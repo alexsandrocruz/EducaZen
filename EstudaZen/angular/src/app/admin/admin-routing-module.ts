@@ -4,6 +4,7 @@ import { SubjectListComponent } from './subjects/subject-list/subject-list';
 import { SubjectFormComponent } from './subjects/subject-form/subject-form';
 import { QuestionListComponent } from './questions/question-list/question-list.component';
 import { QuestionFormComponent } from './questions/question-form/question-form.component';
+import { ClassListSimpleComponent } from './classes/class-list-simple.component';
 
 const routes: Routes = [
   {
@@ -24,7 +25,9 @@ const routes: Routes = [
   },
   {
     path: 'classes',
-    loadChildren: () => import('./classes/classes.module').then(m => m.ClassesModule)
+    children: [
+      { path: '', component: ClassListSimpleComponent }
+    ]
   },
   {
     path: 'students',

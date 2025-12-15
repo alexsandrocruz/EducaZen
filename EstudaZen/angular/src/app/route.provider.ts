@@ -10,19 +10,75 @@ export const APP_ROUTE_PROVIDER = [
 function configureRoutes() {
   const routes = inject(RoutesService);
   routes.add([
-      {
-        path: '/',
-        name: '::Menu:Home',
-        iconClass: 'fas fa-home',
-        order: 1,
-        layout: eLayoutType.application,
-      },
-      {
-        path: '/books',
-        name: '::Menu:Books',
-        iconClass: 'fas fa-book',
-        layout: eLayoutType.application,
-        requiredPolicy: 'EstudaZen.Books',
-      },
+    {
+      path: '/',
+      name: '::Menu:Home',
+      iconClass: 'fas fa-home',
+      order: 1,
+      layout: eLayoutType.application,
+    },
+    {
+      path: '/books',
+      name: '::Menu:Books',
+      iconClass: 'fas fa-book',
+      layout: eLayoutType.application,
+      requiredPolicy: 'EstudaZen.Books',
+    },
+    // Admin Section
+    {
+      path: '/admin',
+      name: 'Administração',
+      iconClass: 'fas fa-cog',
+      order: 10,
+      layout: eLayoutType.application,
+    },
+    {
+      path: '/admin/subjects',
+      name: 'Matérias',
+      parentName: 'Administração',
+      iconClass: 'fas fa-book-open',
+      order: 1,
+      layout: eLayoutType.application,
+    },
+    {
+      path: '/admin/questions',
+      name: 'Questões',
+      parentName: 'Administração',
+      iconClass: 'fas fa-question-circle',
+      order: 2,
+      layout: eLayoutType.application,
+    },
+    {
+      path: '/admin/classes',
+      name: 'Turmas',
+      parentName: 'Administração',
+      iconClass: 'fas fa-users',
+      order: 3,
+      layout: eLayoutType.application,
+    },
+    {
+      path: '/admin/exams',
+      name: 'Exames e Simulados',
+      parentName: 'Administração',
+      iconClass: 'fas fa-file-alt',
+      order: 4,
+      layout: eLayoutType.application,
+    },
+    // Student Section
+    {
+      path: '/student',
+      name: 'Aluno',
+      iconClass: 'fas fa-graduation-cap',
+      order: 20,
+      layout: eLayoutType.application,
+    },
+    {
+      path: '/student/my-exams',
+      name: 'Minhas Provas',
+      parentName: 'Aluno',
+      iconClass: 'fas fa-clipboard-list',
+      order: 1,
+      layout: eLayoutType.application,
+    },
   ]);
 }

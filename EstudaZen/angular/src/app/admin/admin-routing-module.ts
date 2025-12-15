@@ -4,7 +4,8 @@ import { SubjectListComponent } from './subjects/subject-list/subject-list';
 import { SubjectFormComponent } from './subjects/subject-form/subject-form';
 import { QuestionListComponent } from './questions/question-list/question-list.component';
 import { QuestionFormComponent } from './questions/question-form/question-form.component';
-import { ClassListSimpleComponent } from './classes/class-list-simple.component';
+import { ClassListComponent } from './classes/class-list/class-list';
+import { ClassFormComponent } from './classes/class-form/class-form';
 
 const routes: Routes = [
   {
@@ -26,7 +27,9 @@ const routes: Routes = [
   {
     path: 'classes',
     children: [
-      { path: '', component: ClassListSimpleComponent }
+      { path: '', component: ClassListComponent },
+      { path: 'new', component: ClassFormComponent },
+      { path: 'edit/:id', component: ClassFormComponent }
     ]
   },
   {

@@ -1,0 +1,53 @@
+<div class="admin-container">
+    <div class="admin-header">
+        <div>
+            <h1 class="admin-title">Turmas</h1>
+            <p class="admin-subtitle">Gerencie as turmas da escola</p>
+        </div>
+        <button class="zen-btn zen-btn--primary" (click)="createClass()">
+            <span class="material-icons-round">add</span>
+            Nova Turma
+        </button>
+    </div>
+
+    <div class="admin-search">
+        <div class="zen-input-group">
+            <span class="material-icons-round input-icon">search</span>
+            <input class="zen-input zen-input--icon" type="text" placeholder="Buscar turmas..."
+                [(ngModel)]="searchTerm" />
+        </div>
+    </div>
+
+    <div *ngIf="loading" class="loading-state">
+        <div class="spinner"></div>
+        <p>Carregando turmas...</p>
+    </div>
+
+    <div *ngIf="!loading" class="data-table-container">
+        <table class="zen-table">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Código</th>
+                    <th>Série</th>
+                    <th>Turno</th>
+                    <th>Status</th>
+                    <th class="text-right">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="classes.length === 0">
+                    <td colspan="6" class="empty-state">
+                        <div class="empty-state-content">
+                            <span class="material-icons-round empty-icon">school</span>
+                            <p>Nenhuma turma cadastrada</p>
+                            <button class="zen-btn zen-btn--primary" (click)="createClass()">
+                                Criar primeira turma
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

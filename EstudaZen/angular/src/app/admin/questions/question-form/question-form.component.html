@@ -47,6 +47,21 @@
             </div>
         </div>
 
+        <!-- Third Row: Year & Source -->
+        <div class="form-grid">
+            <div class="form-field">
+                <label class="form-label">Ano da Prova</label>
+                <input type="number" class="zen-input" formControlName="year" min="2000" max="2099" placeholder="Ex: 2023">
+                <small class="form-hint">Ano da prova original (ENEM, vestibular, etc.)</small>
+            </div>
+
+            <div class="form-field">
+                <label class="form-label">Fonte</label>
+                <input type="text" class="zen-input" formControlName="source" placeholder="Ex: ENEM 2023, FUVEST 2024">
+                <small class="form-hint">Origem da questão (prova, instituição)</small>
+            </div>
+        </div>
+
         <!-- Content Editor -->
         <div class="form-field full-width">
             <label class="form-label">Enunciado da Questão <span class="required">*</span></label>

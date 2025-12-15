@@ -22,6 +22,18 @@ const routes: Routes = [
       { path: 'edit/:id', component: QuestionFormComponent }
     ]
   },
+  {
+    path: 'classes',
+    loadChildren: () => import('./classes/classes.module').then(m => m.ClassesModule)
+  },
+  {
+    path: 'students',
+    loadChildren: () => import('./students/students.module').then(m => m.StudentsModule)
+  },
+  {
+    path: 'exams',
+    loadChildren: () => import('./exams/exams.module').then(m => m.ExamsModule)
+  },
   { path: '', redirectTo: 'subjects', pathMatch: 'full' }
 ];
 

@@ -1,0 +1,214 @@
+@import '../../../../styles/zen-design-tokens';
+
+.admin-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: $zen-space-8 $zen-space-6;
+}
+
+.form-header {
+    margin-bottom: $zen-space-8;
+
+    .back-link {
+        background: none;
+        border: none;
+        color: $zen-text-secondary;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: $zen-text-sm;
+        font-weight: $zen-font-medium;
+        cursor: pointer;
+        padding: 0;
+        margin-bottom: $zen-space-4;
+
+        &:hover {
+            color: $zen-primary;
+        }
+
+        .material-icons-round {
+            font-size: 18px;
+        }
+    }
+
+    h1 {
+        font-size: $zen-text-3xl;
+        font-weight: $zen-font-extrabold;
+        color: $zen-text-primary;
+        margin: 0;
+    }
+}
+
+.zen-card {
+    background: white;
+    border-radius: $zen-radius-xl;
+    padding: $zen-space-8;
+    box-shadow: $zen-shadow-soft;
+}
+
+.section-title {
+    font-size: $zen-text-lg;
+    font-weight: $zen-font-bold;
+    color: $zen-text-primary;
+    margin-bottom: $zen-space-6;
+    padding-bottom: $zen-space-2;
+    border-bottom: 2px solid $zen-bg-light;
+
+    &.mt-4 {
+        margin-top: $zen-space-8;
+    }
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $zen-space-6;
+
+    @media (max-width: $zen-screen-md) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.span-2 {
+    grid-column: span 2;
+
+    @media (max-width: $zen-screen-md) {
+        grid-column: span 1;
+    }
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+
+    .zen-label {
+        font-size: $zen-text-sm;
+        font-weight: $zen-font-semibold;
+        color: $zen-text-secondary;
+        margin-bottom: $zen-space-2;
+
+        .required {
+            color: $zen-error;
+        }
+    }
+
+    .error-msg {
+        color: $zen-error;
+        font-size: $zen-text-xs;
+        margin-top: 4px;
+    }
+
+    .hint {
+        color: $zen-text-muted;
+        font-size: $zen-text-xs;
+        margin-top: 4px;
+    }
+
+    &.checkbox-group {
+        justify-content: flex-end;
+        padding-bottom: 10px;
+    }
+}
+
+.zen-input,
+.zen-select {
+    padding: 10px 12px;
+    border: 1px solid $zen-input-light;
+    border-radius: $zen-radius-md;
+    font-size: $zen-text-sm;
+    color: $zen-text-primary;
+    transition: all $zen-transition-base;
+
+    &:focus {
+        outline: none;
+        border-color: $zen-primary;
+        box-shadow: 0 0 0 3px rgba($zen-primary, 0.1);
+    }
+
+    &.error {
+        border-color: $zen-error;
+
+        &:focus {
+            box-shadow: 0 0 0 3px rgba($zen-error, 0.1);
+        }
+    }
+}
+
+// Checkbox customizado
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    user-select: none;
+
+    input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+
+    .checkmark {
+        height: 20px;
+        width: 20px;
+        background-color: $zen-bg-light;
+        border-radius: 4px;
+        position: relative;
+        border: 1px solid $zen-input-light;
+        transition: all 0.2s;
+    }
+
+    &:hover input~.checkmark {
+        background-color: $zen-input-light;
+    }
+
+    input:checked~.checkmark {
+        background-color: $zen-primary;
+        border-color: $zen-primary;
+    }
+
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    input:checked~.checkmark:after {
+        display: block;
+    }
+
+    .checkmark:after {
+        left: 6px;
+        top: 2px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+    }
+
+    .label-text {
+        font-weight: $zen-font-medium;
+        color: $zen-text-primary;
+    }
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: $zen-space-4;
+    margin-top: $zen-space-8;
+    padding-top: $zen-space-6;
+    border-top: 1px solid $zen-input-light;
+}
+
+.spinner-sm {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}

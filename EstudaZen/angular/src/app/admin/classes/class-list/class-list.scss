@@ -118,6 +118,74 @@
     }
 }
 
+.badge-code {
+    background: $zen-input-light;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-family: monospace;
+    font-size: 13px;
+    color: $zen-text-secondary;
+}
+
+.status-badge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+
+    &.active {
+        background: rgba($zen-success, 0.1);
+        color: $zen-success;
+    }
+
+    &.inactive {
+        background: rgba($zen-error, 0.1);
+        color: $zen-error;
+    }
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.zen-btn-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    .material-icons-round {
+        font-size: 18px;
+    }
+
+    &--primary {
+        background: rgba($zen-primary, 0.1);
+        color: $zen-primary;
+
+        &:hover {
+            background: $zen-primary;
+            color: white;
+        }
+    }
+
+    &--danger {
+        background: rgba($zen-error, 0.1);
+        color: $zen-error;
+
+        &:hover {
+            background: $zen-error;
+            color: white;
+        }
+    }
+}
+
 .empty-state {
     text-align: center;
     padding: $zen-space-12 !important;

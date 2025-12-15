@@ -14,6 +14,8 @@ export interface CreateQuestionDto {
   difficulty?: QuestionDifficulty;
   timeLimitSeconds: number;
   tags?: string;
+  year?: number;
+  source?: string;
   isPublished: boolean;
   answers: CreateQuestionAnswerDto[];
 }
@@ -44,6 +46,8 @@ export interface QuestionDto extends FullAuditedEntityDto<string> {
   points: number;
   timeLimitSeconds: number;
   tags?: string;
+  year?: number;
+  source?: string;
   isPublished: boolean;
   answers: QuestionAnswerDto[];
 }
@@ -62,6 +66,8 @@ export interface UpdateQuestionDto {
   difficulty?: QuestionDifficulty;
   timeLimitSeconds: number;
   tags?: string;
+  year?: number;
+  source?: string;
   isPublished: boolean;
   answers: UpdateQuestionAnswerDto[];
 }

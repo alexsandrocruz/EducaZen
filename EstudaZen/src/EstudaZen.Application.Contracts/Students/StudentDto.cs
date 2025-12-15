@@ -13,6 +13,18 @@ public class StudentDto : EntityDto<Guid>
     public string? Email { get; set; }
     public Guid? SchoolId { get; set; }
     public string? SchoolName { get; set; }
+    public Guid? ClassId { get; set; }
+    
+    // Personal Information
+    public string? FullName { get; set; }
+    public string? CPF { get; set; }
+    public DateTime? BirthDate { get; set; }
+    public string? Gender { get; set; }
+    public string? PhotoUrl { get; set; }
+    public string? Phone { get; set; }
+    public string? EnrollmentNumber { get; set; }
+    public DateTime? EnrollmentDate { get; set; }
+    public StudentStatus Status { get; set; }
     
     // Gamification stats
     public int TotalXp { get; set; }

@@ -23,6 +23,65 @@ public class Student : FullAuditedAggregateRoot<Guid>, IMultiTenant
     public Guid? SchoolId { get; set; }
     public School? School { get; set; }
 
+    /// <summary>
+    /// Optional class/turma association
+    /// </summary>
+    public Guid? ClassId { get; set; }
+
+    #region Personal Information
+
+    /// <summary>
+    /// Full name of the student
+    /// </summary>
+    public string? FullName { get; set; }
+
+    /// <summary>
+    /// CPF document
+    /// </summary>
+    public string? CPF { get; set; }
+
+    /// <summary>
+    /// Birth date
+    /// </summary>
+    public DateTime? BirthDate { get; set; }
+
+    /// <summary>
+    /// Gender
+    /// </summary>
+    public string? Gender { get; set; }
+
+    /// <summary>
+    /// Photo URL (MinIO storage)
+    /// </summary>
+    public string? PhotoUrl { get; set; }
+
+    /// <summary>
+    /// Student email (may differ from Identity email)
+    /// </summary>
+    public string? Email { get; set; }
+
+    /// <summary>
+    /// Contact phone
+    /// </summary>
+    public string? Phone { get; set; }
+
+    /// <summary>
+    /// School enrollment number
+    /// </summary>
+    public string? EnrollmentNumber { get; set; }
+
+    /// <summary>
+    /// Date of enrollment
+    /// </summary>
+    public DateTime? EnrollmentDate { get; set; }
+
+    /// <summary>
+    /// Student status
+    /// </summary>
+    public StudentStatus Status { get; set; } = StudentStatus.Active;
+
+    #endregion
+
     #region Gamification Stats
 
     /// <summary>

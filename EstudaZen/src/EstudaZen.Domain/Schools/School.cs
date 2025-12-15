@@ -22,9 +22,39 @@ public class School : FullAuditedAggregateRoot<Guid>, IMultiTenant
     public string? Code { get; set; }
 
     /// <summary>
-    /// School address
+    /// School CNPJ
+    /// </summary>
+    public string? CNPJ { get; set; }
+
+    /// <summary>
+    /// School address (street)
     /// </summary>
     public string? Address { get; set; }
+
+    /// <summary>
+    /// City
+    /// </summary>
+    public string? City { get; set; }
+
+    /// <summary>
+    /// State (UF)
+    /// </summary>
+    public string? State { get; set; }
+
+    /// <summary>
+    /// ZIP code (CEP)
+    /// </summary>
+    public string? ZipCode { get; set; }
+
+    /// <summary>
+    /// Contact phone
+    /// </summary>
+    public string? Phone { get; set; }
+
+    /// <summary>
+    /// Contact email
+    /// </summary>
+    public string? Email { get; set; }
 
     /// <summary>
     /// Whether the school is active

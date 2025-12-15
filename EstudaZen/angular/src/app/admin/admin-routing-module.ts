@@ -32,6 +32,7 @@ const routes: Routes = [
       { path: 'edit/:id', component: ClassFormComponent }
     ]
   },
+  /*
   {
     path: 'students',
     loadChildren: () => import('./students/students.module').then(m => m.StudentsModule)
@@ -40,6 +41,7 @@ const routes: Routes = [
     path: 'exams',
     loadChildren: () => import('./exams/exams.module').then(m => m.ExamsModule)
   },
+  */
   { path: '', redirectTo: 'subjects', pathMatch: 'full' }
 ];
 

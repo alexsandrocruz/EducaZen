@@ -57,27 +57,19 @@ function configureRoutes() {
       layout: eLayoutType.application,
     },
     {
+      path: '/admin/students',
+      name: 'Alunos',
+      parentName: 'Administração',
+      iconClass: 'fas fa-user-graduate',
+      order: 4,
+      layout: eLayoutType.application,
+    },
+    {
       path: '/admin/exams',
       name: 'Exames e Simulados',
       parentName: 'Administração',
       iconClass: 'fas fa-file-alt',
-      order: 4,
-      layout: eLayoutType.application,
-    },
-    // Student Section
-    {
-      path: '/student',
-      name: 'Aluno',
-      iconClass: 'fas fa-graduation-cap',
-      order: 20,
-      layout: eLayoutType.application,
-    },
-    {
-      path: '/student/my-exams',
-      name: 'Minhas Provas',
-      parentName: 'Aluno',
-      iconClass: 'fas fa-clipboard-list',
-      order: 1,
+      order: 5,
       layout: eLayoutType.application,
     },
   ]);

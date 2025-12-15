@@ -1,0 +1,68 @@
+<div class="container py-4">
+    <div class="row mb-4">
+        <div class="col-12 text-center">
+            <h1 class="display-6 fw-bold">Leaderboard</h1>
+            <p class="text-muted">See where you stand among other students!</p>
+        </div>
+    </div>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-header bg-white p-3 border-bottom-0">
+            <ul class="nav nav-pills card-header-pills justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link cursor-pointer" [class.active]="scope === rankingScopes.Global"
+                        (click)="setScope(rankingScopes.Global)">Global</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link cursor-pointer" [class.active]="scope === rankingScopes.School"
+                        (click)="setScope(rankingScopes.School)">School</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="card-body p-0">
+            <div *ngIf="loading" class="text-center p-5">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+
+            <div class="table-responsive" *ngIf="!loading">
+                <table class="table table-hover table-striped mb-0 align-middle">
+                    <thead class="bg-light">
+                        <tr>
+                            <th scope="col" class="ps-4">#</th>
+                            <th scope="col">Student</th>
+                            <th scope="col">Level</th>
+                            <th scope="col" class="text-end pe-4">Total XP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of ranking.items; let i = index">
+                            <td class="ps-4 fw-bold text-muted">{{ item.rank }}</td>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div class="avatar bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-2"
+                                        style="width: 35px; height: 35px; font-size: 0.9rem;">
+                                        {{ item.level }}
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-0">{{ item.name }}</h6>
+                                        <small class="text-muted" *ngIf="item.schoolName">{{ item.schoolName }}</small>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>Level {{ item.level }}</td>
+                            <td class="text-end pe-4 fw-bold text-primary">{{ item.totalXp }}</td>
+                        </tr>
+                        <tr *ngIf="ranking.items.length === 0">
+                            <td colspan="4" class="text-center p-5 text-muted">
+                                No students found yet. Be the first!
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

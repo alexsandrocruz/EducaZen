@@ -1,0 +1,270 @@
+@import '../../../../styles/zen-design-tokens';
+
+.zen-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: $zen-space-8 $zen-space-6;
+}
+
+.page-title {
+    font-size: $zen-text-3xl;
+    font-weight: $zen-font-extrabold;
+    margin-bottom: $zen-space-2;
+}
+
+.page-subtitle {
+    color: $zen-text-secondary;
+    margin-bottom: $zen-space-8;
+}
+
+.zen-form {
+    background: white;
+    padding: $zen-space-8;
+    border-radius: $zen-radius-xl;
+    box-shadow: $zen-shadow-soft;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $zen-space-6;
+    margin-bottom: $zen-space-6;
+
+    @media (max-width: $zen-screen-md) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.full-width {
+    grid-column: 1 / -1;
+    margin-bottom: $zen-space-6;
+}
+
+.form-field {
+    margin-bottom: 0; // Handled by grid gap or specific margin
+}
+
+.form-label {
+    display: block;
+    font-weight: $zen-font-semibold;
+    margin-bottom: $zen-space-2;
+    color: $zen-text-primary;
+
+    .required {
+        color: $zen-error;
+    }
+}
+
+.form-error {
+    color: $zen-error;
+    font-size: $zen-text-xs;
+    margin-top: $zen-space-1;
+}
+
+// Difficulty Picker
+.difficulty-picker {
+    display: flex;
+    gap: $zen-space-2;
+    background: $zen-input-light;
+    padding: $zen-space-1;
+    border-radius: $zen-radius-lg;
+
+    .difficulty-option {
+        flex: 1;
+        text-align: center;
+        padding: $zen-space-3;
+        border-radius: $zen-radius-md;
+        cursor: pointer;
+        font-weight: $zen-font-semibold;
+        font-size: $zen-text-sm;
+        transition: all $zen-transition-base;
+        color: $zen-text-secondary;
+
+        input {
+            display: none;
+        }
+
+        &:hover {
+            color: $zen-text-primary;
+        }
+
+        &.selected {
+            background: white;
+            color: $zen-primary;
+            box-shadow: $zen-shadow-sm;
+        }
+    }
+}
+
+// Alternatives Section
+.alternatives-section {
+    margin-top: $zen-space-8;
+    background: $zen-bg-light;
+    padding: $zen-space-6;
+    border-radius: $zen-radius-lg;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $zen-space-4;
+
+    .section-title {
+        font-size: $zen-text-lg;
+        font-weight: $zen-font-bold;
+        margin: 0;
+    }
+}
+
+.answers-list {
+    display: flex;
+    flex-direction: column;
+    gap: $zen-space-3;
+}
+
+.answer-item {
+    display: flex;
+    align-items: center;
+    gap: $zen-space-3;
+    background: white;
+    padding: $zen-space-3;
+    border-radius: $zen-radius-md;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all $zen-transition-base;
+
+    &:focus-within {
+        border-color: $zen-primary;
+        box-shadow: $zen-shadow-sm;
+    }
+}
+
+.answer-letter {
+    width: 28px;
+    height: 28px;
+    background: $zen-input-light;
+    border-radius: $zen-radius-full;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: $zen-font-bold;
+    font-size: $zen-text-xs;
+    color: $zen-text-secondary;
+}
+
+.answer-content {
+    flex: 1;
+}
+
+.answer-actions {
+    display: flex;
+    align-items: center;
+    gap: $zen-space-2;
+}
+
+.correct-toggle {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+
+    input {
+        display: none;
+    }
+
+    .toggle-icon {
+        font-size: 24px;
+        color: $zen-text-muted;
+        transition: color $zen-transition-base;
+    }
+
+    input:checked+.toggle-icon {
+        color: $zen-success;
+    }
+}
+
+
+// Quill Customization (ViewEncapsulation.None)
+app-question-form {
+    quill-editor {
+        display: block;
+        margin-top: $zen-space-2;
+
+        .ql-toolbar.ql-snow {
+            border: 2px solid $zen-gray-200;
+            border-top-left-radius: $zen-radius-lg;
+            border-top-right-radius: $zen-radius-lg;
+            background-color: $zen-gray-50;
+            font-family: $zen-font-body;
+            border-bottom: 1px solid $zen-gray-200;
+        }
+
+        .ql-container.ql-snow {
+            border: 2px solid $zen-gray-200;
+            border-bottom-left-radius: $zen-radius-lg;
+            border-bottom-right-radius: $zen-radius-lg;
+            border-top: none;
+            background-color: white;
+            font-family: $zen-font-body;
+            font-size: $zen-text-base;
+            min-height: 200px;
+        }
+
+        // Active state
+        .ql-container.ql-snow:focus-within,
+        .ql-toolbar.ql-snow:hover+.ql-container.ql-snow,
+        .ql-toolbar.ql-snow:hover {
+            border-color: $zen-primary !important;
+        }
+
+        .ql-editor {
+            min-height: 200px;
+            font-size: 1rem;
+            color: $zen-gray-900;
+            padding: $zen-space-4;
+
+            &.ql-blank::before {
+                font-style: normal;
+                color: $zen-gray-400;
+                font-style: italic;
+            }
+        }
+
+        // Button radius
+        .ql-formats {
+            margin-right: 8px;
+
+            button {
+                border-radius: 4px;
+
+                &:hover {
+                    background-color: $zen-gray-200;
+                }
+            }
+        }
+    }
+}
+
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: $zen-space-4;
+    margin-top: $zen-space-8;
+    padding-top: $zen-space-6;
+    border-top: 1px solid $zen-gray-200;
+}
+
+.spinner-sm {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

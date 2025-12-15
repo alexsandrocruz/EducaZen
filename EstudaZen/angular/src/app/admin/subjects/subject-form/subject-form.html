@@ -1,0 +1,96 @@
+<div class="admin-container">
+    <!-- Header -->
+    <div class="admin-header">
+        <div>
+            <h1 class="admin-title">{{ isEditMode ? 'Editar' : 'Nova' }} Matéria</h1>
+            <p class="admin-subtitle">Preencha os dados da matéria</p>
+        </div>
+    </div>
+
+    <!-- Loading State -->
+    <div *ngIf="loading" class="loading-state">
+        <div class="spinner"></div>
+        <p>Carregando...</p>
+    </div>
+
+    <!-- Form -->
+    <form *ngIf="!loading" [formGroup]="form" (ngSubmit)="save()" class="zen-form">
+        <div class="form-grid">
+            <!-- Name Field -->
+            <div class="form-field">
+                <label class="form-label">
+                    Nome da Matéria <span class="required">*</span>
+                </label>
+                <input class="zen-input" type="text" formControlName="name" placeholder="Ex: Matemática"
+                    [class.error]="form.get('name')?.invalid && form.get('name')?.touched" />
+                <div class="form-error" *ngIf="form.get('name')?.invalid && form.get('name')?.touched">
+                    Nome é obrigatório (máx. 100 caracteres)
+                </div>
+            </div>
+
+            <!-- ENEM Code Field -->
+            <div class="form-field">
+                <label class="form-label">Código ENEM</label>
+                <input class="zen-input" type="text" formControlName="enemAreaCode" placeholder="Ex: MAT" />
+            </div>
+        </div>
+
+        <!-- Icon Selector -->
+        <div class="form-field">
+            <label class="form-label">Ícone <span class="required">*</span></label>
+            <div class="icon-grid">
+                <button *ngFor="let icon of predefinedIcons" type="button" class="icon-option"
+                    [class.selected]="form.get('iconName')?.value === icon" (click)="selectIcon(icon)">
+                    <span class="material-icons-round">{{ icon }}</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Color Selector -->
+        <div class="form-field">
+            <label class="form-label">Cor <span class="required">*</span></label>
+            <div class="color-grid">
+                <button *ngFor="let color of predefinedColors" type="button" class="color-option"
+                    [style.background-color]="color" [class.selected]="form.get('colorHex')?.value === color"
+                    (click)="selectColor(color)">
+                    <span class="material-icons-round check-icon"
+                        *ngIf="form.get('colorHex')?.value === color">check</span>
+                </button>
+            </div>
+            <div class="color-custom">
+                <label>Ou escolha uma cor personalizada:</label>
+                <input type="color" formControlName="colorHex" class="color-picker" />
+                <span class="color-value">{{ form.get('colorHex')?.value }}</span>
+            </div>
+        </div>
+
+
+        <!-- Preview -->
+        <div class="preview-section">
+            <label class="form-label">Pré-visualização</label>
+            <div class="preview-card">
+                <div class="subject-icon-preview" [style.background-color]="form.get('colorHex')?.value">
+                    <span class="material-icons-round">{{ form.get('iconName')?.value }}</span>
+                </div>
+                <div class="preview-info">
+                    <strong>{{ form.get('name')?.value || 'Nome da Matéria' }}</strong>
+                    <span class="preview-code">{{ form.get('enemAreaCode')?.value || 'Código' }}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form Actions -->
+        <div class="form-actions">
+            <button type="button" class="zen-btn zen-btn--outline" (click)="cancel()" [disabled]="saving">
+                Cancelar
+            </button>
+            <button type="submit" class="zen-btn zen-btn--primary" [disabled]="form.invalid || saving">
+                <span *ngIf="!saving">{{ isEditMode ? 'Salvar Alterações' : 'Criar Matéria' }}</span>
+                <span *ngIf="saving" class="loading-text">
+                    <div class="spinner-sm"></div>
+                    Salvando...
+                </span>
+            </button>
+        </div>
+    </form>
+</div>

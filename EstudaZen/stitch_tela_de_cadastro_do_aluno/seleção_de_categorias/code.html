@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VestiQuiz - Seleção de Categorias</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7f13ec",
+                        "secondary": "#3b82f6",
+                        "accent-purple": "#a855f7",
+                        "accent-pink": "#ec4899",
+                        "accent-orange": "#f97316",
+                        "accent-teal": "#14b8a6",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#191022",
+                        "surface-dark": "#2d1b3e",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "2xl": "2rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar hiding for horizontal scroll areas */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display antialiased selection:bg-primary selection:text-white">
+<div class="relative flex h-full min-h-screen w-full flex-col overflow-x-hidden pb-24">
+<!-- Top App Bar -->
+<header class="sticky top-0 z-30 flex items-center justify-between bg-background-light/90 dark:bg-background-dark/90 px-4 py-3 backdrop-blur-md transition-colors">
+<div class="flex items-center gap-3">
+<div class="relative group cursor-pointer">
+<div class="h-10 w-10 overflow-hidden rounded-full ring-2 ring-primary/20 dark:ring-white/10">
+<img alt="Student avatar portrait" class="h-full w-full object-cover" data-alt="Close up portrait of a young student smiling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4cuncXCTLwXrJcYBmeyvRD-n-0JwUMspuWsYub_eLE1HfwmtSxTc_PPRVcKrdnG9xW2qKmDq5M6xv2gAsXsThkAdvB9xdMKzXUEkW8T1_39TUslWDoWbO8ffVtDgwLqGCBTNhuvh44a0Qx43qI85firseAk2qjICtoBuM9PUT8sGo8zgAtqAwKXh-1mMAgmgCJqmqzYivSJ69wqoHXLNN1Z7kEPoV8ShIbuqnpnKBtSgZ9Tkm6wq822DpVbyxLUyNDf48uOl3iiI"/>
+</div>
+<div class="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-green-500 ring-2 ring-background-light dark:ring-background-dark"></div>
+</div>
+<div class="flex flex-col">
+<span class="text-xs font-medium text-slate-500 dark:text-slate-400">Bom dia,</span>
+<h2 class="text-base font-bold leading-tight text-slate-900 dark:text-white">Estudante!</h2>
+</div>
+</div>
+<div class="flex items-center gap-2 rounded-xl bg-white p-1.5 px-3 shadow-sm ring-1 ring-slate-900/5 dark:bg-surface-dark dark:ring-white/10">
+<span class="material-symbols-outlined text-orange-500" style="font-size: 20px; font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span class="text-sm font-bold text-slate-900 dark:text-orange-400">12 Dias</span>
+</div>
+</header>
+<!-- Headline -->
+<section class="px-5 pt-4 pb-2">
+<h1 class="text-[28px] font-extrabold leading-tight tracking-tight text-slate-900 dark:text-white">
+                Escolha sua <br/>
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent-pink">Batalha de Hoje</span>
+</h1>
+</section>
+<!-- Filter Chips -->
+<section class="w-full overflow-hidden py-4">
+<div class="hide-scrollbar flex gap-3 overflow-x-auto px-5 pb-2">
+<button class="flex h-10 shrink-0 items-center justify-center rounded-xl bg-primary px-5 shadow-lg shadow-primary/25 transition-transform active:scale-95">
+<span class="text-sm font-bold text-white">Todas</span>
+</button>
+<button class="flex h-10 shrink-0 items-center justify-center rounded-xl bg-white px-5 ring-1 ring-slate-900/5 dark:bg-surface-dark dark:ring-white/10 transition-transform active:scale-95">
+<span class="text-sm font-bold text-slate-600 dark:text-slate-300">Mais Populares</span>
+</button>
+<button class="flex h-10 shrink-0 items-center justify-center rounded-xl bg-white px-5 ring-1 ring-slate-900/5 dark:bg-surface-dark dark:ring-white/10 transition-transform active:scale-95">
+<span class="text-sm font-bold text-slate-600 dark:text-slate-300">Meus Pontos Fracos</span>
+</button>
+<button class="flex h-10 shrink-0 items-center justify-center rounded-xl bg-white px-5 ring-1 ring-slate-900/5 dark:bg-surface-dark dark:ring-white/10 transition-transform active:scale-95">
+<span class="text-sm font-bold text-slate-600 dark:text-slate-300">Simulados</span>
+</button>
+</div>
+</section>
+<!-- Category Grid -->
+<main class="grid grid-cols-1 gap-4 px-5 sm:grid-cols-2 lg:grid-cols-3">
+<!-- Card: Mathematics -->
+<article class="group relative flex aspect-[4/3] w-full flex-col justify-between overflow-hidden rounded-2xl p-5 shadow-sm transition-all hover:shadow-md cursor-pointer">
+<!-- Background Image & Gradient -->
+<div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Abstract geometric shapes and numbers representing mathematics" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuADtqB3OMPzCUVbYi-cnItV4H-VuYaVefRlCsuJWMwLPuslT7sZm55VGqNv-Niu7hWVKRTlnYKKNC1ThxvFxElLflTKGMAbGhkp7JL8OOljWyhTegHG275g4sJMOrb3e0t0sJWUj_9xG9semoJHCqlCqyeAh_xBIAoHadTPnnpngIMV5Ki8YUd8X-yAK8rF_w-tv7CcYGMoThXHnygM9_TN1QrWiR0fyzXwmuzuNH8SQdODuM21pMZoMguBzwz72zV9Vsm6qcoFMzc');"></div>
+<div class="absolute inset-0 z-0 bg-gradient-to-t from-primary/90 to-primary/40 mix-blend-multiply"></div>
+<div class="absolute inset-0 z-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+<!-- Content -->
+<div class="relative z-10 flex w-full justify-between items-start">
+<div class="rounded-lg bg-white/20 p-2 backdrop-blur-md">
+<span class="material-symbols-outlined text-white" style="font-size: 24px;">calculate</span>
+</div>
+<span class="rounded-full bg-accent-teal px-2.5 py-1 text-[10px] font-bold text-white shadow-sm">+50 XP</span>
+</div>
+<div class="relative z-10 flex flex-col gap-2">
+<h3 class="text-2xl font-bold text-white">Matemática</h3>
+<div class="flex items-center justify-between text-xs font-medium text-white/80">
+<span>Nível 12</span>
+<span>75%</span>
+</div>
+<div class="h-2 w-full overflow-hidden rounded-full bg-black/20 backdrop-blur-sm">
+<div class="h-full w-3/4 rounded-full bg-accent-teal shadow-[0_0_10px_rgba(20,184,166,0.5)]"></div>
+</div>
+</div>
+</article>
+<!-- Card: History -->
+<article class="group relative flex aspect-[4/3] w-full flex-col justify-between overflow-hidden rounded-2xl p-5 shadow-sm transition-all hover:shadow-md cursor-pointer">
+<div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Old paper texture with historical writing" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAsOwqB_Zre0BXagtvUVDTHF_VvJ3RvOq5RlORwQ8yGnr8ixjk1bjbQrFBv3Xof_XVV5p7gn5QbGgjg08vNQjHOIkCQ8Qu834PBPT98S2Oy9LbvKeFZsDIVuav1HzXQ366kmJlPZB6_6HogL4Ux_IbiBb4PxwPlvmXCY356BnHTJDH4JxUdcCYb9wZkq6_sGj-hQqrzyTcyGaugRqtKB2RAbKWNijF8k6vNens8PEctZ2eFLwqz8Au3-xTO5RBKEspITirLrKA58nA');"></div>
+<div class="absolute inset-0 z-0 bg-gradient-to-t from-accent-orange/90 to-accent-orange/40 mix-blend-multiply"></div>
+<div class="absolute inset-0 z-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+<div class="relative z-10 flex w-full justify-between items-start">
+<div class="rounded-lg bg-white/20 p-2 backdrop-blur-md">
+<span class="material-symbols-outlined text-white" style="font-size: 24px;">history_edu</span>
+</div>
+<span class="rounded-full bg-white/20 px-2.5 py-1 text-[10px] font-bold text-white backdrop-blur-md">Diário</span>
+</div>
+<div class="relative z-10 flex flex-col gap-2">
+<h3 class="text-2xl font-bold text-white">História</h3>
+<div class="flex items-center justify-between text-xs font-medium text-white/80">
+<span>Nível 4</span>
+<span>20%</span>
+</div>
+<div class="h-2 w-full overflow-hidden rounded-full bg-black/20 backdrop-blur-sm">
+<div class="h-full w-1/5 rounded-full bg-white"></div>
+</div>
+</div>
+</article>
+<!-- Card: Natural Sciences -->
+<article class="group relative flex aspect-[4/3] w-full flex-col justify-between overflow-hidden rounded-2xl p-5 shadow-sm transition-all hover:shadow-md cursor-pointer">
+<div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Laboratory equipment with colorful liquids" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuACjkglOtxFbkACtVjRwE15hW-YsPTr_WD89nxdmVXPNpUlzzdEFAlFHuRQqkS4tkc2ieLxWQ1lskiW_M6ctLwDb0Ff2H2-gfDy-5vbsEQ6uDp7EPjp9vqfvC19i3jqrRdzlJezjkZGWguHReygYbZlQ9FyzlZfL9LojnZMq__ICU5hwk1EQnCajPrBa8lwZJ17LmsL5bP6ftRCUYYNO8bUJZAvBL2BIXde8PRp1Mc3tnG-GSY_-Dsdvgu-FTJULWHEBjj3QYcy5N0');"></div>
+<div class="absolute inset-0 z-0 bg-gradient-to-t from-secondary/90 to-secondary/40 mix-blend-multiply"></div>
+<div class="absolute inset-0 z-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+<div class="relative z-10 flex w-full justify-between items-start">
+<div class="rounded-lg bg-white/20 p-2 backdrop-blur-md">
+<span class="material-symbols-outlined text-white" style="font-size: 24px;">biotech</span>
+</div>
+</div>
+<div class="relative z-10 flex flex-col gap-2">
+<h3 class="text-2xl font-bold text-white">Ciências</h3>
+<div class="flex items-center justify-between text-xs font-medium text-white/80">
+<span>Nível 8</span>
+<span>42%</span>
+</div>
+<div class="h-2 w-full overflow-hidden rounded-full bg-black/20 backdrop-blur-sm">
+<div class="h-full w-[42%] rounded-full bg-accent-teal"></div>
+</div>
+</div>
+</article>
+<!-- Card: Languages -->
+<article class="group relative flex aspect-[4/3] w-full flex-col justify-between overflow-hidden rounded-2xl p-5 shadow-sm transition-all hover:shadow-md cursor-pointer">
+<div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Stack of books in a library setting" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAL6lh6ligGcRZzuQWfgAKQ2jPbNnN8G-nCQ4uRbkjtJhHcxRQ9NeDhdzBrERLV_-RVL_CMJrZEXb1l5deVg2ixExWc7umhhFmLSOt6MrV40ezAyuZj4WWxDVgQw4hJV3J_Xfp-U0QBgP5TEDXuiku2TVi7zxHf8wCMCMYIE3_6GyPC6NSRIo_ELB1rElQnL3wuB1pOm7DL-pRKLHROwUrdT_IlvBlVRVOCCzvrKBym9umgWXJzKMFYd4cFo3bkeez6hfNim0_Q5kM');"></div>
+<div class="absolute inset-0 z-0 bg-gradient-to-t from-accent-pink/90 to-accent-pink/40 mix-blend-multiply"></div>
+<div class="absolute inset-0 z-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+<div class="relative z-10 flex w-full justify-between items-start">
+<div class="rounded-lg bg-white/20 p-2 backdrop-blur-md">
+<span class="material-symbols-outlined text-white" style="font-size: 24px;">translate</span>
+</div>
+<span class="rounded-full bg-accent-orange px-2.5 py-1 text-[10px] font-bold text-white shadow-sm">Hot 🔥</span>
+</div>
+<div class="relative z-10 flex flex-col gap-2">
+<h3 class="text-2xl font-bold text-white">Linguagens</h3>
+<div class="flex items-center justify-between text-xs font-medium text-white/80">
+<span>Nível 15</span>
+<span>88%</span>
+</div>
+<div class="h-2 w-full overflow-hidden rounded-full bg-black/20 backdrop-blur-sm">
+<div class="h-full w-[88%] rounded-full bg-white"></div>
+</div>
+</div>
+</article>
+<!-- Card: Geography (Smaller/Secondary Style) -->
+<article class="group relative flex aspect-[4/3] w-full flex-col justify-between overflow-hidden rounded-2xl p-5 shadow-sm transition-all hover:shadow-md cursor-pointer">
+<div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="World map globe view from space" data-location="Earth" style="background-image: url('https://placeholder.pics/svg/300');"></div>
+<div class="absolute inset-0 z-0 bg-gradient-to-t from-accent-teal/90 to-accent-teal/40 mix-blend-multiply"></div>
+<div class="absolute inset-0 z-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+<div class="relative z-10 flex w-full justify-between items-start">
+<div class="rounded-lg bg-white/20 p-2 backdrop-blur-md">
+<span class="material-symbols-outlined text-white" style="font-size: 24px;">public</span>
+</div>
+</div>
+<div class="relative z-10 flex flex-col gap-2">
+<h3 class="text-2xl font-bold text-white">Geografia</h3>
+<div class="flex items-center justify-between text-xs font-medium text-white/80">
+<span>Nível 2</span>
+<span>10%</span>
+</div>
+<div class="h-2 w-full overflow-hidden rounded-full bg-black/20 backdrop-blur-sm">
+<div class="h-full w-[10%] rounded-full bg-white"></div>
+</div>
+</div>
+</article>
+</main>
+<!-- Floating Action Button (FAB) -->
+<div class="fixed bottom-24 right-5 z-40">
+<button class="group flex h-14 items-center gap-2 rounded-2xl bg-primary pl-4 pr-6 text-white shadow-xl shadow-primary/40 transition-all hover:scale-105 hover:bg-violet-600 active:scale-95">
+<span class="material-symbols-outlined animate-pulse" style="font-size: 28px;">play_circle</span>
+<span class="font-bold tracking-wide">Quiz Rápido</span>
+</button>
+</div>
+<!-- Bottom Navigation -->
+<nav class="fixed bottom-0 left-0 z-50 w-full border-t border-slate-200 bg-white/90 pb-safe pt-2 backdrop-blur-lg dark:border-white/5 dark:bg-[#1a1122]/90">
+<div class="flex justify-around items-center px-2 pb-5 pt-1">
+<a class="flex flex-col items-center gap-1 p-2 text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="text-[10px] font-bold">Início</span>
+</a>
+<a class="flex flex-col items-center gap-1 p-2 text-slate-400 hover:text-slate-600 dark:text-slate-500 dark:hover:text-slate-300 transition-colors" href="#">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="text-[10px] font-bold">Rank</span>
+</a>
+<a class="flex flex-col items-center gap-1 p-2 text-slate-400 hover:text-slate-600 dark:text-slate-500 dark:hover:text-slate-300 transition-colors" href="#">
+<span class="material-symbols-outlined">shopping_bag</span>
+<span class="text-[10px] font-bold">Loja</span>
+</a>
+<a class="flex flex-col items-center gap-1 p-2 text-slate-400 hover:text-slate-600 dark:text-slate-500 dark:hover:text-slate-300 transition-colors" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-bold">Perfil</span>
+</a>
+</div>
+</nav>
+</div>
+</body></html>

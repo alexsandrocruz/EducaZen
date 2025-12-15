@@ -1,0 +1,301 @@
+@use 'sass:color';
+@import 'zen-design-tokens';
+
+/* USE color.adjust instead of darken/lighten functions */
+
+// Buttons
+.zen-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: $zen-space-2;
+    padding: $zen-space-4 $zen-space-6;
+    border-radius: $zen-radius-xl;
+    font-weight: $zen-font-bold;
+    font-size: $zen-text-base;
+    border: none;
+    cursor: pointer;
+    transition: all $zen-transition-base $zen-ease-in-out;
+
+    &:active {
+        transform: scale(0.98);
+    }
+
+    &--primary {
+        background: linear-gradient(135deg, $zen-primary 0%, $zen-primary-hover 100%);
+        color: white;
+        box-shadow: $zen-shadow-primary;
+
+        &:hover {
+            box-shadow: $zen-shadow-glow;
+            transform: translateY(-1px);
+        }
+
+        &:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+    }
+
+    &--secondary {
+        background: $zen-secondary;
+        color: white;
+        box-shadow: $zen-shadow-md;
+
+        &:hover {
+            background: color.adjust($zen-secondary, $lightness: -5%);
+        }
+    }
+
+    &--outline {
+        background: transparent;
+        border: 2px solid $zen-primary;
+        color: $zen-primary;
+
+        &:hover {
+            background: $zen-primary-light;
+        }
+    }
+
+    &--ghost {
+        background: transparent;
+        color: $zen-primary;
+
+        &:hover {
+            background: $zen-primary-light;
+        }
+    }
+
+    &--sm {
+        padding: $zen-space-2 $zen-space-4;
+        font-size: $zen-text-sm;
+    }
+
+    &--lg {
+        padding: $zen-space-5 $zen-space-8;
+        font-size: $zen-text-lg;
+    }
+}
+
+.zen-btn-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: $zen-radius-md;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all $zen-transition-base;
+
+    .material-icons-round {
+        font-size: 18px;
+    }
+
+    &--primary {
+        background: $zen-primary-light;
+        color: $zen-primary;
+
+        &:hover {
+            background: $zen-primary;
+            color: white;
+        }
+    }
+
+    &--danger {
+        background: rgba($zen-error, 0.1);
+        color: $zen-error;
+
+        &:hover {
+            background: $zen-error;
+            color: white;
+        }
+    }
+}
+
+// Cards
+.zen-card {
+    background: white;
+    border-radius: $zen-radius-lg;
+    padding: $zen-space-6;
+    box-shadow: $zen-shadow-soft;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all $zen-transition-base $zen-ease-in-out;
+
+    &:hover {
+        box-shadow: $zen-shadow-lg;
+        transform: translateY(-2px);
+    }
+
+    &--highlight {
+        border-left: 4px solid $zen-primary;
+    }
+
+    &--gradient {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+
+    &__title {
+        font-size: $zen-text-xl;
+        font-weight: $zen-font-bold;
+        margin-bottom: $zen-space-3;
+    }
+
+    &__content {
+        color: $zen-text-secondary;
+        line-height: $zen-leading-relaxed;
+    }
+}
+
+// Inputs
+.zen-input {
+    width: 100%;
+    padding: $zen-space-4 $zen-space-5;
+    border-radius: $zen-radius-lg;
+    border: 2px solid transparent;
+    background: $zen-input-light;
+    font-size: $zen-text-base;
+    font-weight: $zen-font-semibold;
+    transition: all $zen-transition-base $zen-ease-in-out;
+
+    &:focus {
+        outline: none;
+        border-color: $zen-primary;
+        box-shadow: 0 0 0 3px rgba($zen-primary, 0.2);
+        background: white;
+    }
+
+    &--icon {
+        padding-left: 3rem;
+    }
+}
+
+.zen-input-group {
+    position: relative;
+
+    .input-icon {
+        position: absolute;
+        left: $zen-space-4;
+        top: 50%;
+        transform: translateY(-50%);
+        color: $zen-text-muted;
+        pointer-events: none;
+    }
+}
+
+// Badges
+.zen-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: $zen-space-1;
+    padding: $zen-space-1 $zen-space-3;
+    border-radius: $zen-radius-full;
+    font-size: $zen-text-xs;
+    font-weight: $zen-font-bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    &--primary {
+        background: $zen-primary-light;
+        color: $zen-primary;
+    }
+
+    &--success {
+        background: rgba($zen-success, 0.1);
+        color: $zen-success;
+    }
+
+    &--warning {
+        background: rgba($zen-warning, 0.1);
+        color: $zen-warning;
+    }
+
+    &--error {
+        background: rgba($zen-error, 0.1);
+        color: $zen-error;
+    }
+
+    &--gold {
+        background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 100%);
+        color: white;
+        box-shadow: 0 2px 8px rgba(251, 191, 36, 0.3);
+    }
+}
+
+// Avatars
+.zen-avatar {
+    position: relative;
+
+    &__image {
+        width: 48px;
+        height: 48px;
+        border-radius: $zen-radius-full;
+        border: 2px solid $zen-primary;
+        object-fit: cover;
+    }
+
+    &__badge {
+        position: absolute;
+        bottom: -2px;
+        right: -2px;
+        width: 20px;
+        height: 20px;
+        background: $zen-primary;
+        color: white;
+        border-radius: $zen-radius-full;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        font-weight: $zen-font-bold;
+        border: 2px solid white;
+    }
+
+    &--lg &__image {
+        width: 64px;
+        height: 64px;
+    }
+
+    &--sm &__image {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+// Progress Bar
+.zen-progress {
+    width: 100%;
+    height: 12px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: $zen-radius-full;
+    overflow: hidden;
+    position: relative;
+
+    &__bar {
+        height: 100%;
+        background: linear-gradient(90deg, $zen-primary 0%, $zen-primary-hover 100%);
+        border-radius: $zen-radius-full;
+        transition: width $zen-transition-slow $zen-ease-in-out;
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.3) 50%, transparent 100%);
+        }
+    }
+
+    &--sm {
+        height: 8px;
+    }
+
+    &--lg {
+        height: 16px;
+    }
+}

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ranking VestiQuiz</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#3713ec",
+              "background-light": "#f6f6f8",
+              "background-dark": "#131022",
+              "surface-dark": "#1c182f",
+              "surface-highlight": "#292348",
+            },
+            fontFamily: {
+              "display": ["Plus Jakarta Sans", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+            backgroundImage: {
+              'podium-glow': 'radial-gradient(circle at center, rgba(55, 19, 236, 0.4) 0%, rgba(19, 16, 34, 0) 70%)',
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        /* Custom Scrollbar for cleaner look */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #131022; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #292348; 
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3713ec; 
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-white overflow-x-hidden">
+<div class="relative flex min-h-screen w-full flex-col group/design-root">
+<!-- Header -->
+<header class="sticky top-0 z-30 flex items-center bg-background-dark/95 backdrop-blur-md p-4 pb-2 justify-between border-b border-white/5">
+<div class="text-white flex size-12 shrink-0 items-center justify-center rounded-full active:bg-white/10 transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-2xl">arrow_back</span>
+</div>
+<h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center">Ranking</h2>
+<div class="flex w-12 items-center justify-end">
+<button class="flex size-12 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-transparent text-white active:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-2xl">filter_list</span>
+</button>
+</div>
+</header>
+<!-- Segmented Control Tabs -->
+<div class="flex px-4 py-4 w-full sticky top-[70px] z-20 bg-background-dark">
+<div class="flex h-12 flex-1 items-center justify-center rounded-full bg-surface-highlight p-1 shadow-inner">
+<label class="flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded-full px-2 has-[:checked]:bg-primary has-[:checked]:shadow-lg has-[:checked]:text-white text-[#9b92c9] text-sm font-bold transition-all duration-300">
+<span class="truncate">Por Escola</span>
+<input checked="" class="invisible w-0" name="ranking-type" type="radio" value="Por Escola"/>
+</label>
+<label class="flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded-full px-2 has-[:checked]:bg-primary has-[:checked]:shadow-lg has-[:checked]:text-white text-[#9b92c9] text-sm font-bold transition-all duration-300">
+<span class="truncate">Por Prefeitura</span>
+<input class="invisible w-0" name="ranking-type" type="radio" value="Por Prefeitura"/>
+</label>
+</div>
+</div>
+<!-- Scrollable Content Area -->
+<div class="flex-1 flex flex-col pb-24"> <!-- Padding bottom for sticky footer -->
+<!-- Podium Section -->
+<div class="relative flex flex-col items-center justify-center pt-4 pb-8">
+<!-- Glow Effect behind podium -->
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-podium-glow pointer-events-none z-0"></div>
+<div class="relative z-10 flex items-end justify-center gap-2 sm:gap-6 w-full px-4">
+<!-- 2nd Place -->
+<div class="flex flex-col items-center gap-2 w-1/3 max-w-[110px]">
+<div class="text-[#C0C0C0] font-bold text-sm mb-1">2º Lugar</div>
+<div class="relative group cursor-pointer">
+<div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full border-4 border-[#C0C0C0] p-1 bg-surface-highlight shadow-[0_0_15px_rgba(192,192,192,0.3)]">
+<div class="w-full h-full rounded-full bg-cover bg-center" data-alt="Student avatar for 2nd place" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBebiVZ5L-z3lFFS9qaLVIg0gE4GO017Q6X2mQP8oCavFwYk8YFrAQ8_Gw_c2oM17krQVbogu0gowrR6ysUJN3uagenwI_3qTtzaQvYdVyJV2bOkjLHW7C0nBxl71wGmjv9VMJxVL1rn6J5XwFSjmSG1O6db4g0qqM4F0kUdYD6jvJSuwOKbqFmXN-_RVwybw1goaZhTmOKc-V9Ckk3hYGHDHcSwg7t-_J1l0-SPqSRXopwPDlK2CCPPge_FkEW7LI3LK_sOjfQv0w");'></div>
+</div>
+<div class="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-[#C0C0C0] text-background-dark text-xs font-bold px-2 py-0.5 rounded-full">
+                                #2
+                            </div>
+</div>
+<div class="text-center mt-2">
+<p class="text-white text-sm font-bold leading-tight truncate w-full">Maria O.</p>
+<p class="text-primary text-xs font-semibold">14.200 XP</p>
+</div>
+</div>
+<!-- 1st Place -->
+<div class="flex flex-col items-center gap-2 w-1/3 max-w-[130px] -mt-8 mb-4">
+<div class="text-[#FFD700] font-bold text-base mb-1 flex flex-col items-center animate-bounce">
+<span class="material-symbols-outlined text-[#FFD700] mb-1 fill-current">crown</span>
+</div>
+<div class="relative group cursor-pointer scale-110 origin-bottom">
+<div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-4 border-[#FFD700] p-1 bg-surface-highlight shadow-[0_0_30px_rgba(255,215,0,0.4)] relative z-10">
+<div class="w-full h-full rounded-full bg-cover bg-center" data-alt="Student avatar for 1st place" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCxw6F5ppPVImLZdQyDaCQKjo50dfBfYA--RjSJnGs0gr2vmiYfn-XpwGndW-KwYvmo1FtYLRZLodPkdkeTmug12ZWc-9b6lwvdjgrXB5prA0ohhf-2O9MrwBjkRgGDkoNQB38wexzXpln5eRAbpm64BWBDbGF3ZBlZ5aoRRvxuddIbqfMsZS1lNcxhVtT3ILepPU_bruAX6sRcV2BjiFn7G3smYZsydx96OqMykoqrM8XuWJQ12gkjLJIA_uxCSNPTDxoZGG--ARg");'></div>
+</div>
+<!-- Ring glow -->
+<div class="absolute inset-0 rounded-full border border-[#FFD700]/50 animate-ping"></div>
+<div class="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-[#FFD700] to-[#FDB931] text-background-dark text-sm font-black px-3 py-0.5 rounded-full z-20 shadow-lg">
+                                #1
+                            </div>
+</div>
+<div class="text-center mt-2 scale-110 origin-top">
+<p class="text-white text-base font-bold leading-tight truncate w-full">João Silva</p>
+<p class="text-[#FFD700] text-sm font-black tracking-wide">15.000 XP</p>
+</div>
+</div>
+<!-- 3rd Place -->
+<div class="flex flex-col items-center gap-2 w-1/3 max-w-[110px]">
+<div class="text-[#CD7F32] font-bold text-sm mb-1">3º Lugar</div>
+<div class="relative group cursor-pointer">
+<div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full border-4 border-[#CD7F32] p-1 bg-surface-highlight shadow-[0_0_15px_rgba(205,127,50,0.3)]">
+<div class="w-full h-full rounded-full bg-cover bg-center" data-alt="Student avatar for 3rd place" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDFKfntGaGFLxVn9--Sus3JPwQLIYtPbEqh-f_N7ce-yBO-UMKYA9YCpr49xPpUiWdWHTi_OIhvAIDMawa8p1vTjyoBAcdD8KD5gr4MxqrlGsgFZuqGrZP9F1UlAydUow6xv1doKeeuGC6tM_9d2nad4oOAwHiaeUKdD4WClt9Y6cPoh1zdHCYTkABGGIhj65o_hamL1sCl-JdrbxF2cdKJPQSP-lOPgDlig3P71S6346qNal3uU9B2wyxpcCnWWgWlGBOHRYqnIwc");'></div>
+</div>
+<div class="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-[#CD7F32] text-background-dark text-xs font-bold px-2 py-0.5 rounded-full">
+                                #3
+                            </div>
+</div>
+<div class="text-center mt-2">
+<p class="text-white text-sm font-bold leading-tight truncate w-full">Pedro S.</p>
+<p class="text-primary text-xs font-semibold">13.800 XP</p>
+</div>
+</div>
+</div>
+</div>
+<!-- List Header -->
+<div class="px-6 py-2 flex items-center justify-between text-xs font-medium text-[#9b92c9] uppercase tracking-wider">
+<span>Rank</span>
+<span>Pontuação</span>
+</div>
+<!-- Ranking List -->
+<div class="flex flex-col gap-3 px-4">
+<!-- Item 4 -->
+<div class="flex items-center gap-4 bg-surface-dark p-3 rounded-2xl border border-white/5 shadow-sm active:scale-[0.99] transition-transform">
+<span class="text-[#9b92c9] font-bold w-6 text-center text-lg">4</span>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-12 w-12 border border-white/10" data-alt="Student avatar list item" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCudRyOBa9mJdKcs8nvtJjgJwD3cPl-hlE3IrK-STVohBtuFU7hD-9IaSfR43_w2Qrvgu27DbZ07yD1HuYY22p9Bl5wDFPUJkIjL-qhJjonN2NQLlWfIkySNi84EtEJ7CZ4Zi8w3vwV4ybbqB7BDHCP41LDyZe9EsqFqnaxp5jlnq-MdD2Bo5uyYw4CmIkD2kk0yvGOsNXov5unGPrwQ6LDqhO2wO9RsOiY6lL3smwqb-TRmogiEb3tPBshsHENxCRpLLX6eNkB0aw");'></div>
+<div class="flex flex-col flex-1 min-w-0">
+<p class="text-white text-base font-semibold truncate">Ana Costa</p>
+<p class="text-[#9b92c9] text-xs truncate">Colégio Militar</p>
+</div>
+<div class="shrink-0 flex items-center gap-1 bg-surface-highlight px-3 py-1.5 rounded-full">
+<span class="material-symbols-outlined text-primary text-base">bolt</span>
+<p class="text-white text-sm font-bold">12.500</p>
+</div>
+</div>
+<!-- Item 5 -->
+<div class="flex items-center gap-4 bg-surface-dark p-3 rounded-2xl border border-white/5 shadow-sm active:scale-[0.99] transition-transform">
+<span class="text-[#9b92c9] font-bold w-6 text-center text-lg">5</span>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-12 w-12 border border-white/10" data-alt="Student avatar list item" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBscOayPSiUawhYDXfJGO_7nSDIXnKs3FNO4yzsABPj_-VafAO-QxPwQMoGbL4MP2aynPiTTl4xmfHKKEw3wLRj_Q3kjOEW5lMQeCAMCQLO7uqwboaI2KUy9bvuA8I57wPQHXywspehQniNSWXhb-1SQs8L9Sv-p_rBEeL0zjiDznGuJjSb1vg7av-8yzF0NDbSx2qOfsW66nLDQKfSqzXll6f41_SwH5SYhDQcNvtm70TkhxiufaSI8P2wsvqdEz6SgLYlwbf3_3s");'></div>
+<div class="flex flex-col flex-1 min-w-0">
+<p class="text-white text-base font-semibold truncate">Lucas Pereira</p>
+<p class="text-[#9b92c9] text-xs truncate">Escola Estadual Modelo</p>
+</div>
+<div class="shrink-0 flex items-center gap-1 bg-surface-highlight px-3 py-1.5 rounded-full">
+<span class="material-symbols-outlined text-primary text-base">bolt</span>
+<p class="text-white text-sm font-bold">11.950</p>
+</div>
+</div>
+<!-- Item 6 -->
+<div class="flex items-center gap-4 bg-surface-dark p-3 rounded-2xl border border-white/5 shadow-sm active:scale-[0.99] transition-transform">
+<span class="text-[#9b92c9] font-bold w-6 text-center text-lg">6</span>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-12 w-12 border border-white/10" data-alt="Student avatar list item" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCESJQR9rKks1RPgqLY8B9OLohKeQ99asNDoVRTt8gH46pTN6QTnSV0GBPKpSsDY0hh4zQpDcwsPM1qz7Uj9Qvu8BHPACoE-0wdUFQkmIqv5PzhJwyDQU2typiZEPcwGtMyhNyzYqz3yHPVORSnlsa2x89CWp_xuP8mrTwL1IRvwjCic6XNFhp_uCtXA5NKIXBZztzRmdTEBvemwlx2nh6jx4V9FIlPPFtIzs7a8n-Ko8loPa6q_G3_3M73f6hVdtIGBQe9jdFErkQ");'></div>
+<div class="flex flex-col flex-1 min-w-0">
+<p class="text-white text-base font-semibold truncate">Carla Mendes</p>
+<p class="text-[#9b92c9] text-xs truncate">Instituto Federal</p>
+</div>
+<div class="shrink-0 flex items-center gap-1 bg-surface-highlight px-3 py-1.5 rounded-full">
+<span class="material-symbols-outlined text-primary text-base">bolt</span>
+<p class="text-white text-sm font-bold">10.200</p>
+</div>
+</div>
+<!-- Item 7 -->
+<div class="flex items-center gap-4 bg-surface-dark p-3 rounded-2xl border border-white/5 shadow-sm active:scale-[0.99] transition-transform">
+<span class="text-[#9b92c9] font-bold w-6 text-center text-lg">7</span>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-12 w-12 border border-white/10" data-alt="Student avatar list item" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBafLysC3r-gnT8xFz7hnbDffMWwa6VkBCWXSFxTlBEY9FtF7jnp_OTVjEJSMuuMADoTRPgYx-U--6kNxZftbxgNCl5BTqW0MLrmyo3NqHPfJROJ5S5Jc2mcrZohpCnRIc86FYaZK9YDQnBY9a0j0cmxBBo66Dh9FZ8tB7hWUdJXjPi-md_Z9SAg9H6aD8PmoUSrlJBXKh3ivUeGwQZ_UOZNO5jrN4wJyxeh8F1INKKYJAoWm73o5aJf5iTXbgZlFbObvp6NUNr7FU");'></div>
+<div class="flex flex-col flex-1 min-w-0">
+<p class="text-white text-base font-semibold truncate">Rafael Souza</p>
+<p class="text-[#9b92c9] text-xs truncate">Colégio Santa Maria</p>
+</div>
+<div class="shrink-0 flex items-center gap-1 bg-surface-highlight px-3 py-1.5 rounded-full">
+<span class="material-symbols-outlined text-primary text-base">bolt</span>
+<p class="text-white text-sm font-bold">9.800</p>
+</div>
+</div>
+<!-- Item 8 -->
+<div class="flex items-center gap-4 bg-surface-dark p-3 rounded-2xl border border-white/5 shadow-sm active:scale-[0.99] transition-transform">
+<span class="text-[#9b92c9] font-bold w-6 text-center text-lg">8</span>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-12 w-12 border border-white/10" data-alt="Student avatar list item" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA7hm1UbRrRal2FHnqeQFuazWsh184pJ2vBlsXf5iti1JEN6XKG96kCZrZiSRGR5rzPhZA2FrH1zLgrDfOtg5a0zp98RIK0teRHFaJBBQlYPRFA9gcEdUs8N2Rw1gxWmVbj76qGuaK5w8O0aG__dTuRmGSXWBhaNpu4hzadY1zEQJqFCy-CY2S2hgbCOrc3Al-yj3Sf2GiRlhhKNj2_iBnvDXa3LdRs0l5wxIdcYkSKINvuhyC6DXjIClu7HzvDqniIJC1_0-9nkrA");'></div>
+<div class="flex flex-col flex-1 min-w-0">
+<p class="text-white text-base font-semibold truncate">Beatriz Lima</p>
+<p class="text-[#9b92c9] text-xs truncate">Escola Técnica</p>
+</div>
+<div class="shrink-0 flex items-center gap-1 bg-surface-highlight px-3 py-1.5 rounded-full">
+<span class="material-symbols-outlined text-primary text-base">bolt</span>
+<p class="text-white text-sm font-bold">9.450</p>
+</div>
+</div>
+<!-- Item 9 -->
+<div class="flex items-center gap-4 bg-surface-dark p-3 rounded-2xl border border-white/5 shadow-sm active:scale-[0.99] transition-transform">
+<span class="text-[#9b92c9] font-bold w-6 text-center text-lg">9</span>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-12 w-12 border border-white/10" data-alt="Student avatar list item" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBsr6kyEZg1Sk4AVSEta-j1OpavREV5r7IHxV8d1xeBOURyKd8dwuIj1q7f4m3xnZCAdxP-bdXBD_4EHJbGIJuIgkwVhToCTi2r1bsms5yRbzkLn_R85E3bDTb3Z7VNpnU8hR-zIIrFRmV3UcVhvkeYyufpDdYpzbdLzBR6hT6fvHvUtTzyx1qv8u1AjHrbv0X9kPZkiHHnFXsBHGJ5iK32n147lcBVz4kQgnp7NdHzoAatdrgiFPosP9HHkhVUftQpeqI-InQ4l1U");'></div>
+<div class="flex flex-col flex-1 min-w-0">
+<p class="text-white text-base font-semibold truncate">Fernando K.</p>
+<p class="text-[#9b92c9] text-xs truncate">Colégio Objetivo</p>
+</div>
+<div class="shrink-0 flex items-center gap-1 bg-surface-highlight px-3 py-1.5 rounded-full">
+<span class="material-symbols-outlined text-primary text-base">bolt</span>
+<p class="text-white text-sm font-bold">9.100</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Sticky User Footer -->
+<div class="fixed bottom-0 left-0 w-full z-40 px-4 pb-6 pt-2">
+<div class="relative overflow-hidden rounded-3xl bg-primary shadow-2xl shadow-primary/40 border border-white/10 p-1">
+<!-- Background Decoration -->
+<div class="absolute -right-10 -top-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
+<div class="flex items-center gap-3 bg-[#131022]/20 backdrop-blur-sm rounded-2xl p-2 pr-4 relative z-10">
+<div class="flex flex-col items-center justify-center w-10 shrink-0">
+<span class="material-symbols-outlined text-green-400 text-sm">arrow_drop_up</span>
+<span class="text-white font-black text-lg leading-none">42</span>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-10 w-10 border-2 border-white/30" data-alt="Current user avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCMhJ6X6twFtPbOHdLbc9LT2a4Ff3Bnt83Fojys6JL-mp5KCGMHUX3kcnxcdxJg1QfZbH_SPtKccZH9xw8NOgbwc7xEb7bG37ApGLkrSgFCGGFbp1N77b8QeQwnK1FmnfNBhX9wvPycjFPios3YlyJlBqQ5GhfdR5zPgu4j_q4a2nFWhuTdFhdZqx4kbi8qOvx7AbbsoVRzr-nexJ_5rg_VMi370gXwe-Y9AF2Jc6N9-iaUjfFXXw3EDQOxaM0RTCYw4LxYGBtYoy0");'></div>
+<div class="flex flex-col flex-1 min-w-0">
+<p class="text-white text-sm font-bold truncate">Você</p>
+<p class="text-white/80 text-xs truncate">Subiu 3 posições hoje!</p>
+</div>
+<div class="shrink-0">
+<p class="text-white text-base font-black tracking-wide">8.900 XP</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body></html>

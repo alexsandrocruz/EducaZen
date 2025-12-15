@@ -1,0 +1,23 @@
+<Solution>
+    <Configurations>
+        <Platform Name="Any CPU" />
+    </Configurations>
+    <Folder Name="/src/">
+        <Project Path="src/EstudaZen.Domain/EstudaZen.Domain.csproj" />
+        <Project Path="src/EstudaZen.Application/EstudaZen.Application.csproj" />
+        <Project Path="src/EstudaZen.EntityFrameworkCore/EstudaZen.EntityFrameworkCore.csproj" />
+        <Project Path="src/EstudaZen.Domain.Shared/EstudaZen.Domain.Shared.csproj" />
+        <Project Path="src/EstudaZen.Application.Contracts/EstudaZen.Application.Contracts.csproj" />
+        <Project Path="src/EstudaZen.HttpApi/EstudaZen.HttpApi.csproj" />
+        <Project Path="src/EstudaZen.HttpApi.Client/EstudaZen.HttpApi.Client.csproj" />
+        <Project Path="src/EstudaZen.DbMigrator/EstudaZen.DbMigrator.csproj" />
+        <Project Path="src/EstudaZen.HttpApi.Host/EstudaZen.HttpApi.Host.csproj" />
+    </Folder>
+    <Folder Name="/test/">
+        <Project Path="test/EstudaZen.Application.Tests/EstudaZen.Application.Tests.csproj" />
+        <Project Path="test/EstudaZen.EntityFrameworkCore.Tests/EstudaZen.EntityFrameworkCore.Tests.csproj" />
+        <Project Path="test/EstudaZen.TestBase/EstudaZen.TestBase.csproj" />
+        <Project Path="test/EstudaZen.Domain.Tests/EstudaZen.Domain.Tests.csproj" />
+        <Project Path="test/EstudaZen.HttpApi.Client.ConsoleTestApp/EstudaZen.HttpApi.Client.ConsoleTestApp.csproj" />
+    </Folder>
+</Solution>

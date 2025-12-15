@@ -1,0 +1,91 @@
+<div class="admin-container">
+    <!-- Header -->
+    <div class="admin-header">
+        <div>
+            <h1 class="admin-title">Banco de Questões</h1>
+            <p class="admin-subtitle">Gerencie as questões para quizzes e simulados</p>
+        </div>
+        <button class="zen-btn zen-btn--primary" (click)="createQuestion()">
+            <span class="material-icons-round">add</span>
+            Nova Questão
+        </button>
+    </div>
+
+    <!-- Search & Filters -->
+    <div class="admin-search">
+        <div class="zen-input-group">
+            <span class="material-icons-round input-icon">search</span>
+            <input class="zen-input zen-input--icon" type="text" placeholder="Buscar por enunciado..."
+                [(ngModel)]="searchTerm" (keyup.enter)="loadQuestions()" />
+        </div>
+    </div>
+
+    <!-- Loading State -->
+    <div *ngIf="loading" class="loading-state">
+        <div class="spinner"></div>
+        <p>Carregando questões...</p>
+    </div>
+
+    <!-- Data Table -->
+    <div *ngIf="!loading" class="data-table-container">
+        <table class="zen-table">
+            <thead>
+                <tr>
+                    <th>Enunciado</th>
+                    <th>Matéria</th>
+                    <th>Dificuldade</th>
+                    <th>Status</th>
+                    <th class="text-right">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let question of questions.items" class="table-row">
+                    <td class="content-cell">
+                        <div class="question-preview">
+                            <span class="text-truncate">{{ stripHtml(question.content!) }}</span>
+                            <span class="badge-count">{{ question.answers?.length || 0 }} alt.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="subject-tag">
+                            {{ question.subjectName || 'Sem Matéria' }}
+                        </span>
+                    </td>
+                    <td>
+                        <span class="zen-badge" [ngClass]="'zen-badge--' + getDifficultyColor(question.difficulty!)">
+                            {{ getDifficultyLabel(question.difficulty!) }}
+                        </span>
+                    </td>
+                    <td>
+                        <span class="status-indicator" [class.active]="question.isPublished">
+                            {{ question.isPublished ? 'Publicada' : 'Rascunho' }}
+                        </span>
+                    </td>
+                    <td class="text-right">
+                        <div class="action-buttons">
+                            <button class="zen-btn-icon zen-btn-icon--primary" (click)="editQuestion(question.id!)"
+                                title="Editar">
+                                <span class="material-icons-round">edit</span>
+                            </button>
+                            <button class="zen-btn-icon zen-btn-icon--danger" (click)="deleteQuestion(question)"
+                                title="Excluir">
+                                <span class="material-icons-round">delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <tr *ngIf="questions.items.length === 0">
+                    <td colspan="5" class="empty-state">
+                        <div class="empty-state-content">
+                            <span class="material-icons-round empty-icon">quiz</span>
+                            <p>Nenhuma questão encontrada</p>
+                            <button class="zen-btn zen-btn--primary" (click)="createQuestion()">
+                                Criar primeira questão
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

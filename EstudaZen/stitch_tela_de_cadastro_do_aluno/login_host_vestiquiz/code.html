@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login Host VestiQuiz</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#3713ec",
+                        "primary-light": "#5b37f2",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#131022",
+                        "surface-dark": "#1e1933",
+                        "border-dark": "#3b3267",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3b3267;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #5b37f2;
+        }
+        
+        .glass-effect {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        
+        /* Input autofill fix for dark mode */
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover, 
+        input:-webkit-autofill:focus, 
+        input:-webkit-autofill:active{
+            -webkit-box-shadow: 0 0 0 30px #1e1933 inset !important;
+            -webkit-text-fill-color: white !important;
+            transition: background-color 5000s ease-in-out 0s;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display antialiased min-h-screen relative flex items-center justify-center overflow-hidden selection:bg-primary selection:text-white">
+<!-- Decorative Background Elements (Gamified/Vibrant feel) -->
+<div class="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+<!-- Top Left Purple Blob -->
+<div class="absolute -top-[10%] -left-[10%] w-[50vh] h-[50vh] bg-primary/30 rounded-full blur-[100px] opacity-60 mix-blend-screen animate-pulse"></div>
+<!-- Bottom Right Blue Blob -->
+<div class="absolute -bottom-[10%] -right-[10%] w-[60vh] h-[60vh] bg-blue-600/20 rounded-full blur-[120px] opacity-50 mix-blend-screen"></div>
+<!-- Center subtle glow -->
+<div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gradient-radial from-transparent to-background-dark/90"></div>
+</div>
+<!-- Main Container -->
+<div class="relative z-10 w-full max-w-[480px] p-6 flex flex-col items-center justify-center min-h-screen sm:min-h-0 sm:block">
+<!-- Logo Section -->
+<div class="flex flex-col items-center justify-center mb-10 w-full">
+<div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary to-blue-500 flex items-center justify-center shadow-lg shadow-primary/30 mb-6 transform transition-transform hover:scale-105 duration-300 group">
+<span class="material-symbols-outlined text-4xl text-white group-hover:rotate-12 transition-transform duration-500">
+                    sports_esports
+                </span>
+</div>
+<div class="flex items-center gap-2">
+<h1 class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">VestiQuiz</h1>
+<span class="px-2 py-0.5 rounded-full bg-primary/20 border border-primary/40 text-[10px] font-bold tracking-wider text-primary-light uppercase">Host</span>
+</div>
+</div>
+<!-- Login Card -->
+<div class="w-full bg-white/5 dark:bg-surface-dark/60 backdrop-blur-xl border border-gray-200 dark:border-white/10 rounded-2xl p-8 shadow-2xl relative overflow-hidden">
+<!-- Decorative top line -->
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-70"></div>
+<!-- Headlines -->
+<div class="mb-8 text-center">
+<h2 class="text-slate-900 dark:text-white text-2xl font-bold mb-2">Painel Administrativo</h2>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Gerencie prefeituras, planos e usuários.</p>
+</div>
+<!-- Form -->
+<form class="flex flex-col gap-5" onsubmit="event.preventDefault();">
+<!-- Email Field -->
+<div class="space-y-2">
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 ml-1">
+                        E-mail ou Usuário
+                    </label>
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-slate-400 group-focus-within:text-primary transition-colors text-[20px]">
+                                mail
+                            </span>
+</div>
+<input class="form-input block w-full pl-11 pr-4 py-3.5 bg-gray-50 dark:bg-[#1e1933] border-gray-200 dark:border-[#3b3267] rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:border-primary dark:focus:border-primary focus:ring-1 focus:ring-primary transition-all duration-200" placeholder="ex: admin@vestiquiz.com" type="text"/>
+</div>
+</div>
+<!-- Password Field -->
+<div class="space-y-2">
+<label class="flex justify-between items-center text-sm font-medium text-slate-700 dark:text-slate-300 ml-1">
+<span>Senha</span>
+<a class="text-primary hover:text-primary-light text-xs font-semibold transition-colors" href="#">Esqueceu a senha?</a>
+</label>
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-slate-400 group-focus-within:text-primary transition-colors text-[20px]">
+                                lock
+                            </span>
+</div>
+<input class="form-input block w-full pl-11 pr-12 py-3.5 bg-gray-50 dark:bg-[#1e1933] border-gray-200 dark:border-[#3b3267] rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:border-primary dark:focus:border-primary focus:ring-1 focus:ring-primary transition-all duration-200" placeholder="••••••••" type="password"/>
+<button class="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 hover:text-slate-200 transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">
+                                visibility
+                            </span>
+</button>
+</div>
+</div>
+<!-- Login Button -->
+<button class="mt-4 w-full bg-gradient-to-r from-primary to-[#5b37f2] hover:to-[#4a2bc2] text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-primary/25 hover:shadow-primary/40 transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 flex items-center justify-center gap-2 group/btn" type="submit">
+<span>Acessar Painel</span>
+<span class="material-symbols-outlined text-[20px] group-hover/btn:translate-x-1 transition-transform">
+                        arrow_forward
+                    </span>
+</button>
+</form>
+<!-- Footer Links -->
+<div class="mt-8 pt-6 border-t border-gray-200 dark:border-white/10 flex flex-col gap-4 text-center">
+<p class="text-sm text-slate-500 dark:text-slate-400">
+                    Ainda não tem acesso? 
+                    <a class="text-primary font-semibold hover:underline" href="#">Solicitar convite</a>
+</p>
+<div class="flex justify-center gap-6">
+<a class="text-xs text-slate-400 hover:text-white transition-colors flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[14px]">help</span>
+                        Suporte
+                    </a>
+<a class="text-xs text-slate-400 hover:text-white transition-colors flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[14px]">policy</span>
+                        Termos
+                    </a>
+</div>
+</div>
+</div>
+<!-- Abstract Bottom decoration -->
+<div class="mt-8 flex justify-center opacity-40">
+<div class="h-1 w-24 rounded-full bg-gray-600 dark:bg-gray-700"></div>
+</div>
+</div>
+</body></html>

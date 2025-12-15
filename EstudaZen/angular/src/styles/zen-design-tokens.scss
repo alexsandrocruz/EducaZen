@@ -1,0 +1,180 @@
+/**
+ * Zen Design System - Design Tokens
+ * Extracted from VestiQuiz Stitch Designs
+ */
+
+/* ===== COLORS ===== */
+
+/* Primary Colors */
+$zen-primary: #7f13ec;
+$zen-primary-hover: #6C5CE7;
+$zen-primary-light: rgba(127, 19, 236, 0.1);
+$zen-primary-glow: rgba(108, 92, 231, 0.4);
+
+/* Secondary Colors */
+$zen-secondary: #FF7675;
+$zen-secondary-alt: #00d4ff;
+$zen-accent: #00CEC9;
+
+/* Gray Scale (Slate) */
+$zen-gray-50: #f8fafc;
+$zen-gray-100: #f1f5f9;
+$zen-gray-200: #e2e8f0;
+$zen-gray-300: #cbd5e1;
+$zen-gray-400: #94a3b8;
+$zen-gray-500: #64748b;
+$zen-gray-600: #475569;
+$zen-gray-700: #334155;
+$zen-gray-800: #1e293b;
+$zen-gray-900: #0f172a;
+
+/* Background Colors */
+$zen-bg-light: #F8FAFC;
+$zen-bg-dark: #130b1b;
+$zen-surface-dark: #1f162b;
+$zen-surface-highlight: #292348;
+
+/* Card Colors */
+$zen-card-light: #FFFFFF;
+$zen-card-dark: #1E293B;
+
+/* Input Colors */
+$zen-input-light: #F1F5F9;
+$zen-input-dark: #334155;
+
+/* Text Colors */
+$zen-text-primary: #1E293B;
+$zen-text-secondary: #64748B;
+$zen-text-muted: #94A3B8;
+
+/* Status Colors */
+$zen-success: #10B981;
+$zen-error: #EF4444;
+$zen-warning: #F59E0B;
+$zen-info: #3B82F6;
+
+/* Gamification Colors */
+$zen-gold: #FBBF24;
+$zen-silver: #C0C0C0;
+$zen-bronze: #CD7F32;
+
+/* ===== TYPOGRAPHY ===== */
+
+/* Font Families */
+$zen-font-display: 'Plus Jakarta Sans', 'Nunito', sans-serif;
+$zen-font-body: 'Plus Jakarta Sans', sans-serif;
+
+/* Font Sizes */
+$zen-text-xs: 0.75rem; // 12px
+$zen-text-sm: 0.875rem; // 14px
+$zen-text-base: 1rem; // 16px
+$zen-text-lg: 1.125rem; // 18px
+$zen-text-xl: 1.25rem; // 20px
+$zen-text-2xl: 1.5rem; // 24px
+$zen-text-3xl: 1.875rem; // 30px
+$zen-text-4xl: 2.25rem; // 36px
+
+/* Font Weights */
+$zen-font-normal: 400;
+$zen-font-medium: 500;
+$zen-font-semibold: 600;
+$zen-font-bold: 700;
+$zen-font-extrabold: 800;
+
+/* Line Heights */
+$zen-leading-tight: 1.25;
+$zen-leading-normal: 1.5;
+$zen-leading-relaxed: 1.75;
+
+/* ===== SPACING ===== */
+
+$zen-space-1: 0.25rem; // 4px
+$zen-space-2: 0.5rem; // 8px
+$zen-space-3: 0.75rem; // 12px
+$zen-space-4: 1rem; // 16px
+$zen-space-5: 1.25rem; // 20px
+$zen-space-6: 1.5rem; // 24px
+$zen-space-8: 2rem; // 32px
+$zen-space-10: 2.5rem; // 40px
+$zen-space-12: 3rem; // 48px
+
+/* ===== BORDER RADIUS ===== */
+
+$zen-radius-sm: 0.5rem; // 8px
+$zen-radius-md: 1rem; // 16px
+$zen-radius-lg: 1.5rem; // 24px
+$zen-radius-xl: 2rem; // 32px
+$zen-radius-2xl: 2.5rem; // 40px
+$zen-radius-3xl: 3rem; // 48px
+$zen-radius-full: 9999px;
+
+/* ===== SHADOWS ===== */
+
+$zen-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$zen-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+$zen-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+$zen-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+$zen-shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+$zen-shadow-soft: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
+$zen-shadow-glow: 0 0 20px $zen-primary-glow;
+$zen-shadow-primary: 0 10px 25px -5px rgba(127, 19, 236, 0.3);
+
+/* ===== TRANSITIONS ===== */
+
+$zen-transition-fast: 150ms;
+$zen-transition-base: 200ms;
+$zen-transition-slow: 300ms;
+$zen-transition-slower: 500ms;
+
+$zen-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+$zen-ease-out: cubic-bezier(0, 0, 0.2, 1);
+$zen-ease-in: cubic-bezier(0.4, 0, 1, 1);
+
+/* ===== Z-INDEX LAYERS ===== */
+
+$zen-z-base: 1;
+$zen-z-dropdown: 10;
+$zen-z-sticky: 20;
+$zen-z-fixed: 30;
+$zen-z-modal-backdrop: 40;
+$zen-z-modal: 50;
+$zen-z-popover: 60;
+$zen-z-toast: 70;
+
+/* ===== BREAKPOINTS ===== */
+
+$zen-screen-sm: 640px;
+$zen-screen-md: 768px;
+$zen-screen-lg: 1024px;
+$zen-screen-xl: 1280px;
+$zen-screen-2xl: 1536px;
+
+/* ===== GLASSMORPHISM ===== */
+
+@mixin zen-glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@mixin zen-glass-light {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* ===== GRADIENTS ===== */
+
+@mixin zen-gradient-primary {
+  background: linear-gradient(135deg, $zen-primary 0%, #6C5CE7 100%);
+}
+
+@mixin zen-gradient-hero {
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+}
+
+@mixin zen-gradient-sunset {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VestiQuiz - Seleção de Dificuldade</title>
+<!-- Google Fonts: Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7f13ec",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#191022",
+                        "card-dark": "#261933", // Custom derived from the provided snippets
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: "Plus Jakarta Sans", sans-serif;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white transition-colors duration-200">
+<div class="relative flex h-full min-h-screen w-full flex-col overflow-hidden max-w-md mx-auto shadow-2xl bg-background-light dark:bg-background-dark">
+<!-- Top App Bar -->
+<div class="sticky top-0 z-10 flex items-center bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-md p-4 pb-2 justify-between">
+<button aria-label="Voltar" class="flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-slate-900 dark:text-white" style="font-size: 24px;">arrow_back</span>
+</button>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-10">Escolha o Nível</h2>
+</div>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto pb-24 hide-scrollbar">
+<!-- Headline & Subtitle -->
+<div class="px-5 pt-4 pb-2">
+<h1 class="text-slate-900 dark:text-white tracking-tight text-[28px] font-extrabold leading-tight text-left">Seleção de Dificuldade</h1>
+<p class="text-slate-600 dark:text-slate-400 text-base font-medium leading-normal pt-2">Quanto você quer arriscar hoje?</p>
+</div>
+<!-- List of Cards -->
+<div class="p-4 flex flex-col gap-5">
+<!-- Easy Card -->
+<div class="group relative overflow-hidden rounded-xl bg-white dark:bg-[#261933] shadow-sm hover:shadow-md transition-all duration-300 border border-slate-200 dark:border-white/5">
+<!-- Decorative Gradient Bar -->
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-green-400 to-emerald-600"></div>
+<div class="flex flex-row p-4 gap-4 items-center">
+<div class="relative h-20 w-20 shrink-0 overflow-hidden rounded-lg bg-emerald-100 dark:bg-emerald-500/10">
+<div class="absolute inset-0 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
+<span class="material-symbols-outlined" style="font-size: 40px;">spa</span>
+</div>
+</div>
+<div class="flex-1 flex flex-col justify-center">
+<div class="flex justify-between items-start mb-1">
+<h3 class="text-slate-900 dark:text-white text-lg font-bold leading-tight">Fácil</h3>
+<span class="inline-flex items-center rounded-full bg-emerald-100 dark:bg-emerald-500/20 px-2.5 py-0.5 text-xs font-bold text-emerald-700 dark:text-emerald-300">
+                                    +10 XP
+                                </span>
+</div>
+<p class="text-slate-500 dark:text-[#ad92c9] text-sm font-normal leading-snug mb-3">Aquecimento para revisar conceitos básicos.</p>
+<button class="w-full h-9 rounded-lg bg-slate-100 dark:bg-white/5 hover:bg-emerald-50 dark:hover:bg-emerald-500/10 text-slate-700 dark:text-white text-sm font-semibold transition-colors flex items-center justify-center gap-2 group-hover:bg-emerald-600 group-hover:text-white dark:group-hover:bg-emerald-600">
+                                Selecionar
+                            </button>
+</div>
+</div>
+</div>
+<!-- Medium Card -->
+<div class="group relative overflow-hidden rounded-xl bg-white dark:bg-[#261933] shadow-sm hover:shadow-md transition-all duration-300 border border-slate-200 dark:border-white/5">
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-blue-400 to-primary"></div>
+<div class="flex flex-row p-4 gap-4 items-center">
+<div class="relative h-20 w-20 shrink-0 overflow-hidden rounded-lg bg-blue-100 dark:bg-blue-500/10">
+<div class="absolute inset-0 flex items-center justify-center text-blue-600 dark:text-blue-400">
+<span class="material-symbols-outlined" style="font-size: 40px;">school</span>
+</div>
+</div>
+<div class="flex-1 flex flex-col justify-center">
+<div class="flex justify-between items-start mb-1">
+<h3 class="text-slate-900 dark:text-white text-lg font-bold leading-tight">Médio</h3>
+<span class="inline-flex items-center rounded-full bg-blue-100 dark:bg-blue-500/20 px-2.5 py-0.5 text-xs font-bold text-blue-700 dark:text-blue-300">
+                                    +25 XP
+                                </span>
+</div>
+<p class="text-slate-500 dark:text-[#ad92c9] text-sm font-normal leading-snug mb-3">O padrão do ENEM. Equilíbrio ideal.</p>
+<button class="w-full h-9 rounded-lg bg-slate-100 dark:bg-white/5 hover:bg-blue-50 dark:hover:bg-blue-500/10 text-slate-700 dark:text-white text-sm font-semibold transition-colors flex items-center justify-center gap-2 group-hover:bg-blue-600 group-hover:text-white dark:group-hover:bg-blue-600">
+                                Selecionar
+                            </button>
+</div>
+</div>
+</div>
+<!-- Hard Card -->
+<div class="group relative overflow-hidden rounded-xl bg-white dark:bg-[#261933] shadow-sm hover:shadow-md transition-all duration-300 border border-slate-200 dark:border-white/5">
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-orange-400 to-red-600"></div>
+<div class="flex flex-row p-4 gap-4 items-center">
+<div class="relative h-20 w-20 shrink-0 overflow-hidden rounded-lg bg-orange-100 dark:bg-orange-500/10">
+<div class="absolute inset-0 flex items-center justify-center text-orange-600 dark:text-orange-400">
+<span class="material-symbols-outlined" style="font-size: 40px;">local_fire_department</span>
+</div>
+</div>
+<div class="flex-1 flex flex-col justify-center">
+<div class="flex justify-between items-start mb-1">
+<h3 class="text-slate-900 dark:text-white text-lg font-bold leading-tight">Difícil</h3>
+<span class="inline-flex items-center rounded-full bg-orange-100 dark:bg-orange-500/20 px-2.5 py-0.5 text-xs font-bold text-orange-700 dark:text-orange-300">
+                                    +50 XP
+                                </span>
+</div>
+<p class="text-slate-500 dark:text-[#ad92c9] text-sm font-normal leading-snug mb-3">Questões complexas para os fortes.</p>
+<button class="w-full h-9 rounded-lg bg-slate-100 dark:bg-white/5 hover:bg-orange-50 dark:hover:bg-orange-500/10 text-slate-700 dark:text-white text-sm font-semibold transition-colors flex items-center justify-center gap-2 group-hover:bg-orange-600 group-hover:text-white dark:group-hover:bg-orange-600">
+                                Selecionar
+                            </button>
+</div>
+</div>
+</div>
+<!-- Challenge Card (Hero Card) -->
+<div class="group relative overflow-hidden rounded-xl bg-[#261933] shadow-lg hover:shadow-xl transition-all duration-300 border border-primary/30">
+<!-- Animated-feel background for premium card -->
+<div class="absolute inset-0 bg-gradient-to-br from-[#261933] via-[#351046] to-[#1a0524] opacity-80"></div>
+<div class="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-primary/20 blur-3xl"></div>
+<div class="relative flex flex-col p-0">
+<!-- Image Area -->
+<div class="w-full h-32 bg-center bg-cover relative" data-alt="Abstract dark purple galaxy nebula space background" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA5Sv8Zv9p7mh_s7d1Wt4DT7UYze-kjCoSoXCYz2im6yvd6ICis-88tVHEAU55lCqLTBIcBXwAEOlgVF58eUL_brDGsIYR4GQsn6duoqhVLVn36KeIRfv_cNalGhatgYLG0JVLaVmexbcsxxkS-UCebb2960MgmdOWdHDZwLU1gBdCesd8ilyZJNfuafnBtVw1Jxbk3q5lO3RneqFAyVdKmPqLs-nZnvQtMC7XgzkwP7b_ekXOxqM88hCfwmVZqQPA7G5lZMs0p35U');">
+<div class="absolute inset-0 bg-gradient-to-t from-[#261933] to-transparent"></div>
+<div class="absolute top-3 right-3">
+<span class="inline-flex items-center rounded-full bg-primary/20 backdrop-blur-md border border-primary/30 px-3 py-1 text-xs font-bold text-white shadow-[0_0_10px_rgba(127,19,236,0.5)]">
+<span class="material-symbols-outlined text-[14px] mr-1 text-yellow-300">bolt</span>
+                                    +100 XP
+                                </span>
+</div>
+</div>
+<div class="px-5 pb-5 pt-2">
+<div class="flex justify-between items-center mb-1">
+<h3 class="text-white text-xl font-bold leading-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-purple-200">Desafio</h3>
+</div>
+<p class="text-[#ad92c9] text-sm font-normal leading-snug mb-4">Modo Deus. Risco máximo, recompensa máxima. Você aguenta?</p>
+<button class="relative w-full overflow-hidden rounded-xl h-10 px-4 bg-primary text-white text-sm font-bold leading-normal shadow-[0_4px_14px_rgba(127,19,236,0.5)] active:scale-95 transition-transform">
+<span class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></span>
+<span class="relative flex items-center justify-center gap-2">
+                                    Aceitar Desafio <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="h-10"></div> <!-- Spacer -->
+</div>
+<!-- Floating Bottom Stats Bar -->
+<div class="absolute bottom-6 left-0 right-0 px-4 pointer-events-none">
+<div class="mx-auto w-full max-w-[360px] pointer-events-auto rounded-full bg-[#2d1f3d]/90 dark:bg-[#2d1f3d]/90 backdrop-blur-xl border border-white/10 p-1.5 pr-5 flex items-center justify-between shadow-2xl">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-gradient-to-br from-primary to-purple-800 flex items-center justify-center text-white shadow-inner">
+<span class="material-symbols-outlined text-sm">trophy</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Ranking Semanal</span>
+<span class="text-white text-sm font-bold">#42 • 1.250 XP</span>
+</div>
+</div>
+<div class="flex items-center gap-1 text-[#ad92c9]">
+<span class="text-xs font-semibold">Perfil</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</div>
+</div>
+</div>
+</div>
+</body></html>

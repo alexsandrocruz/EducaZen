@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VestiQuiz - Estatísticas</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+            extend: {
+                colors: {
+                "primary": "#3713ec",
+                "primary-light": "#6e4df6",
+                "primary-dark": "#2a0eb5",
+                "background-light": "#f6f6f8",
+                "background-dark": "#131022",
+                "surface-light": "#ffffff",
+                "surface-dark": "#1e1b2e",
+                "text-main": "#100d1b",
+                "text-muted": "#6b7280",
+                },
+                fontFamily: {
+                "display": ["Lexend", "sans-serif"]
+                },
+                borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "2xl": "2rem", "full": "9999px"},
+            },
+            },
+        }
+    </script>
+<style>
+        /* Custom Scrollbar hide */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-text-main dark:text-white transition-colors duration-200">
+<div class="relative flex min-h-screen w-full flex-col max-w-md mx-auto bg-background-light dark:bg-background-dark pb-24 overflow-x-hidden shadow-2xl">
+<!-- Top App Bar -->
+<header class="sticky top-0 z-50 flex items-center justify-between p-4 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-md">
+<button class="flex size-10 items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-2xl">menu</span>
+</button>
+<h1 class="text-lg font-bold tracking-tight">Estatísticas</h1>
+<button class="relative flex size-10 overflow-hidden rounded-full border-2 border-white dark:border-white/10 shadow-sm">
+<img alt="Profile picture of a manager" class="h-full w-full object-cover" data-alt="Profile picture of a manager" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMTS292TPdcnO_fwkRUjXqw7zDliHc26T5b9wcGqk5yasS-gbsxRsD8F8387Jmmg7JwNN05e1wbII89NQjKuNn1HQlHlBDk2xmyB_dXXgNlt_bUOv9-JLiiG-hTYTS5MB24krc0IoiBU5DH-XreOIz89dlNNXu90Nrc5XohmbCjkcYjCfPjqwe_Bkpk5IGCSTNIaceS-rOwkEpOA12flM72cpNrPOidktiENvg-Vg9WfMsJHCCFmGLrxhiT2flUMvXnD1HBMg2Fi0"/>
+</button>
+</header>
+<!-- Date Filters (Chips) -->
+<div class="flex gap-3 px-4 py-2 overflow-x-auto no-scrollbar mask-gradient">
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-primary text-white px-5 shadow-lg shadow-primary/25 transition-transform active:scale-95">
+<span class="text-sm font-semibold">Esta Semana</span>
+</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-white dark:bg-surface-dark border border-gray-200 dark:border-gray-800 px-5 transition-transform active:scale-95">
+<span class="text-sm font-medium text-text-muted dark:text-gray-300">Este Mês</span>
+</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-white dark:bg-surface-dark border border-gray-200 dark:border-gray-800 px-5 transition-transform active:scale-95">
+<span class="text-sm font-medium text-text-muted dark:text-gray-300">Semestre</span>
+</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-white dark:bg-surface-dark border border-gray-200 dark:border-gray-800 px-5 transition-transform active:scale-95">
+<span class="text-sm font-medium text-text-muted dark:text-gray-300">Ano</span>
+</button>
+</div>
+<!-- Main Content -->
+<main class="flex flex-col gap-6 px-4 pt-6">
+<!-- Hero Stat Card -->
+<div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary to-primary-light p-6 text-white shadow-xl shadow-primary/30">
+<!-- Decorative background elements -->
+<div class="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/10 blur-3xl"></div>
+<div class="absolute bottom-0 left-0 h-32 w-32 rounded-full bg-black/10 blur-2xl"></div>
+<div class="relative z-10 flex flex-col gap-4">
+<div class="flex items-start justify-between">
+<div>
+<p class="text-sm font-medium text-white/80">Média Geral da Rede</p>
+<h2 class="mt-1 text-4xl font-bold tracking-tight">78%</h2>
+</div>
+<div class="flex h-12 w-12 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm">
+<span class="material-symbols-outlined text-2xl text-white">trending_up</span>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex items-center gap-1 rounded-lg bg-white/10 px-3 py-1.5 backdrop-blur-md">
+<span class="material-symbols-outlined text-sm text-green-300">arrow_upward</span>
+<span class="text-sm font-bold text-green-300">+5%</span>
+<span class="text-xs text-white/70 ml-1">vs. mês anterior</span>
+</div>
+</div>
+<!-- Mini Gamification progress -->
+<div class="mt-2 space-y-2">
+<div class="flex justify-between text-xs font-medium text-white/90">
+<span>Nível da Rede: <span class="text-yellow-300 font-bold">Ouro III</span></span>
+<span>Próx: Diamante</span>
+</div>
+<div class="h-2 w-full overflow-hidden rounded-full bg-black/20">
+<div class="h-full w-[78%] rounded-full bg-gradient-to-r from-yellow-300 to-yellow-500 shadow-[0_0_10px_rgba(253,224,71,0.5)]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Stats Grid -->
+<div class="grid grid-cols-2 gap-4">
+<div class="flex flex-col gap-1 rounded-2xl bg-surface-light dark:bg-surface-dark p-4 shadow-sm border border-gray-100 dark:border-gray-800">
+<div class="mb-2 flex h-10 w-10 items-center justify-center rounded-full bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400">
+<span class="material-symbols-outlined text-xl">school</span>
+</div>
+<p class="text-sm text-text-muted dark:text-gray-400">Total Escolas</p>
+<p class="text-2xl font-bold">42</p>
+</div>
+<div class="flex flex-col gap-1 rounded-2xl bg-surface-light dark:bg-surface-dark p-4 shadow-sm border border-gray-100 dark:border-gray-800">
+<div class="mb-2 flex h-10 w-10 items-center justify-center rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400">
+<span class="material-symbols-outlined text-xl">groups</span>
+</div>
+<p class="text-sm text-text-muted dark:text-gray-400">Total Alunos</p>
+<p class="text-2xl font-bold">12.5k</p>
+</div>
+</div>
+<!-- Level Distribution (Gamified) -->
+<div>
+<div class="mb-4 flex items-center justify-between">
+<h3 class="text-lg font-bold">Distribuição de Elo</h3>
+<button class="text-sm font-semibold text-primary dark:text-primary-light">Ver todos</button>
+</div>
+<div class="flex flex-col gap-3 rounded-2xl bg-surface-light dark:bg-surface-dark p-5 shadow-sm border border-gray-100 dark:border-gray-800">
+<!-- Item: Diamante -->
+<div class="flex items-center gap-3">
+<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-cyan-100 dark:bg-cyan-900/30 text-cyan-600 dark:text-cyan-300">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">diamond</span>
+</div>
+<div class="flex-1">
+<div class="mb-1 flex justify-between">
+<span class="text-sm font-bold text-cyan-700 dark:text-cyan-300">Diamante</span>
+<span class="text-sm font-medium text-text-muted dark:text-gray-400">120 alunos</span>
+</div>
+<div class="h-2 w-full overflow-hidden rounded-full bg-gray-100 dark:bg-gray-800">
+<div class="h-full w-[15%] rounded-full bg-gradient-to-r from-cyan-400 to-cyan-600"></div>
+</div>
+</div>
+</div>
+<!-- Item: Ouro -->
+<div class="flex items-center gap-3">
+<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+</div>
+<div class="flex-1">
+<div class="mb-1 flex justify-between">
+<span class="text-sm font-bold text-yellow-700 dark:text-yellow-400">Ouro</span>
+<span class="text-sm font-medium text-text-muted dark:text-gray-400">840 alunos</span>
+</div>
+<div class="h-2 w-full overflow-hidden rounded-full bg-gray-100 dark:bg-gray-800">
+<div class="h-full w-[45%] rounded-full bg-gradient-to-r from-yellow-400 to-yellow-600"></div>
+</div>
+</div>
+</div>
+<!-- Item: Prata -->
+<div class="flex items-center gap-3">
+<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">military_tech</span>
+</div>
+<div class="flex-1">
+<div class="mb-1 flex justify-between">
+<span class="text-sm font-bold text-gray-700 dark:text-gray-300">Prata</span>
+<span class="text-sm font-medium text-text-muted dark:text-gray-400">1.2k alunos</span>
+</div>
+<div class="h-2 w-full overflow-hidden rounded-full bg-gray-100 dark:bg-gray-800">
+<div class="h-full w-[65%] rounded-full bg-gradient-to-r from-gray-400 to-gray-600"></div>
+</div>
+</div>
+</div>
+<!-- Item: Bronze -->
+<div class="flex items-center gap-3">
+<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-orange-100 dark:bg-orange-900/20 text-orange-700 dark:text-orange-600">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">stars</span>
+</div>
+<div class="flex-1">
+<div class="mb-1 flex justify-between">
+<span class="text-sm font-bold text-orange-800 dark:text-orange-500">Bronze</span>
+<span class="text-sm font-medium text-text-muted dark:text-gray-400">450 alunos</span>
+</div>
+<div class="h-2 w-full overflow-hidden rounded-full bg-gray-100 dark:bg-gray-800">
+<div class="h-full w-[30%] rounded-full bg-gradient-to-r from-orange-500 to-orange-700"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- School Ranking (Leaderboard) -->
+<div class="pb-6">
+<div class="mb-4 flex items-center justify-between">
+<h3 class="text-lg font-bold">Ranking das Escolas</h3>
+<div class="flex items-center gap-1 text-sm text-text-muted cursor-pointer">
+<span>Filtros</span>
+<span class="material-symbols-outlined text-base">filter_list</span>
+</div>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Rank 1 Card -->
+<div class="group relative flex items-center gap-4 rounded-xl bg-surface-light dark:bg-surface-dark p-4 shadow-md border-2 border-yellow-400/30 transition-all hover:scale-[1.02]">
+<div class="absolute -left-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full bg-yellow-400 text-xs font-bold text-white shadow-sm z-10">1</div>
+<div class="h-12 w-12 shrink-0 overflow-hidden rounded-full bg-gray-200">
+<img alt="Escola Municipal Centro" class="h-full w-full object-cover" data-alt="School building exterior" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiqUObF3-veaP6UlA__eItJghofHzIjPrCpKFPMf27_Sfu2tj-1PDTqKhOc9hV330hJkLNYl7q8shs3OCKQVQCSugddRG-1CCX_G8w2HBy7egvfUY01p6_BgbKjZrrevg4RepgqSzN1w6XK2lUJMVwgRDNgRImpfdsNts7xugdevmaFWELidPiu2-AMg5A-xkTldHYIDX9ZwcWpoUvaU4EoVzDcaYZmwG8zVEad8t7VF6M5XIVuvepSU-jzHpM2UGEgn7dWM9-5xU"/>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="font-bold truncate text-text-main dark:text-white">Escola Mun. Centro</h4>
+<p class="text-xs text-text-muted dark:text-gray-400 truncate">Diretora Ana Clara</p>
+</div>
+<div class="text-right">
+<p class="text-lg font-bold text-primary dark:text-primary-light">92%</p>
+<p class="text-[10px] font-bold text-green-500">+2%</p>
+</div>
+</div>
+<!-- Rank 2 Card -->
+<div class="group relative flex items-center gap-4 rounded-xl bg-surface-light dark:bg-surface-dark p-4 shadow-sm border border-gray-100 dark:border-gray-800 transition-all hover:scale-[1.02]">
+<div class="absolute -left-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full bg-gray-400 text-xs font-bold text-white shadow-sm z-10">2</div>
+<div class="h-12 w-12 shrink-0 overflow-hidden rounded-full bg-gray-200">
+<img alt="Escola Jardim das Flores" class="h-full w-full object-cover" data-alt="Modern school building entrance" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBY3mDtvsyFJO-nb_K91E66boEOjvyNWrWdiNLSO54YyBNLi4fBNkzDA4WeywlF1vpe57n6GuGpdIdxVcL_DDTS6H7Yfu2QXJjx95EzCSj8tB4MDO9NKsALoc-bmiB_4cAQqPhXXoCZfDzW_tGeog8CNmr_vY3uTkQaWHYu0NYs_4PViF_0uJ-nFhQEqJKtW-gYzRzpVhvubwK1CW4hkH1yXXxtA08rF4OCYmyngYK5amfWIwVMT-LYAHpEnr_9p_OZ538rEeI5lYw"/>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="font-bold truncate text-text-main dark:text-white">Jardim das Flores</h4>
+<p class="text-xs text-text-muted dark:text-gray-400 truncate">Diretor Carlos M.</p>
+</div>
+<div class="text-right">
+<p class="text-lg font-bold text-text-main dark:text-white">88%</p>
+<p class="text-[10px] font-bold text-red-500">-1%</p>
+</div>
+</div>
+<!-- Rank 3 Card -->
+<div class="group relative flex items-center gap-4 rounded-xl bg-surface-light dark:bg-surface-dark p-4 shadow-sm border border-gray-100 dark:border-gray-800 transition-all hover:scale-[1.02]">
+<div class="absolute -left-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full bg-orange-400 text-xs font-bold text-white shadow-sm z-10">3</div>
+<div class="h-12 w-12 shrink-0 overflow-hidden rounded-full bg-gray-200">
+<img alt="Colégio São Pedro" class="h-full w-full object-cover" data-alt="Brick school building" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTzn_BQsDdWYKUb2LUijHndEjRFzH5StKVqIZ0FuY5ONc8lPwEYzz2Rzt01ub1Bqom7QZRQIzRf0Oy6fdc4vlfg3bggng-Oid-iIGgklSAhHSP7ag8dxLHE2rmqHgk-tIoy5KOjLEXH1-hdEDe8giac2jpILphsqFG4H5CplFVDwFvZPXuXbZ51VbgV54Ze2OuTtUs80pNFo__mSFxdlscv1rPKGR0mREsNfCinlj23kNZ46WAabDZsdQ87Wmhe8x381Vy72qLhbE"/>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="font-bold truncate text-text-main dark:text-white">Colégio São Pedro</h4>
+<p class="text-xs text-text-muted dark:text-gray-400 truncate">Diretora Marina</p>
+</div>
+<div class="text-right">
+<p class="text-lg font-bold text-text-main dark:text-white">85%</p>
+<p class="text-[10px] font-bold text-green-500">+4%</p>
+</div>
+</div>
+</div>
+<button class="mt-4 w-full rounded-xl bg-white dark:bg-surface-dark py-3 text-sm font-semibold text-primary dark:text-primary-light shadow-sm border border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-white/5">
+                    Ver Ranking Completo
+                </button>
+</div>
+</main>
+<!-- Bottom Navigation -->
+<nav class="fixed bottom-0 z-40 w-full max-w-md border-t border-gray-200 dark:border-white/5 bg-surface-light/80 dark:bg-background-dark/80 backdrop-blur-lg pb-safe">
+<div class="grid h-16 grid-cols-4 items-center justify-items-center">
+<button class="flex flex-col items-center gap-1 text-gray-400 hover:text-primary dark:hover:text-primary-light transition-colors">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px] font-medium">Início</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-gray-400 hover:text-primary dark:hover:text-primary-light transition-colors">
+<span class="material-symbols-outlined">school</span>
+<span class="text-[10px] font-medium">Escolas</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-primary dark:text-primary-light transition-colors">
+<span class="material-symbols-outlined font-variation-fill">bar_chart</span>
+<span class="text-[10px] font-medium">Stats</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-gray-400 hover:text-primary dark:hover:text-primary-light transition-colors">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px] font-medium">Ajustes</span>
+</button>
+</div>
+</nav>
+<!-- CSS for Material Symbols fill variation helper -->
+<style>
+            .font-variation-fill {
+                font-variation-settings: 'FILL' 1;
+            }
+            .pb-safe {
+                padding-bottom: env(safe-area-inset-bottom, 20px);
+            }
+        </style>
+</div>
+</body></html>

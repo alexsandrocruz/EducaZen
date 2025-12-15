@@ -1,0 +1,128 @@
+<div class="zen-container">
+    <div class="form-header">
+        <h1 class="page-title">{{ isEditMode ? 'Editar Questão' : 'Nova Questão' }}</h1>
+        <p class="page-subtitle">Preencha os dados da questão, enunciado e alternativas</p>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="save()" class="zen-form">
+
+        <!-- Top Row: Subject & Difficulty -->
+        <div class="form-grid">
+            <div class="form-field">
+                <label class="form-label">Matéria <span class="required">*</span></label>
+                <select class="zen-input" formControlName="subjectId">
+                    <option [ngValue]="null" disabled>Selecione uma matéria</option>
+                    <option *ngFor="let subject of subjects" [value]="subject.id">
+                        {{ subject.name }}
+                    </option>
+                </select>
+                <div class="form-error"
+                    *ngIf="form.get('subjectId')?.touched && form.get('subjectId')?.errors?.['required']">
+                    A matéria é obrigatória.
+                </div>
+            </div>
+
+            <div class="form-field">
+                <label class="form-label">Dificuldade <span class="required">*</span></label>
+                <div class="difficulty-picker">
+                    <label *ngFor="let diff of difficulties" class="difficulty-option"
+                        [class.selected]="form.get('difficulty')?.value === diff.value">
+                        <input type="radio" formControlName="difficulty" [value]="diff.value">
+                        <span>{{ diff.label }}</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Second Row: Time & Tags -->
+        <div class="form-grid">
+            <div class="form-field">
+                <label class="form-label">Tempo Limite (segundos) <span class="required">*</span></label>
+                <input type="number" class="zen-input" formControlName="timeLimitSeconds" min="10">
+            </div>
+
+            <div class="form-field">
+                <label class="form-label">Tags (separadas por vírgula)</label>
+                <input type="text" class="zen-input" formControlName="tags" placeholder="Ex: geometria, analítica">
+            </div>
+        </div>
+
+        <!-- Content Editor -->
+        <div class="form-field full-width">
+            <label class="form-label">Enunciado da Questão <span class="required">*</span></label>
+            <quill-editor formControlName="content" [modules]="quillConfig"
+                placeholder="Digite o enunciado da questão..."></quill-editor>
+            <div class="form-error" *ngIf="form.get('content')?.touched && form.get('content')?.errors?.['required']">
+                O enunciado é obrigatório.
+            </div>
+        </div>
+
+        <!-- Image Upload (Placeholder for now) -->
+        <!-- 
+    <div class="form-field">
+      <label class="form-label">Imagem Auxiliar</label>
+      <div class="upload-zone">
+        <span class="material-icons-round">cloud_upload</span>
+        <p>Arraste uma imagem ou clique para selecionar</p>
+      </div>
+    </div>
+    -->
+
+        <!-- Explanation -->
+        <div class="form-field full-width">
+            <label class="form-label">Explicação / Resolução</label>
+            <textarea class="zen-input" formControlName="explanation" rows="3"
+                placeholder="Explique a resposta correta..."></textarea>
+        </div>
+
+        <!-- Alternatives -->
+        <div class="alternatives-section">
+            <div class="section-header">
+                <h3 class="section-title">Alternativas</h3>
+                <button type="button" class="zen-btn zen-btn--sm zen-btn--outline" (click)="addAnswer()">
+                    <span class="material-icons-round">add</span> Adicionar
+                </button>
+            </div>
+
+            <div formArrayName="answers" class="answers-list">
+                <div *ngFor="let answer of answers.controls; let i=index" [formGroupName]="i" class="answer-item">
+                    <div class="drag-handle">
+                        <span class="answer-letter">{{ i + 1 }}</span>
+                    </div>
+
+                    <div class="answer-content">
+                        <input type="text" class="zen-input" formControlName="content"
+                            placeholder="Texto da alternativa">
+                    </div>
+
+                    <div class="answer-actions">
+                        <label class="correct-toggle"
+                            [title]="answer.get('isCorrect')?.value ? 'Alternativa Correta' : 'Marcar como Correta'">
+                            <input type="checkbox" formControlName="isCorrect">
+                            <span class="toggle-icon material-icons-round">
+                                {{ answer.get('isCorrect')?.value ? 'check_circle' : 'radio_button_unchecked' }}
+                            </span>
+                        </label>
+
+                        <button type="button" class="zen-btn-icon zen-btn-icon--danger" (click)="removeAnswer(i)"
+                            [disabled]="answers.length <= 2">
+                            <span class="material-icons-round">delete</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="form-actions">
+            <button type="button" class="zen-btn zen-btn--ghost" (click)="cancel()">
+                Cancelar
+            </button>
+            <button type="submit" class="zen-btn zen-btn--primary" [disabled]="form.invalid || saving">
+                <span *ngIf="saving" class="spinner-sm"></span>
+                {{ isEditMode ? 'Salvar Alterações' : 'Criar Questão' }}
+            </button>
+        </div>
+
+    </form>
+</div>

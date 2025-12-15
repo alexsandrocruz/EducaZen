@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Gestão de Planos e Cobrança - VestiQuiz</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#3713ec",
+                        "primary-glow": "#5d3efc",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#131022",
+                        "surface-dark": "#1e1b2e",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "2xl": "2rem", "full": "9999px" },
+                    boxShadow: {
+                        "glow": "0 0 20px -5px rgba(55, 19, 236, 0.5)",
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for horizontal sections */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display antialiased selection:bg-primary selection:text-white">
+<div class="relative flex h-full min-h-screen w-full flex-col overflow-x-hidden pb-24">
+<!-- Header -->
+<header class="sticky top-0 z-50 glass-card border-b-0 border-b-white/5 bg-background-light/80 dark:bg-background-dark/80 px-4 py-3 backdrop-blur-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="relative h-10 w-10 overflow-hidden rounded-full border border-white/10 ring-2 ring-primary/20">
+<div class="h-full w-full bg-cover bg-center" data-alt="Admin profile picture showing a confident person" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBKHKu1zVGKzGNkWXPi6BEjIQ0X1ole-AsvKc9pUbMmi0_87z6rkbJa27_n26yHYij0UFuVrcAQRvgi5XY88isiIfDu4jb49KktDH2ldQ6xfxgzxYHi0a8n-vMSXO-NhDoxvYjU33KotqE1dfnIMqkCZ7gdhT_MpWwr82Anpg-NEB3P8uznOvBoCFqqQVYUwLwtg_GlYrFql5RWF-Ezb16JwU7ny3jYT6wNlBHZdcV80LutrLGm_hVyQO9F4m4o5iNkOtebywAI0N4");'></div>
+<div class="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-[#131022] bg-green-500"></div>
+</div>
+<div>
+<h2 class="text-sm font-medium text-gray-500 dark:text-gray-400">Olá, Admin</h2>
+<h1 class="text-lg font-bold leading-tight tracking-tight text-gray-900 dark:text-white">Funil de Receita</h1>
+</div>
+</div>
+<button class="relative flex h-10 w-10 items-center justify-center rounded-full bg-white/5 text-gray-900 transition hover:bg-white/10 dark:text-white">
+<span class="material-symbols-outlined text-[24px]">notifications</span>
+<span class="absolute right-2 top-2 h-2 w-2 rounded-full bg-red-500 ring-2 ring-[#131022]"></span>
+</button>
+</div>
+</header>
+<!-- Revenue Goal Gamification -->
+<div class="px-4 pt-6">
+<div class="flex items-center justify-between pb-2">
+<span class="text-xs font-semibold uppercase tracking-wider text-primary">Meta Mensal</span>
+<span class="text-xs font-medium text-gray-400">R$ 12.450 / R$ 15k</span>
+</div>
+<div class="h-2 w-full overflow-hidden rounded-full bg-gray-200 dark:bg-gray-800">
+<div class="h-full rounded-full bg-gradient-to-r from-primary to-purple-400 shadow-glow" style="width: 83%"></div>
+</div>
+</div>
+<!-- Hero Stats Cards -->
+<div class="flex gap-3 overflow-x-auto px-4 py-6 hide-scrollbar">
+<!-- Card 1 -->
+<div class="glass-card flex min-w-[140px] flex-1 flex-col items-start gap-3 rounded-xl p-4 transition-transform hover:scale-[1.02]">
+<div class="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500/10 text-blue-400">
+<span class="material-symbols-outlined">hourglass_top</span>
+</div>
+<div>
+<p class="text-2xl font-bold text-gray-900 dark:text-white">42</p>
+<p class="text-xs font-medium text-gray-500 dark:text-gray-400">Em Trial Ativo</p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="glass-card flex min-w-[140px] flex-1 flex-col items-start gap-3 rounded-xl p-4 transition-transform hover:scale-[1.02]">
+<div class="flex h-10 w-10 items-center justify-center rounded-lg bg-orange-500/10 text-orange-400">
+<span class="material-symbols-outlined">warning</span>
+</div>
+<div>
+<p class="text-2xl font-bold text-gray-900 dark:text-white">8</p>
+<p class="text-xs font-medium text-gray-500 dark:text-gray-400">Expirando (24h)</p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="glass-card flex min-w-[140px] flex-1 flex-col items-start gap-3 rounded-xl p-4 transition-transform hover:scale-[1.02]">
+<div class="flex h-10 w-10 items-center justify-center rounded-lg bg-green-500/10 text-green-400">
+<span class="material-symbols-outlined">trending_up</span>
+</div>
+<div>
+<p class="text-2xl font-bold text-gray-900 dark:text-white">12%</p>
+<p class="text-xs font-medium text-gray-500 dark:text-gray-400">Taxa Conversão</p>
+</div>
+</div>
+</div>
+<!-- Visual Funnel Section -->
+<section class="mt-2">
+<div class="flex items-center justify-between px-4 pb-4 pt-2">
+<h3 class="text-lg font-bold leading-tight tracking-tight text-gray-900 dark:text-white">Jornada do Cliente</h3>
+<button class="text-xs font-bold text-primary hover:text-primary-glow">Ver Detalhes</button>
+</div>
+<div class="px-4">
+<div class="relative flex flex-col gap-0 rounded-2xl bg-white p-5 shadow-sm dark:bg-[#1a172c] border border-gray-100 dark:border-white/5">
+<!-- Vertical Line Connector -->
+<div class="absolute left-[39px] top-8 h-[calc(100%-64px)] w-[2px] bg-gradient-to-b from-primary via-primary/50 to-gray-700"></div>
+<!-- Step 1 -->
+<div class="relative z-10 grid grid-cols-[40px_1fr] gap-4 pb-6">
+<div class="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white shadow-glow">
+<span class="material-symbols-outlined text-[20px]">person_add</span>
+</div>
+<div class="flex flex-col justify-center">
+<h4 class="text-base font-semibold text-gray-900 dark:text-white">Cadastro Gratuito</h4>
+<p class="text-sm text-gray-500 dark:text-gray-400">Acesso ilimitado ao painel básico</p>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="relative z-10 grid grid-cols-[40px_1fr] gap-4 pb-6">
+<div class="flex h-10 w-10 items-center justify-center rounded-full bg-background-light border-2 border-primary text-primary dark:bg-[#131022]">
+<span class="material-symbols-outlined text-[20px]">timer</span>
+</div>
+<div class="flex flex-col justify-center">
+<div class="flex items-center gap-2">
+<h4 class="text-base font-semibold text-gray-900 dark:text-white">Trial de 7 Dias</h4>
+<span class="rounded bg-primary/20 px-1.5 py-0.5 text-[10px] font-bold text-primary-glow">AUTO</span>
+</div>
+<p class="text-sm text-gray-500 dark:text-gray-400">Contagem regressiva automática</p>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="relative z-10 grid grid-cols-[40px_1fr] gap-4">
+<div class="flex h-10 w-10 items-center justify-center rounded-full bg-gray-200 text-gray-500 dark:bg-white/10 dark:text-gray-400">
+<span class="material-symbols-outlined text-[20px]">payments</span>
+</div>
+<div class="flex flex-col justify-center">
+<h4 class="text-base font-semibold text-gray-900 dark:text-white">Assinatura Premium</h4>
+<p class="text-sm text-gray-500 dark:text-gray-400">Cobrança Mensal ou Anual</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Plans Configuration -->
+<section class="mt-8">
+<h3 class="px-4 pb-4 pt-2 text-lg font-bold leading-tight tracking-tight text-gray-900 dark:text-white">Planos Ativos</h3>
+<div class="flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-4 hide-scrollbar">
+<!-- Plan 1 -->
+<div class="snap-center glass-card relative min-w-[280px] overflow-hidden rounded-2xl bg-gradient-to-br from-[#1e1b2e] to-[#131022] p-5 shadow-lg border border-white/5">
+<div class="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-primary/20 blur-2xl"></div>
+<div class="relative z-10 flex flex-col h-full">
+<div class="mb-4 flex items-start justify-between">
+<div class="rounded-lg bg-white/5 p-2 text-white">
+<span class="material-symbols-outlined">calendar_view_month</span>
+</div>
+<span class="rounded-full bg-green-500/20 px-2 py-1 text-xs font-bold text-green-400">ATIVO</span>
+</div>
+<h4 class="text-xl font-bold text-white">Mensal</h4>
+<p class="mb-4 text-sm text-gray-400">Cobrança a cada 30 dias</p>
+<div class="mt-auto">
+<p class="text-2xl font-bold text-primary-glow">R$ 49,90</p>
+<p class="text-xs text-gray-500">156 assinantes ativos</p>
+</div>
+<button class="mt-4 w-full rounded-lg bg-white/5 py-2 text-sm font-semibold text-white transition hover:bg-white/10">
+                            Editar Preço
+                        </button>
+</div>
+</div>
+<!-- Plan 2 -->
+<div class="snap-center glass-card relative min-w-[280px] overflow-hidden rounded-2xl bg-gradient-to-br from-[#1e1b2e] to-[#131022] p-5 shadow-lg border border-white/5">
+<div class="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-purple-500/20 blur-2xl"></div>
+<div class="relative z-10 flex flex-col h-full">
+<div class="mb-4 flex items-start justify-between">
+<div class="rounded-lg bg-white/5 p-2 text-white">
+<span class="material-symbols-outlined">calendar_today</span>
+</div>
+<span class="rounded-full bg-green-500/20 px-2 py-1 text-xs font-bold text-green-400">ATIVO</span>
+</div>
+<h4 class="text-xl font-bold text-white">Anual</h4>
+<p class="mb-4 text-sm text-gray-400">Cobrança a cada 12 meses</p>
+<div class="mt-auto">
+<p class="text-2xl font-bold text-purple-400">R$ 499,00</p>
+<p class="text-xs text-gray-500">42 assinantes ativos</p>
+</div>
+<button class="mt-4 w-full rounded-lg bg-white/5 py-2 text-sm font-semibold text-white transition hover:bg-white/10">
+                            Editar Preço
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Recent Activity Feed -->
+<section class="mt-4 px-4">
+<div class="mb-4 flex items-center justify-between">
+<h3 class="text-lg font-bold leading-tight tracking-tight text-gray-900 dark:text-white">Atividade Recente</h3>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Item 1 -->
+<div class="flex items-center justify-between rounded-xl bg-white p-3 shadow-sm dark:bg-[#1a172c] border border-gray-100 dark:border-white/5">
+<div class="flex items-center gap-3">
+<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-[20px]">add_business</span>
+</div>
+<div>
+<p class="text-sm font-semibold text-gray-900 dark:text-white">Pref. de Campinas</p>
+<p class="text-xs text-gray-500 dark:text-gray-400">Iniciou Trial de 7 dias</p>
+</div>
+</div>
+<span class="text-xs font-medium text-gray-400">2 min</span>
+</div>
+<!-- Item 2 -->
+<div class="flex items-center justify-between rounded-xl bg-white p-3 shadow-sm dark:bg-[#1a172c] border border-gray-100 dark:border-white/5">
+<div class="flex items-center gap-3">
+<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-green-500/10 text-green-500">
+<span class="material-symbols-outlined text-[20px]">verified</span>
+</div>
+<div>
+<p class="text-sm font-semibold text-gray-900 dark:text-white">Pref. de Curitiba</p>
+<p class="text-xs text-gray-500 dark:text-gray-400">Converteu para Anual</p>
+</div>
+</div>
+<span class="text-xs font-medium text-gray-400">2h atrás</span>
+</div>
+<!-- Item 3 -->
+<div class="flex items-center justify-between rounded-xl bg-white p-3 shadow-sm dark:bg-[#1a172c] border border-gray-100 dark:border-white/5">
+<div class="flex items-center gap-3">
+<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-red-500/10 text-red-500">
+<span class="material-symbols-outlined text-[20px]">timer_off</span>
+</div>
+<div>
+<p class="text-sm font-semibold text-gray-900 dark:text-white">Pref. de Salvador</p>
+<p class="text-xs text-gray-500 dark:text-gray-400">Trial expirou</p>
+</div>
+</div>
+<span class="text-xs font-medium text-gray-400">5h atrás</span>
+</div>
+</div>
+</section>
+<!-- Bottom Spacing -->
+<div class="h-24"></div>
+<!-- Floating Action Button Area (Simulating Mobile Tab Bar Actions) -->
+<div class="fixed bottom-6 left-0 right-0 flex justify-center px-4 z-50">
+<button class="group flex h-14 w-full max-w-sm items-center justify-center gap-3 rounded-2xl bg-primary text-white shadow-glow transition active:scale-95">
+<span class="material-symbols-outlined">add_link</span>
+<span class="font-bold">Novo Convite de Prefeitura</span>
+</button>
+</div>
+</div>
+<!-- Background decorative blur elements -->
+<div class="pointer-events-none fixed left-[-20%] top-[-10%] z-0 h-[500px] w-[500px] rounded-full bg-primary/10 blur-[100px] dark:bg-primary/5"></div>
+<div class="pointer-events-none fixed right-[-20%] bottom-[-10%] z-0 h-[500px] w-[500px] rounded-full bg-purple-600/10 blur-[100px] dark:bg-purple-600/5"></div>
+</body></html>

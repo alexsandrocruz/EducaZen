@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Tela de Resultado Quiz</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7f13ec",
+                        "primary-dark": "#5e0eb0",
+                        "primary-light": "#9f4bf2",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#191022",
+                        "card-dark": "#251835",
+                        "card-light": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom gradient for the score circle border */
+        .score-circle {
+            background: linear-gradient(to bottom, #191022, #191022) padding-box,
+                        linear-gradient(135deg, #7f13ec, #d946ef) border-box;
+            border: 6px solid transparent;
+        }
+        .light .score-circle {
+            background: linear-gradient(to bottom, #f7f6f8, #f7f6f8) padding-box,
+                        linear-gradient(135deg, #7f13ec, #d946ef) border-box;
+        }
+        
+        /* Shimmer effect for XP bar */
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        .animate-shimmer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: skewX(-20deg);
+            animation: shimmer 2s infinite;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-white antialiased overflow-x-hidden selection:bg-primary selection:text-white">
+<div class="relative flex min-h-screen w-full flex-col max-w-md mx-auto shadow-2xl overflow-hidden">
+<!-- Top App Bar -->
+<header class="flex items-center p-4 justify-between z-10">
+<button class="text-slate-900 dark:text-white flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-slate-200 dark:hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-2xl">arrow_back</span>
+</button>
+<h2 class="text-lg font-bold leading-tight tracking-tight text-center">Resultado</h2>
+<button class="flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-slate-200 dark:hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-2xl text-slate-900 dark:text-white">share</span>
+</button>
+</header>
+<main class="flex-1 flex flex-col gap-6 px-4 pb-24 overflow-y-auto">
+<!-- Hero Score Section -->
+<div class="flex flex-col items-center justify-center pt-2">
+<h1 class="text-[32px] font-bold leading-tight text-center bg-gradient-to-r from-primary to-pink-500 bg-clip-text text-transparent animate-pulse">
+                    Excelente!
+                </h1>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium mt-1 mb-6">Você dominou este tópico</p>
+<!-- Score Circle -->
+<div class="relative flex items-center justify-center size-48 rounded-full score-circle shadow-[0_0_40px_rgba(127,19,236,0.3)]">
+<div class="flex flex-col items-center">
+<span class="text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white">85<span class="text-2xl text-primary">%</span></span>
+<span class="text-sm font-medium text-slate-500 dark:text-slate-400 mt-1">17 de 20</span>
+</div>
+<!-- Decorative dots/stars -->
+<div class="absolute -top-2 right-8 text-yellow-400 animate-bounce" style="animation-delay: 0.1s;">
+<span class="material-symbols-outlined fill-1" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<div class="absolute bottom-4 -left-2 text-primary animate-bounce" style="animation-delay: 0.3s;">
+<span class="material-symbols-outlined fill-1" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+</div>
+<!-- Level Up Card -->
+<div class="relative w-full @container">
+<div class="relative overflow-hidden flex flex-col items-center rounded-xl bg-card-light dark:bg-card-dark shadow-lg border border-slate-200 dark:border-white/5 p-0">
+<!-- Background Glow -->
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/20 blur-3xl rounded-full -mr-10 -mt-10"></div>
+<div class="flex w-full flex-row items-center p-4 gap-4 z-10">
+<!-- 3D Badge Image -->
+<div class="relative shrink-0 size-20 rounded-xl bg-gradient-to-br from-slate-100 to-slate-200 dark:from-white/10 dark:to-white/5 flex items-center justify-center shadow-inner">
+<div class="w-full h-full bg-contain bg-center bg-no-repeat transform hover:scale-110 transition-transform duration-300" data-alt="3D glossy golden shield badge with a star in the center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDzgtfwRjNe8Y9Z460e9TKtn425AEl0bQ4YZR-NisvI691jBheUanaqAmnf0b9VRRUFB3KqhYnDlP3Mj24qRCw-fc0Elv0O2drS-EC-OAcq189pfgxcl39U0j3rl0aa1EgBrS8APDw1hu41xNyH3tuVpXUuuUhfrA9iWZIb6Bbui8D_esp87YDVgt36WSI8BcHOo0iavls0HNzaWsCbi0W_xsZg1fX466P6HgTbjYrRY3YYhLdx7akOZB3Kvvs4NwRrdopvNqZTAvs");'>
+</div>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<div class="flex justify-between items-start mb-1">
+<div>
+<p class="text-primary text-xs font-bold uppercase tracking-wider mb-0.5">Subiu de Nível!</p>
+<h3 class="text-lg font-bold text-slate-900 dark:text-white leading-tight">Nível 5: Bronze</h3>
+</div>
+<div class="bg-primary/10 dark:bg-primary/20 px-2 py-1 rounded-lg">
+<span class="text-primary font-bold text-sm">+150 XP</span>
+</div>
+</div>
+<!-- XP Progress Bar -->
+<div class="mt-2 w-full">
+<div class="flex justify-between text-xs text-slate-500 dark:text-slate-400 mb-1">
+<span>Progresso</span>
+<span>2.450 / 3.000 XP</span>
+</div>
+<div class="h-2.5 w-full bg-slate-200 dark:bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-primary to-pink-500 w-[82%] rounded-full relative overflow-hidden">
+<div class="animate-shimmer"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Stats Grid -->
+<div class="grid grid-cols-3 gap-3">
+<!-- Time Stat -->
+<div class="flex flex-col items-center justify-center gap-1 rounded-xl p-4 bg-card-light dark:bg-card-dark border border-slate-200 dark:border-white/5 shadow-sm">
+<div class="p-2 rounded-full bg-blue-100 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400 mb-1">
+<span class="material-symbols-outlined text-[20px]">timer</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium">Tempo</p>
+<p class="text-slate-900 dark:text-white text-lg font-bold">12m</p>
+</div>
+<!-- Streak Stat -->
+<div class="flex flex-col items-center justify-center gap-1 rounded-xl p-4 bg-card-light dark:bg-card-dark border border-slate-200 dark:border-white/5 shadow-sm">
+<div class="p-2 rounded-full bg-orange-100 dark:bg-orange-500/20 text-orange-600 dark:text-orange-400 mb-1">
+<span class="material-symbols-outlined text-[20px] fill-1" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium">Sequência</p>
+<p class="text-slate-900 dark:text-white text-lg font-bold">5 dias</p>
+</div>
+<!-- Improvement Stat -->
+<div class="flex flex-col items-center justify-center gap-1 rounded-xl p-4 bg-card-light dark:bg-card-dark border border-slate-200 dark:border-white/5 shadow-sm">
+<div class="p-2 rounded-full bg-green-100 dark:bg-green-500/20 text-green-600 dark:text-green-400 mb-1">
+<span class="material-symbols-outlined text-[20px]">trending_up</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium">Melhoria</p>
+<p class="text-slate-900 dark:text-white text-lg font-bold text-green-500">+12%</p>
+</div>
+</div>
+<!-- Detailed Breakdown Accordion/Card -->
+<div class="flex flex-col rounded-xl bg-card-light dark:bg-card-dark border border-slate-200 dark:border-white/5 shadow-sm p-4 gap-3">
+<div class="flex items-center justify-between">
+<h3 class="text-slate-900 dark:text-white font-bold text-base">Desempenho por Matéria</h3>
+<span class="material-symbols-outlined text-slate-400">expand_more</span>
+</div>
+<!-- Mini bars -->
+<div class="flex flex-col gap-3">
+<div class="space-y-1">
+<div class="flex justify-between text-xs font-medium">
+<span class="text-slate-600 dark:text-slate-300">História do Brasil</span>
+<span class="text-slate-900 dark:text-white">100%</span>
+</div>
+<div class="h-2 w-full bg-slate-200 dark:bg-white/10 rounded-full">
+<div class="h-full bg-green-500 w-full rounded-full"></div>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-xs font-medium">
+<span class="text-slate-600 dark:text-slate-300">Geografia Física</span>
+<span class="text-slate-900 dark:text-white">70%</span>
+</div>
+<div class="h-2 w-full bg-slate-200 dark:bg-white/10 rounded-full">
+<div class="h-full bg-yellow-500 w-[70%] rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Sticky Bottom Actions -->
+<div class="fixed bottom-0 left-0 right-0 max-w-md mx-auto p-4 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-md border-t border-slate-200 dark:border-white/5 flex flex-col gap-3 z-50">
+<button class="w-full h-12 bg-primary hover:bg-primary-dark text-white rounded-xl font-bold text-base tracking-wide shadow-lg shadow-primary/30 active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+<span>Próximo Desafio</span>
+<span class="material-symbols-outlined text-xl">arrow_forward</span>
+</button>
+<button class="w-full h-12 bg-transparent border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5 rounded-xl font-bold text-base tracking-wide active:scale-[0.98] transition-all">
+                Revisar Erros
+            </button>
+</div>
+</div>
+</body></html>

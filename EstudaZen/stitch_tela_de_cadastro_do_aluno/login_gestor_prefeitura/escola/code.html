@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login Gestor - VestiQuiz</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#3713ec",
+                        "primary-hover": "#2c0ebf",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#131022",
+                        "surface-dark": "#1e1933",
+                        "border-dark": "#3b3267",
+                        "text-secondary": "#9b92c9",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "2xl": "2rem", "full": "9999px"},
+                    boxShadow: {
+                        'glow': '0 0 20px -5px rgba(55, 19, 236, 0.5)',
+                        'input-focus': '0 0 0 4px rgba(55, 19, 236, 0.2)',
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display antialiased selection:bg-primary selection:text-white">
+<div class="relative min-h-screen w-full flex flex-col items-center justify-center p-4 overflow-hidden">
+<!-- Decorative Elements for Premium Feel -->
+<div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+<!-- Top Gradient Blob -->
+<div class="absolute -top-[20%] -left-[10%] w-[70%] h-[50%] bg-primary/20 blur-[100px] rounded-full"></div>
+<!-- Bottom Gradient Blob -->
+<div class="absolute bottom-[10%] -right-[10%] w-[50%] h-[40%] bg-purple-600/10 blur-[80px] rounded-full"></div>
+</div>
+<!-- Main Card / Container -->
+<div class="relative z-10 w-full max-w-[400px] flex flex-col gap-6">
+<!-- Header Section -->
+<div class="flex flex-col items-center gap-4 pt-4">
+<!-- Logo -->
+<div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary to-purple-600 flex items-center justify-center shadow-glow mb-2 animate-fade-in">
+<span class="material-symbols-outlined text-white text-[40px]">school</span>
+</div>
+<!-- Headline Text -->
+<div class="text-center space-y-1">
+<h1 class="text-slate-900 dark:text-white text-3xl font-bold tracking-tight">Bem-vindo de volta</h1>
+<p class="text-slate-500 dark:text-text-secondary text-base font-normal">Painel de Gestão VestiQuiz</p>
+</div>
+</div>
+<!-- Login Form -->
+<form class="flex flex-col gap-5 mt-4" onsubmit="event.preventDefault();">
+<!-- Email Field -->
+<div class="flex flex-col gap-2">
+<label class="text-slate-700 dark:text-white text-sm font-medium ml-1">E-mail ou Usuário</label>
+<div class="relative group">
+<input class="w-full h-14 pl-4 pr-12 rounded-xl border border-gray-200 dark:border-border-dark bg-white dark:bg-surface-dark text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-text-secondary focus:outline-none focus:border-primary dark:focus:border-primary focus:ring-0 shadow-sm transition-all duration-200 text-base" placeholder="gestor@prefeitura.gov.br" type="email"/>
+<div class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-text-secondary pointer-events-none flex items-center">
+<span class="material-symbols-outlined text-[20px]">mail</span>
+</div>
+</div>
+</div>
+<!-- Password Field -->
+<div class="flex flex-col gap-2">
+<label class="text-slate-700 dark:text-white text-sm font-medium ml-1 flex justify-between items-center w-full">
+                        Senha
+                    </label>
+<div class="relative group">
+<input class="w-full h-14 pl-4 pr-12 rounded-xl border border-gray-200 dark:border-border-dark bg-white dark:bg-surface-dark text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-text-secondary focus:outline-none focus:border-primary dark:focus:border-primary focus:ring-0 shadow-sm transition-all duration-200 text-base" placeholder="Sua senha de acesso" type="password"/>
+<button class="absolute right-0 top-0 h-full w-12 flex items-center justify-center text-slate-400 dark:text-text-secondary hover:text-primary transition-colors focus:outline-none" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+<!-- Forgot Password Link -->
+<div class="flex justify-end mt-1">
+<a class="text-primary hover:text-purple-400 text-sm font-medium transition-colors" href="#">
+                            Esqueci minha senha
+                        </a>
+</div>
+</div>
+<!-- Action Button -->
+<button class="mt-2 w-full h-14 bg-gradient-to-r from-primary to-[#502df4] hover:to-primary text-white rounded-xl font-bold text-lg shadow-lg shadow-primary/30 transition-all active:scale-[0.98] flex items-center justify-center gap-2 group">
+<span>Acessar Painel</span>
+<span class="material-symbols-outlined text-[20px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<!-- Biometric Alternative (Mobile Feel) -->
+<div class="flex items-center gap-4 my-2">
+<div class="h-px flex-1 bg-gray-200 dark:bg-border-dark"></div>
+<span class="text-xs text-slate-400 dark:text-text-secondary uppercase tracking-wider font-medium">ou</span>
+<div class="h-px flex-1 bg-gray-200 dark:bg-border-dark"></div>
+</div>
+<button class="w-full h-12 bg-transparent border border-gray-200 dark:border-border-dark hover:bg-gray-50 dark:hover:bg-surface-dark/50 text-slate-600 dark:text-white rounded-xl font-medium text-base transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[24px]">fingerprint</span>
+<span>Entrar com Face ID</span>
+</button>
+</form>
+<!-- Footer -->
+<div class="text-center pb-6">
+<p class="text-slate-500 dark:text-text-secondary text-sm">
+                    Problemas com o acesso? 
+                    <a class="text-white font-medium hover:text-primary transition-colors underline decoration-transparent hover:decoration-primary underline-offset-4" href="#">Fale com o suporte</a>
+</p>
+</div>
+</div>
+</div>
+</body></html>

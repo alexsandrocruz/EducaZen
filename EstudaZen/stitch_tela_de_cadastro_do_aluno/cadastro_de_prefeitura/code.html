@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Cadastro de Prefeitura - VestiQuiz</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#3713ec",
+                        "primary-dark": "#2a0eb5",
+                        "background-light": "#f9f8fc",
+                        "background-dark": "#131022",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1e1b2e",
+                        "text-main": "#100d1b",
+                        "text-secondary": "#594c9a",
+                        "border-light": "#d3cfe7",
+                        "border-dark": "#373445",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(55, 19, 236, 0.05)',
+                        'glow': '0 0 15px rgba(55, 19, 236, 0.3)',
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar hide for cleaner UI */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-text-main dark:text-white antialiased transition-colors duration-200">
+<div class="relative flex h-full min-h-screen w-full flex-col overflow-hidden max-w-md mx-auto shadow-2xl bg-background-light dark:bg-background-dark">
+<!-- TopAppBar -->
+<div class="flex items-center bg-background-light dark:bg-background-dark p-4 pb-2 justify-between sticky top-0 z-20">
+<button class="text-text-main dark:text-white flex size-12 shrink-0 items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-surface-dark transition-colors">
+<span class="material-symbols-outlined text-[24px]">arrow_back</span>
+</button>
+<h2 class="text-text-main dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center">Nova Prefeitura</h2>
+<button class="flex w-12 items-center justify-center">
+<span class="text-primary dark:text-primary-dark text-base font-bold leading-normal tracking-[0.015em] shrink-0">Ajuda</span>
+</button>
+</div>
+<!-- Scrollable Content -->
+<main class="flex-1 overflow-y-auto no-scrollbar pb-24">
+<!-- PageIndicators (Progress) -->
+<div class="flex w-full flex-col items-center justify-center gap-2 py-4 px-6">
+<div class="flex w-full items-center justify-between gap-2">
+<div class="h-1.5 flex-1 rounded-full bg-primary shadow-glow"></div>
+<div class="h-1.5 flex-1 rounded-full bg-border-light dark:bg-border-dark"></div>
+<div class="h-1.5 flex-1 rounded-full bg-border-light dark:bg-border-dark"></div>
+</div>
+<div class="flex w-full justify-between text-xs font-medium text-text-secondary dark:text-gray-400 px-1">
+<span>Dados</span>
+<span class="opacity-50">Plano</span>
+<span class="opacity-50">Revisão</span>
+</div>
+</div>
+<!-- HeadlineText -->
+<div class="px-4 pt-2">
+<h2 class="text-text-main dark:text-white tracking-tight text-[28px] font-bold leading-tight text-left">Dados da Organização</h2>
+<p class="text-text-secondary dark:text-gray-400 text-base font-normal leading-normal pt-2">Cadastre as informações fiscais para iniciar o período de teste.</p>
+</div>
+<!-- Form Section -->
+<div class="flex flex-col gap-5 px-4 py-6">
+<!-- Input: Nome da Prefeitura -->
+<label class="flex flex-col w-full group">
+<p class="text-text-main dark:text-gray-200 text-sm font-semibold leading-normal pb-2 ml-1">Nome da Prefeitura</p>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary">location_city</span>
+<input class="form-input flex w-full rounded-xl text-text-main dark:text-white border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark focus:border-primary focus:ring-2 focus:ring-primary/20 h-14 placeholder:text-text-secondary/60 pl-12 pr-4 text-base font-normal transition-all" placeholder="Ex: Prefeitura de São Paulo" type="text"/>
+</div>
+</label>
+<!-- Input: CNPJ & UF Row -->
+<div class="flex gap-4">
+<label class="flex flex-col w-2/3">
+<p class="text-text-main dark:text-gray-200 text-sm font-semibold leading-normal pb-2 ml-1">CNPJ</p>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary">badge</span>
+<input class="form-input flex w-full rounded-xl text-text-main dark:text-white border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark focus:border-primary focus:ring-2 focus:ring-primary/20 h-14 placeholder:text-text-secondary/60 pl-12 pr-4 text-base font-normal transition-all" placeholder="00.000.000/0001-00" type="text"/>
+</div>
+</label>
+<label class="flex flex-col w-1/3">
+<p class="text-text-main dark:text-gray-200 text-sm font-semibold leading-normal pb-2 ml-1">UF</p>
+<div class="relative">
+<select class="form-select flex w-full rounded-xl text-text-main dark:text-white border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark focus:border-primary focus:ring-2 focus:ring-primary/20 h-14 pl-4 pr-8 text-base font-normal appearance-none transition-all cursor-pointer">
+<option>SP</option>
+<option>RJ</option>
+<option>MG</option>
+<option>RS</option>
+</select>
+</div>
+</label>
+</div>
+<!-- Input: Gestor -->
+<label class="flex flex-col w-full">
+<p class="text-text-main dark:text-gray-200 text-sm font-semibold leading-normal pb-2 ml-1">E-mail do Gestor</p>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary">mail</span>
+<input class="form-input flex w-full rounded-xl text-text-main dark:text-white border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark focus:border-primary focus:ring-2 focus:ring-primary/20 h-14 placeholder:text-text-secondary/60 pl-12 pr-4 text-base font-normal transition-all" placeholder="gestor@prefeitura.gov.br" type="email"/>
+</div>
+</label>
+</div>
+<div class="h-1 bg-gray-100 dark:bg-border-dark mx-4 rounded-full opacity-50"></div>
+<!-- Plans Section -->
+<div class="px-4 py-6">
+<h3 class="text-text-main dark:text-white text-lg font-bold leading-tight mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">stars</span>
+                    Escolha o Plano
+                </h3>
+<div class="flex flex-col gap-4">
+<!-- Plan Card: Basic -->
+<div class="group relative flex items-center gap-4 rounded-2xl border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark p-4 shadow-sm transition-all hover:border-primary/50 cursor-pointer">
+<div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 text-text-secondary dark:text-gray-300">
+<span class="material-symbols-outlined">description</span>
+</div>
+<div class="flex-1">
+<p class="text-text-main dark:text-white font-bold text-base">Plano Básico</p>
+<p class="text-text-secondary dark:text-gray-400 text-sm">Até 5 departamentos</p>
+</div>
+<div class="text-right">
+<p class="text-text-main dark:text-white font-bold">R$ 499</p>
+<p class="text-xs text-text-secondary">/mês</p>
+</div>
+<div class="absolute right-4 top-4 h-4 w-4 rounded-full border-2 border-gray-300 dark:border-gray-600 group-hover:border-primary"></div>
+</div>
+<!-- Plan Card: Pro (Selected) -->
+<div class="relative flex items-center gap-4 rounded-2xl border-2 border-primary bg-primary/5 dark:bg-primary/10 p-4 shadow-soft cursor-pointer overflow-hidden">
+<!-- Trial Badge -->
+<div class="absolute top-0 right-0 bg-primary text-white text-[10px] font-bold px-2 py-1 rounded-bl-xl rounded-tr-xl z-10">
+                            7 DIAS GRÁTIS
+                        </div>
+<div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary text-white shadow-glow">
+<span class="material-symbols-outlined">rocket_launch</span>
+</div>
+<div class="flex-1">
+<p class="text-text-main dark:text-white font-bold text-base">Plano Município Pro</p>
+<p class="text-primary dark:text-primary-dark font-medium text-sm">Ilimitado + Relatórios</p>
+</div>
+<div class="text-right mr-6">
+<p class="text-text-main dark:text-white font-bold">R$ 999</p>
+<p class="text-xs text-text-secondary">/mês</p>
+</div>
+<div class="absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 rounded-full border-[5px] border-primary bg-white"></div>
+<!-- Decorative bg blur -->
+<div class="absolute -bottom-10 -right-10 w-24 h-24 bg-primary/20 blur-2xl rounded-full pointer-events-none"></div>
+</div>
+</div>
+</div>
+</main>
+<!-- Fixed Bottom Action -->
+<div class="absolute bottom-0 left-0 w-full bg-surface-light/90 dark:bg-background-dark/95 backdrop-blur-md border-t border-border-light dark:border-border-dark p-4 pb-8 z-30">
+<div class="flex flex-col gap-3">
+<div class="flex justify-between items-center px-1">
+<p class="text-sm font-medium text-text-secondary dark:text-gray-400">Total a pagar hoje</p>
+<p class="text-lg font-bold text-primary dark:text-white">R$ 0,00</p>
+</div>
+<button class="flex w-full items-center justify-center gap-2 rounded-xl bg-primary hover:bg-primary-dark text-white font-bold h-14 shadow-lg shadow-primary/30 transition-all active:scale-[0.98]">
+<span>Continuar para Revisão</span>
+<span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</body></html>

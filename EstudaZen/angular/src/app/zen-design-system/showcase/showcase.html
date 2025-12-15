@@ -1,0 +1,242 @@
+<div class="zen-showcase">
+  <div class="showcase-header">
+    <h1>🎨 Zen Design System</h1>
+    <p>Componentes reutilizáveis baseados nas telas do VestiQuiz</p>
+  </div>
+
+  <!-- Colors Section -->
+  <section class="showcase-section">
+    <h2 class="showcase-section__title">Paleta de Cores</h2>
+    <div class="color-palette">
+      <div class="color-palette__item">
+        <div class="color-palette__swatch" style="background: #7f13ec;"></div>
+        <div class="color-palette__name">Primary</div>
+        <div class="color-palette__value">#7f13ec</div>
+      </div>
+      <div class="color-palette__item">
+        <div class="color-palette__swatch" style="background: #6C5CE7;"></div>
+        <div class="color-palette__name">Primary Hover</div>
+        <div class="color-palette__value">#6C5CE7</div>
+      </div>
+      <div class="color-palette__item">
+        <div class="color-palette__swatch" style="background: #FF7675;"></div>
+        <div class="color-palette__name">Secondary</div>
+        <div class="color-palette__value">#FF7675</div>
+      </div>
+      <div class="color-palette__item">
+        <div class="color-palette__swatch" style="background: #00d4ff;"></div>
+        <div class="color-palette__name">Secondary Alt</div>
+        <div class="color-palette__value">#00d4ff</div>
+      </div>
+      <div class="color-palette__item">
+        <div class="color-palette__swatch" style="background: #10B981;"></div>
+        <div class="color-palette__name">Success</div>
+        <div class="color-palette__value">#10B981</div>
+      </div>
+      <div class="color-palette__item">
+        <div class="color-palette__swatch" style="background: #EF4444;"></div>
+        <div class="color-palette__name">Error</div>
+        <div class="color-palette__value">#EF4444</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Typography Section -->
+  <section class="showcase-section">
+    <h2 class="showcase-section__title">Tipografia</h2>
+    <div class="typography-demo">
+      <div class="typography-demo__item">
+        <div class="typography-demo__label">Heading 1</div>
+        <h1 style="font-size: 2.25rem; font-weight: 800;">The quick brown fox jumps</h1>
+      </div>
+      <div class="typography-demo__item">
+        <div class="typography-demo__label">Heading 2</div>
+        <h2 style="font-size: 1.875rem; font-weight: 700;">The quick brown fox jumps</h2>
+      </div>
+      <div class="typography-demo__item">
+        <div class="typography-demo__label">Body Text</div>
+        <p style="font-size: 1rem;">The quick brown fox jumps over the lazy dog. Lorem ipsum dolor sit amet.</p>
+      </div>
+      <div class="typography-demo__item">
+        <div class="typography-demo__label">Small Text</div>
+        <small style="font-size: 0.875rem;">The quick brown fox jumps over the lazy dog</small>
+      </div>
+    </div>
+  </section>
+
+  <!-- Buttons Section -->
+  <section class="showcase-section">
+    <h2 class="showcase-section__title">Botões</h2>
+    <div class="showcase-section__grid showcase-section__grid--2col">
+      <div>
+        <h3 style="margin-bottom: 1rem; font-size: 1.125rem; font-weight: 600;">Primary</h3>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <button class="zen-btn zen-btn--primary zen-btn--sm" (click)="handleButtonClick('primary-sm')">
+            Small Button
+          </button>
+          <button class="zen-btn zen-btn--primary" (click)="handleButtonClick('primary')">
+            Normal Button
+          </button>
+          <button class="zen-btn zen-btn--primary zen-btn--lg" (click)="handleButtonClick('primary-lg')">
+            Large Button
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <h3 style="margin-bottom: 1rem; font-size: 1.125rem; font-weight: 600;">Secondary</h3>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <button class="zen-btn zen-btn--secondary" (click)="handleButtonClick('secondary')">
+            Secondary Button
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <h3 style="margin-bottom: 1rem; font-size: 1.125rem; font-weight: 600;">Outline</h3>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <button class="zen-btn zen-btn--outline" (click)="handleButtonClick('outline')">
+            Outline Button
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <h3 style="margin-bottom: 1rem; font-size: 1.125rem; font-weight: 600;">Ghost</h3>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <button class="zen-btn zen-btn--ghost" (click)="handleButtonClick('ghost')">
+            Ghost Button
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cards Section -->
+  <section class="showcase-section">
+    <h2 class="showcase-section__title">Cards</h2>
+    <div class="showcase-section__grid showcase-section__grid--3col">
+      <div class="zen-card">
+        <h3 class="zen-card__title">Card Padrão</h3>
+        <p class="zen-card__content">
+          Este é um card básico com sombra suave e hover effect.
+        </p>
+      </div>
+
+      <div class="zen-card zen-card--highlight">
+        <h3 class="zen-card__title">Card com Destaque</h3>
+        <p class="zen-card__content">
+          Card com borda lateral colorida para destacar conteúdo importante.
+        </p>
+      </div>
+
+      <div class="zen-card zen-card--gradient">
+        <h3 class="zen-card__title">Card Gradiente</h3>
+        <p class="zen-card__content">
+          Card com fundo gradiente vibrante.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Form Inputs Section -->
+  <section class="showcase-section">
+    <h2 class="showcase-section__title">Form Inputs</h2>
+    <div style="max-width: 600px;">
+      <div style="margin-bottom: 1.5rem;">
+        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Input Padrão</label>
+        <input class="zen-input" type="text" placeholder="Digite algo aqui..." />
+      </div>
+      <div style="margin-bottom: 1.5rem;">
+        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Email</label>
+        <input class="zen-input" type="email" placeholder="seu@email.com" />
+      </div>
+      <div>
+        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Senha</label>
+        <input class="zen-input" type="password" placeholder="••••••••" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Badges Section -->
+  <section class="showcase-section">
+    <h2 class="showcase-section__title">Badges</h2>
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+      <span class="zen-badge zen-badge--primary">Primary</span>
+      <span class="zen-badge zen-badge--success">✓ Success</span>
+      <span class="zen-badge zen-badge--warning">⚠ Warning</span>
+      <span class="zen-badge zen-badge--error">✕ Error</span>
+      <span class="zen-badge zen-badge--gold">★ Gold League</span>
+    </div>
+  </section>
+
+  <!-- Avatars Section -->
+  <section class="showcase-section">
+    <h2 class="showcase-section__title">Avatars</h2>
+    <div style="display: flex; gap: 2rem; align-items: center; flex-wrap: wrap;">
+      <div class="zen-avatar zen-avatar--sm">
+        <img class="zen-avatar__image" src="https://i.pravatar.cc/150?img=1" alt="Avatar pequeno" />
+      </div>
+      <div class="zen-avatar">
+        <img class="zen-avatar__image" src="https://i.pravatar.cc/150?img=2" alt="Avatar normal" />
+        <span class="zen-avatar__badge">12</span>
+      </div>
+      <div class="zen-avatar zen-avatar--lg">
+        <img class="zen-avatar__image" src="https://i.pravatar.cc/150?img=3" alt="Avatar grande" />
+        <span class="zen-avatar__badge">5</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Progress Bars Section -->
+  <section class="showcase-section">
+    <h2 class="showcase-section__title">Progress Bars</h2>
+    <div style="max-width: 600px;">
+      <div style="margin-bottom: 2rem;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+          <span style="font-weight: 600;">XP Progress</span>
+          <span style="color: #7f13ec; font-weight: 700;">{{ progress }}%</span>
+        </div>
+        <div class="zen-progress">
+          <div class="zen-progress__bar" [style.width.%]="progress"></div>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 2rem;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+          <span style="font-weight: 600;">Small Progress</span>
+          <span style="color: #10B981; font-weight: 700;">80%</span>
+        </div>
+        <div class="zen-progress zen-progress--sm">
+          <div class="zen-progress__bar" style="width: 80%;"></div>
+        </div>
+      </div>
+
+      <div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+          <span style="font-weight: 600;">Large Progress</span>
+          <span style="color: #FF7675; font-weight: 700;">45%</span>
+        </div>
+        <div class="zen-progress zen-progress--lg">
+          <div class="zen-progress__bar" style="width: 45%;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Spacing & Shadows -->
+  <section class="showcase-section">
+    <h2 class="showcase-section__title">Sombras</h2>
+    <div class="showcase-section__grid showcase-section__grid--3col">
+      <div style="padding: 2rem; background: white; border-radius: 1rem; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);">
+        <strong>Shadow SM</strong>
+      </div>
+      <div style="padding: 2rem; background: white; border-radius: 1rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);">
+        <strong>Shadow LG</strong>
+      </div>
+      <div style="padding: 2rem; background: white; border-radius: 1rem; box-shadow: 0 0 20px rgba(108, 92, 231, 0.4);">
+        <strong>Shadow Glow</strong>
+      </div>
+    </div>
+  </section>
+</div>

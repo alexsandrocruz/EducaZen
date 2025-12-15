@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VestiQuiz Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                        "surface-dark": "#1C2333",
+                        "surface-light": "#FFFFFF",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "1.5rem",
+                        "xl": "2rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar hiding for clean UI */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .glass-nav {
+            background: rgba(28, 35, 51, 0.9);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        /* Gamified XP Bar Shimmer */
+        .xp-bar-fill {
+            background: linear-gradient(90deg, #135bec 0%, #3b82f6 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .xp-bar-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transform: translateX(-100%);
+            animation: shimmer 2s infinite;
+        }
+        @keyframes shimmer {
+            100% {
+                transform: translateX(100%);
+            }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-900 dark:text-white transition-colors duration-200">
+<div class="relative flex min-h-screen w-full flex-col overflow-hidden pb-28">
+<!-- Header -->
+<header class="flex items-center justify-between p-6 pt-8 pb-2">
+<div class="flex items-center gap-3">
+<div class="relative group cursor-pointer">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-12 ring-2 ring-primary/20" data-alt="Profile picture of the dashboard host user" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCZgoadBP4KIDujyG4Aofv7xDXRSORY4vMOGzsXQD-PWR6KBtpU52-jtCpUI4mhvoEDokhT_IHB1QdhPYQz2xztXPQyt7lg-pC8VV27u-3l0yK4twzwpycok57Or6CH6kQ3wfHtpzy7k1PblejSP3xc8-PQ1Y4eojDa7vlXccpTTrftqvPuzGx2o1LZalEcMTudPGwm0-SND9QFKCUTdpr2oYkDx1El7yGXBdvnfEDjIWAgdHNuEL-s1DtYRIekL0Mj_6DMlLGfKw8");'>
+</div>
+<div class="absolute bottom-0 right-0 size-3 bg-green-500 border-2 border-background-dark rounded-full"></div>
+</div>
+<div class="flex flex-col">
+<span class="text-sm text-gray-500 dark:text-gray-400 font-medium">Welcome back,</span>
+<h2 class="text-xl font-bold leading-tight tracking-tight">Host Master</h2>
+</div>
+</div>
+<button class="relative flex size-10 items-center justify-center rounded-full bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-gray-800 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+<span class="material-symbols-outlined" style="font-size: 24px;">notifications</span>
+<span class="absolute top-2 right-2.5 size-2 bg-red-500 rounded-full border border-surface-dark"></span>
+</button>
+</header>
+<!-- Stats Horizontal Scroll -->
+<div class="w-full overflow-x-auto no-scrollbar pl-6 py-6">
+<div class="flex gap-4 min-w-max pr-6">
+<!-- Card 1: MRR -->
+<div class="flex w-[180px] flex-col gap-3 rounded-xl p-5 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-gray-800 shadow-sm relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-4xl text-primary">payments</span>
+</div>
+<p class="text-gray-500 dark:text-gray-400 text-sm font-medium">Total MRR</p>
+<p class="text-2xl font-bold tracking-tight">R$ 125k</p>
+<div class="flex items-center gap-1 text-emerald-500 text-sm font-semibold bg-emerald-500/10 w-fit px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined" style="font-size: 16px;">trending_up</span>
+<span>+12%</span>
+</div>
+</div>
+<!-- Card 2: Active Cities -->
+<div class="flex w-[180px] flex-col gap-3 rounded-xl p-5 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-gray-800 shadow-sm relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-4xl text-primary">location_city</span>
+</div>
+<p class="text-gray-500 dark:text-gray-400 text-sm font-medium">Active Cities</p>
+<p class="text-2xl font-bold tracking-tight">42</p>
+<div class="flex items-center gap-1 text-emerald-500 text-sm font-semibold bg-emerald-500/10 w-fit px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined" style="font-size: 16px;">trending_up</span>
+<span>+5%</span>
+</div>
+</div>
+<!-- Card 3: Signups -->
+<div class="flex w-[180px] flex-col gap-3 rounded-xl p-5 bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-gray-800 shadow-sm relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-4xl text-primary">person_add</span>
+</div>
+<p class="text-gray-500 dark:text-gray-400 text-sm font-medium">New Signups</p>
+<p class="text-2xl font-bold tracking-tight">12</p>
+<div class="flex items-center gap-1 text-emerald-500 text-sm font-semibold bg-emerald-500/10 w-fit px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined" style="font-size: 16px;">trending_up</span>
+<span>+8%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Gamified Goal Section -->
+<div class="px-6 py-2">
+<div class="flex flex-col gap-3 rounded-xl bg-gradient-to-r from-surface-light to-gray-50 dark:from-surface-dark dark:to-[#161b28] p-5 border border-gray-200 dark:border-gray-800 shadow-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="bg-primary/20 p-1.5 rounded-lg text-primary">
+<span class="material-symbols-outlined" style="font-size: 20px;">trophy</span>
+</div>
+<p class="font-bold text-sm dark:text-gray-200">Monthly Revenue Goal</p>
+</div>
+<p class="text-xs font-bold text-primary bg-primary/10 px-2 py-1 rounded-md">LEVEL 5</p>
+</div>
+<div class="relative h-4 w-full rounded-full bg-gray-200 dark:bg-gray-700/50 overflow-hidden">
+<div class="h-full rounded-full xp-bar-fill" style="width: 85%;"></div>
+</div>
+<div class="flex justify-between items-center text-xs text-gray-500 dark:text-gray-400 font-medium">
+<span>Current: 125k XP</span>
+<span>Target: 150k XP</span>
+</div>
+</div>
+</div>
+<!-- Charts / Subscription Breakdown -->
+<div class="px-6 pt-6">
+<h2 class="text-xl font-bold mb-4">Subscription Health</h2>
+<div class="flex flex-col gap-4 rounded-xl bg-surface-light dark:bg-surface-dark p-6 border border-gray-200 dark:border-gray-800 shadow-sm">
+<div class="flex items-end justify-between mb-2">
+<div>
+<p class="text-gray-500 dark:text-gray-400 text-sm font-medium mb-1">Total Subscriptions</p>
+<p class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white">50</p>
+</div>
+<div class="bg-primary/10 text-primary rounded-lg px-3 py-1 text-xs font-bold">This Month</div>
+</div>
+<!-- Active -->
+<div class="space-y-2">
+<div class="flex justify-between text-sm font-medium">
+<span class="flex items-center gap-2 text-gray-600 dark:text-gray-300">
+<span class="size-2 rounded-full bg-emerald-500"></span> Active
+                        </span>
+<span class="text-gray-900 dark:text-white">40</span>
+</div>
+<div class="h-2 w-full rounded-full bg-gray-200 dark:bg-gray-700/50 overflow-hidden">
+<div class="h-full bg-emerald-500 rounded-full" style="width: 80%;"></div>
+</div>
+</div>
+<!-- Trial -->
+<div class="space-y-2">
+<div class="flex justify-between text-sm font-medium">
+<span class="flex items-center gap-2 text-gray-600 dark:text-gray-300">
+<span class="size-2 rounded-full bg-amber-400"></span> Trial
+                        </span>
+<span class="text-gray-900 dark:text-white">7</span>
+</div>
+<div class="h-2 w-full rounded-full bg-gray-200 dark:bg-gray-700/50 overflow-hidden">
+<div class="h-full bg-amber-400 rounded-full" style="width: 14%;"></div>
+</div>
+</div>
+<!-- Expired -->
+<div class="space-y-2">
+<div class="flex justify-between text-sm font-medium">
+<span class="flex items-center gap-2 text-gray-600 dark:text-gray-300">
+<span class="size-2 rounded-full bg-rose-500"></span> Expired
+                        </span>
+<span class="text-gray-900 dark:text-white">3</span>
+</div>
+<div class="h-2 w-full rounded-full bg-gray-200 dark:bg-gray-700/50 overflow-hidden">
+<div class="h-full bg-rose-500 rounded-full" style="width: 6%;"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Activity Feed -->
+<div class="px-6 pt-8">
+<div class="flex items-center justify-between mb-4">
+<h2 class="text-xl font-bold">Recent Updates</h2>
+<button class="text-primary text-sm font-bold">See All</button>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Item 1 -->
+<div class="flex items-center gap-4 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-gray-800">
+<div class="relative size-12 shrink-0 rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800">
+<img alt="Curitiba" class="h-full w-full object-cover" data-alt="Abstract representation of Curitiba city hall architecture or flag" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFx2QqPGjZoj2cKvb5SnhD8Z-98IBW49xOUwLRocDlwHJ3WNlCZn1HJDcfKrIS2kwaxD5xyAy8QHggGiZ1YfxhIw5s0XPRwyrJB25yoEC1B4B-1PZhqBii71pGritqL7rLWlChua4vekjht9skumIHU2kfYRVTMsTyGSK8Kx75GWdC973UeX4aEASFO6XtRtgX0-rtXfN2RHfXx3kCB0DWMW8A4i3WxX_JbTooBv2cBDPRhiNnl2_gr9KqYmtg7jWm2yc8uQR1tTQ"/>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-bold truncate">Pref. de Curitiba</p>
+<p class="text-xs text-gray-500 dark:text-gray-400 truncate">Plan renewed successfully</p>
+</div>
+<div class="px-2.5 py-1 rounded-md bg-emerald-500/10 text-emerald-500 text-xs font-bold whitespace-nowrap">
+                        Active
+                    </div>
+</div>
+<!-- Item 2 -->
+<div class="flex items-center gap-4 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-gray-800">
+<div class="relative size-12 shrink-0 rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800">
+<img alt="Osasco" class="h-full w-full object-cover" data-alt="Abstract representation of Osasco city architecture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGp_fU9VYFbvysQNykQQvUkQJriTNBoELs_1YSI5nEb8Fw3x6IJZo-NMI-RzIrRBXWTIfYmq9kdR2A3tEd3X9KXDKWx0EMUkgHxEVmzPl558smpkEdT7HoY6_EPl1H6rdLof4yiI4vyhk6MEPvTGkB1akbN5uwrD145MP4lpX9PZaWl9QgSwRxGZo1kb0CDi8cLhYenRXzm2UwDFNypVnfKo_czd1q6o4SvDjFkF0q9IrHi6okY7hzwEN88IUHxMFFcVc9E3aXMZo"/>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-bold truncate">Pref. de Osasco</p>
+<p class="text-xs text-gray-500 dark:text-gray-400 truncate">Trial ending in 2 days</p>
+</div>
+<div class="px-2.5 py-1 rounded-md bg-amber-500/10 text-amber-500 text-xs font-bold whitespace-nowrap">
+                        Trial
+                    </div>
+</div>
+<!-- Item 3 -->
+<div class="flex items-center gap-4 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-gray-800">
+<div class="relative size-12 shrink-0 rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800">
+<img alt="Salvador" class="h-full w-full object-cover" data-alt="Abstract representation of Salvador city colors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAORBt2PPVHKXQYrHmWlBL8F4UYmKZouZLP7d6OhsBAkLH3hzpdqV_lYmYY34uD58E-aVUOKsEQf7n0m0n4uZ-wwIPVCvS3lQSQgpoRHH4j1u07gtmi24oPBL2kvpMlxISjP04HrhsfSP_Ann66bS7tYoUxyK5zKy-bCNZKuGji9AF2GSvivhoLBRSsusLPmyWowHO8Xh5L4PpnQFpPjuhV7-md7XCsPLhxQSCFsaHUEYHF0swSgBHkjQQ6y3SnQFfTeptnAOUHsZA"/>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-bold truncate">Pref. de Salvador</p>
+<p class="text-xs text-gray-500 dark:text-gray-400 truncate">Subscription expired</p>
+</div>
+<div class="px-2.5 py-1 rounded-md bg-rose-500/10 text-rose-500 text-xs font-bold whitespace-nowrap">
+                        Expired
+                    </div>
+</div>
+</div>
+</div>
+<!-- Spacer for Bottom Nav -->
+<div class="h-8"></div>
+</div>
+<!-- Floating Bottom Navigation -->
+<div class="fixed bottom-6 left-4 right-4 z-50">
+<nav class="glass-nav h-[72px] w-full rounded-full flex items-center justify-between px-2 shadow-2xl shadow-black/50">
+<button class="flex-1 flex flex-col items-center justify-center gap-1 group">
+<div class="bg-primary size-10 rounded-full flex items-center justify-center text-white shadow-[0_0_15px_rgba(19,91,236,0.5)] transition-all duration-300">
+<span class="material-symbols-outlined" style="font-size: 24px;">grid_view</span>
+</div>
+</button>
+<button class="flex-1 flex flex-col items-center justify-center gap-1 group">
+<div class="size-10 rounded-full flex items-center justify-center text-gray-400 group-hover:text-white hover:bg-white/5 transition-all">
+<span class="material-symbols-outlined" style="font-size: 24px;">groups</span>
+</div>
+</button>
+<button class="flex-1 flex flex-col items-center justify-center gap-1 group">
+<div class="size-10 rounded-full flex items-center justify-center text-gray-400 group-hover:text-white hover:bg-white/5 transition-all">
+<span class="material-symbols-outlined" style="font-size: 24px;">payments</span>
+</div>
+</button>
+<button class="flex-1 flex flex-col items-center justify-center gap-1 group">
+<div class="size-10 rounded-full flex items-center justify-center text-gray-400 group-hover:text-white hover:bg-white/5 transition-all">
+<span class="material-symbols-outlined" style="font-size: 24px;">settings</span>
+</div>
+</button>
+</nav>
+</div>
+</body></html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Cadastro Notas ENEM/Corte</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#3713ec",
+                        "primary-light": "#6a4df4",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#131022",
+                        "surface-dark": "#1e1b2e",
+                        "surface-highlight": "#2a2640",
+                        "accent-cyan": "#00d4ff",
+                        "accent-pink": "#ff00d4",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "1.5rem", "xl": "2rem", "2xl": "3rem", "full": "9999px"},
+                    boxShadow: {
+                        "neon": "0 0 20px -5px rgba(55, 19, 236, 0.5)",
+                        "neon-hover": "0 0 30px -5px rgba(55, 19, 236, 0.7)",
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for clean look */
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+        
+        .glass-card {
+            background: rgba(30, 27, 46, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gradient-border {
+            position: relative;
+            background: #1e1b2e;
+            border-radius: 2rem;
+            z-index: 1;
+        }
+
+        .gradient-border::before {
+            content: "";
+            position: absolute;
+            inset: -2px;
+            border-radius: 2.1rem;
+            background: linear-gradient(45deg, #3713ec, #00d4ff);
+            z-index: -1;
+            opacity: 0.6;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display antialiased selection:bg-primary selection:text-white overflow-x-hidden">
+<div class="relative flex min-h-screen w-full flex-col max-w-md mx-auto shadow-2xl overflow-hidden">
+<!-- Decorative Background Gradients -->
+<div class="absolute top-[-10%] right-[-10%] w-64 h-64 bg-primary/20 rounded-full blur-[80px] pointer-events-none"></div>
+<div class="absolute bottom-[10%] left-[-10%] w-64 h-64 bg-accent-pink/10 rounded-full blur-[80px] pointer-events-none"></div>
+<!-- Top App Bar -->
+<div class="flex items-center p-5 pt-8 pb-2 justify-between z-10">
+<button class="text-white flex size-10 shrink-0 items-center justify-center rounded-full bg-surface-highlight hover:bg-surface-highlight/80 transition-colors">
+<span class="material-symbols-outlined text-[20px]">arrow_back</span>
+</button>
+<h2 class="text-white text-lg font-bold leading-tight tracking-tight flex-1 text-center pr-2">Metas de Aprovação</h2>
+<div class="flex items-center justify-end bg-surface-highlight/50 px-3 py-1.5 rounded-full border border-white/5">
+<span class="material-symbols-outlined text-accent-cyan text-[16px] mr-1.5 filled">bolt</span>
+<p class="text-white text-sm font-bold leading-normal tracking-wide shrink-0">1250 XP</p>
+</div>
+</div>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto pb-24 z-10">
+<!-- Description -->
+<div class="px-5 pt-2 pb-4">
+<p class="text-gray-400 text-sm font-medium leading-relaxed">
+                    Configure sua meta ou consulte notas de corte. Seus objetivos definem sua jornada.
+                </p>
+</div>
+<!-- Filters Section -->
+<div class="flex flex-col gap-4 px-5">
+<!-- Course Select -->
+<div class="relative group">
+<label class="block text-xs font-bold text-primary mb-2 uppercase tracking-wider ml-1">Curso Alvo</label>
+<div class="relative">
+<select class="appearance-none flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-2xl text-white focus:outline-0 focus:ring-2 focus:ring-primary border-none bg-surface-highlight h-14 pl-12 pr-10 text-base font-medium leading-normal shadow-lg transition-all hover:bg-surface-highlight/80 cursor-pointer">
+<option disabled="" selected="" value="">Selecione o curso</option>
+<option value="medicina">Medicina</option>
+<option value="direito">Direito</option>
+<option value="engenharia_comp">Engenharia de Computação</option>
+<option value="psicologia">Psicologia</option>
+</select>
+<div class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
+<span class="material-symbols-outlined text-[20px]">stethoscope</span>
+</div>
+<div class="absolute right-4 top-1/2 -translate-y-1/2 text-primary pointer-events-none">
+<span class="material-symbols-outlined">expand_more</span>
+</div>
+</div>
+</div>
+<!-- University Select -->
+<div class="relative group">
+<label class="block text-xs font-bold text-gray-500 mb-2 uppercase tracking-wider ml-1 group-focus-within:text-primary transition-colors">Universidade</label>
+<div class="relative">
+<select class="appearance-none flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-2xl text-white focus:outline-0 focus:ring-2 focus:ring-primary border-none bg-surface-highlight h-14 pl-12 pr-10 text-base font-medium leading-normal shadow-lg transition-all hover:bg-surface-highlight/80 cursor-pointer">
+<option disabled="" selected="" value="">Selecione a universidade</option>
+<option value="usp">USP - São Paulo</option>
+<option value="ufrj">UFRJ - Rio de Janeiro</option>
+<option value="ufmg">UFMG - Minas Gerais</option>
+<option value="unicamp">Unicamp - Campinas</option>
+</select>
+<div class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
+<span class="material-symbols-outlined text-[20px]">school</span>
+</div>
+<div class="absolute right-4 top-1/2 -translate-y-1/2 text-primary pointer-events-none">
+<span class="material-symbols-outlined">expand_more</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Score Card (The Target) -->
+<div class="px-5 py-8">
+<div class="gradient-border p-6 flex flex-col items-center justify-center text-center shadow-neon relative overflow-hidden">
+<!-- Background pattern inside card -->
+<div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20 mix-blend-overlay" data-alt="Texture pattern overlay"></div>
+<div class="relative z-10 w-full">
+<div class="flex justify-between items-start w-full mb-2">
+<div class="bg-white/10 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
+<span class="text-[10px] font-bold text-white uppercase tracking-wider">SISU 2023.2</span>
+</div>
+<span class="material-symbols-outlined text-yellow-400 text-[24px]">emoji_events</span>
+</div>
+<div class="py-4">
+<span class="text-gray-400 text-sm font-medium uppercase tracking-widest block mb-1">Nota de Corte</span>
+<h2 class="text-white text-[56px] font-display font-extrabold leading-none tracking-tighter gradient-text drop-shadow-lg">
+                                815.4
+                            </h2>
+</div>
+<div class="mt-2 flex items-center justify-center gap-2">
+<div class="h-1.5 w-full bg-surface-highlight rounded-full overflow-hidden max-w-[120px]">
+<div class="h-full bg-gradient-to-r from-red-500 to-yellow-500 w-[85%]"></div>
+</div>
+<span class="text-xs font-bold text-yellow-400 uppercase tracking-wide">Lendário</span>
+</div>
+<p class="text-gray-400 text-xs mt-4 max-w-[200px] mx-auto leading-relaxed">
+                            Essa pontuação está entre as <strong class="text-white">top 2%</strong> mais altas da plataforma.
+                        </p>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="px-5 flex gap-3">
+<button class="flex-1 bg-surface-highlight hover:bg-surface-highlight/80 text-white font-bold py-4 rounded-2xl transition-all active:scale-95 flex items-center justify-center gap-2 border border-white/5">
+<span class="material-symbols-outlined">edit</span>
+<span>Minha Meta</span>
+</button>
+<button class="flex-1 bg-primary hover:bg-primary-light text-white font-bold py-4 rounded-2xl shadow-lg shadow-primary/30 transition-all active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add_circle</span>
+<span>Salvar Nota</span>
+</button>
+</div>
+<!-- Trending List -->
+<div class="mt-10 px-5">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-white text-lg font-bold">Mais Buscados</h3>
+<a class="text-primary text-sm font-bold hover:text-primary-light" href="#">Ver todos</a>
+</div>
+<div class="flex flex-col gap-3">
+<!-- List Item 1 -->
+<div class="flex items-center gap-4 bg-surface-highlight/50 p-4 rounded-2xl border border-white/5 hover:bg-surface-highlight transition-colors cursor-pointer group">
+<div class="size-12 rounded-xl bg-blue-500/20 flex items-center justify-center text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">balance</span>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="text-white font-bold text-base truncate">Direito</h4>
+<p class="text-gray-400 text-xs truncate">Universidade de São Paulo (USP)</p>
+</div>
+<div class="text-right">
+<span class="block text-white font-bold text-lg">760.2</span>
+<span class="text-[10px] text-gray-500 font-bold uppercase">Difícil</span>
+</div>
+</div>
+<!-- List Item 2 -->
+<div class="flex items-center gap-4 bg-surface-highlight/50 p-4 rounded-2xl border border-white/5 hover:bg-surface-highlight transition-colors cursor-pointer group">
+<div class="size-12 rounded-xl bg-purple-500/20 flex items-center justify-center text-purple-400 group-hover:bg-purple-500 group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">computer</span>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="text-white font-bold text-base truncate">Ciência da Comp.</h4>
+<p class="text-gray-400 text-xs truncate">UFMG</p>
+</div>
+<div class="text-right">
+<span class="block text-white font-bold text-lg">785.0</span>
+<span class="text-[10px] text-gray-500 font-bold uppercase">Muito Difícil</span>
+</div>
+</div>
+<!-- List Item 3 -->
+<div class="flex items-center gap-4 bg-surface-highlight/50 p-4 rounded-2xl border border-white/5 hover:bg-surface-highlight transition-colors cursor-pointer group">
+<div class="size-12 rounded-xl bg-emerald-500/20 flex items-center justify-center text-emerald-400 group-hover:bg-emerald-500 group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">psychology</span>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="text-white font-bold text-base truncate">Psicologia</h4>
+<p class="text-gray-400 text-xs truncate">UFRJ</p>
+</div>
+<div class="text-right">
+<span class="block text-white font-bold text-lg">745.8</span>
+<span class="text-[10px] text-gray-500 font-bold uppercase">Médio</span>
+</div>
+</div>
+</div>
+</div>
+<div class="h-6"></div>
+</div>
+<!-- Floating Bottom Navigation (Simulated) -->
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 w-[90%] max-w-[360px]">
+<nav class="bg-[#1e1b2e]/90 backdrop-blur-xl rounded-full p-2 flex justify-between items-center shadow-2xl border border-white/10">
+<a class="p-3 text-gray-400 hover:text-white transition-colors rounded-full" href="#">
+<span class="material-symbols-outlined">home</span>
+</a>
+<a class="p-3 text-gray-400 hover:text-white transition-colors rounded-full" href="#">
+<span class="material-symbols-outlined">school</span>
+</a>
+<a class="p-4 bg-primary text-white rounded-full shadow-lg shadow-primary/40 -mt-8 border-4 border-[#131022] hover:bg-primary-light transition-transform active:scale-95" href="#">
+<span class="material-symbols-outlined">add</span>
+</a>
+<a class="p-3 text-white transition-colors rounded-full bg-white/5" href="#">
+<span class="material-symbols-outlined filled">analytics</span>
+</a>
+<a class="p-3 text-gray-400 hover:text-white transition-colors rounded-full" href="#">
+<span class="material-symbols-outlined">person</span>
+</a>
+</nav>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Cadastro de Perguntas - VestiQuiz</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#3713ec",
+                        "primary-dark": "#2a0eb5",
+                        "secondary": "#a855f7", 
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#131022",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1e1b2e",
+                        "success": "#10b981",
+                        "danger": "#ef4444",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "2xl": "2rem",
+                        "full": "9999px"
+                    },
+                    boxShadow: {
+                        "soft": "0 4px 20px -2px rgba(0, 0, 0, 0.05)",
+                        "glow": "0 0 15px rgba(55, 19, 236, 0.3)",
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        
+        .radio-custom:checked + div {
+            border-color: #3713ec;
+            background-color: #f0fdf4;
+        }
+        .dark .radio-custom:checked + div {
+            background-color: rgba(55, 19, 236, 0.1);
+        }
+        
+        /* Gradient Text */
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(to right, #3713ec, #a855f7);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-800 dark:text-slate-100 min-h-screen flex flex-col pb-24 transition-colors duration-200">
+<!-- Top App Bar -->
+<div class="sticky top-0 z-50 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors duration-200">
+<div class="flex items-center p-4 justify-between max-w-md mx-auto w-full">
+<button class="text-slate-800 dark:text-white flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-2xl">arrow_back</span>
+</button>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-tight flex-1 text-center">Nova Pergunta</h2>
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-primary dark:text-indigo-400 font-bold">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Main Content -->
+<main class="flex-1 w-full max-w-md mx-auto px-4 pt-2">
+<!-- Progress Bar -->
+<div class="flex flex-col gap-3 py-4">
+<div class="flex gap-6 justify-between items-end">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium leading-normal uppercase tracking-wider">Passo 1 de 3</p>
+<p class="text-primary dark:text-indigo-400 text-sm font-bold">Detalhes da Questão</p>
+</div>
+<div class="h-2 w-full rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
+<div class="h-full rounded-full bg-gradient-to-r from-primary to-secondary w-1/3 shadow-glow"></div>
+</div>
+</div>
+<!-- Section: Subject (Contexto) -->
+<div class="mb-6">
+<h2 class="text-slate-900 dark:text-white text-xl font-bold leading-tight mb-3">Disciplina</h2>
+<div class="flex gap-3 overflow-x-auto no-scrollbar pb-2 snap-x">
+<!-- Active Chip -->
+<button class="snap-start flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-xl bg-primary text-white pl-4 pr-4 shadow-lg shadow-primary/30 transition-transform active:scale-95">
+<span class="material-symbols-outlined text-[18px]">functions</span>
+<p class="text-sm font-semibold">Matemática</p>
+</button>
+<!-- Inactive Chips -->
+<button class="snap-start flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-xl bg-white dark:bg-surface-dark border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 pl-4 pr-4 hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">history_edu</span>
+<p class="text-sm font-medium">História</p>
+</button>
+<button class="snap-start flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-xl bg-white dark:bg-surface-dark border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 pl-4 pr-4 hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">public</span>
+<p class="text-sm font-medium">Geografia</p>
+</button>
+<button class="snap-start flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-xl bg-white dark:bg-surface-dark border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 pl-4 pr-4 hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">biotech</span>
+<p class="text-sm font-medium">Ciências</p>
+</button>
+</div>
+</div>
+<!-- Section: Difficulty -->
+<div class="mb-8">
+<h2 class="text-slate-900 dark:text-white text-xl font-bold leading-tight mb-3">Dificuldade</h2>
+<div class="grid grid-cols-4 gap-2">
+<label class="cursor-pointer group relative">
+<input class="peer sr-only" name="difficulty" type="radio"/>
+<div class="flex flex-col items-center justify-center gap-1 p-2 rounded-xl bg-white dark:bg-surface-dark border-2 border-transparent peer-checked:border-green-500 peer-checked:bg-green-50 dark:peer-checked:bg-green-900/20 transition-all">
+<div class="size-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]"></div>
+<span class="text-xs font-bold text-slate-500 dark:text-slate-400 peer-checked:text-green-600 dark:peer-checked:text-green-400">Fácil</span>
+</div>
+</label>
+<label class="cursor-pointer group relative">
+<input checked="" class="peer sr-only" name="difficulty" type="radio"/>
+<div class="flex flex-col items-center justify-center gap-1 p-2 rounded-xl bg-white dark:bg-surface-dark border-2 border-transparent peer-checked:border-yellow-500 peer-checked:bg-yellow-50 dark:peer-checked:bg-yellow-900/20 transition-all shadow-md">
+<div class="size-2 rounded-full bg-yellow-500 shadow-[0_0_8px_rgba(234,179,8,0.6)]"></div>
+<span class="text-xs font-bold text-slate-500 dark:text-slate-400 peer-checked:text-yellow-600 dark:peer-checked:text-yellow-400">Médio</span>
+</div>
+</label>
+<label class="cursor-pointer group relative">
+<input class="peer sr-only" name="difficulty" type="radio"/>
+<div class="flex flex-col items-center justify-center gap-1 p-2 rounded-xl bg-white dark:bg-surface-dark border-2 border-transparent peer-checked:border-orange-500 peer-checked:bg-orange-50 dark:peer-checked:bg-orange-900/20 transition-all">
+<div class="size-2 rounded-full bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.6)]"></div>
+<span class="text-xs font-bold text-slate-500 dark:text-slate-400 peer-checked:text-orange-600 dark:peer-checked:text-orange-400">Difícil</span>
+</div>
+</label>
+<label class="cursor-pointer group relative">
+<input class="peer sr-only" name="difficulty" type="radio"/>
+<div class="flex flex-col items-center justify-center gap-1 p-2 rounded-xl bg-white dark:bg-surface-dark border-2 border-transparent peer-checked:border-purple-600 peer-checked:bg-purple-50 dark:peer-checked:bg-purple-900/20 transition-all">
+<div class="size-2 rounded-full bg-purple-600 shadow-[0_0_8px_rgba(147,51,234,0.6)]"></div>
+<span class="text-xs font-bold text-slate-500 dark:text-slate-400 peer-checked:text-purple-600 dark:peer-checked:text-purple-400">Desafio</span>
+</div>
+</label>
+</div>
+</div>
+<!-- Section: Question Body (Enunciado) -->
+<div class="mb-8 relative group">
+<div class="flex justify-between items-center mb-3">
+<h2 class="text-slate-900 dark:text-white text-xl font-bold leading-tight">Enunciado</h2>
+<button class="text-primary dark:text-indigo-400 text-sm font-semibold flex items-center gap-1 hover:underline">
+<span class="material-symbols-outlined text-sm">image</span> Adicionar Mídia
+                </button>
+</div>
+<div class="relative bg-white dark:bg-surface-dark rounded-2xl p-4 shadow-soft ring-1 ring-slate-100 dark:ring-slate-800 focus-within:ring-2 focus-within:ring-primary transition-all">
+<textarea class="w-full bg-transparent border-none p-0 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:ring-0 text-base leading-relaxed resize-none font-medium" placeholder="Digite a pergunta aqui... Ex: Se João tem 5 maçãs..." rows="4"></textarea>
+<!-- Formatting Toolbar (Bottom of textarea) -->
+<div class="flex gap-2 mt-2 pt-2 border-t border-slate-100 dark:border-slate-800">
+<button class="p-1.5 rounded hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-400 transition-colors"><span class="material-symbols-outlined text-[20px]">format_bold</span></button>
+<button class="p-1.5 rounded hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-400 transition-colors"><span class="material-symbols-outlined text-[20px]">format_italic</span></button>
+<button class="p-1.5 rounded hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-400 transition-colors"><span class="material-symbols-outlined text-[20px]">format_underlined</span></button>
+<div class="flex-1"></div>
+<p class="text-xs text-slate-400 self-center">0/500</p>
+</div>
+</div>
+</div>
+<!-- Section: Alternatives -->
+<div class="mb-8">
+<div class="flex justify-between items-end mb-4">
+<h2 class="text-slate-900 dark:text-white text-xl font-bold leading-tight">Alternativas</h2>
+<span class="text-xs font-semibold text-slate-500 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded-md">Selecione a correta</span>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Option A -->
+<div class="group relative flex items-center gap-3 p-1 pr-3 bg-white dark:bg-surface-dark rounded-2xl shadow-soft ring-1 ring-slate-100 dark:ring-slate-800 transition-all hover:ring-primary/30">
+<label class="cursor-pointer relative flex items-center justify-center shrink-0 size-12 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<input class="peer sr-only" name="correct_answer" type="radio"/>
+<div class="size-6 rounded-full border-2 border-slate-300 dark:border-slate-600 peer-checked:border-success peer-checked:bg-success transition-all flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-[16px] scale-0 peer-checked:scale-100 transition-transform font-bold">check</span>
+</div>
+</label>
+<div class="flex-1 py-3">
+<input class="w-full bg-transparent border-none p-0 text-slate-900 dark:text-white placeholder-slate-400 focus:ring-0 font-medium" type="text" value="15 Maçãs"/>
+</div>
+<button class="text-slate-400 hover:text-danger p-2 rounded-full hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+<!-- Option B (Correct) -->
+<div class="group relative flex items-center gap-3 p-1 pr-3 bg-white dark:bg-surface-dark rounded-2xl shadow-soft ring-2 ring-success/20 dark:ring-success/20 transition-all">
+<label class="cursor-pointer relative flex items-center justify-center shrink-0 size-12 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<input checked="" class="peer sr-only" name="correct_answer" type="radio"/>
+<div class="size-6 rounded-full border-2 border-slate-300 dark:border-slate-600 peer-checked:border-success peer-checked:bg-success transition-all flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-[16px] scale-0 peer-checked:scale-100 transition-transform font-bold">check</span>
+</div>
+</label>
+<div class="flex-1 py-3">
+<input class="w-full bg-transparent border-none p-0 text-slate-900 dark:text-white placeholder-slate-400 focus:ring-0 font-medium text-success" type="text" value="10 Maçãs"/>
+</div>
+<button class="text-slate-400 hover:text-danger p-2 rounded-full hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+<!-- Option C -->
+<div class="group relative flex items-center gap-3 p-1 pr-3 bg-white dark:bg-surface-dark rounded-2xl shadow-soft ring-1 ring-slate-100 dark:ring-slate-800 transition-all hover:ring-primary/30">
+<label class="cursor-pointer relative flex items-center justify-center shrink-0 size-12 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<input class="peer sr-only" name="correct_answer" type="radio"/>
+<div class="size-6 rounded-full border-2 border-slate-300 dark:border-slate-600 peer-checked:border-success peer-checked:bg-success transition-all flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-[16px] scale-0 peer-checked:scale-100 transition-transform font-bold">check</span>
+</div>
+</label>
+<div class="flex-1 py-3">
+<input class="w-full bg-transparent border-none p-0 text-slate-900 dark:text-white placeholder-slate-400 focus:ring-0 font-medium" placeholder="Opção 3" type="text"/>
+</div>
+<button class="text-slate-400 hover:text-danger p-2 rounded-full hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+<!-- Option D -->
+<div class="group relative flex items-center gap-3 p-1 pr-3 bg-white dark:bg-surface-dark rounded-2xl shadow-soft ring-1 ring-slate-100 dark:ring-slate-800 transition-all hover:ring-primary/30">
+<label class="cursor-pointer relative flex items-center justify-center shrink-0 size-12 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<input class="peer sr-only" name="correct_answer" type="radio"/>
+<div class="size-6 rounded-full border-2 border-slate-300 dark:border-slate-600 peer-checked:border-success peer-checked:bg-success transition-all flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-[16px] scale-0 peer-checked:scale-100 transition-transform font-bold">check</span>
+</div>
+</label>
+<div class="flex-1 py-3">
+<input class="w-full bg-transparent border-none p-0 text-slate-900 dark:text-white placeholder-slate-400 focus:ring-0 font-medium" placeholder="Opção 4" type="text"/>
+</div>
+<button class="text-slate-400 hover:text-danger p-2 rounded-full hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+<!-- Add Option Button -->
+<button class="mt-4 w-full flex items-center justify-center gap-2 py-3 rounded-2xl border-2 border-dashed border-primary/30 text-primary dark:text-indigo-400 font-bold hover:bg-primary/5 dark:hover:bg-primary/10 transition-colors group">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">add_circle</span>
+                Adicionar Alternativa
+            </button>
+</div>
+</main>
+<!-- Fixed Footer -->
+<div class="fixed bottom-0 left-0 right-0 p-4 bg-white/90 dark:bg-surface-dark/90 backdrop-blur-lg border-t border-slate-200 dark:border-slate-800 z-50">
+<div class="max-w-md mx-auto flex gap-3">
+<button class="flex-1 bg-white dark:bg-transparent border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-bold py-3.5 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                Rascunho
+            </button>
+<button class="flex-[2] bg-gradient-to-r from-primary to-secondary text-white font-bold py-3.5 rounded-xl shadow-lg shadow-primary/25 hover:shadow-primary/40 active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[20px]">save</span>
+                Salvar e Publicar
+            </button>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,87 @@
+<div class="admin-container">
+    <!-- Header -->
+    <div class="admin-header">
+        <div>
+            <h1 class="admin-title">Gestão de Matérias</h1>
+            <p class="admin-subtitle">Gerencie as matérias disponíveis para os quizzes</p>
+        </div>
+        <button class="zen-btn zen-btn--primary" (click)="createSubject()">
+            <span class="material-icons-round">add</span>
+            Nova Matéria
+        </button>
+    </div>
+
+    <!-- Search -->
+    <div class="admin-search">
+        <div class="zen-input-group">
+            <span class="material-icons-round input-icon">search</span>
+            <input class="zen-input zen-input--icon" type="text" placeholder="Buscar por nome ou código ENEM..."
+                [(ngModel)]="searchTerm" />
+        </div>
+    </div>
+
+    <!-- Loading State -->
+    <div *ngIf="loading" class="loading-state">
+        <div class="spinner"></div>
+        <p>Carregando matérias...</p>
+    </div>
+
+    <!-- Data Table -->
+    <div *ngIf="!loading" class="data-table-container">
+        <table class="zen-table">
+            <thead>
+                <tr>
+                    <th>Ícone</th>
+                    <th>Nome</th>
+                    <th>Cor</th>
+                    <th>Código ENEM</th>
+                    <th class="text-right">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let subject of filteredSubjects" class="table-row">
+                    <td>
+                        <div class="subject-icon" [style.background-color]="subject.colorHex">
+                            <span class="material-icons-round">{{ subject.iconName || 'book' }}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <strong>{{ subject.name }}</strong>
+                    </td>
+                    <td>
+                        <div class="color-badge">
+                            <span class="color-swatch" [style.background-color]="subject.colorHex"></span>
+                            {{ subject.colorHex }}
+                        </div>
+                    </td>
+                    <td>
+                        <span class="badge">{{ subject.enemAreaCode }}</span>
+                    </td>
+                    <td class="text-right">
+                        <div class="action-buttons">
+                            <button class="zen-btn-icon zen-btn-icon--primary" (click)="editSubject(subject.id!)"
+                                title="Editar">
+                                <span class="material-icons-round">edit</span>
+                            </button>
+                            <button class="zen-btn-icon zen-btn-icon--danger" (click)="deleteSubject(subject)"
+                                title="Excluir">
+                                <span class="material-icons-round">delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <tr *ngIf="filteredSubjects.length === 0">
+                    <td colspan="5" class="empty-state">
+                        <div class="empty-state-content">
+                            <span class="material-icons-round empty-icon">inbox</span>
+                            <p>Nenhuma matéria encontrada</p>
+                            <button class="zen-btn zen-btn--primary" (click)="createSubject()">
+                                Criar primeira matéria
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

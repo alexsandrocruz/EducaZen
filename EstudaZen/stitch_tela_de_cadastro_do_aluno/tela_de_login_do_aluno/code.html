@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VestiQuiz - Login</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#6C5CE7", // A vibrant purple from the reference vibe
+                        secondary: "#FF7675", // A soft coral/pink
+                        accent: "#00CEC9", // Teal
+                        "background-light": "#F8FAFC", // Slate 50
+                        "background-dark": "#0F172A", // Slate 900
+                        "card-light": "#FFFFFF",
+                        "card-dark": "#1E293B",
+                        "input-light": "#F1F5F9",
+                        "input-dark": "#334155",
+                    },
+                    fontFamily: {
+                        display: ["Nunito", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "1rem",
+                        "xl": "1.5rem",
+                        "2xl": "2rem",
+                        "3xl": "2.5rem",
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 40px -10px rgba(0,0,0,0.08)',
+                        'glow': '0 0 20px rgba(108, 92, 231, 0.4)',
+                    }
+                },
+            },
+        };
+    </script>
+<style>.no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }@keyframes gradient-move {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .animate-gradient {
+            background-size: 200% 200%;
+            animation: gradient-move 6s ease infinite;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-gray-100 dark:bg-gray-900 font-display flex items-center justify-center min-h-screen p-0 sm:p-4">
+<div class="relative w-full max-w-[400px] h-[100dvh] sm:h-[850px] bg-background-light dark:bg-background-dark sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col">
+<div class="absolute top-0 left-0 w-full h-[35%] bg-gradient-to-br from-indigo-500 via-primary to-secondary rounded-b-[40px] z-0 animate-gradient">
+<div class="absolute top-10 left-10 w-24 h-24 bg-white/10 rounded-full blur-2xl"></div>
+<div class="absolute bottom-10 right-10 w-32 h-32 bg-purple-900/10 rounded-full blur-xl"></div>
+</div>
+<div class="relative z-10 flex flex-col h-full px-8 pt-12 pb-6">
+<div class="flex flex-col items-center justify-center mt-6 mb-8 text-center">
+<div class="w-20 h-20 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center mb-4 shadow-lg border border-white/30 transform rotate-3">
+<span class="material-icons-round text-white text-5xl">school</span>
+</div>
+<h1 class="text-3xl font-extrabold text-white tracking-tight drop-shadow-sm">VestiQuiz</h1>
+<p class="text-white/90 text-sm mt-1 font-medium">Prepare-se para vencer!</p>
+</div>
+<div class="flex-1 bg-card-light dark:bg-card-dark rounded-3xl shadow-soft p-6 sm:p-8 flex flex-col justify-between mb-4">
+<form class="space-y-5 mt-2">
+<div class="text-left mb-6">
+<h2 class="text-2xl font-bold text-slate-800 dark:text-white">Bem-vindo(a)! 👋</h2>
+<p class="text-slate-500 dark:text-slate-400 text-sm">Faça login para continuar sua jornada.</p>
+</div>
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<span class="material-icons-round text-slate-400 group-focus-within:text-primary transition-colors">person</span>
+</div>
+<input class="w-full pl-12 pr-4 py-4 bg-input-light dark:bg-input-dark border-transparent focus:border-primary dark:focus:border-primary focus:ring-2 focus:ring-primary/20 rounded-2xl text-slate-700 dark:text-slate-200 placeholder-slate-400 transition-all font-semibold outline-none" placeholder="Usuário ou E-mail" type="text"/>
+</div>
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<span class="material-icons-round text-slate-400 group-focus-within:text-primary transition-colors">lock</span>
+</div>
+<input class="w-full pl-12 pr-12 py-4 bg-input-light dark:bg-input-dark border-transparent focus:border-primary dark:focus:border-primary focus:ring-2 focus:ring-primary/20 rounded-2xl text-slate-700 dark:text-slate-200 placeholder-slate-400 transition-all font-semibold outline-none" placeholder="Senha" type="password"/>
+<button class="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors" type="button">
+<span class="material-icons-round text-xl">visibility_off</span>
+</button>
+</div>
+<div class="flex justify-end">
+<a class="text-sm font-bold text-secondary hover:text-red-500 transition-colors" href="#">
+                            Esqueci minha senha
+                        </a>
+</div>
+<button class="w-full bg-gradient-to-r from-primary to-indigo-600 hover:from-indigo-600 hover:to-primary text-white font-bold py-4 rounded-2xl shadow-glow transform transition hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 mt-4" type="button">
+<span>Entrar</span>
+<span class="material-icons-round text-lg">arrow_forward</span>
+</button>
+</form>
+<div class="mt-6 flex flex-col items-center space-y-4">
+<div class="relative w-full text-center">
+<div class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-slate-200 dark:border-slate-700"></div>
+</div>
+<div class="relative flex justify-center text-sm">
+<span class="px-3 bg-card-light dark:bg-card-dark text-slate-400 font-medium">ou entre com</span>
+</div>
+</div>
+<div class="flex gap-4 w-full">
+<button class="flex-1 py-3 px-4 rounded-xl border-2 border-slate-100 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors flex items-center justify-center">
+<img alt="Google" class="w-6 h-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwvRHnX556jYxOqiZZBFs6LkQPdIxrxcW9uEvdguB84Snvn9PcGhrtbHFrYgIHLmj0geda9Q_gVU1EZuAUccSUv4NhO0TvmlySPAREz5xkwXq_urHBt_d3jtVnfUAkQcHIsHonahiyh68mbwAtKW-kq0Xn6IH_COifmA3Ov17MJilvGJaclug5rPvyGnQTyFjV04wqrvNiUFzAkK6Fv81zR849Gdf_VqBrAm0wFzss6hoAVsY4CRJRuqCBfTMMlWXIlgTrDipJw-U"/>
+</button>
+<button class="flex-1 py-3 px-4 rounded-xl border-2 border-slate-100 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors flex items-center justify-center">
+<img alt="Apple" class="w-6 h-6 dark:invert" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDm0n0fY_BicbmE6VosDps3Ba-2E9gMiAoklbP-rnW4k9V7qPQvVKc6zJrZOo969WWxLHeVN99Fqyd8wm0qiOZPz2gbPBP6elt7gEfnBjywdo5np4zcCU7SOnqyR1n6sSjmvmVZ66b_iWrOESCiEBefAye3QwlhWhhX3zIpqXs_vXZZZlSoMLBm9mHAN-TsxtRkPcNlBqkT-LIBUQtKAI9wJ-1WGIxb38C1_ug2Vn3KKMm1g9OFm9ZBWFN53bSz4xG6DTaca6PWQrg"/>
+</button>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm mt-4 font-medium">
+                        Novo por aqui? 
+                        <a class="text-primary font-bold hover:underline" href="#">Criar conta grátis</a>
+</p>
+</div>
+</div>
+</div>
+<div class="absolute -bottom-16 -left-16 w-48 h-48 bg-secondary/10 rounded-full blur-3xl z-0"></div>
+</div>
+
+</body></html>

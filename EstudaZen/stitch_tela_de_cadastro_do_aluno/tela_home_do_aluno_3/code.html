@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VestiQuiz - Home do Aluno</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7f13ec",
+                        "secondary": "#00d4ff",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#130b1b", 
+                        "surface-dark": "#1f162b",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "2xl": "2rem",
+                        "3xl": "2.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-900 dark:text-white transition-colors duration-200">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden pb-24">
+<header class="flex items-center justify-between px-6 py-5 sticky top-0 z-20 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">
+<div class="flex items-center gap-3">
+<div class="relative">
+<div class="size-12 rounded-full border-2 border-primary p-0.5">
+<img alt="Avatar do usuário com fundo colorido" class="h-full w-full rounded-full object-cover" data-alt="User avatar with colorful background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbloM_2tIaI5KvPrCoqGSmO3hxJrY-0N6SQXLg7O9RggPVFw_RxMWQcyr7j7GUTxLPSFJ75GlR3vynsrRf35zSZ-FGItEiHga4BDCh5DYyYs1W55_u1imh-h1LJvgWe93B7f7QojjHR6v7jW4J1qx3K1gkWYm4cAuZ9Fv-WSMi3-46BCgvpWRR-Rjdx6cDjgpboheBP5HF9Ba7Aq-J8lY78ID8C_sx7JqbjnyJtODBbVEKfHCLDsZDUA1YX2NppO8cTwEWZ0ppFiI"/>
+</div>
+<div class="absolute -bottom-1 -right-1 flex size-5 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-white border-2 border-background-dark">
+                        12
+                    </div>
+</div>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-gray-500 dark:text-gray-400">Olá, Gabriel!</span>
+<div class="flex items-center gap-1">
+<span class="text-base font-bold text-gray-900 dark:text-white">Vamos estudar?</span>
+</div>
+</div>
+</div>
+<button class="relative flex size-10 items-center justify-center rounded-full bg-white dark:bg-surface-dark shadow-sm ring-1 ring-gray-900/5 transition hover:scale-105 active:scale-95">
+<span class="material-symbols-outlined text-gray-600 dark:text-gray-300" style="font-variation-settings: 'FILL' 0;">notifications</span>
+<span class="absolute top-2 right-2.5 size-2 rounded-full bg-red-500 ring-2 ring-white dark:ring-surface-dark"></span>
+</button>
+</header>
+<main class="flex flex-col gap-6 px-6">
+<section class="relative w-full overflow-hidden rounded-3xl bg-gradient-to-br from-[#6a11cb] to-[#2575fc] shadow-lg shadow-primary/20">
+<div class="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/10 blur-3xl"></div>
+<div class="absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-primary/30 blur-3xl"></div>
+<div class="relative flex flex-col p-6">
+<div class="flex items-start justify-between">
+<div>
+<p class="text-sm font-medium text-white/80">Liga Atual</p>
+<h2 class="mt-1 text-3xl font-extrabold tracking-tight text-white drop-shadow-sm">Bronze III</h2>
+</div>
+<div class="flex items-center justify-center rounded-xl bg-white/20 p-2 backdrop-blur-sm">
+<span class="material-symbols-outlined text-yellow-300 text-4xl" style="font-variation-settings: 'FILL' 1;">military_tech</span>
+</div>
+</div>
+<div class="mt-6">
+<div class="flex items-end justify-between mb-2">
+<span class="text-sm font-semibold text-white">450 <span class="text-white/60 font-normal">/ 1000 XP</span></span>
+<span class="text-xs font-medium text-white/80 uppercase tracking-wider">Faltam 550 XP</span>
+</div>
+<div class="relative h-3 w-full overflow-hidden rounded-full bg-black/20">
+<div class="absolute left-0 top-0 h-full rounded-full bg-gradient-to-r from-yellow-300 to-yellow-500 transition-all duration-1000 ease-out" style="width: 45%;">
+<div class="absolute inset-0 bg-white/20"></div>
+</div>
+</div>
+</div>
+<div class="mt-4 flex items-center gap-4 border-t border-white/10 pt-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-orange-400" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span class="text-sm font-bold text-white">12 Dias</span>
+</div>
+<div class="h-4 w-px bg-white/20"></div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-yellow-300" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<span class="text-sm font-bold text-white">Top 5%</span>
+</div>
+</div>
+</div>
+</section>
+<section class="flex flex-col gap-4">
+<h3 class="text-lg font-bold text-gray-900 dark:text-white">Ações Rápidas</h3>
+<div class="grid grid-cols-2 gap-3">
+<button class="group col-span-2 relative flex h-48 w-full flex-col justify-between overflow-hidden rounded-3xl bg-gradient-to-br from-[#7f13ec] to-[#4c1d95] p-6 shadow-xl shadow-primary/25 transition-all active:scale-[0.98]">
+<div class="absolute -right-12 -top-12 h-48 w-48 rounded-full bg-white/10 blur-3xl transition-transform duration-700 group-hover:scale-125"></div>
+<div class="absolute -bottom-10 -left-10 h-32 w-32 rounded-full bg-secondary/20 blur-2xl"></div>
+<div class="relative z-10 flex w-full items-start justify-between">
+<div class="flex flex-col text-left">
+<div class="mb-2 flex items-center gap-2">
+<span class="inline-flex items-center rounded-lg bg-white/20 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white backdrop-blur-sm border border-white/10">
+<span class="mr-1 size-1.5 rounded-full bg-green-400 animate-pulse"></span>
+                                    Recomendado
+                                </span>
+</div>
+<h3 class="text-3xl font-extrabold leading-tight text-white drop-shadow-md">Começar<br/>Simulado</h3>
+</div>
+<div class="flex size-14 items-center justify-center rounded-full bg-white text-primary shadow-xl shadow-black/10 transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<div class="relative z-10 flex items-center justify-between border-t border-white/10 pt-4 mt-2">
+<p class="text-sm font-medium text-white/90 flex items-center gap-1">
+<span class="material-symbols-outlined text-lg">description</span>
+                            Modo ENEM Completo
+                        </p>
+<span class="flex items-center text-xs font-bold text-white bg-white/10 px-3 py-1.5 rounded-lg backdrop-blur-md group-hover:bg-white group-hover:text-primary transition-colors">
+                            INICIAR
+                        </span>
+</div>
+</button>
+<button class="relative flex h-40 flex-col justify-between overflow-hidden rounded-3xl bg-white dark:bg-surface-dark p-5 shadow-sm ring-1 ring-black/5 dark:ring-white/5 transition-all active:scale-[0.98] text-left group hover:shadow-md hover:ring-primary/20 dark:hover:ring-primary/40">
+<div class="absolute right-0 top-0 p-5 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-blue-500">history_edu</span>
+</div>
+<div class="flex size-11 items-center justify-center rounded-2xl bg-blue-500/10 text-blue-500 transition-colors group-hover:bg-blue-500 group-hover:text-white shadow-sm">
+<span class="material-symbols-outlined text-2xl">edit_document</span>
+</div>
+<div class="relative z-10 flex flex-col gap-1">
+<span class="text-base font-bold text-gray-900 dark:text-white leading-tight">Continuar<br/>Prova</span>
+<span class="text-[11px] font-medium text-blue-500 bg-blue-500/5 dark:bg-blue-500/10 px-2 py-1 rounded-md w-fit mt-1 line-clamp-1">
+                            Humanas 2023
+                        </span>
+</div>
+</button>
+<button class="relative flex h-40 flex-col justify-between overflow-hidden rounded-3xl bg-white dark:bg-surface-dark p-5 shadow-sm ring-1 ring-black/5 dark:ring-white/5 transition-all active:scale-[0.98] text-left group hover:shadow-md hover:ring-primary/20 dark:hover:ring-primary/40">
+<div class="absolute right-0 top-0 p-5 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-pink-500">style</span>
+</div>
+<div class="flex size-11 items-center justify-center rounded-2xl bg-pink-500/10 text-pink-500 transition-colors group-hover:bg-pink-500 group-hover:text-white shadow-sm">
+<span class="material-symbols-outlined text-2xl">category</span>
+</div>
+<div class="relative z-10 flex flex-col gap-1">
+<span class="text-base font-bold text-gray-900 dark:text-white leading-tight">Praticar por<br/>Matéria</span>
+<span class="text-[11px] font-medium text-pink-500 bg-pink-500/5 dark:bg-pink-500/10 px-2 py-1 rounded-md w-fit mt-1">
+                            Treino focado
+                        </span>
+</div>
+</button>
+</div>
+</section>
+<section class="flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<h3 class="text-lg font-bold text-gray-900 dark:text-white">Seu Desempenho</h3>
+<button class="text-sm font-semibold text-primary">Ver mais</button>
+</div>
+<div class="grid grid-cols-[repeat(auto-fit,minmax(140px,1fr))] gap-3">
+<div class="rounded-2xl bg-white dark:bg-surface-dark p-4 shadow-sm border border-transparent dark:border-white/5">
+<p class="text-xs font-medium text-gray-500 dark:text-gray-400">Taxa de Acertos</p>
+<div class="mt-2 flex items-baseline gap-1">
+<span class="text-2xl font-bold text-green-500">72%</span>
+<span class="material-symbols-outlined text-xs text-green-500">trending_up</span>
+</div>
+<div class="mt-2 h-1.5 w-full rounded-full bg-gray-100 dark:bg-white/10">
+<div class="h-1.5 rounded-full bg-green-500" style="width: 72%"></div>
+</div>
+</div>
+<div class="rounded-2xl bg-white dark:bg-surface-dark p-4 shadow-sm border border-transparent dark:border-white/5">
+<p class="text-xs font-medium text-gray-500 dark:text-gray-400">Questões Hoje</p>
+<div class="mt-2 flex items-baseline gap-1">
+<span class="text-2xl font-bold text-primary">24</span>
+<span class="text-xs text-gray-400">/ 50</span>
+</div>
+<div class="mt-2 h-1.5 w-full rounded-full bg-gray-100 dark:bg-white/10">
+<div class="h-1.5 rounded-full bg-primary" style="width: 48%"></div>
+</div>
+</div>
+</div>
+</section>
+<div class="h-4"></div>
+</main>
+<nav class="fixed bottom-0 left-0 right-0 z-50 border-t border-gray-200 dark:border-white/5 bg-background-light dark:bg-[#130b1b] pb-safe pt-2">
+<div class="flex items-center justify-around px-2 pb-2">
+<button class="group flex flex-col items-center gap-1 p-2 text-primary">
+<div class="relative flex size-10 items-center justify-center rounded-xl bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">home</span>
+</div>
+<span class="text-[10px] font-bold">Início</span>
+</button>
+<button class="group flex flex-col items-center gap-1 p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
+<div class="flex size-10 items-center justify-center rounded-xl transition-colors group-hover:bg-gray-100 dark:group-hover:bg-white/5">
+<span class="material-symbols-outlined text-2xl">menu_book</span>
+</div>
+<span class="text-[10px] font-medium">Matérias</span>
+</button>
+<button class="group flex flex-col items-center gap-1 p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
+<div class="flex size-10 items-center justify-center rounded-xl transition-colors group-hover:bg-gray-100 dark:group-hover:bg-white/5">
+<span class="material-symbols-outlined text-2xl">leaderboard</span>
+</div>
+<span class="text-[10px] font-medium">Ranking</span>
+</button>
+<button class="group flex flex-col items-center gap-1 p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
+<div class="flex size-10 items-center justify-center rounded-xl transition-colors group-hover:bg-gray-100 dark:group-hover:bg-white/5">
+<span class="material-symbols-outlined text-2xl">person</span>
+</div>
+<span class="text-[10px] font-medium">Perfil</span>
+</button>
+</div>
+<div class="h-1 w-full bg-transparent pb-4"></div>
+</nav>
+</div>
+<div class="fixed inset-0 pointer-events-none z-[-1] opacity-[0.03] dark:opacity-[0.05]" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%239C92AC\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');">
+</div>
+
+</body></html>

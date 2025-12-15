@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Feedback Quiz UI</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+            extend: {
+                colors: {
+                    "primary": "#7f13ec",
+                    "background-light": "#f7f6f8",
+                    "background-dark": "#191022",
+                    "success": "#00E096", // Vibrant Green
+                    "error": "#FF3B30", // Vibrant Red
+                    "surface-dark": "#2a1f36", // Slightly lighter than bg-dark
+                },
+                fontFamily: {
+                    "display": ["Lexend", "sans-serif"]
+                },
+                borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "2xl": "2rem", "full": "9999px"},
+                boxShadow: {
+                    'glow-success': '0 0 40px -10px rgba(0, 224, 150, 0.4)',
+                    'glow-error': '0 0 40px -10px rgba(255, 59, 48, 0.3)',
+                    'glow-primary': '0 0 40px -10px rgba(127, 19, 236, 0.4)',
+                }
+            },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #191022; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2a1f36; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #7f13ec; 
+        }
+
+        /* Animation utilities */
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .animate-pop {
+            animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-white overflow-x-hidden antialiased">
+<!-- 
+        VIEW 1: SUCCESS STATE 
+        This section demonstrates the "Correct Answer" feedback design.
+    -->
+<div class="relative flex flex-col min-h-screen w-full max-w-md mx-auto bg-background-dark shadow-2xl border-x border-white/5 pb-24">
+<!-- Header -->
+<div class="flex items-center justify-between p-4 z-10">
+<button class="text-white/60 hover:text-white transition-colors p-2 rounded-full hover:bg-white/5">
+<span class="material-symbols-outlined text-[24px]">close</span>
+</button>
+<div class="flex items-center gap-2">
+<div class="h-1.5 w-16 bg-white/10 rounded-full overflow-hidden">
+<div class="h-full w-3/4 bg-primary rounded-full"></div>
+</div>
+<span class="text-xs font-medium text-white/40">5/10</span>
+</div>
+<button class="text-[#ad92c9] text-sm font-bold hover:text-white transition-colors">
+                Reportar
+            </button>
+</div>
+<!-- Success Hero Area -->
+<div class="relative flex flex-col items-center pt-4 pb-8 px-6">
+<!-- Background Glow Effect -->
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-64 bg-gradient-to-b from-success/20 to-transparent blur-3xl pointer-events-none"></div>
+<!-- Icon -->
+<div class="relative z-10 mb-4 animate-pop">
+<div class="flex items-center justify-center size-20 rounded-full bg-success text-background-dark shadow-glow-success">
+<span class="material-symbols-outlined text-[48px] font-bold">check</span>
+</div>
+<!-- Decor particles (simulated with absolute divs) -->
+<div class="absolute -top-2 -right-2 size-3 bg-yellow-400 rounded-full animate-bounce delay-75"></div>
+<div class="absolute top-10 -left-6 size-2 bg-primary rounded-full animate-pulse"></div>
+<div class="absolute -bottom-1 right-10 size-2.5 bg-blue-400 rounded-full"></div>
+</div>
+<!-- Headline -->
+<h1 class="text-3xl font-extrabold text-success tracking-tight text-center mb-2 drop-shadow-sm">Resposta Correta!</h1>
+<!-- Gamification Pill -->
+<div class="inline-flex items-center gap-3 px-4 py-1.5 bg-white/5 border border-white/10 rounded-full backdrop-blur-sm">
+<span class="flex items-center gap-1 text-yellow-400 font-bold text-sm">
+<span class="material-symbols-outlined text-[18px] fill-1">bolt</span>
+                    +10 XP
+                </span>
+<div class="w-px h-4 bg-white/10"></div>
+<span class="flex items-center gap-1 text-orange-400 font-bold text-sm">
+<span class="material-symbols-outlined text-[16px]">local_fire_department</span>
+                    5 dias seguidos
+                </span>
+</div>
+</div>
+<!-- Content Area -->
+<div class="px-4 space-y-6">
+<!-- Question Review Card -->
+<div class="bg-surface-dark rounded-2xl p-5 border border-white/5">
+<p class="text-white/60 text-xs font-bold uppercase tracking-wider mb-2">Questão 5</p>
+<p class="text-lg font-medium leading-relaxed mb-6">Qual é a fórmula da velocidade média na física clássica?</p>
+<div class="space-y-3">
+<!-- Correct Option (Selected) -->
+<div class="flex items-center justify-between p-4 rounded-xl bg-success/10 border-2 border-success relative overflow-hidden group">
+<div class="absolute inset-0 bg-success/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex items-center gap-4 z-10">
+<div class="size-8 rounded-full bg-success flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-background-dark text-lg font-bold">check</span>
+</div>
+<span class="text-white font-medium">Vm = ΔS / Δt</span>
+</div>
+</div>
+<!-- Other Option (Neutral/Hidden context) -->
+<div class="flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/5 opacity-50">
+<div class="flex items-center gap-4">
+<div class="size-8 rounded-full border-2 border-white/20 flex items-center justify-center shrink-0 text-white/40 font-bold text-sm">B</div>
+<span class="text-white/60">Vm = m * a</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Explanation Section -->
+<div class="bg-primary/5 rounded-2xl p-5 border border-primary/20">
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-primary text-xl">lightbulb</span>
+<h3 class="text-primary font-bold text-base">Explicação</h3>
+</div>
+<p class="text-white/80 text-sm leading-relaxed">
+                    A velocidade média é a razão entre o deslocamento (ΔS) e o intervalo de tempo (Δt) necessário para percorrer esse deslocamento. É uma grandeza fundamental da cinemática.
+                </p>
+</div>
+</div>
+<!-- Sticky Footer Action -->
+<div class="fixed bottom-0 w-full max-w-md bg-background-dark/90 backdrop-blur-md p-4 border-t border-white/5">
+<button class="w-full bg-primary hover:bg-primary/90 active:scale-[0.98] transition-all text-white font-bold text-lg py-4 rounded-xl shadow-glow-primary flex items-center justify-center gap-2">
+                Próxima Questão
+                <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- 
+        SPACER FOR DEMONSTRATION 
+        This just separates the two examples in the output file.
+    -->
+<div class="w-full max-w-md mx-auto py-12 text-center">
+<p class="text-white/40 text-sm font-mono">--- DEMONSTRAÇÃO: ESTADO DE ERRO ---</p>
+<p class="text-white/20 text-xs mt-1">Role para baixo para ver a variante "Erro"</p>
+</div>
+<!-- 
+        VIEW 2: ERROR STATE 
+        This section demonstrates the "Incorrect Answer" feedback design.
+    -->
+<div class="relative flex flex-col min-h-screen w-full max-w-md mx-auto bg-background-dark shadow-2xl border-x border-white/5 pb-24">
+<!-- Header -->
+<div class="flex items-center justify-between p-4 z-10">
+<button class="text-white/60 hover:text-white transition-colors p-2 rounded-full hover:bg-white/5">
+<span class="material-symbols-outlined text-[24px]">close</span>
+</button>
+<div class="flex items-center gap-2">
+<div class="h-1.5 w-16 bg-white/10 rounded-full overflow-hidden">
+<div class="h-full w-3/4 bg-primary rounded-full"></div>
+</div>
+</div>
+<button class="text-[#ad92c9] text-sm font-bold hover:text-white transition-colors">
+                Reportar
+            </button>
+</div>
+<!-- Error Hero Area -->
+<div class="relative flex flex-col items-center pt-4 pb-8 px-6">
+<!-- Background Glow Effect (Red) -->
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-64 bg-gradient-to-b from-error/20 to-transparent blur-3xl pointer-events-none"></div>
+<!-- Icon -->
+<div class="relative z-10 mb-4 animate-pop">
+<div class="flex items-center justify-center size-20 rounded-full bg-error/10 border-2 border-error text-error shadow-glow-error">
+<span class="material-symbols-outlined text-[40px] font-bold">close</span>
+</div>
+</div>
+<!-- Headline -->
+<h1 class="text-3xl font-extrabold text-error tracking-tight text-center mb-2">Ops, errou!</h1>
+<!-- Message -->
+<p class="text-white/60 text-center font-medium">Não desanime, vamos aprender com isso.</p>
+</div>
+<!-- Content Area -->
+<div class="px-4 space-y-6">
+<!-- Question Review Card with Image -->
+<div class="bg-surface-dark rounded-2xl overflow-hidden border border-white/5">
+<!-- Image Header for Question -->
+<div class="w-full h-40 bg-cover bg-center relative" data-alt="Abstract geometric 3D shapes representing structure" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDUafMGh2CtHPfHVQvmC35RuOyrFNeCEJve3V_AqR3oupzvaARwIPcC1Y9rrhw5l_kzd9b6a3mZtaoy9JsolTOFo1W6Y7AI84WECLsi7-LdIeIa3m31rvNCvZquakbreW8xuuM_WemQzSpckVla2EvdlQ6EByfNqR7nGeqr9TrZVwSyl8iRHWMH2gLMa9s9KBTcaF-mPJGwlqRiBdadZYY5iXvZOzu6L8Uvm1gXj59TKjnolbVpEueRyRCl7Ovc2OQyrqM4lrhWy4E')">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-dark to-transparent"></div>
+<div class="absolute bottom-3 left-4">
+<span class="bg-black/50 backdrop-blur-md px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider text-white/80 border border-white/10">Química</span>
+</div>
+</div>
+<div class="p-5 pt-2">
+<p class="text-lg font-medium leading-relaxed mb-6">Qual é a estrutura molecular representada na imagem?</p>
+<div class="space-y-3">
+<!-- Wrong Option (Selected by User) -->
+<div class="flex items-center justify-between p-4 rounded-xl bg-error/10 border border-error relative">
+<div class="flex items-center gap-4">
+<div class="size-8 rounded-full bg-error flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-white text-lg font-bold">close</span>
+</div>
+<div class="flex flex-col">
+<span class="text-white font-medium line-through opacity-70">Metano (CH4)</span>
+<span class="text-error text-xs font-bold mt-0.5">Sua resposta</span>
+</div>
+</div>
+</div>
+<!-- Correct Option (Highlighted) -->
+<div class="flex items-center justify-between p-4 rounded-xl bg-success/10 border border-success relative shadow-[0_0_15px_rgba(0,224,150,0.1)]">
+<div class="flex items-center gap-4">
+<div class="size-8 rounded-full bg-success flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-background-dark text-lg font-bold">check</span>
+</div>
+<div class="flex flex-col">
+<span class="text-white font-bold">Benzeno (C6H6)</span>
+<span class="text-success text-xs font-bold mt-0.5">Resposta correta</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Explanation Section -->
+<div class="bg-white/5 rounded-2xl p-5 border border-white/5">
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-[#ad92c9] text-xl">school</span>
+<h3 class="text-[#ad92c9] font-bold text-base">Por que é Benzeno?</h3>
+</div>
+<p class="text-white/80 text-sm leading-relaxed">
+                    A imagem mostra um anel hexagonal com ligações duplas alternadas (ressonância), característica fundamental dos compostos aromáticos como o Benzeno. O Metano possui geometria tetraédrica.
+                </p>
+</div>
+</div>
+<!-- Sticky Footer Action -->
+<div class="p-4 mt-4 pb-8">
+<button class="w-full bg-white/10 hover:bg-white/20 active:scale-[0.98] transition-all text-white font-bold text-lg py-4 rounded-xl border border-white/5 flex items-center justify-center gap-2">
+                Continuar
+                <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</body></html>

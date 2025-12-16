@@ -1,11 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { permissionGuard } from '@abp/ng.core';
 import { SubjectListComponent } from './subjects/subject-list/subject-list';
 import { SubjectFormComponent } from './subjects/subject-form/subject-form';
 import { QuestionListComponent } from './questions/question-list/question-list.component';
 import { QuestionFormComponent } from './questions/question-form/question-form.component';
 import { ClassListComponent } from './classes/class-list/class-list';
 import { ClassFormComponent } from './classes/class-form/class-form';
+import { StudentListComponent } from './students/student-list/student-list.component';
+import { SchoolListComponent } from './schools/school-list/school-list.component';
+import { SchoolFormComponent } from './schools/school-form/school-form.component';
+import { StudentFormComponent } from './students/student-form/student-form.component';
 
 const routes: Routes = [
   {
@@ -32,11 +37,27 @@ const routes: Routes = [
       { path: 'edit/:id', component: ClassFormComponent }
     ]
   },
-  /*
+  {
+    path: 'schools',
+    children: [
+      { path: '', component: SchoolListComponent },
+      { path: 'new', component: SchoolFormComponent },
+      { path: 'edit/:id', component: SchoolFormComponent }
+    ],
+    canActivate: [permissionGuard],
+    data: {
+      requiredPolicy: 'EstudaZen.Schools',
+    },
+  },
   {
     path: 'students',
-    loadChildren: () => import('./students/students.module').then(m => m.StudentsModule)
+    children: [
+      { path: '', component: StudentListComponent },
+      { path: 'new', component: StudentFormComponent },
+      { path: 'edit/:id', component: StudentFormComponent }
+    ]
   },
+  /*
   {
     path: 'exams',
     loadChildren: () => import('./exams/exams.module').then(m => m.ExamsModule)

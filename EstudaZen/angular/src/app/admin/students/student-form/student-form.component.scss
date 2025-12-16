@@ -1,0 +1,195 @@
+@import '../../../../styles/zen-design-tokens';
+
+.admin-container {
+    padding: 2rem;
+    max-width: 800px;
+    /* Smaller width for forms */
+    margin: 0 auto;
+}
+
+.form-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+
+    h1 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: var(--zen-text-primary);
+        margin: 0;
+    }
+}
+
+.back-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: none;
+    border: none;
+    color: var(--zen-text-secondary);
+    font-size: 0.9rem;
+    cursor: pointer;
+    padding: 0;
+
+    &:hover {
+        color: var(--zen-primary);
+    }
+}
+
+.zen-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    padding: 2rem;
+    border: 1px solid var(--zen-border-color);
+}
+
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--zen-text-primary);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--zen-border-color);
+}
+
+.mt-4 {
+    margin-top: 2rem;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.span-2 {
+    grid-column: span 2;
+
+    @media (max-width: 768px) {
+        grid-column: span 1;
+    }
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.zen-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--zen-text-secondary);
+
+    .required {
+        color: #ef4444;
+    }
+}
+
+.zen-input,
+.zen-select {
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--zen-border-color);
+    font-size: 0.95rem;
+    outline: none;
+    transition: all 0.2s;
+    background-color: white;
+
+    &:focus {
+        border-color: var(--zen-primary);
+        box-shadow: 0 0 0 3px rgba(var(--zen-primary-rgb), 0.1);
+    }
+
+    &.error {
+        border-color: #ef4444;
+
+        &:focus {
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+        }
+    }
+
+    &:disabled {
+        background-color: #f5f5f5;
+        cursor: not-allowed;
+    }
+}
+
+.error-msg {
+    font-size: 0.8rem;
+    color: #ef4444;
+}
+
+.hint {
+    font-size: 0.8rem;
+    color: var(--zen-text-secondary);
+}
+
+.form-actions {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--zen-border-color);
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.zen-btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s;
+
+    &.zen-btn--primary {
+        background-color: var(--zen-primary);
+        color: white;
+
+        &:hover:not(:disabled) {
+            background-color: var(--zen-primary-dark);
+            transform: translateY(-1px);
+        }
+
+        &:disabled {
+            background-color: rgba(var(--zen-primary-rgb), 0.5);
+            cursor: not-allowed;
+        }
+    }
+
+    &.zen-btn--secondary {
+        background-color: transparent;
+        border: 1px solid var(--zen-border-color);
+        color: var(--zen-text-secondary);
+
+        &:hover:not(:disabled) {
+            background-color: #f9fafb;
+            color: var(--zen-text-primary);
+        }
+    }
+}
+
+.spinner-sm {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s ease-in-out infinite;
+    display: inline-block;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

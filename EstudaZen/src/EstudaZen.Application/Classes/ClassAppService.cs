@@ -9,6 +9,7 @@ using EstudaZen.Classes;
 
 namespace EstudaZen.Classes;
 
+[RemoteService(IsEnabled = true)]
 public class ClassAppService : ApplicationService, IClassAppService
 {
     private readonly IClassRepository _classRepository;

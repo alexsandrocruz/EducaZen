@@ -2,6 +2,13 @@
   "Culture": "en",
   "Texts": {
     "AppName": "EstudaZen",
+    "Permission:Students": "Student Management",
+    "Permission:Schools": "School Management",
+    "Menu:StartQuiz": "Start Quiz",
+    "Menu:Dashboard": "Dashboard",
+    "Menu:Students": "Students",
+    "Menu:Schools": "Schools",
+    "Menu:Classes": "Classes",
     "Menu:EstudaZen": "Book Store",
     "Menu:Books": "Books",
     "Actions": "Actions",

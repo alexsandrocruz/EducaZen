@@ -65,11 +65,20 @@ function configureRoutes() {
       layout: eLayoutType.application,
     },
     {
+      path: '/admin/schools',
+      name: 'Escolas',
+      parentName: 'Administração',
+      iconClass: 'fas fa-university',
+      order: 5,
+      layout: eLayoutType.application,
+      requiredPolicy: 'EstudaZen.Schools',
+    },
+    {
       path: '/admin/exams',
       name: 'Exames e Simulados',
       parentName: 'Administração',
       iconClass: 'fas fa-file-alt',
-      order: 5,
+      order: 6,
       layout: eLayoutType.application,
     },
   ]);

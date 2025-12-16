@@ -1,8 +1,11 @@
 import * as Books from './books';
+import * as Classes from './classes';
+import * as Exams from './exams';
 import * as Questions from './questions';
 import * as Quizzes from './quizzes';
+import * as Schools from './schools';
 import * as Students from './students';
 import * as Subjects from './subjects';
 export * from './question-difficulty.enum';
 export * from './quiz-status.enum';
-export { Books, Questions, Quizzes, Students, Subjects };
+export { Books, Classes, Exams, Questions, Quizzes, Schools, Students, Subjects };

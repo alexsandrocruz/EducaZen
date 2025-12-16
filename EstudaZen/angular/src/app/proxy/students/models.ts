@@ -1,10 +1,27 @@
-import type { EntityDto, PagedResultRequestDto } from '@abp/ng.core';
-import type { RankingScope } from './ranking-scope.enum';
 import type { StudentStatus } from './student-status.enum';
+import type { EntityDto, PagedAndSortedResultRequestDto, PagedResultRequestDto } from '@abp/ng.core';
+import type { RankingScope } from './ranking-scope.enum';
+
+export interface CreateUpdateStudentDto {
+  fullName: string;
+  email: string;
+  birthDate?: string;
+  cpf?: string;
+  gender?: string;
+  phone?: string;
+  classId?: string;
+  status?: StudentStatus;
+}
 
 export interface GetRankingDto extends PagedResultRequestDto {
   scope?: RankingScope;
   schoolId?: string;
+}
+
+export interface GetStudentListDto extends PagedAndSortedResultRequestDto {
+  filter?: string;
+  classId?: string;
+  status?: StudentStatus;
 }
 
 export interface RankingEntryDto {

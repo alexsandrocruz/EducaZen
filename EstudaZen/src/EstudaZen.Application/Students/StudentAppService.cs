@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Users;
+using Volo.Abp.Identity;
+using EstudaZen.Permissions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EstudaZen.Students;
 
@@ -13,15 +16,18 @@ public class StudentAppService : ApplicationService, IStudentAppService
     private readonly IStudentRepository _studentRepository;
     private readonly StudentMapper _studentMapper;
     private readonly ICurrentUser _currentUser;
+    private readonly IdentityUserManager _userManager;
 
     public StudentAppService(
         IStudentRepository studentRepository,
         StudentMapper studentMapper,
-        ICurrentUser currentUser)
+        ICurrentUser currentUser,
+        IdentityUserManager userManager)
     {
         _studentRepository = studentRepository;
         _studentMapper = studentMapper;
         _currentUser = currentUser;
+        _userManager = userManager;
     }
 
     public async Task<StudentDto> GetMyProfileAsync()
@@ -79,5 +85,118 @@ public class StudentAppService : ApplicationService, IStudentAppService
             IsCurrentUser = true,
             SchoolName = profile.SchoolName
         };
+    }
+
+
+    [Authorize(EstudaZenPermissions.Students.Default)]
+    public async Task<PagedResultDto<StudentDto>> GetListAsync(GetStudentListDto input)
+    {
+        var query = await _studentRepository.GetQueryableAsync();
+
+        if (!string.IsNullOrWhiteSpace(input.Filter))
+        {
+            var filter = input.Filter.ToLower();
+            query = query.Where(x => x.FullName.ToLower().Contains(filter) || x.Email.ToLower().Contains(filter));
+        }
+
+        if (input.ClassId.HasValue)
+        {
+            query = query.Where(x => x.ClassId == input.ClassId.Value);
+        }
+
+        if (input.Status.HasValue)
+        {
+            query = query.Where(x => x.Status == input.Status.Value);
+        }
+
+        var totalCount = query.Count();
+
+        query = query.OrderBy(x => x.FullName)
+                     .Skip(input.SkipCount)
+                     .Take(input.MaxResultCount);
+
+        var students = query.ToList();
+        var dtos = students.Select(x => _studentMapper.Map(x)).ToList();
+
+        return new PagedResultDto<StudentDto>(totalCount, dtos);
+    }
+
+    [Authorize(EstudaZenPermissions.Students.Default)]
+    public async Task<StudentDto> GetAsync(Guid id)
+    {
+        var student = await _studentRepository.GetAsync(id);
+        return _studentMapper.Map(student);
+    }
+
+    [Authorize(EstudaZenPermissions.Students.Create)]
+    public async Task<StudentDto> CreateAsync(CreateUpdateStudentDto input)
+    {
+        // 1. Check if user already exists
+        var existingUser = await _userManager.FindByEmailAsync(input.Email);
+        if (existingUser != null)
+        {
+             // Check if already linked
+             var existingStudent = await _studentRepository.FindByUserIdAsync(existingUser.Id);
+             if (existingStudent != null)
+             {
+                 throw new Volo.Abp.BusinessException("EstudaZen:StudentAlreadyExists").WithData("email", input.Email);
+             }
+             
+             // If user exists but no student profile, we can link it.
+             // But for manual creation, we usually expect to create a NEW user.
+        }
+
+        // 2. Create IdentityUser
+        // Default password for manually created students (should be changed later or emailed)
+        var defaultPassword = "Password123!"; 
+        var user = new IdentityUser(GuidGenerator.Create(), input.Email, input.Email, CurrentTenant.Id);
+        user.Name = input.FullName;
+        
+        var result = await _userManager.CreateAsync(user, defaultPassword);
+        if (!result.Succeeded)
+        {
+            throw new Volo.Abp.BusinessException("EstudaZen:UserCreationFailure")
+                .WithData("errors", string.Join(", ", result.Errors.Select(e => e.Description)));
+        }
+
+        // 3. Create Student
+        var student = new Student(GuidGenerator.Create(), user.Id, CurrentTenant.Id);
+        student.FullName = input.FullName;
+        student.Email = input.Email;
+        student.BirthDate = input.BirthDate;
+        student.Phone = input.Phone;
+        student.Gender = input.Gender;
+        student.CPF = input.CPF;
+        student.ClassId = input.ClassId;
+        student.Status = input.Status;
+        
+        await _studentRepository.InsertAsync(student);
+        
+        return _studentMapper.Map(student);
+    }
+    
+    [Authorize(EstudaZenPermissions.Students.Edit)]
+    public async Task<StudentDto> UpdateAsync(Guid id, CreateUpdateStudentDto input)
+    {
+        var student = await _studentRepository.GetAsync(id);
+        
+        // Update fields
+        student.FullName = input.FullName;
+        student.Email = input.Email;
+        student.BirthDate = input.BirthDate;
+        student.Phone = input.Phone;
+        student.Gender = input.Gender;
+        student.CPF = input.CPF;
+        student.ClassId = input.ClassId;
+        student.Status = input.Status;
+
+        await _studentRepository.UpdateAsync(student);
+        return _studentMapper.Map(student);
+    }
+
+    [Authorize(EstudaZenPermissions.Students.Delete)]
+    public async Task DeleteAsync(Guid id)
+    {
+        await _studentRepository.DeleteAsync(id);
     }
 }

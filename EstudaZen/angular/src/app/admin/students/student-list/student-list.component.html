@@ -1,0 +1,77 @@
+<div class="admin-container">
+    <div class="header-actions">
+        <h1>Alunos</h1>
+        <button *abpPermission="'EstudaZen.Students.Create'" class="zen-btn zen-btn--primary" (click)="createStudent()">
+            <span class="material-icons-round">add</span>
+            Novo Aluno
+        </button>
+    </div>
+
+    <div class="zen-card">
+        <!-- Filters -->
+        <div class="table-filters">
+            <div class="search-box">
+                <span class="material-icons-round">search</span>
+                <input type="text" placeholder="Buscar alunos..." [(ngModel)]="searchTerm"
+                    (keyup.enter)="loadStudents()">
+            </div>
+        </div>
+
+        <!-- Table -->
+        <div class="table-responsive">
+            <table class="zen-table">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Email / CPF</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="loading">
+                        <td colspan="4" class="text-center py-4">Carregando...</td>
+                    </tr>
+                    <tr *ngIf="!loading && students.items.length === 0">
+                        <td colspan="4" class="text-center py-4">Nenhum aluno encontrado.</td>
+                    </tr>
+                    <tr *ngFor="let student of students.items">
+                        <td>
+                            <div class="student-info">
+                                <div class="avatar"
+                                    [style.background-image]="'url(' + (student.photoUrl || 'assets/images/default-avatar.png') + ')'">
+                                </div>
+                                <span class="name">{{ student.fullName }}</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="contact-info">
+                                <div>{{ student.email }}</div>
+                                <small>{{ student.cpf || '-' }}</small>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="status-badge" [ngClass]="getStatusClass(student.status!)">{{
+                                getStatusLabel(student.status!) }}</span>
+                        </td>
+                        <td class="actions-cell">
+                            <button *abpPermission="'EstudaZen.Students.Edit'" class="icon-btn"
+                                (click)="editStudent(student.id)">
+                                <span class="material-icons-round">edit</span>
+                            </button>
+                            <button *abpPermission="'EstudaZen.Students.Delete'" class="icon-btn delete"
+                                (click)="deleteStudent(student)">
+                                <span class="material-icons-round">delete</span>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination (Simplified) -->
+        <div class="pagination-footer" *ngIf="students.totalCount > 0">
+            <span>Total: {{ students.totalCount }} alunos</span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,78 @@
+<div class="admin-container">
+    <div class="admin-header">
+        <div>
+            <h1 class="admin-title">Escolas</h1>
+            <p class="admin-subtitle">Gerencie as escolas cadastradas</p>
+        </div>
+        <button class="zen-btn zen-btn--primary" (click)="createSchool()">
+            <span class="material-icons-round">add</span>
+            Nova Escola
+        </button>
+    </div>
+
+    <div class="admin-search">
+        <div class="zen-input-group">
+            <span class="material-icons-round input-icon">search</span>
+            <input class="zen-input zen-input--icon" type="text" placeholder="Buscar escolas..."
+                [(ngModel)]="searchTerm" (keyup.enter)="loadSchools()" />
+        </div>
+    </div>
+
+    <div *ngIf="loading" class="loading-state">
+        <div class="spinner"></div>
+        <p>Carregando escolas...</p>
+    </div>
+
+    <div *ngIf="!loading" class="data-table-container">
+        <table class="zen-table">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Código</th>
+                    <th>CNPJ</th>
+                    <th>Cidade</th>
+                    <th>UF</th>
+                    <th>Status</th>
+                    <th class="text-right">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let school of schools.items">
+                    <td style="font-weight: 500;">{{school.name}}</td>
+                    <td><span class="badge-code">{{school.code || '-'}}</span></td>
+                    <td>{{school.cnpj || '-'}}</td>
+                    <td>{{school.city || '-'}}</td>
+                    <td>{{school.state || '-'}}</td>
+                    <td>
+                        <span class="status-badge" [class.active]="school.isActive" [class.inactive]="!school.isActive">
+                            {{ school.isActive ? 'Ativa' : 'Inativa' }}
+                        </span>
+                    </td>
+                    <td class="text-right">
+                        <div class="action-buttons">
+                            <button class="zen-btn-icon zen-btn-icon--primary" (click)="editSchool(school.id!)"
+                                title="Editar">
+                                <span class="material-icons-round">edit</span>
+                            </button>
+                            <button class="zen-btn-icon zen-btn-icon--danger" (click)="deleteSchool(school)"
+                                title="Excluir">
+                                <span class="material-icons-round">delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <tr *ngIf="schools.totalCount === 0">
+                    <td colspan="7" class="empty-state">
+                        <div class="empty-state-content">
+                            <span class="material-icons-round empty-icon">business</span>
+                            <p>Nenhuma escola encontrada</p>
+                            <button class="zen-btn zen-btn--primary" (click)="createSchool()">
+                                Criar primeira escola
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

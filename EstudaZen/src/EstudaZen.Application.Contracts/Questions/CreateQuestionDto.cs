@@ -29,6 +29,11 @@ public class CreateQuestionDto
     [StringLength(500)]
     public string? Tags { get; set; }
 
+    public int? Year { get; set; }
+
+    [StringLength(200)]
+    public string? Source { get; set; }
+
     public bool IsPublished { get; set; } = true;
 
     [Required]

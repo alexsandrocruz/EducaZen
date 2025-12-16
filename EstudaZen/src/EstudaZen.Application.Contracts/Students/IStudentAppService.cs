@@ -24,4 +24,10 @@ public interface IStudentAppService : IApplicationService
     /// Get my position in ranking
     /// </summary>
     Task<RankingEntryDto> GetMyRankingAsync(RankingScope scope);
+
+    Task<PagedResultDto<StudentDto>> GetListAsync(GetStudentListDto input);
+    Task<StudentDto> GetAsync(Guid id);
+    Task<StudentDto> CreateAsync(CreateUpdateStudentDto input);
+    Task<StudentDto> UpdateAsync(Guid id, CreateUpdateStudentDto input);
+    Task DeleteAsync(Guid id);
 }

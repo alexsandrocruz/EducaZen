@@ -67,6 +67,8 @@ export class QuestionFormComponent implements OnInit {
             timeLimitSeconds: [60, [Validators.required, Validators.min(10)]],
             explanation: [''],
             tags: [''],
+            year: [null],
+            source: [''],
             isPublished: [true],
             answers: this.fb.array([])
         });
@@ -106,6 +108,8 @@ export class QuestionFormComponent implements OnInit {
                     timeLimitSeconds: question.timeLimitSeconds,
                     explanation: question.explanation,
                     tags: question.tags,
+                    year: (question as any).year || null,
+                    source: (question as any).source || '',
                     isPublished: question.isPublished
                 });
 
@@ -166,6 +170,8 @@ export class QuestionFormComponent implements OnInit {
             timeLimitSeconds: Number(formValue.timeLimitSeconds),
             explanation: formValue.explanation || null,
             tags: formValue.tags || null,
+            year: formValue.year ? Number(formValue.year) : null,
+            source: formValue.source || null,
             isPublished: formValue.isPublished
         };
 

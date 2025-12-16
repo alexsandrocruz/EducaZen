@@ -58,6 +58,16 @@ public class Question : FullAuditedAggregateRoot<Guid>, IMultiTenant
     public string? Tags { get; set; }
 
     /// <summary>
+    /// Year of the original exam (e.g., 2023 for ENEM 2023)
+    /// </summary>
+    public int? Year { get; set; }
+
+    /// <summary>
+    /// Source of the question (e.g., "ENEM 2023", "FUVEST 2024")
+    /// </summary>
+    public string? Source { get; set; }
+
+    /// <summary>
     /// Whether the question is published
     /// </summary>
     public bool IsPublished { get; set; } = true;

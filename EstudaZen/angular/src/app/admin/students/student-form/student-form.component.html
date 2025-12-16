@@ -1,0 +1,88 @@
+<div class="admin-container">
+    <div class="form-header">
+        <button class="back-link" (click)="goBack()">
+            <span class="material-icons-round">arrow_back</span>
+            Voltar
+        </button>
+        <h1>{{ isEditMode ? 'Editar Aluno' : 'Novo Aluno' }}</h1>
+    </div>
+
+    <div class="zen-card">
+        <form [formGroup]="form" (ngSubmit)="save()">
+
+            <!-- Seção 1: Dados Pessoais -->
+            <h3 class="section-title">Dados Pessoais</h3>
+            <div class="form-grid">
+                <div class="form-group span-2">
+                    <label class="zen-label">Nome Completo <span class="required">*</span></label>
+                    <input type="text" formControlName="fullName" class="zen-input" [class.error]="hasError('fullName')"
+                        placeholder="Nome do aluno">
+                    <span class="error-msg" *ngIf="hasError('fullName')">{{getError('fullName')}}</span>
+                </div>
+
+                <div class="form-group span-2">
+                    <label class="zen-label">Email <span class="required">*</span></label>
+                    <input type="email" formControlName="email" class="zen-input" [class.error]="hasError('email')"
+                        placeholder="email@exemplo.com">
+                    <span class="error-msg" *ngIf="hasError('email')">{{getError('email')}}</span>
+                </div>
+
+                <div class="form-group">
+                    <label class="zen-label">CPF</label>
+                    <input type="text" formControlName="cpf" class="zen-input" [class.error]="hasError('cpf')"
+                        placeholder="000.000.000-00">
+                    <span class="error-msg" *ngIf="hasError('cpf')">{{getError('cpf')}}</span>
+                </div>
+
+                <div class="form-group">
+                    <label class="zen-label">Data de Nascimento <span class="required">*</span></label>
+                    <input type="date" formControlName="birthDate" class="zen-input"
+                        [class.error]="hasError('birthDate')">
+                    <span class="error-msg" *ngIf="hasError('birthDate')">{{getError('birthDate')}}</span>
+                </div>
+
+                <div class="form-group">
+                    <label class="zen-label">Gênero</label>
+                    <select formControlName="gender" class="zen-select">
+                        <option *ngFor="let g of genderOptions" [ngValue]="g.value">{{g.label}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="zen-label">Telefone</label>
+                    <input type="text" formControlName="phone" class="zen-input" placeholder="(00) 00000-0000">
+                </div>
+            </div>
+
+            <!-- Seção 2: Acadêmico -->
+            <h3 class="section-title mt-4">Dados Acadêmicos</h3>
+            <div class="form-grid">
+                <div class="form-group span-2">
+                    <label class="zen-label">Turma</label>
+                    <select formControlName="classId" class="zen-select">
+                        <option [ngValue]="null">-- Selecione uma Turma --</option>
+                        <option *ngFor="let c of classes" [ngValue]="c.id">{{c.name}} ({{c.code}})</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="zen-label">Status <span class="required">*</span></label>
+                    <select formControlName="status" class="zen-select">
+                        <option *ngFor="let s of statusOptions" [ngValue]="s.value">{{s.label}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="button" class="zen-btn zen-btn--secondary" (click)="goBack()"
+                    [disabled]="saving">Cancelar</button>
+                <button type="submit" class="zen-btn zen-btn--primary" [disabled]="saving || form.invalid">
+                    <span class="material-icons-round" *ngIf="!saving">save</span>
+                    <span class="spinner-sm" *ngIf="saving"></span>
+                    {{ saving ? 'Salvando...' : 'Salvar Aluno' }}
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>

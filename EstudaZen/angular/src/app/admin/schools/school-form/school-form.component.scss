@@ -1,0 +1,233 @@
+@import '../../../../styles/zen-design-tokens';
+
+.admin-container {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.form-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+
+    h1 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: var(--zen-text-primary);
+        margin: 0;
+    }
+}
+
+.back-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: none;
+    border: none;
+    color: var(--zen-text-secondary);
+    font-size: 0.9rem;
+    cursor: pointer;
+    padding: 0;
+
+    &:hover {
+        color: var(--zen-primary);
+    }
+}
+
+.zen-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    padding: 2rem;
+    border: 1px solid var(--zen-border-color);
+}
+
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--zen-text-primary);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--zen-border-color);
+}
+
+.mt-4 {
+    margin-top: 2rem;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.span-2 {
+    grid-column: span 2;
+
+    @media (max-width: 768px) {
+        grid-column: span 1;
+    }
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.zen-label {
+    display: block;
+    font-weight: $zen-font-semibold;
+    color: $zen-text-primary;
+    margin-bottom: $zen-space-2;
+    font-size: $zen-text-sm;
+
+    .required {
+        color: $zen-error;
+    }
+}
+
+.zen-input,
+.zen-select {
+    width: 100%;
+    padding: $zen-space-4 $zen-space-5;
+    border-radius: $zen-radius-lg;
+    border: 2px solid transparent;
+    background: $zen-input-light;
+    font-size: $zen-text-base;
+    font-weight: $zen-font-semibold;
+    color: $zen-text-primary;
+    transition: all $zen-transition-base;
+
+    &::placeholder {
+        color: $zen-text-muted;
+        font-weight: $zen-font-normal;
+    }
+
+    &:focus {
+        outline: none;
+        border-color: $zen-primary;
+        box-shadow: 0 0 0 3px rgba($zen-primary, 0.2);
+        background: white;
+    }
+
+    &.error {
+        border-color: $zen-error;
+        background: rgba($zen-error, 0.05);
+
+        &:focus {
+            box-shadow: 0 0 0 3px rgba($zen-error, 0.1);
+        }
+    }
+
+    &:disabled {
+        background: darken($zen-input-light, 5%);
+        cursor: not-allowed;
+        opacity: 0.7;
+    }
+}
+
+.error-msg {
+    font-size: $zen-text-xs;
+    color: $zen-error;
+    margin-top: $zen-space-1;
+}
+
+.hint {
+    font-size: $zen-text-xs;
+    color: $zen-text-secondary;
+}
+
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+
+    input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        margin-right: 0.75rem;
+        accent-color: var(--zen-primary);
+    }
+
+    .label-text {
+        font-size: 0.95rem;
+        color: var(--zen-text-primary);
+    }
+}
+
+.form-actions {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--zen-border-color);
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.zen-btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s;
+
+    &.zen-btn--primary {
+        background-color: var(--zen-primary);
+        color: white;
+
+        &:hover:not(:disabled) {
+            background-color: var(--zen-primary-dark);
+            transform: translateY(-1px);
+        }
+
+        &:disabled {
+            background-color: rgba(var(--zen-primary-rgb), 0.5);
+            cursor: not-allowed;
+        }
+    }
+
+    &.zen-btn--secondary {
+        background-color: transparent;
+        border: 1px solid var(--zen-border-color);
+        color: var(--zen-text-secondary);
+
+        &:hover:not(:disabled) {
+            background-color: #f9fafb;
+            color: var(--zen-text-primary);
+        }
+    }
+}
+
+.spinner-sm {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s ease-in-out infinite;
+    display: inline-block;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

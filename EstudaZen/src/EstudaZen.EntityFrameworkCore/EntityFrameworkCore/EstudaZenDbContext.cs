@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using EstudaZen.Books;
+using EstudaZen.Classes;
+using EstudaZen.Exams;
 using EstudaZen.Questions;
 using EstudaZen.Quizzes;
 using EstudaZen.Schools;
@@ -50,6 +52,13 @@ public class EstudaZenDbContext :
     public DbSet<SimuladoQuestion> SimuladoQuestions { get; set; }
     public DbSet<Plan> Plans { get; set; }
     public DbSet<Subscription> Subscriptions { get; set; }
+    
+    // NEW P0 Entities
+    public DbSet<Class> Classes { get; set; }
+    public DbSet<Exam> Exams { get; set; }
+    public DbSet<ExamQuestion> ExamQuestions { get; set; }
+    public DbSet<ExamSession> ExamSessions { get; set; }
+    public DbSet<ExamAnswer> ExamAnswers { get; set; }
 
     #endregion
 
@@ -220,6 +229,55 @@ public class EstudaZenDbContext :
             b.Property(x => x.ExternalSubscriptionId).HasMaxLength(200);
             b.HasOne(x => x.Plan).WithMany().HasForeignKey(x => x.PlanId).OnDelete(DeleteBehavior.Restrict);
             b.HasIndex(x => new { x.TenantId, x.Status });
+        });
+
+        // Class
+        builder.Entity<Class>(b =>
+        {
+            b.ToTable(EstudaZenConsts.DbTablePrefix + "Classes", EstudaZenConsts.DbSchema);
+            b.ConfigureByConvention();
+            b.Property(x => x.Name).IsRequired().HasMaxLength(100);
+            b.Property(x => x.Code).IsRequired().HasMaxLength(50);
+            b.HasIndex(x => new { x.SchoolId, x.Code }).IsUnique();
+            b.HasIndex(x => new { x.SchoolYear, x.IsActive });
+        });
+
+        // Exam
+        builder.Entity<Exam>(b =>
+        {
+            b.ToTable(EstudaZenConsts.DbTablePrefix + "Exams", EstudaZenConsts.DbSchema);
+            b.ConfigureByConvention();
+            b.Property(x => x.Title).IsRequired().HasMaxLength(200);
+            b.Property(x => x.Description).HasMaxLength(1000);
+            b.HasMany(x => x.Questions).WithOne().HasForeignKey(x => x.ExamId).OnDelete(DeleteBehavior.Cascade);
+            b.HasIndex(x => new { x.TenantId, x.IsPublished });
+            b.HasIndex(x => new { x.AvailableFrom, x.AvailableUntil });
+        });
+
+        // ExamQuestion
+        builder.Entity<ExamQuestion>(b =>
+        {
+            b.ToTable(EstudaZenConsts.DbTablePrefix + "ExamQuestions", EstudaZenConsts.DbSchema);
+            b.ConfigureByConvention();
+            b.HasIndex(x => new { x.ExamId, x.Order }).IsUnique();
+        });
+
+        // ExamSession
+        builder.Entity<ExamSession>(b =>
+        {
+            b.ToTable(EstudaZenConsts.DbTablePrefix + "ExamSessions", EstudaZenConsts.DbSchema);
+            b.ConfigureByConvention();
+            b.HasMany(x => x.Answers).WithOne().HasForeignKey(x => x.ExamSessionId).OnDelete(DeleteBehavior.Cascade);
+            b.HasIndex(x => new { x.StudentId, x.ExamId, x.Status });
+            b.HasIndex(x => x.StartedAt).IsDescending();
+        });
+
+        // ExamAnswer
+        builder.Entity<ExamAnswer>(b =>
+        {
+            b.ToTable(EstudaZenConsts.DbTablePrefix + "ExamAnswers", EstudaZenConsts.DbSchema);
+            b.ConfigureByConvention();
+            b.HasIndex(x => new { x.ExamSessionId, x.QuestionId }).IsUnique();
         });
     }
 }

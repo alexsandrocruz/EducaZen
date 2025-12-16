@@ -76,6 +76,330 @@ namespace EstudaZen.Migrations
                     b.ToTable("AppBooks", (string)null);
                 });
 
+            modelBuilder.Entity("EstudaZen.Classes.Class", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("character varying(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<string>("ExtraProperties")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<int>("GradeLevel")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<int?>("MaxStudents")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<Guid>("SchoolId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("SchoolYear")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Shift")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid?>("TenantId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("TenantId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SchoolId", "Code")
+                        .IsUnique();
+
+                    b.HasIndex("SchoolYear", "IsActive");
+
+                    b.ToTable("AppClasses", (string)null);
+                });
+
+            modelBuilder.Entity("EstudaZen.Exams.Exam", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("AvailableFrom")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime?>("AvailableUntil")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("character varying(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)");
+
+                    b.Property<int?>("Difficulty")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("DurationMinutes")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("ExtraProperties")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<bool>("IsPublished")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<DateTime?>("PublishedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<bool>("RandomizeOptions")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("RandomizeQuestions")
+                        .HasColumnType("boolean");
+
+                    b.Property<Guid?>("SchoolId")
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("ShowCorrectAnswers")
+                        .HasColumnType("boolean");
+
+                    b.Property<Guid?>("TenantId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("TenantId");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<decimal>("TotalPoints")
+                        .HasColumnType("numeric");
+
+                    b.Property<int>("TotalQuestions")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AvailableFrom", "AvailableUntil");
+
+                    b.HasIndex("TenantId", "IsPublished");
+
+                    b.ToTable("AppExams", (string)null);
+                });
+
+            modelBuilder.Entity("EstudaZen.Exams.ExamAnswer", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("AnsweredAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<Guid>("ExamSessionId")
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("IsCorrect")
+                        .HasColumnType("boolean");
+
+                    b.Property<Guid>("QuestionId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("SelectedAnswerId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("TimeSpentSeconds")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExamSessionId", "QuestionId")
+                        .IsUnique();
+
+                    b.ToTable("AppExamAnswers", (string)null);
+                });
+
+            modelBuilder.Entity("EstudaZen.Exams.ExamQuestion", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ExamId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("integer");
+
+                    b.Property<decimal>("Points")
+                        .HasColumnType("numeric");
+
+                    b.Property<Guid>("QuestionId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExamId", "Order")
+                        .IsUnique();
+
+                    b.ToTable("AppExamQuestions", (string)null);
+                });
+
+            modelBuilder.Entity("EstudaZen.Exams.ExamSession", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("character varying(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<int>("CorrectAnswers")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid>("ExamId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("ExtraProperties")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<DateTime?>("FinishedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<decimal>("MaxScore")
+                        .HasColumnType("numeric");
+
+                    b.Property<decimal?>("PercentageScore")
+                        .HasColumnType("numeric");
+
+                    b.Property<decimal?>("Score")
+                        .HasColumnType("numeric");
+
+                    b.Property<int>("SkippedAnswers")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("StartedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("StudentId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int?>("TimeSpentMinutes")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("WrongAnswers")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StartedAt")
+                        .IsDescending();
+
+                    b.HasIndex("StudentId", "ExamId", "Status");
+
+                    b.ToTable("AppExamSessions", (string)null);
+                });
+
             modelBuilder.Entity("EstudaZen.Questions.Question", b =>
                 {
                     b.Property<Guid>("Id")
@@ -145,6 +469,9 @@ namespace EstudaZen.Migrations
                     b.Property<int>("Points")
                         .HasColumnType("integer");
 
+                    b.Property<string>("Source")
+                        .HasColumnType("text");
+
                     b.Property<Guid>("SubjectId")
                         .HasColumnType("uuid");
 
@@ -157,6 +484,9 @@ namespace EstudaZen.Migrations
                         .HasColumnName("TenantId");
 
                     b.Property<int>("TimeLimitSeconds")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("Year")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
@@ -333,6 +663,12 @@ namespace EstudaZen.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("character varying(500)");
 
+                    b.Property<string>("CNPJ")
+                        .HasColumnType("text");
+
+                    b.Property<string>("City")
+                        .HasColumnType("text");
+
                     b.Property<string>("Code")
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
@@ -359,6 +695,9 @@ namespace EstudaZen.Migrations
                     b.Property<DateTime?>("DeletionTime")
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("DeletionTime");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("text");
 
                     b.Property<string>("ExtraProperties")
                         .IsRequired()
@@ -387,9 +726,18 @@ namespace EstudaZen.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)");
 
+                    b.Property<string>("Phone")
+                        .HasColumnType("text");
+
+                    b.Property<string>("State")
+                        .HasColumnType("text");
+
                     b.Property<Guid?>("TenantId")
                         .HasColumnType("uuid")
                         .HasColumnName("TenantId");
+
+                    b.Property<string>("ZipCode")
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -509,6 +857,15 @@ namespace EstudaZen.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
 
+                    b.Property<DateTime?>("BirthDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("CPF")
+                        .HasColumnType("text");
+
+                    b.Property<Guid?>("ClassId")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .IsRequired()
@@ -538,6 +895,9 @@ namespace EstudaZen.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("DeletionTime");
 
+                    b.Property<string>("Email")
+                        .HasColumnType("text");
+
                     b.Property<int?>("EnemScoreCienciasHumanas")
                         .HasColumnType("integer");
 
@@ -553,10 +913,22 @@ namespace EstudaZen.Migrations
                     b.Property<int?>("EnemScoreRedacao")
                         .HasColumnType("integer");
 
+                    b.Property<DateTime?>("EnrollmentDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("EnrollmentNumber")
+                        .HasColumnType("text");
+
                     b.Property<string>("ExtraProperties")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("ExtraProperties");
+
+                    b.Property<string>("FullName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("text");
 
                     b.Property<int>("HighestStreak")
                         .HasColumnType("integer");
@@ -578,8 +950,17 @@ namespace EstudaZen.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("LastModifierId");
 
+                    b.Property<string>("Phone")
+                        .HasColumnType("text");
+
+                    b.Property<string>("PhotoUrl")
+                        .HasColumnType("text");
+
                     b.Property<Guid?>("SchoolId")
                         .HasColumnType("uuid");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
 
                     b.Property<Guid?>("TenantId")
                         .HasColumnType("uuid")
@@ -2715,6 +3096,24 @@ namespace EstudaZen.Migrations
                     b.ToTable("AbpTenantConnectionStrings", (string)null);
                 });
 
+            modelBuilder.Entity("EstudaZen.Exams.ExamAnswer", b =>
+                {
+                    b.HasOne("EstudaZen.Exams.ExamSession", null)
+                        .WithMany("Answers")
+                        .HasForeignKey("ExamSessionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("EstudaZen.Exams.ExamQuestion", b =>
+                {
+                    b.HasOne("EstudaZen.Exams.Exam", null)
+                        .WithMany("Questions")
+                        .HasForeignKey("ExamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("EstudaZen.Questions.Question", b =>
                 {
                     b.HasOne("EstudaZen.Subjects.Subject", "Subject")
@@ -2923,6 +3322,16 @@ namespace EstudaZen.Migrations
                         .HasForeignKey("TenantId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("EstudaZen.Exams.Exam", b =>
+                {
+                    b.Navigation("Questions");
+                });
+
+            modelBuilder.Entity("EstudaZen.Exams.ExamSession", b =>
+                {
+                    b.Navigation("Answers");
                 });
 
             modelBuilder.Entity("EstudaZen.Questions.Question", b =>

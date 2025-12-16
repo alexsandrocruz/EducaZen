@@ -6,23 +6,72 @@
     padding: $zen-space-8 $zen-space-6;
 }
 
+.form-header {
+    display: flex;
+    align-items: center;
+    gap: $zen-space-4;
+    margin-bottom: $zen-space-6;
+}
+
+.back-link {
+    display: flex;
+    align-items: center;
+    gap: $zen-space-2;
+    background: none;
+    border: none;
+    color: $zen-text-secondary;
+    font-size: $zen-text-sm;
+    cursor: pointer;
+    padding: 0;
+    white-space: nowrap;
+
+    &:hover {
+        color: $zen-primary;
+    }
+}
+
+.header-info {
+    h1 {
+        font-size: $zen-text-2xl;
+        font-weight: $zen-font-extrabold;
+        color: $zen-text-primary;
+        margin: 0;
+    }
+
+    .school-name {
+        color: $zen-primary;
+        font-size: $zen-text-base;
+        font-weight: $zen-font-semibold;
+        margin: 0;
+    }
+}
+
 .admin-header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: $zen-space-8;
+    align-items: center;
+    margin-bottom: $zen-space-6;
 }
 
-.admin-title {
-    font-size: $zen-text-3xl;
-    font-weight: $zen-font-extrabold;
-    color: $zen-text-primary;
-    margin-bottom: $zen-space-2;
+.stats-info {
+    display: flex;
+    gap: $zen-space-4;
 }
 
-.admin-subtitle {
-    color: $zen-text-secondary;
-    font-size: $zen-text-base;
+.stats-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: $zen-space-2;
+    background: $zen-primary-light;
+    color: $zen-primary;
+    padding: $zen-space-2 $zen-space-4;
+    border-radius: $zen-radius-full;
+    font-weight: $zen-font-semibold;
+    font-size: $zen-text-sm;
+
+    .material-icons-round {
+        font-size: 18px;
+    }
 }
 
 .admin-search {
@@ -40,6 +89,26 @@
         transform: translateY(-50%);
         color: $zen-text-muted;
         pointer-events: none;
+    }
+}
+
+.zen-input {
+    width: 100%;
+    padding: $zen-space-4 $zen-space-5;
+    border-radius: $zen-radius-lg;
+    border: 2px solid transparent;
+    background: $zen-input-light;
+    font-size: $zen-text-base;
+    transition: all $zen-transition-base;
+
+    &--icon {
+        padding-left: 3rem;
+    }
+
+    &:focus {
+        outline: none;
+        border-color: $zen-primary;
+        background: white;
     }
 }
 
@@ -184,14 +253,28 @@
             color: white;
         }
     }
+}
 
-    &--secondary {
-        background: rgba($zen-text-secondary, 0.1);
-        color: $zen-text-secondary;
+.zen-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: $zen-space-2;
+    padding: $zen-space-4 $zen-space-6;
+    border-radius: $zen-radius-xl;
+    font-weight: $zen-font-bold;
+    font-size: $zen-text-base;
+    border: none;
+    cursor: pointer;
+    transition: all $zen-transition-base;
+
+    &--primary {
+        background: linear-gradient(135deg, $zen-primary 0%, $zen-primary-hover 100%);
+        color: white;
+        box-shadow: $zen-shadow-primary;
 
         &:hover {
-            background: $zen-primary;
-            color: white;
+            box-shadow: $zen-shadow-glow;
+            transform: translateY(-1px);
         }
     }
 }

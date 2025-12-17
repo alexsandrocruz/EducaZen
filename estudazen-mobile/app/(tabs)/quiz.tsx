@@ -26,8 +26,7 @@ export default function QuizScreen() {
     } = useQuizStore();
 
     useEffect(() => {
-        // TODO: Descomentar quando backend tiver endpoint de quiz
-        // loadQuizzes();
+        loadQuizzes();
     }, []);
 
     const loadQuizzes = async () => {

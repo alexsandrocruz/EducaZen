@@ -60,9 +60,8 @@ export default function LoginScreen() {
 
             await login(formData.email, formData.password);
 
-            // Sucesso - authStore vai atualizar isAuthenticated
-            Alert.alert('Sucesso!', 'Login realizado com sucesso!');
-            // TODO: Navegar para home screen quando estiver pronta
+            // Sucesso - redirecionar para home
+            router.replace('/(tabs)/home');
         } catch (error: any) {
             Alert.alert('Erro', error.message || 'Email ou senha incorretos');
         } finally {

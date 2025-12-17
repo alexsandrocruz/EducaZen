@@ -8,6 +8,9 @@ import { PagedResultDto } from '@abp/ng.core';
 import { ConfirmationService, Confirmation } from '@abp/ng.theme.shared';
 import { QuestionDifficulty } from '../../../proxy/question-difficulty.enum';
 
+import { SubjectService } from '../../../proxy/subjects/subject.service';
+import { SubjectDto } from '../../../proxy/subjects/models';
+
 @Component({
     selector: 'app-question-list',
     standalone: true,
@@ -17,6 +20,7 @@ import { QuestionDifficulty } from '../../../proxy/question-difficulty.enum';
 })
 export class QuestionListComponent implements OnInit {
     private questionService = inject(QuestionService);
+    private subjectService = inject(SubjectService);
     private router = inject(Router);
     private confirmation = inject(ConfirmationService);
 
@@ -24,20 +28,35 @@ export class QuestionListComponent implements OnInit {
     loading = true;
     searchTerm = '';
 
+    // Filters
+    filterSubjectId = '';
+    filterDifficulty = '';
+
+    subjects: SubjectDto[] = [];
+
     difficultyLabels = {
         [QuestionDifficulty.Easy]: 'Fácil',
         [QuestionDifficulty.Medium]: 'Médio',
-        [QuestionDifficulty.Hard]: 'Difícil'
+        [QuestionDifficulty.Hard]: 'Difícil',
+        [QuestionDifficulty.Challenge]: 'Desafio'
     };
 
     difficultyColors = {
         [QuestionDifficulty.Easy]: 'success',
         [QuestionDifficulty.Medium]: 'warning',
-        [QuestionDifficulty.Hard]: 'error'
+        [QuestionDifficulty.Hard]: 'error',
+        [QuestionDifficulty.Challenge]: 'primary'
     };
 
     ngOnInit() {
+        this.loadSubjects();
         this.loadQuestions();
+    }
+
+    loadSubjects() {
+        this.subjectService.getList({ maxResultCount: 100 }).subscribe({
+            next: (res) => this.subjects = res.items || []
+        });
     }
 
     loadQuestions() {
@@ -45,7 +64,9 @@ export class QuestionListComponent implements OnInit {
         this.questionService.getList({
             maxResultCount: 100,
             skipCount: 0,
-            searchTerm: this.searchTerm
+            searchTerm: this.searchTerm || undefined,
+            subjectId: this.filterSubjectId || undefined,
+            difficulty: this.filterDifficulty ? parseInt(this.filterDifficulty) : undefined
         }).subscribe({
             next: (res) => {
                 this.questions = res;

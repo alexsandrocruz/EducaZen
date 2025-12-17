@@ -13,10 +13,25 @@
 
     <!-- Search & Filters -->
     <div class="admin-search">
-        <div class="zen-input-group">
-            <span class="material-icons-round input-icon">search</span>
-            <input class="zen-input zen-input--icon" type="text" placeholder="Buscar por enunciado..."
-                [(ngModel)]="searchTerm" (keyup.enter)="loadQuestions()" />
+        <div class="filters-row">
+            <div class="zen-input-group search-group">
+                <span class="material-icons-round input-icon">search</span>
+                <input class="zen-input zen-input--icon" type="text" placeholder="Buscar por enunciado..."
+                    [(ngModel)]="searchTerm" (keyup.enter)="loadQuestions()" />
+            </div>
+
+            <select [(ngModel)]="filterSubjectId" (change)="loadQuestions()" class="zen-select">
+                <option value="">Todas as Matérias</option>
+                <option *ngFor="let s of subjects" [value]="s.id">{{s.name}}</option>
+            </select>
+
+            <select [(ngModel)]="filterDifficulty" (change)="loadQuestions()" class="zen-select">
+                <option value="">Qualquer Dificuldade</option>
+                <option value="0">Fácil</option>
+                <option value="1">Médio</option>
+                <option value="2">Difícil</option>
+                <option value="3">Desafio</option>
+            </select>
         </div>
     </div>
 
@@ -34,6 +49,8 @@
                     <th>Enunciado</th>
                     <th>Matéria</th>
                     <th>Dificuldade</th>
+                    <th>Uso</th>
+                    <th>Último Uso</th>
                     <th>Status</th>
                     <th class="text-right">Ações</th>
                 </tr>
@@ -57,6 +74,14 @@
                         </span>
                     </td>
                     <td>
+                        <span class="usage-count">{{ question.usageCount || 0 }}x</span>
+                    </td>
+                    <td>
+                        <span class="last-used">
+                            {{ question.lastUsedAt ? (question.lastUsedAt | date:'shortDate') : '-' }}
+                        </span>
+                    </td>
+                    <td>
                         <span class="status-indicator" [class.active]="question.isPublished">
                             {{ question.isPublished ? 'Publicada' : 'Rascunho' }}
                         </span>
@@ -75,7 +100,7 @@
                     </td>
                 </tr>
                 <tr *ngIf="questions.items.length === 0">
-                    <td colspan="5" class="empty-state">
+                    <td colspan="7" class="empty-state">
                         <div class="empty-state-content">
                             <span class="material-icons-round empty-icon">quiz</span>
                             <p>Nenhuma questão encontrada</p>

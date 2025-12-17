@@ -1,0 +1,98 @@
+<div class="admin-container">
+    <div class="admin-header">
+        <div>
+            <h1 class="admin-title">Simulados e Provas</h1>
+            <p class="admin-subtitle">Gerencie os simulados e avaliações</p>
+        </div>
+        <button class="zen-btn zen-btn--primary" (click)="createExam()">
+            <span class="material-icons-round">add</span>
+            Novo Simulado
+        </button>
+    </div>
+
+    <div class="admin-search">
+        <div class="zen-input-group">
+            <span class="material-icons-round input-icon">search</span>
+            <input class="zen-input zen-input--icon" type="text" placeholder="Buscar simulados..."
+                [(ngModel)]="searchTerm" (keyup.enter)="loadExams()" />
+        </div>
+    </div>
+
+    <div *ngIf="loading" class="loading-state">
+        <div class="spinner"></div>
+        <p>Carregando simulados...</p>
+    </div>
+
+    <div *ngIf="!loading" class="data-table-container">
+        <table class="zen-table">
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Tipo</th>
+                    <th>Duração</th>
+                    <th>Questões</th>
+                    <th>Pontuação</th>
+                    <th>Status</th>
+                    <th class="text-right">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let exam of exams.items">
+                    <td>
+                        <div class="exam-title">
+                            <strong>{{exam.title}}</strong>
+                            <small *ngIf="exam.description">{{exam.description | slice:0:50}}...</small>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="type-badge" [attr.data-type]="exam.type">
+                            {{getExamTypeLabel(exam.type)}}
+                        </span>
+                    </td>
+                    <td>{{formatDuration(exam.durationMinutes)}}</td>
+                    <td>{{exam.totalQuestions}} questões</td>
+                    <td>{{exam.totalPoints}} pts</td>
+                    <td>
+                        <span class="status-badge" [class.published]="exam.isPublished"
+                            [class.draft]="!exam.isPublished">
+                            {{ exam.isPublished ? 'Publicado' : 'Rascunho' }}
+                        </span>
+                    </td>
+                    <td class="text-right">
+                        <div class="action-buttons">
+                            <button class="zen-btn-icon zen-btn-icon--info" (click)="viewQuestions(exam.id!)"
+                                title="Ver Questões">
+                                <span class="material-icons-round">quiz</span>
+                            </button>
+                            <button class="zen-btn-icon zen-btn-icon--secondary" (click)="togglePublish(exam)"
+                                [title]="exam.isPublished ? 'Despublicar' : 'Publicar'">
+                                <span class="material-icons-round">
+                                    {{ exam.isPublished ? 'unpublished' : 'publish' }}
+                                </span>
+                            </button>
+                            <button class="zen-btn-icon zen-btn-icon--primary" (click)="editExam(exam.id!)"
+                                title="Editar">
+                                <span class="material-icons-round">edit</span>
+                            </button>
+                            <button class="zen-btn-icon zen-btn-icon--danger" (click)="deleteExam(exam)"
+                                title="Excluir">
+                                <span class="material-icons-round">delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <tr *ngIf="exams.totalCount === 0">
+                    <td colspan="7" class="empty-state">
+                        <div class="empty-state-content">
+                            <span class="material-icons-round empty-icon">quiz</span>
+                            <p>Nenhum simulado encontrado</p>
+                            <button class="zen-btn zen-btn--primary" (click)="createExam()">
+                                Criar primeiro simulado
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

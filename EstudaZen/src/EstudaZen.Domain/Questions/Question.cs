@@ -68,6 +68,16 @@ public class Question : FullAuditedAggregateRoot<Guid>, IMultiTenant
     public string? Source { get; set; }
 
     /// <summary>
+    /// Last time this question was used in an exam
+    /// </summary>
+    public DateTime? LastUsedAt { get; set; }
+
+    /// <summary>
+    /// Number of times this question was used in exams
+    /// </summary>
+    public int UsageCount { get; set; }
+
+    /// <summary>
     /// Whether the question is published
     /// </summary>
     public bool IsPublished { get; set; } = true;

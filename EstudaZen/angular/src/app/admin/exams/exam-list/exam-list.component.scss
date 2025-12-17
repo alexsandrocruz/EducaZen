@@ -11,41 +11,23 @@
     justify-content: space-between;
     align-items: flex-start;
     margin-bottom: $zen-space-8;
-
-    @media (max-width: $zen-screen-md) {
-        flex-direction: column;
-        gap: $zen-space-4;
-    }
 }
 
 .admin-title {
     font-size: $zen-text-3xl;
     font-weight: $zen-font-extrabold;
     color: $zen-text-primary;
-    margin-bottom: $zen-space-2;
+    margin: 0 0 $zen-space-2 0;
 }
 
 .admin-subtitle {
     color: $zen-text-secondary;
-    font-size: $zen-text-base;
+    margin: 0;
 }
 
 .admin-search {
-    margin-bottom: 2rem;
-
-    .filters-row {
-        display: grid;
-        grid-template-columns: 2fr 1fr 1fr;
-        gap: 1rem;
-
-        @media (max-width: 768px) {
-            grid-template-columns: 1fr;
-        }
-    }
-
-    .search-group {
-        margin-bottom: 0;
-    }
+    margin-bottom: $zen-space-6;
+    max-width: 500px;
 }
 
 .zen-input-group {
@@ -61,7 +43,26 @@
     }
 }
 
-// Loading state
+.zen-input {
+    width: 100%;
+    padding: $zen-space-4 $zen-space-5;
+    border-radius: $zen-radius-lg;
+    border: 2px solid transparent;
+    background: $zen-input-light;
+    font-size: $zen-text-base;
+    transition: all $zen-transition-base;
+
+    &--icon {
+        padding-left: 3rem;
+    }
+
+    &:focus {
+        outline: none;
+        border-color: $zen-primary;
+        background: white;
+    }
+}
+
 .loading-state {
     display: flex;
     flex-direction: column;
@@ -87,7 +88,6 @@
     }
 }
 
-// Data table
 .data-table-container {
     background: white;
     border-radius: $zen-radius-xl;
@@ -125,10 +125,6 @@
             &:hover {
                 background: rgba($zen-primary, 0.02);
             }
-
-            &:last-child {
-                border-bottom: none;
-            }
         }
 
         td {
@@ -142,31 +138,100 @@
     }
 }
 
-// Action buttons
+.exam-title {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    strong {
+        font-weight: $zen-font-semibold;
+    }
+
+    small {
+        color: $zen-text-muted;
+        font-size: $zen-text-xs;
+    }
+}
+
+.type-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    background: $zen-input-light;
+    color: $zen-text-secondary;
+
+    &[data-type="1"] {
+        // Mock
+        background: rgba($zen-primary, 0.1);
+        color: $zen-primary;
+    }
+
+    &[data-type="2"] {
+        // ENEM
+        background: rgba($zen-success, 0.1);
+        color: $zen-success;
+    }
+
+    &[data-type="3"] {
+        // Entrance
+        background: rgba($zen-warning, 0.1);
+        color: $zen-warning;
+    }
+}
+
+.status-badge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+
+    &.published {
+        background: rgba($zen-success, 0.1);
+        color: $zen-success;
+    }
+
+    &.draft {
+        background: rgba($zen-warning, 0.1);
+        color: $zen-warning;
+    }
+}
+
 .action-buttons {
     display: flex;
-    gap: $zen-space-2;
     justify-content: flex-end;
+    gap: 8px;
 }
 
 .zen-btn-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: $zen-radius-md;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
     border: none;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all $zen-transition-base;
+    transition: all 0.2s;
 
     .material-icons-round {
         font-size: 18px;
     }
 
     &--primary {
-        background: $zen-primary-light;
+        background: rgba($zen-primary, 0.1);
         color: $zen-primary;
+
+        &:hover {
+            background: $zen-primary;
+            color: white;
+        }
+    }
+
+    &--secondary {
+        background: rgba($zen-text-secondary, 0.1);
+        color: $zen-text-secondary;
 
         &:hover {
             background: $zen-primary;
@@ -183,9 +248,42 @@
             color: white;
         }
     }
+
+    &--info {
+        background: rgba(#3b82f6, 0.1);
+        color: #3b82f6;
+
+        &:hover {
+            background: #3b82f6;
+            color: white;
+        }
+    }
 }
 
-// Empty state
+.zen-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: $zen-space-2;
+    padding: $zen-space-4 $zen-space-6;
+    border-radius: $zen-radius-xl;
+    font-weight: $zen-font-bold;
+    font-size: $zen-text-base;
+    border: none;
+    cursor: pointer;
+    transition: all $zen-transition-base;
+
+    &--primary {
+        background: linear-gradient(135deg, $zen-primary 0%, $zen-primary-hover 100%);
+        color: white;
+        box-shadow: $zen-shadow-primary;
+
+        &:hover {
+            box-shadow: $zen-shadow-glow;
+            transform: translateY(-1px);
+        }
+    }
+}
+
 .empty-state {
     text-align: center;
     padding: $zen-space-12 !important;
@@ -201,57 +299,5 @@
     p {
         color: $zen-text-secondary;
         margin-bottom: $zen-space-6;
-    }
-}
-
-// Question Specific
-.question-preview {
-    display: flex;
-    align-items: center;
-    gap: $zen-space-2;
-    max-width: 400px;
-}
-
-.text-truncate {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 300px;
-}
-
-.badge-count {
-    font-size: $zen-text-xs;
-    background: $zen-input-light;
-    padding: 2px 6px;
-    border-radius: 4px;
-    color: $zen-text-secondary;
-}
-
-.subject-tag {
-    font-weight: $zen-font-semibold;
-    color: $zen-text-primary;
-}
-
-.status-indicator {
-    font-size: $zen-text-sm;
-    color: $zen-text-muted;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-
-    &::before {
-        content: '';
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: $zen-text-muted;
-    }
-
-    &.active {
-        color: $zen-success;
-
-        &::before {
-            background: $zen-success;
-        }
     }
 }

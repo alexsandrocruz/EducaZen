@@ -48,6 +48,8 @@ export interface QuestionDto extends FullAuditedEntityDto<string> {
   tags?: string;
   year?: number;
   source?: string;
+  lastUsedAt?: string;
+  usageCount: number;
   isPublished: boolean;
   answers: QuestionAnswerDto[];
 }

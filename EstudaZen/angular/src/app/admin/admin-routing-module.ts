@@ -12,6 +12,9 @@ import { SchoolListComponent } from './schools/school-list/school-list.component
 import { SchoolFormComponent } from './schools/school-form/school-form.component';
 import { SchoolClassesComponent } from './schools/school-classes/school-classes.component';
 import { StudentFormComponent } from './students/student-form/student-form.component';
+import { ExamListComponent } from './exams/exam-list/exam-list.component';
+import { ExamFormComponent } from './exams/exam-form/exam-form.component';
+import { ExamQuestionsComponent } from './exams/exam-questions/exam-questions.component';
 
 const routes: Routes = [
   {
@@ -53,12 +56,15 @@ const routes: Routes = [
       { path: 'edit/:id', component: StudentFormComponent }
     ]
   },
-  /*
   {
     path: 'exams',
-    loadChildren: () => import('./exams/exams.module').then(m => m.ExamsModule)
+    children: [
+      { path: '', component: ExamListComponent },
+      { path: 'new', component: ExamFormComponent },
+      { path: 'edit/:id', component: ExamFormComponent },
+      { path: ':examId/questions', component: ExamQuestionsComponent }
+    ]
   },
-  */
   { path: '', redirectTo: 'subjects', pathMatch: 'full' }
 ];
 

@@ -102,7 +102,7 @@ export const quizService = {
         totalQuestions?: number;
     }): Promise<any> {
         try {
-            const response = await api.post('/app/student-quiz/start', {
+            const response = await api.post('/app/student-quiz/start-quiz', {
                 subjectId: options?.subjectId || null,
                 difficulty: options?.difficulty ?
                     (options.difficulty === 'EASY' ? 0 : options.difficulty === 'MEDIUM' ? 1 : 2) :
@@ -116,27 +116,64 @@ export const quizService = {
     },
 
     /**
-     * Submeter respostas do quiz
+     * Obter questão atual do quiz
      */
-    async submitQuiz(request: SubmitQuizRequest): Promise<QuizResult> {
+    async getCurrentQuestion(quizId: string): Promise<any> {
         try {
-            const response = await api.post('/app/quiz/submit', request);
+            const response = await api.get(`/app/student-quiz/current-question/${quizId}`);
             return response.data;
         } catch (error: any) {
-            throw new Error(error.message || 'Erro ao submeter quiz');
+            throw new Error(error.message || 'Erro ao buscar questão atual');
         }
     },
 
     /**
-     * Buscar histórico de tentativas
+     * Submeter resposta (UMA questão por vez)
+     * Backend: SubmitAnswerAsync
      */
-    async getMyAttempts(): Promise<QuizAttempt[]> {
+    async submitAnswer(request: {
+        quizId: string;
+        questionId: string;
+        selectedAnswerId: string;
+    }): Promise<any> {
         try {
-            const response = await api.get('/app/quiz/my-attempts');
-            return response.data.items || response.data;
+            const response = await api.post('/app/student-quiz/submit-answer', request);
+            return response.data;
         } catch (error: any) {
-            throw new Error(error.message || 'Erro ao buscar histórico');
+            throw new Error(error.message || 'Erro ao submeter resposta');
         }
+    },
+
+    /**
+     * Obter resultado do quiz
+     */
+    async getQuizResult(quizId: string): Promise<QuizResult> {
+        try {
+            const response = await api.get(`/app/student-quiz/quiz-result/${quizId}`);
+            return response.data;
+        } catch (error: any) {
+            throw new Error(error.message || 'Erro ao obter resultado');
+        }
+    },
+
+    /**
+     * Abandonar quiz
+     */
+    async abandonQuiz(quizId: string): Promise<void> {
+        try {
+            await api.post(`/app/student-quiz/abandon-quiz/${quizId}`);
+        } catch (error: any) {
+            throw new Error(error.message || 'Erro ao abandonar quiz');
+        }
+    },
+
+    // Deprecated methods removal or adaptation
+    async submitQuiz(request: SubmitQuizRequest): Promise<QuizResult> {
+        throw new Error("Use submitAnswer for detailed flow");
+    },
+
+    async getMyAttempts(): Promise<any[]> {
+        return this.getAvailableQuizzes();
     },
 };
 

@@ -79,7 +79,10 @@ public class OpenIddictDataSeedContributor : OpenIddictDataSeedContributorBase, 
                     "Impersonation"
                 },
                 scopes: commonScopes,
-                redirectUris: new List<string> { consoleAndAngularClientRootUrl },
+                redirectUris: new List<string> { 
+                    consoleAndAngularClientRootUrl,
+                    $"{consoleAndAngularClientRootUrl}/dashboard"
+                },
                 postLogoutRedirectUris: new List<string> { consoleAndAngularClientRootUrl },
                 clientUri: consoleAndAngularClientRootUrl,
                 logoUri: "/images/clients/angular.svg"

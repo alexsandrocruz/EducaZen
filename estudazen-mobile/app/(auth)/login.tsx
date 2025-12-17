@@ -9,10 +9,13 @@ import {
     StatusBar,
     TouchableOpacity,
 } from 'react-native';
+import { useRouter } from 'expo-router';
 import { Button, Input, Card } from '../../src/components/ui';
 import { theme } from '../../src/theme';
 
 export default function LoginScreen() {
+    const router = useRouter();
+
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -57,7 +60,8 @@ export default function LoginScreen() {
             // Simulate API call
             await new Promise(resolve => setTimeout(resolve, 2000));
 
-            // Navigate to home
+            // Navigate to home (will be implemented later)
+            // router.replace('/(tabs)');
         } catch (error) {
             console.error('Login error:', error);
             setErrors({ general: 'Email ou senha incorretos' });
@@ -67,11 +71,12 @@ export default function LoginScreen() {
     };
 
     const handleForgotPassword = () => {
+        // TODO: Navigate to forgot password screen
         console.log('Navigate to forgot password');
     };
 
     const handleRegister = () => {
-        console.log('Navigate to register');
+        router.push('/(auth)/register');
     };
 
     return (

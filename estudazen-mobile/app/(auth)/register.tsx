@@ -9,10 +9,13 @@ import {
     StatusBar,
     TouchableOpacity,
 } from 'react-native';
+import { useRouter } from 'expo-router';
 import { Button, Input } from '../../src/components/ui';
 import { theme } from '../../src/theme';
 
 export default function RegisterScreen() {
+    const router = useRouter();
+
     const [formData, setFormData] = useState({
         fullName: '',
         email: '',
@@ -77,6 +80,7 @@ export default function RegisterScreen() {
             await new Promise(resolve => setTimeout(resolve, 2000));
 
             // Navigate to login or home
+            router.replace('/(auth)/login');
         } catch (error) {
             console.error('Registration error:', error);
         } finally {
@@ -85,8 +89,7 @@ export default function RegisterScreen() {
     };
 
     const handleBackToLogin = () => {
-        // Navigate to login screen
-        console.log('Navigate to login');
+        router.push('/(auth)/login');
     };
 
     return (

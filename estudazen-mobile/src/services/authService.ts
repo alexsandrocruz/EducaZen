@@ -57,7 +57,9 @@ export const authService = {
      */
     async login(data: LoginData): Promise<AuthResponse> {
         try {
-            // ABP usa grant_type=password para autenticação
+            // OAuth endpoint está na raiz, não em /api
+            const tokenUrl = 'http://localhost:5000/connect/token';
+
             const formData = new URLSearchParams();
             formData.append('grant_type', 'password');
             formData.append('username', data.email);
@@ -65,7 +67,12 @@ export const authService = {
             formData.append('client_id', 'EstudaZen_App');
             formData.append('scope', 'offline_access EstudaZen');
 
-            const response = await api.post('/connect/token', formData.toString(), {
+            console.log('Login attempt:', data.email);
+            console.log('Token URL:', tokenUrl);
+
+            // Usar axios diretamente (não api) para evitar baseURL com /api
+            const axios = (await import('axios')).default;
+            const response = await axios.post(tokenUrl, formData.toString(), {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
@@ -81,6 +88,7 @@ export const authService = {
 
             return authData;
         } catch (error: any) {
+            console.error('Login error:', error.response?.status, error.response?.data || error.message);
             throw new Error(error.message || 'Email ou senha incorretos');
         }
     },

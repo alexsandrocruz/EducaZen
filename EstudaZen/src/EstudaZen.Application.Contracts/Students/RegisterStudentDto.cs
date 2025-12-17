@@ -20,11 +20,10 @@ public class RegisterStudentDto
     [DisableAuditing]
     public string Password { get; set; } = null!;
 
-    [Required]
-    [StringLength(14)] // CPF: 000.000.000-00
-    public string Cpf { get; set; } = null!;
+    [StringLength(14)] // CPF: 000.000.000-00 (opcional)
+    public string? Cpf { get; set; }
 
     // Código da escola (OPCIONAL) - se não informado, aluno vira cliente do Host
     [StringLength(20)]
-    public string SchoolCode { get; set; }
+    public string? SchoolCode { get; set; }
 }

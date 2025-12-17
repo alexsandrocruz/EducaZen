@@ -61,6 +61,43 @@
     }
 }
 
+.zen-input {
+    width: 100%;
+    padding: $zen-space-4 $zen-space-5;
+    border-radius: $zen-radius-lg;
+    border: 2px solid transparent;
+    background: $zen-input-light;
+    font-size: $zen-text-base;
+    transition: all $zen-transition-base;
+
+    &--icon {
+        padding-left: 3rem;
+    }
+
+    &:focus {
+        outline: none;
+        border-color: $zen-primary;
+        background: white;
+    }
+}
+
+.zen-select {
+    width: 100%;
+    padding: $zen-space-4 $zen-space-5;
+    border-radius: $zen-radius-lg;
+    border: 2px solid transparent;
+    background: $zen-input-light;
+    font-size: $zen-text-base;
+    transition: all $zen-transition-base;
+    cursor: pointer;
+
+    &:focus {
+        outline: none;
+        border-color: $zen-primary;
+        background: white;
+    }
+}
+
 // Loading state
 .loading-state {
     display: flex;

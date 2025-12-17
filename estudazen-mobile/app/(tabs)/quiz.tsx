@@ -37,14 +37,23 @@ export default function QuizScreen() {
         }
     };
 
-    const handleStartQuiz = async (quizId: string) => {
+    const handleStartNewQuiz = async () => {
         try {
-            await startQuiz(quizId);
-            // TODO: Criar tela de quiz taking
-            Alert.alert('Quiz Iniciado!', 'A tela de fazer quiz será implementada em breve.');
-            // router.push(`/quiz/${quizId}`);
+            // Iniciar um quiz aleatório com 10 questões
+            await startQuiz();
+            // Recarregar a lista para mostrar o novo quiz
+            await loadQuizzes();
         } catch (error: any) {
-            Alert.alert('Erro', error.message || 'Não foi possível iniciar o quiz');
+            // Erro já exibido pelo store
+        }
+    };
+
+    const handleContinueQuiz = async (quizId: string) => {
+        try {
+            // TODO: Implementar tela de quiz taking
+            Alert.alert('Em Desenvolvimento', 'A tela de fazer quiz será implementada em breve.');
+        } catch (error: any) {
+            Alert.alert('Erro', error.message || 'Não foi possível continuar o quiz');
         }
     };
 
@@ -78,10 +87,18 @@ export default function QuizScreen() {
             >
                 {/* Header */}
                 <View style={styles.header}>
-                    <Text style={styles.title}>Quizzes</Text>
-                    <Text style={styles.subtitle}>
-                        Teste seus conhecimentos e ganhe XP!
-                    </Text>
+                    <View>
+                        <Text style={styles.title}>Quizzes</Text>
+                        <Text style={styles.subtitle}>
+                            Teste seus conhecimentos e ganhe XP!
+                        </Text>
+                    </View>
+                    <TouchableOpacity
+                        style={styles.newQuizButton}
+                        onPress={() => handleStartNewQuiz()}
+                    >
+                        <Text style={styles.newQuizButtonText}>+ Novo Quiz</Text>
+                    </TouchableOpacity>
                 </View>
 
                 {/* Error Message */}
@@ -147,9 +164,9 @@ export default function QuizScreen() {
 
                         <TouchableOpacity
                             style={styles.startButton}
-                            onPress={() => handleStartQuiz(quiz.id)}
+                            onPress={() => handleContinueQuiz(quiz.id)}
                         >
-                            <Text style={styles.startButtonText}>Começar Quiz</Text>
+                            <Text style={styles.startButtonText}>Continuar Quiz</Text>
                             <Text style={styles.startButtonIcon}>→</Text>
                         </TouchableOpacity>
                     </Card>
@@ -181,6 +198,9 @@ const styles = StyleSheet.create({
     },
     header: {
         marginBottom: theme.spacing.xl,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'flex-start',
     },
     title: {
         fontSize: theme.typography.sizes['3xl'],
@@ -191,6 +211,17 @@ const styles = StyleSheet.create({
     subtitle: {
         fontSize: theme.typography.sizes.base,
         color: theme.colors.text.secondary,
+    },
+    newQuizButton: {
+        backgroundColor: theme.colors.primary,
+        borderRadius: theme.borderRadius.lg,
+        paddingHorizontal: theme.spacing.lg,
+        paddingVertical: theme.spacing.sm,
+    },
+    newQuizButtonText: {
+        fontSize: theme.typography.sizes.sm,
+        fontWeight: '700',
+        color: '#ffffff',
     },
     errorCard: {
         backgroundColor: theme.colors.status.error + '20',

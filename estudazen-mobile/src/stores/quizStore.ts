@@ -15,7 +15,11 @@ interface QuizState {
 
     // Actions
     loadAvailableQuizzes: () => Promise<void>;
-    startQuiz: (quizId: string) => Promise<void>;
+    startQuiz: (options?: {
+        subjectId?: string;
+        difficulty?: 'EASY' | 'MEDIUM' | 'HARD';
+        totalQuestions?: number;
+    }) => Promise<void>;
     setAnswer: (questionId: string, alternativeId: string) => void;
     submitQuiz: () => Promise<QuizResult>;
     resetQuiz: () => void;
@@ -49,15 +53,19 @@ export const useQuizStore = create<QuizState>((set, get) => ({
         }
     },
 
-    // Start a quiz
-    startQuiz: async (quizId: string) => {
+    // Start a new quiz
+    startQuiz: async (options?: {
+        subjectId?: string;
+        difficulty?: 'EASY' | 'MEDIUM' | 'HARD';
+        totalQuestions?: number;
+    }) => {
         set({ isLoading: true, error: null });
         try {
-            const response = await quizService.startQuiz(quizId);
+            const quizData = await quizService.startQuiz(options);
             set({
-                currentQuiz: response.quiz,
-                currentQuestions: response.questions,
-                currentAttemptId: response.attemptId,
+                currentQuiz: quizData,
+                currentQuestions: [],
+                currentAttemptId: quizData.id,
                 answers: new Map(),
                 lastResult: null,
                 isLoading: false,

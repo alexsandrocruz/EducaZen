@@ -78,11 +78,15 @@ export interface QuizResult {
 
 export const quizService = {
     /**
-     * Listar quizzes disponíveis
+     * Listar quizzes disponíveis (histórico do estudante)
      */
     async getAvailableQuizzes(): Promise<Quiz[]> {
         try {
-            const response = await api.get('/app/quiz/available');
+            const response = await api.get('/app/student-quiz/my-quizzes', {
+                params: {
+                    maxResultCount: 100
+                }
+            });
             return response.data.items || response.data;
         } catch (error: any) {
             throw new Error(error.message || 'Erro ao buscar quizzes');
@@ -90,11 +94,21 @@ export const quizService = {
     },
 
     /**
-     * Iniciar um quiz
+     * Iniciar um novo quiz
      */
-    async startQuiz(quizId: string): Promise<StartQuizResponse> {
+    async startQuiz(options?: {
+        subjectId?: string;
+        difficulty?: 'EASY' | 'MEDIUM' | 'HARD';
+        totalQuestions?: number;
+    }): Promise<any> {
         try {
-            const response = await api.post(`/app/quiz/${quizId}/start`);
+            const response = await api.post('/app/student-quiz/start', {
+                subjectId: options?.subjectId || null,
+                difficulty: options?.difficulty ?
+                    (options.difficulty === 'EASY' ? 0 : options.difficulty === 'MEDIUM' ? 1 : 2) :
+                    null,
+                totalQuestions: options?.totalQuestions || 10
+            });
             return response.data;
         } catch (error: any) {
             throw new Error(error.message || 'Erro ao iniciar quiz');

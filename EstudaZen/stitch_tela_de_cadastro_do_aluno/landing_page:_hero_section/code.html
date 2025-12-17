@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VestiQuiz - Hero Section</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#7f13ec",
+              "primary-light": "#a760f3",
+              "background-light": "#f7f6f8",
+              "background-dark": "#191022",
+              "accent-blue": "#3b82f6",
+            },
+            fontFamily: {
+              "display": ["Lexend", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "2xl": "2rem", "full": "9999px"},
+            boxShadow: {
+                "glow": "0 0 40px -10px rgba(127, 19, 236, 0.5)",
+                "card": "0 20px 40px -10px rgba(0, 0, 0, 0.3)",
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        /* Custom Animations & Gradients */
+        .text-gradient {
+            background: linear-gradient(135deg, #fff 30%, #a760f3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .bg-mesh {
+            background-color: #191022;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(127, 19, 236, 0.25) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(127, 19, 236, 0.1) 0px, transparent 50%);
+        }
+
+        .floating-card {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-display antialiased overflow-x-hidden bg-background-light dark:bg-background-dark text-slate-900 dark:text-white selection:bg-primary selection:text-white">
+<!-- Mobile Wrapper -->
+<div class="relative min-h-screen w-full mx-auto flex flex-col bg-mesh">
+<!-- Navbar -->
+<nav class="sticky top-0 z-50 w-full px-5 py-4 flex items-center justify-between backdrop-blur-xl border-b border-white/5 bg-[#191022]/70">
+<div class="flex items-center gap-2.5">
+<div class="flex size-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-accent-blue shadow-lg">
+<span class="material-symbols-outlined text-white text-[24px]">psychology</span>
+</div>
+<span class="text-xl font-bold tracking-tight text-white">VestiQuiz</span>
+</div>
+<button class="flex size-10 items-center justify-center rounded-xl bg-white/5 hover:bg-white/10 active:scale-95 transition-all text-white border border-white/10">
+<span class="material-symbols-outlined text-[24px]">menu</span>
+</button>
+</nav>
+<!-- Hero Content -->
+<main class="flex-1 flex flex-col px-5 pt-8 pb-10 w-full relative z-10">
+<!-- Badge -->
+<div class="flex justify-center mb-6">
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-md">
+<span class="relative flex h-2.5 w-2.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary"></span>
+</span>
+<span class="text-xs font-semibold text-primary-light uppercase tracking-wider">Novo App 2.0</span>
+</div>
+</div>
+<!-- Headline -->
+<div class="text-center space-y-4 mb-8">
+<h1 class="text-[42px] leading-[1.1] font-extrabold tracking-tight text-white">
+                    Domine o Vestibular com <br class="hidden sm:block"/>
+<span class="bg-clip-text text-transparent bg-gradient-to-r from-primary-light via-primary to-accent-blue">Inteligência Artificial</span>
+</h1>
+<p class="text-base font-normal leading-relaxed text-slate-300 max-w-[340px] mx-auto">
+                    Plataforma completa de questões e simulados adaptativos que personalizam seu estudo para garantir sua vaga na universidade.
+                </p>
+</div>
+<!-- CTA Section -->
+<div class="flex flex-col gap-4 w-full max-w-sm mx-auto mb-10">
+<button class="group relative flex w-full items-center justify-center gap-3 overflow-hidden rounded-2xl bg-primary h-14 text-white shadow-glow transition-all hover:scale-[1.02] active:scale-[0.98]">
+<div class="absolute inset-0 bg-gradient-to-r from-primary via-[#953bf5] to-primary opacity-100 transition-opacity"></div>
+<span class="relative z-10 text-lg font-bold">Começar Agora - Grátis</span>
+<span class="material-symbols-outlined relative z-10 text-[20px] group-hover:translate-x-1 transition-transform">rocket_launch</span>
+</button>
+<!-- Trust Signals -->
+<div class="flex flex-col items-center justify-center gap-2">
+<div class="flex items-center justify-center -space-x-3 rtl:space-x-reverse">
+<img alt="Portrait of a young student smiling" class="size-8 rounded-full border-2 border-[#191022] object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzqPN_sm2mmMLeO0sI5cu6EK1sjQBlYCVy9f0YxkqFfzELJdCJFwJqx2cCxGVvBHMs216Z1NDGt25BD55QqLDL1sLL8TmBc1Y3BvKADegZLnv8IUK0njWghEgyLwa-WgpKl6sHXuZBRudTiuPGE2b2xz3oU0RU5STfp0nUSZ4EHnfJ0s_i0zoJdnM344W_tVTng1bkmKQbH9v87FM4yuAcgIhPFK6aphmD0RKUteYRPEW_dhfGy5MDQPlyIRZy-2Sb3SGj9sFRb-k"/>
+<img alt="Portrait of a male student" class="size-8 rounded-full border-2 border-[#191022] object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfB64k8LohmfQ3uoSLjTdC9qLtSDm5oJsgfXvGjG8z9AFuHRP1mc39IzjaNYmLpPHxDdzVJny0AQ5uiz2IM0zqSA5ktQXrbE74fpeCJi946TcWAiruv52g3sR_Ras4v9rdIKGt1eLKbXV-TC6CdqeHuwFfwIjXnRt22gJYx4l5O6zQrmVzSK9lTSd03ui5K_WTwUCsDTqSi5GCQMRfq2g-rZhBkQrnSy8A1ywkzFdA1ARAHBhhPi3UZs8NXXY1I2g34TNDIQlNwQs"/>
+<img alt="Portrait of a female student with glasses" class="size-8 rounded-full border-2 border-[#191022] object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtr3g1AvnAJ82hCbMv5L3U0Mqf9sAYhcdUdAiks90pyu4y05Z4Ch4sZH1HKmbjk66PR-e2_A2-_XOD4JOVZfT6TSUKOPhmF4V3rDE2ysOtrmqfNaw7cratcqbQ_8GB-y0QtaOiWHugOkweZNVjNwC7TSc_Inmw2cBewtJlT1-bUbG3-HeJqnC6iOYfjKJFEGsk9Fh7-FvkzTWV-QE0PaArcrJn0sae3qFmsbQME7K2Xo4vrEHEe4dqQ-sMlBkiz1O_mLZ3sZiaDWk"/>
+<div class="flex size-8 items-center justify-center rounded-full border-2 border-[#191022] bg-slate-800 text-[10px] font-bold text-white leading-none">
+                            +10k
+                        </div>
+</div>
+<p class="text-xs font-medium text-slate-400">Junte-se a milhares de aprovados</p>
+</div>
+</div>
+<!-- Hero Visual / Mockup -->
+<div class="relative w-full mt-auto perspective-1000">
+<!-- Glow Effect behind image -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 h-4/5 bg-primary blur-[60px] opacity-30 rounded-full pointer-events-none"></div>
+<!-- Main Card Visual -->
+<div class="relative w-full aspect-[4/3] rounded-[2rem] border border-white/10 bg-[#231730]/80 backdrop-blur-sm overflow-hidden shadow-card floating-card">
+<!-- Abstract Background inside card -->
+<div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&amp;w=800&amp;auto=format&amp;fit=crop')] bg-cover bg-center opacity-60" data-alt="Abstract purple liquid gradient background representing flow and energy"></div>
+<!-- UI Overlay Elements simulating App Interface -->
+<div class="absolute inset-x-0 bottom-0 top-12 bg-gradient-to-b from-transparent to-[#191022] p-5 flex flex-col justify-end">
+<!-- Floating Quiz Card -->
+<div class="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-4 mb-2 animate-[pulse_4s_ease-in-out_infinite]">
+<div class="flex justify-between items-start mb-2">
+<div class="flex gap-1.5">
+<span class="size-2 rounded-full bg-red-400"></span>
+<span class="size-2 rounded-full bg-yellow-400"></span>
+<span class="size-2 rounded-full bg-green-400"></span>
+</div>
+<span class="text-[10px] font-bold text-primary-light tracking-wide bg-primary/20 px-2 py-0.5 rounded-lg">FÍSICA</span>
+</div>
+<div class="h-2 w-3/4 bg-white/20 rounded-full mb-2"></div>
+<div class="h-2 w-1/2 bg-white/20 rounded-full"></div>
+</div>
+<!-- Success Notification -->
+<div class="flex items-center gap-3 bg-[#191022]/90 border border-white/10 rounded-xl p-3 shadow-lg transform translate-x-4">
+<div class="flex items-center justify-center size-10 rounded-full bg-green-500/20 text-green-400 shrink-0">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+</div>
+<div>
+<h3 class="text-sm font-bold text-white">Resposta Correta!</h3>
+<p class="text-xs text-slate-400">+150 pontos XP</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

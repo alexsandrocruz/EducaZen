@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VestiQuiz - FAQ</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7f13ec",
+                        "primary-dark": "#5e0eb0",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#191022",
+                        "surface-dark": "#362348",
+                        "surface-light": "#ffffff",
+                        "text-muted": "#ad92c9",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "2xl": "2rem", "full": "9999px"},
+                    boxShadow: {
+                        "glow": "0 0 20px -5px rgba(127, 19, 236, 0.5)",
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar hide for horizontal scroll */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-900 dark:text-white min-h-screen flex flex-col antialiased selection:bg-primary selection:text-white">
+<!-- Ambient Background Gradient -->
+<div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+<div class="absolute top-[-10%] right-[-20%] w-[80%] h-[40%] bg-primary/20 blur-[100px] rounded-full"></div>
+<div class="absolute bottom-[-10%] left-[-10%] w-[60%] h-[40%] bg-blue-600/10 blur-[120px] rounded-full"></div>
+</div>
+<!-- Top App Bar -->
+<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-gray-200 dark:border-white/5">
+<div class="flex items-center p-4 justify-between">
+<div class="flex items-center gap-3">
+<div class="flex items-center justify-center size-10 rounded-xl bg-gradient-to-br from-primary to-blue-600 text-white shadow-glow">
+<span class="material-symbols-outlined">school</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight">VestiQuiz</h1>
+</div>
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-gray-600 dark:text-white">account_circle</span>
+</button>
+</div>
+</header>
+<main class="flex-1 w-full max-w-md mx-auto w-full pb-24">
+<!-- Hero Header -->
+<section class="px-5 pt-8 pb-4">
+<div class="flex flex-col gap-2 text-center">
+<span class="text-primary font-bold text-sm tracking-widest uppercase">Suporte</span>
+<h2 class="text-3xl font-bold leading-tight bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent dark:from-white dark:to-gray-400 text-gray-900">
+                    Como podemos ajudar?
+                </h2>
+<p class="text-gray-500 dark:text-text-muted text-base max-w-[80%] mx-auto font-light">
+                    Encontre respostas rápidas para suas dúvidas sobre o VestiQuiz.
+                </p>
+</div>
+</section>
+<!-- Search Bar -->
+<section class="px-5 py-2 sticky top-[72px] z-40 bg-background-light dark:bg-background-dark transition-all duration-300">
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-gray-400 dark:text-text-muted group-focus-within:text-primary transition-colors">search</span>
+</div>
+<input class="block w-full pl-12 pr-4 py-3.5 rounded-2xl border-none bg-white dark:bg-surface-dark shadow-sm focus:ring-2 focus:ring-primary/50 text-base placeholder:text-gray-400 dark:placeholder:text-text-muted/60 dark:text-white transition-all" placeholder="Buscar por uma dúvida..." type="text"/>
+<div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-gray-400 dark:text-text-muted/50 text-[20px]">mic</span>
+</div>
+</div>
+</section>
+<!-- Filter Chips -->
+<section class="px-5 pt-4 pb-6">
+<div class="flex gap-3 overflow-x-auto no-scrollbar pb-2 mask-linear-fade">
+<button class="flex shrink-0 items-center justify-center h-9 px-5 rounded-full bg-primary text-white font-medium text-sm shadow-glow transition-transform active:scale-95">
+                    Geral
+                </button>
+<button class="flex shrink-0 items-center justify-center h-9 px-5 rounded-full bg-white dark:bg-surface-dark text-gray-600 dark:text-text-muted border border-transparent hover:border-primary/30 font-medium text-sm transition-all active:scale-95">
+                    Assinatura
+                </button>
+<button class="flex shrink-0 items-center justify-center h-9 px-5 rounded-full bg-white dark:bg-surface-dark text-gray-600 dark:text-text-muted border border-transparent hover:border-primary/30 font-medium text-sm transition-all active:scale-95">
+                    Conta
+                </button>
+<button class="flex shrink-0 items-center justify-center h-9 px-5 rounded-full bg-white dark:bg-surface-dark text-gray-600 dark:text-text-muted border border-transparent hover:border-primary/30 font-medium text-sm transition-all active:scale-95">
+                    Segurança
+                </button>
+<button class="flex shrink-0 items-center justify-center h-9 px-5 rounded-full bg-white dark:bg-surface-dark text-gray-600 dark:text-text-muted border border-transparent hover:border-primary/30 font-medium text-sm transition-all active:scale-95">
+                    App
+                </button>
+</div>
+</section>
+<!-- FAQ List (Accordion) -->
+<section class="px-5 space-y-4">
+<!-- Item 1 (Expanded State Simulation) -->
+<div class="group rounded-2xl bg-white dark:bg-surface-dark overflow-hidden transition-all duration-300 ring-2 ring-primary/30 dark:ring-primary/50 shadow-glow">
+<button class="w-full flex items-center justify-between p-5 text-left bg-transparent">
+<span class="text-base font-semibold text-gray-900 dark:text-white">O VestiQuiz é gratuito?</span>
+<span class="flex items-center justify-center size-8 rounded-full bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-[20px]">remove</span>
+</span>
+</button>
+<div class="px-5 pb-5 pt-0">
+<p class="text-sm leading-relaxed text-gray-600 dark:text-gray-300 font-light">
+                        Sim! Oferecemos um plano gratuito com acesso limitado a questões diárias. Para acesso ilimitado, simulados exclusivos e modo offline, conheça o <span class="text-primary font-medium">VestiQuiz Premium</span>.
+                    </p>
+<div class="mt-4">
+<button class="text-xs font-bold text-primary hover:text-primary-light uppercase tracking-wide flex items-center gap-1">
+                            Ver planos <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Item 2 (Collapsed) -->
+<div class="group rounded-2xl bg-white dark:bg-surface-dark overflow-hidden transition-all duration-300 hover:bg-gray-50 dark:hover:bg-[#432c59] cursor-pointer">
+<button class="w-full flex items-center justify-between p-5 text-left bg-transparent">
+<span class="text-base font-medium text-gray-800 dark:text-gray-200 group-hover:text-primary transition-colors">Posso usar offline?</span>
+<span class="flex items-center justify-center size-8 rounded-full bg-gray-100 dark:bg-white/5 text-gray-500 dark:text-text-muted group-hover:bg-primary group-hover:text-white transition-all">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</span>
+</button>
+</div>
+<!-- Item 3 (Collapsed) -->
+<div class="group rounded-2xl bg-white dark:bg-surface-dark overflow-hidden transition-all duration-300 hover:bg-gray-50 dark:hover:bg-[#432c59] cursor-pointer">
+<button class="w-full flex items-center justify-between p-5 text-left bg-transparent">
+<span class="text-base font-medium text-gray-800 dark:text-gray-200 group-hover:text-primary transition-colors">Como cancelo minha assinatura?</span>
+<span class="flex items-center justify-center size-8 rounded-full bg-gray-100 dark:bg-white/5 text-gray-500 dark:text-text-muted group-hover:bg-primary group-hover:text-white transition-all">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</span>
+</button>
+</div>
+<!-- Item 4 (Collapsed) -->
+<div class="group rounded-2xl bg-white dark:bg-surface-dark overflow-hidden transition-all duration-300 hover:bg-gray-50 dark:hover:bg-[#432c59] cursor-pointer">
+<button class="w-full flex items-center justify-between p-5 text-left bg-transparent">
+<span class="text-base font-medium text-gray-800 dark:text-gray-200 group-hover:text-primary transition-colors">Serve para quais vestibulares?</span>
+<span class="flex items-center justify-center size-8 rounded-full bg-gray-100 dark:bg-white/5 text-gray-500 dark:text-text-muted group-hover:bg-primary group-hover:text-white transition-all">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</span>
+</button>
+</div>
+<!-- Item 5 (Collapsed) -->
+<div class="group rounded-2xl bg-white dark:bg-surface-dark overflow-hidden transition-all duration-300 hover:bg-gray-50 dark:hover:bg-[#432c59] cursor-pointer">
+<button class="w-full flex items-center justify-between p-5 text-left bg-transparent">
+<span class="text-base font-medium text-gray-800 dark:text-gray-200 group-hover:text-primary transition-colors">Como redefinir minha senha?</span>
+<span class="flex items-center justify-center size-8 rounded-full bg-gray-100 dark:bg-white/5 text-gray-500 dark:text-text-muted group-hover:bg-primary group-hover:text-white transition-all">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</span>
+</button>
+</div>
+</section>
+<!-- Still have questions CTA -->
+<section class="px-5 mt-8">
+<div class="relative overflow-hidden rounded-2xl p-6 bg-gradient-to-br from-[#362348] to-[#1f1429] border border-white/5 text-center">
+<!-- Background Decoration -->
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/20 blur-[50px] rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+<div class="relative z-10 flex flex-col items-center gap-3">
+<div class="size-12 rounded-full bg-white/10 flex items-center justify-center mb-1">
+<span class="material-symbols-outlined text-white">support_agent</span>
+</div>
+<h3 class="text-white text-lg font-bold">Ainda tem dúvidas?</h3>
+<p class="text-text-muted text-sm font-light mb-2">Nossa equipe está pronta para te ajudar a conquistar sua aprovação.</p>
+<button class="w-full py-3 px-4 bg-primary hover:bg-primary-dark text-white font-semibold rounded-xl transition-all shadow-lg active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+                        Falar com Suporte
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation -->
+<nav class="fixed bottom-0 w-full bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-lg border-t border-gray-200 dark:border-white/5 z-50 safe-area-bottom pb-1">
+<div class="flex justify-around items-center h-16 max-w-md mx-auto">
+<a class="flex flex-col items-center gap-1 w-16 text-gray-400 dark:text-gray-500 hover:text-primary dark:hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px] font-medium">Início</span>
+</a>
+<a class="flex flex-col items-center gap-1 w-16 text-gray-400 dark:text-gray-500 hover:text-primary dark:hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">school</span>
+<span class="text-[10px] font-medium">Estudo</span>
+</a>
+<div class="relative -top-5">
+<button class="size-14 rounded-full bg-primary text-white shadow-glow flex items-center justify-center transform hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[28px]">play_arrow</span>
+</button>
+</div>
+<a class="flex flex-col items-center gap-1 w-16 text-primary dark:text-white transition-colors" href="#">
+<span class="material-symbols-outlined fill-current">help</span>
+<span class="text-[10px] font-medium">Ajuda</span>
+</a>
+<a class="flex flex-col items-center gap-1 w-16 text-gray-400 dark:text-gray-500 hover:text-primary dark:hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-medium">Perfil</span>
+</a>
+</div>
+</nav>
+<style>
+        /* Safe area for iPhone home indicator */
+        .safe-area-bottom {
+            padding-bottom: env(safe-area-inset-bottom, 20px);
+        }
+    </style>
+</body></html>

@@ -21,4 +21,5 @@ public interface IExamAppService : IApplicationService
     Task<List<ExamQuestionDto>> GetQuestionsAsync(Guid id);
     Task AddQuestionAsync(Guid id, Guid questionId);
     Task RemoveQuestionAsync(Guid id, Guid questionId);
+    Task<List<ExamDto>> GetAvailableExamsAsync();
 }

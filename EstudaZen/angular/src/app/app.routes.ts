@@ -5,7 +5,12 @@ export const APP_ROUTES: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    loadComponent: () => import('./home/home.component').then(c => c.HomeComponent),
+    loadComponent: () => import('./landing/landing-page.component').then(c => c.LandingPageComponent),
+  },
+  {
+    path: 'dashboard',
+    loadComponent: () => import('./dashboard/dashboard').then(c => c.DashboardComponent),
+    canActivate: [authGuard],
   },
   {
     path: 'account',

@@ -11,7 +11,7 @@ function configureRoutes() {
   const routes = inject(RoutesService);
   routes.add([
     {
-      path: '/',
+      path: '/dashboard',
       name: '::Menu:Home',
       iconClass: 'fas fa-home',
       order: 1,

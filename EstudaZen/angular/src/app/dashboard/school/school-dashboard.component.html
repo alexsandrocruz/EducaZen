@@ -1,0 +1,75 @@
+<div *ngIf="loading" class="flex items-center justify-center p-8">
+    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+</div>
+
+<div *ngIf="!loading && data" class="relative flex min-h-screen w-full flex-col overflow-hidden pb-10">
+    <header class="p-6">
+        <h2 class="text-2xl font-bold">Visão Geral da Escola</h2>
+    </header>
+
+    <!-- KPIs -->
+    <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 px-6 mb-6">
+        <div class="rounded-xl p-5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm">
+            <p class="text-sm font-medium text-gray-500">Alunos Ativos</p>
+            <p class="text-3xl font-bold">{{ data.activeStudents }}</p>
+        </div>
+        <div class="rounded-xl p-5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm">
+            <p class="text-sm font-medium text-gray-500">Provas Realizadas</p>
+            <p class="text-3xl font-bold">{{ data.totalExamsTaken }}</p>
+        </div>
+        <div class="rounded-xl p-5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm">
+            <p class="text-sm font-medium text-gray-500">Média da Escola</p>
+            <p class="text-3xl font-bold text-primary">{{ data.averageScore | number:'1.0-1' }}</p>
+        </div>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-6 px-6">
+        <!-- Top Students -->
+        <div>
+            <h3 class="text-lg font-bold mb-3 flex items-center gap-2">
+                <span class="material-icons-round text-yellow-500">emoji_events</span> Ouro (Top 5)
+            </h3>
+            <div class="flex flex-col gap-3">
+                <div *ngFor="let student of data.topStudents"
+                    class="flex items-center justify-between p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-cover bg-center border border-gray-200"
+                            [style.background-image]="'url(' + (student.photoUrl || 'assets/images/user.png') + ')'">
+                        </div>
+                        <div>
+                            <p class="font-bold">{{ student.name }}</p>
+                            <p class="text-xs text-gray-500">{{ student.examsCompleted }} exames</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p class="font-bold text-primary">{{ student.score | number:'1.0-1' }} pts</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Students Needing Support -->
+        <div>
+            <h3 class="text-lg font-bold mb-3 flex items-center gap-2">
+                <span class="material-icons-round text-red-500">priority_high</span> Alunos que Precisam de Apoio
+            </h3>
+            <div class="flex flex-col gap-3">
+                <div *ngFor="let student of data.studentsNeedingSupport"
+                    class="flex items-center justify-between p-4 bg-white dark:bg-gray-800 rounded-xl border border-red-200 dark:border-red-900/30">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-cover bg-center border border-red-200 grayscale opacity-80"
+                            [style.background-image]="'url(' + (student.photoUrl || 'assets/images/user.png') + ')'">
+                        </div>
+                        <div>
+                            <p class="font-bold">{{ student.name }}</p>
+                            <p class="text-xs text-gray-500">{{ student.examsCompleted }} exames</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p class="font-bold text-red-500">{{ student.score | number:'1.0-1' }} pts</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

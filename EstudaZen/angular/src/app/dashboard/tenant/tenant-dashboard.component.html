@@ -1,0 +1,77 @@
+<div *ngIf="loading" class="flex items-center justify-center p-8">
+    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+</div>
+
+<div *ngIf="!loading && data" class="relative flex min-h-screen w-full flex-col overflow-hidden pb-10">
+    <header class="p-6">
+        <h2 class="text-2xl font-bold">Visão Geral do Município</h2>
+    </header>
+
+    <!-- KPIs -->
+    <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 px-6 mb-6">
+        <div class="rounded-xl p-5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm">
+            <p class="text-sm font-medium text-gray-500">Total Escolas</p>
+            <p class="text-3xl font-bold">{{ data.totalSchools }}</p>
+        </div>
+        <div class="rounded-xl p-5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm">
+            <p class="text-sm font-medium text-gray-500">Total Alunos</p>
+            <p class="text-3xl font-bold">{{ data.totalStudents }}</p>
+        </div>
+        <div class="rounded-xl p-5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm">
+            <p class="text-sm font-medium text-gray-500">Média Geral</p>
+            <p class="text-3xl font-bold text-primary">{{ data.averageScore | number:'1.0-1' }}</p>
+        </div>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-6 px-6">
+        <!-- Top Schools -->
+        <div>
+            <h3 class="text-lg font-bold mb-3 flex items-center gap-2">
+                <span class="material-icons-round text-yellow-500">emoji_events</span> Ouro (Top 5)
+            </h3>
+            <div class="flex flex-col gap-3">
+                <div *ngFor="let school of data.topSchools"
+                    class="flex items-center justify-between p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="w-8 h-8 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center font-bold">
+                            {{ school.rank }}
+                        </div>
+                        <div>
+                            <p class="font-bold">{{ school.name }}</p>
+                            <p class="text-xs text-gray-500">{{ school.activeStudents }} alunos ativos</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p class="font-bold text-primary">{{ school.averageScore | number:'1.0-1' }} pts</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Needs Support -->
+        <div>
+            <h3 class="text-lg font-bold mb-3 flex items-center gap-2">
+                <span class="material-icons-round text-red-500">priority_high</span> Precisam de Apoio
+            </h3>
+            <div class="flex flex-col gap-3">
+                <div *ngFor="let school of data.schoolsNeedingSupport"
+                    class="flex items-center justify-between p-4 bg-white dark:bg-gray-800 rounded-xl border border-red-200 dark:border-red-900/30">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="w-8 h-8 rounded-full bg-red-100 text-red-600 flex items-center justify-center font-bold">
+                            !
+                        </div>
+                        <div>
+                            <p class="font-bold">{{ school.name }}</p>
+                            <p class="text-xs text-gray-500">{{ school.city }}</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p class="font-bold text-red-500">{{ school.averageScore | number:'1.0-1' }} pts</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

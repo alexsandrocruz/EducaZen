@@ -11,17 +11,20 @@ using Volo.Abp.Domain.Repositories;
 namespace EstudaZen.Exams;
 
 using EstudaZen.Questions;
+using EstudaZen.Students;
 
 
 [RemoteService(IsEnabled = true)]
 public class ExamAppService : ApplicationService, IExamAppService
 {
-    private readonly IRepository<Exam, Guid> _examRepository;
+    private readonly IExamRepository _examRepository;
+    private readonly IStudentRepository _studentRepository;
     private readonly ExamMapper _examMapper = new();
 
-    public ExamAppService(IRepository<Exam, Guid> examRepository)
+    public ExamAppService(IExamRepository examRepository, IStudentRepository studentRepository)
     {
         _examRepository = examRepository;
+        _studentRepository = studentRepository;
     }
 
     public async Task<PagedResultDto<ExamDto>> GetListAsync(GetExamListDto input)
@@ -137,6 +140,28 @@ public class ExamAppService : ApplicationService, IExamAppService
         entity.Unpublish();
         await _examRepository.UpdateAsync(entity, autoSave: true);
         return _examMapper.Map(entity);
+    }
+
+    [HttpGet]
+    [Route("api/app/exam/available")]
+    public async Task<List<ExamDto>> GetAvailableExamsAsync()
+    {
+        Guid? schoolId = null;
+
+        if (CurrentUser.Id.HasValue)
+        {
+            var student = await _studentRepository.FindByUserIdAsync(CurrentUser.Id.Value);
+            schoolId = student?.SchoolId;
+        }
+
+        var exams = await _examRepository.GetAvailableExamsAsync(
+            CurrentTenant.Id,
+            schoolId,
+            null, // Type (optional)
+            default
+        );
+
+        return exams.Select(_examMapper.Map).ToList();
     }
 
     [Route("api/app/exam/{id}/generate-questions")]

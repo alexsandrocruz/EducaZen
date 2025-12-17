@@ -32,6 +32,11 @@ public class StudentAuthAppService : ApplicationService, IStudentAuthAppService
 
     public async Task RegisterAsync(RegisterStudentDto input)
     {
+        // TODO: Reimplementar com lógica de código de escola
+        // Ver student-registration-plan.md para implementação completa
+        throw new NotImplementedException("RegisterAsync será reimplementado com lógica de código de escola");
+        
+        /*
         // 1. Validate School
         var school = await _schoolRepository.GetAsync(input.SchoolId);
         if (school == null)
@@ -76,6 +81,7 @@ public class StudentAuthAppService : ApplicationService, IStudentAuthAppService
 
             await _studentRepository.InsertAsync(student);
         }
+        */
     }
 
     public async Task<ListResultDto<SchoolDto>> GetSchoolsLookupAsync(string? filter = null)

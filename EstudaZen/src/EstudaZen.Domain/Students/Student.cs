@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using EstudaZen.Schools;
 using Volo.Abp.Domain.Entities.Auditing;
 using Volo.Abp.MultiTenancy;
@@ -15,10 +16,10 @@ public class Student : FullAuditedAggregateRoot<Guid>, IMultiTenant
     /// <summary>
     /// Link to ABP IdentityUser
     /// </summary>
-    public Guid UserId { get; private set; }
+    public Guid UserId { get; set; }
 
     /// <summary>
-    /// Optional school association
+    /// Optional school association - NULL = aluno cliente direto do Host
     /// </summary>
     public Guid? SchoolId { get; set; }
     public School? School { get; set; }
@@ -76,9 +77,9 @@ public class Student : FullAuditedAggregateRoot<Guid>, IMultiTenant
     public DateTime? EnrollmentDate { get; set; }
 
     /// <summary>
-    /// Student status
+    /// Student status - PENDING (aguardando aprovação), APPROVED, REJECTED
     /// </summary>
-    public StudentStatus Status { get; set; } = StudentStatus.Active;
+    public StudentStatus Status { get; set; } = StudentStatus.APPROVED;
 
     #endregion
 
@@ -156,6 +157,7 @@ public class Student : FullAuditedAggregateRoot<Guid>, IMultiTenant
     {
         UserId = userId;
         TenantId = tenantId;
+        Status = StudentStatus.APPROVED; // Default: aprovado
     }
 
     /// <summary>

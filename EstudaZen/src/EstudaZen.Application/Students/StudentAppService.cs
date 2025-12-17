@@ -199,4 +199,34 @@ public class StudentAppService : ApplicationService, IStudentAppService
     {
         await _studentRepository.DeleteAsync(id);
     }
+
+    // Métodos para aprovação de alunos
+
+    [Authorize(EstudaZenPermissions.Students.Default)]
+    public async Task<List<PendingStudentDto>> GetPendingStudentsAsync()
+    {
+        // Buscar alunos PENDING do tenant atual
+        var pendingStudents = await _studentRepository.GetListAsync(
+            s => s.Status == StudentStatus.PENDING
+        );
+
+        return ObjectMapper.Map<List<Student>, List<PendingStudentDto>>(pendingStudents);
+    }
+
+    [Authorize(EstudaZenPermissions.Students.Edit)]
+    public async Task ApproveStudentAsync(ApproveStudentDto input)
+    {
+        var student = await _studentRepository.GetAsync(input.StudentId);
+
+        // Verificar se student pertence ao tenant atual (segurança)
+        if (student.TenantId != CurrentTenant.Id)
+        {
+            throw new Volo.Abp.BusinessException("EstudaZen:AccessDenied")
+                .WithData("message", "Acesso negado!");
+        }
+
+        student.Status = input.Approved ? StudentStatus.APPROVED : StudentStatus.REJECTED;
+
+        await _studentRepository.UpdateAsync(student);
+    }
 }

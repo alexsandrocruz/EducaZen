@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using Volo.Abp.Domain.Entities.Auditing;
 using Volo.Abp.MultiTenancy;
 
@@ -17,9 +18,11 @@ public class School : FullAuditedAggregateRoot<Guid>, IMultiTenant
     public string Name { get; private set; } = null!;
 
     /// <summary>
-    /// Official school code (INEP or local)
+    /// Official school code (INEP or local) - usado para registro de alunos
     /// </summary>
-    public string? Code { get; set; }
+    [Required]
+    [MaxLength(20)]
+    public string Code { get; set; } = null!;
 
     /// <summary>
     /// School CNPJ

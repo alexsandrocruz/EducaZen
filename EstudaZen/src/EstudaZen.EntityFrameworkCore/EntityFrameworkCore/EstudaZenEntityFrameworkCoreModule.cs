@@ -20,6 +20,7 @@ using EstudaZen.Simulados;
 using EstudaZen.Students;
 using EstudaZen.Subjects;
 using EstudaZen.Subscriptions;
+using EstudaZen.Exams;
 
 namespace EstudaZen.EntityFrameworkCore;
 
@@ -61,6 +62,7 @@ public class EstudaZenEntityFrameworkCoreModule : AbpModule
             options.AddRepository<Quiz, EfCoreQuizRepository>();
             options.AddRepository<Simulado, EfCoreSimuladoRepository>();
             options.AddRepository<Subscription, EfCoreSubscriptionRepository>();
+            options.AddRepository<Exam, EfCoreExamRepository>();
         });
 
         if (AbpStudioAnalyzeHelper.IsInAnalyzeMode)

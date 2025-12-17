@@ -30,11 +30,20 @@
             font-size: 18px;
         }
     }
+}
 
+.header-info {
     h1 {
-        font-size: $zen-text-3xl;
-        font-weight: $zen-font-extrabold;
-        color: $zen-text-primary;
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: var(--zen-text-primary);
+        margin: 0;
+    }
+
+    .school-name {
+        color: var(--zen-primary);
+        font-size: 0.95rem;
+        font-weight: 600;
         margin: 0;
     }
 }

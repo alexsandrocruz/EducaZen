@@ -4,7 +4,7 @@ const baseUrl = 'http://localhost:4200';
 
 const oAuthConfig = {
   issuer: 'https://localhost:44334/',
-  redirectUri: baseUrl,
+  redirectUri: baseUrl + '/dashboard',
   clientId: 'EstudaZen_App',
   responseType: 'code',
   scope: 'offline_access EstudaZen',

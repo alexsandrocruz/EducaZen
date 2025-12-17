@@ -1,0 +1,91 @@
+<div class="admin-container">
+    <div class="form-header">
+        <button class="back-link" (click)="goBack()">
+            <span class="material-icons-round">arrow_back</span>
+            Voltar para Escolas
+        </button>
+        <div class="header-info">
+            <h1>Turmas da Escola</h1>
+            <p class="school-name" *ngIf="school">{{ school.name }}</p>
+        </div>
+    </div>
+
+    <div class="admin-header">
+        <div class="stats-info" *ngIf="!loading">
+            <span class="stats-badge">
+                <span class="material-icons-round">groups</span>
+                {{ classes.totalCount }} turma(s)
+            </span>
+        </div>
+        <button class="zen-btn zen-btn--primary" (click)="createClass()">
+            <span class="material-icons-round">add</span>
+            Nova Turma
+        </button>
+    </div>
+
+    <div class="admin-search">
+        <div class="zen-input-group">
+            <span class="material-icons-round input-icon">search</span>
+            <input class="zen-input zen-input--icon" type="text" placeholder="Buscar turmas..." [(ngModel)]="searchTerm"
+                (keyup.enter)="loadClasses()" />
+        </div>
+    </div>
+
+    <div *ngIf="loading" class="loading-state">
+        <div class="spinner"></div>
+        <p>Carregando turmas...</p>
+    </div>
+
+    <div *ngIf="!loading" class="data-table-container">
+        <table class="zen-table">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Código</th>
+                    <th>Série</th>
+                    <th>Turno</th>
+                    <th>Ano Letivo</th>
+                    <th>Status</th>
+                    <th class="text-right">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let cls of classes.items">
+                    <td style="font-weight: 500;">{{cls.name}}</td>
+                    <td><span class="badge-code">{{cls.code}}</span></td>
+                    <td>{{getGradeLevelLabel(cls.gradeLevel)}}</td>
+                    <td>{{getShiftLabel(cls.shift)}}</td>
+                    <td>{{cls.schoolYear}}</td>
+                    <td>
+                        <span class="status-badge" [class.active]="cls.isActive" [class.inactive]="!cls.isActive">
+                            {{ cls.isActive ? 'Ativa' : 'Inativa' }}
+                        </span>
+                    </td>
+                    <td class="text-right">
+                        <div class="action-buttons">
+                            <button class="zen-btn-icon zen-btn-icon--primary" (click)="editClass(cls.id!)"
+                                title="Editar">
+                                <span class="material-icons-round">edit</span>
+                            </button>
+                            <button class="zen-btn-icon zen-btn-icon--danger" (click)="deleteClass(cls)"
+                                title="Excluir">
+                                <span class="material-icons-round">delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <tr *ngIf="classes.totalCount === 0">
+                    <td colspan="7" class="empty-state">
+                        <div class="empty-state-content">
+                            <span class="material-icons-round empty-icon">school</span>
+                            <p>Nenhuma turma cadastrada para esta escola</p>
+                            <button class="zen-btn zen-btn--primary" (click)="createClass()">
+                                Criar primeira turma
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

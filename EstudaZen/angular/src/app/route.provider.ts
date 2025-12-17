@@ -11,7 +11,7 @@ function configureRoutes() {
   const routes = inject(RoutesService);
   routes.add([
     {
-      path: '/',
+      path: '/dashboard',
       name: '::Menu:Home',
       iconClass: 'fas fa-home',
       order: 1,
@@ -49,19 +49,11 @@ function configureRoutes() {
       layout: eLayoutType.application,
     },
     {
-      path: '/admin/classes',
-      name: 'Turmas',
-      parentName: 'Administração',
-      iconClass: 'fas fa-users',
-      order: 3,
-      layout: eLayoutType.application,
-    },
-    {
       path: '/admin/students',
       name: 'Alunos',
       parentName: 'Administração',
       iconClass: 'fas fa-user-graduate',
-      order: 4,
+      order: 3,
       layout: eLayoutType.application,
     },
     {
@@ -69,7 +61,7 @@ function configureRoutes() {
       name: 'Escolas',
       parentName: 'Administração',
       iconClass: 'fas fa-university',
-      order: 5,
+      order: 4,
       layout: eLayoutType.application,
       requiredPolicy: 'EstudaZen.Schools',
     },
@@ -78,7 +70,7 @@ function configureRoutes() {
       name: 'Exames e Simulados',
       parentName: 'Administração',
       iconClass: 'fas fa-file-alt',
-      order: 6,
+      order: 5,
       layout: eLayoutType.application,
     },
   ]);

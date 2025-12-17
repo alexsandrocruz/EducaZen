@@ -1,0 +1,298 @@
+@import '../../../../styles/zen-design-tokens';
+
+.admin-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: $zen-space-8 $zen-space-6;
+}
+
+.form-header {
+    display: flex;
+    align-items: center;
+    gap: $zen-space-4;
+    margin-bottom: $zen-space-6;
+}
+
+.back-link {
+    display: flex;
+    align-items: center;
+    gap: $zen-space-2;
+    background: none;
+    border: none;
+    color: $zen-text-secondary;
+    font-size: $zen-text-sm;
+    cursor: pointer;
+    padding: 0;
+    white-space: nowrap;
+
+    &:hover {
+        color: $zen-primary;
+    }
+}
+
+.header-info {
+    h1 {
+        font-size: $zen-text-2xl;
+        font-weight: $zen-font-extrabold;
+        color: $zen-text-primary;
+        margin: 0;
+    }
+
+    .school-name {
+        color: $zen-primary;
+        font-size: $zen-text-base;
+        font-weight: $zen-font-semibold;
+        margin: 0;
+    }
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $zen-space-6;
+}
+
+.stats-info {
+    display: flex;
+    gap: $zen-space-4;
+}
+
+.stats-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: $zen-space-2;
+    background: $zen-primary-light;
+    color: $zen-primary;
+    padding: $zen-space-2 $zen-space-4;
+    border-radius: $zen-radius-full;
+    font-weight: $zen-font-semibold;
+    font-size: $zen-text-sm;
+
+    .material-icons-round {
+        font-size: 18px;
+    }
+}
+
+.admin-search {
+    margin-bottom: $zen-space-6;
+    max-width: 500px;
+}
+
+.zen-input-group {
+    position: relative;
+
+    .input-icon {
+        position: absolute;
+        left: $zen-space-4;
+        top: 50%;
+        transform: translateY(-50%);
+        color: $zen-text-muted;
+        pointer-events: none;
+    }
+}
+
+.zen-input {
+    width: 100%;
+    padding: $zen-space-4 $zen-space-5;
+    border-radius: $zen-radius-lg;
+    border: 2px solid transparent;
+    background: $zen-input-light;
+    font-size: $zen-text-base;
+    transition: all $zen-transition-base;
+
+    &--icon {
+        padding-left: 3rem;
+    }
+
+    &:focus {
+        outline: none;
+        border-color: $zen-primary;
+        background: white;
+    }
+}
+
+.loading-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: $zen-space-12;
+    color: $zen-text-secondary;
+
+    .spinner {
+        width: 48px;
+        height: 48px;
+        border: 4px solid $zen-input-light;
+        border-top-color: $zen-primary;
+        border-radius: $zen-radius-full;
+        animation: spin 1s linear infinite;
+        margin-bottom: $zen-space-4;
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.data-table-container {
+    background: white;
+    border-radius: $zen-radius-xl;
+    box-shadow: $zen-shadow-soft;
+    overflow: hidden;
+}
+
+.zen-table {
+    width: 100%;
+    border-collapse: collapse;
+
+    thead {
+        background: $zen-bg-light;
+
+        th {
+            padding: $zen-space-4 $zen-space-6;
+            text-align: left;
+            font-size: $zen-text-sm;
+            font-weight: $zen-font-bold;
+            color: $zen-text-secondary;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+
+            &.text-right {
+                text-align: right;
+            }
+        }
+    }
+
+    tbody {
+        tr {
+            border-bottom: 1px solid $zen-input-light;
+            transition: background-color $zen-transition-base;
+
+            &:hover {
+                background: rgba($zen-primary, 0.02);
+            }
+        }
+
+        td {
+            padding: $zen-space-5 $zen-space-6;
+            color: $zen-text-primary;
+
+            &.text-right {
+                text-align: right;
+            }
+        }
+    }
+}
+
+.badge-code {
+    background: $zen-input-light;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-family: monospace;
+    font-size: 13px;
+    color: $zen-text-secondary;
+}
+
+.status-badge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+
+    &.active {
+        background: rgba($zen-success, 0.1);
+        color: $zen-success;
+    }
+
+    &.inactive {
+        background: rgba($zen-error, 0.1);
+        color: $zen-error;
+    }
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.zen-btn-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    .material-icons-round {
+        font-size: 18px;
+    }
+
+    &--primary {
+        background: rgba($zen-primary, 0.1);
+        color: $zen-primary;
+
+        &:hover {
+            background: $zen-primary;
+            color: white;
+        }
+    }
+
+    &--danger {
+        background: rgba($zen-error, 0.1);
+        color: $zen-error;
+
+        &:hover {
+            background: $zen-error;
+            color: white;
+        }
+    }
+}
+
+.zen-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: $zen-space-2;
+    padding: $zen-space-4 $zen-space-6;
+    border-radius: $zen-radius-xl;
+    font-weight: $zen-font-bold;
+    font-size: $zen-text-base;
+    border: none;
+    cursor: pointer;
+    transition: all $zen-transition-base;
+
+    &--primary {
+        background: linear-gradient(135deg, $zen-primary 0%, $zen-primary-hover 100%);
+        color: white;
+        box-shadow: $zen-shadow-primary;
+
+        &:hover {
+            box-shadow: $zen-shadow-glow;
+            transform: translateY(-1px);
+        }
+    }
+}
+
+.empty-state {
+    text-align: center;
+    padding: $zen-space-12 !important;
+}
+
+.empty-state-content {
+    .empty-icon {
+        font-size: 64px;
+        color: $zen-text-muted;
+        margin-bottom: $zen-space-4;
+    }
+
+    p {
+        color: $zen-text-secondary;
+        margin-bottom: $zen-space-6;
+    }
+}

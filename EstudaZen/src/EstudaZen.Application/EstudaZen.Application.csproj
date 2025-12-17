@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
     <ProjectReference Include="..\EstudaZen.Domain\EstudaZen.Domain.csproj" />
     <ProjectReference Include="..\EstudaZen.Application.Contracts\EstudaZen.Application.Contracts.csproj" />
   </ItemGroup>

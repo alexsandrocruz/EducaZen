@@ -1,0 +1,161 @@
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-[#130b1b] py-20">
+    <!-- Ambient Background Glows -->
+    <div
+        class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-primary/20 rounded-full blur-[120px] pointer-events-none">
+    </div>
+    <div
+        class="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] bg-[#0ea5e9]/10 rounded-full blur-[100px] pointer-events-none">
+    </div>
+
+    <!-- HeadlineText -->
+    <div class="px-4 text-center relative z-10">
+        <div
+            class="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 mb-4">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-primary">Novos Recursos</span>
+        </div>
+        <h2 class="text-white tracking-tight text-[32px] md:text-4xl font-extrabold leading-[1.1] mb-3">
+            Invista na sua <span
+                class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-[#0ea5e9]">aprovação</span>
+        </h2>
+        <p class="text-gray-400 text-base font-normal leading-relaxed max-w-md mx-auto">
+            Planos flexíveis para estudantes e soluções multi-tenant completas para prefeituras.
+        </p>
+    </div>
+
+    <!-- SegmentedButtons (Toggle) -->
+    <div class="flex px-4 py-8 justify-center relative z-10">
+        <div
+            class="relative flex h-12 w-full max-w-[340px] items-center justify-center rounded-full bg-[#1f152b] border border-white/10 p-1">
+            <button (click)="setBilling('monthly')" [class.bg-white-10-force]="billingCycle === 'monthly'"
+                class="flex-1 flex h-full w-full items-center justify-center rounded-full text-gray-400 font-medium text-sm transition-all duration-300 hover:text-white"
+                [ngClass]="{'text-white bg-white/10': billingCycle === 'monthly'}">
+                Mensal
+            </button>
+            <button (click)="setBilling('annual')" [class.bg-white-10-force]="billingCycle === 'annual'"
+                class="flex-1 flex h-full w-full items-center justify-center rounded-full text-gray-400 font-medium text-sm transition-all duration-300 hover:text-white"
+                [ngClass]="{'text-white bg-white/10': billingCycle === 'annual'}">
+                Anual <span class="ml-1 text-[10px] text-green-400 font-bold">-20%</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- PricingCards -->
+    <div class="px-4 pb-12 w-full max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+            <!-- Card 1: Estudante -->
+            <div
+                class="group relative flex flex-col gap-5 rounded-2xl border border-white/5 bg-[#1f152b] p-6 transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5">
+                <div class="flex flex-col gap-2">
+                    <h3 class="text-gray-300 text-lg font-semibold">Estudante</h3>
+                    <div class="flex items-baseline gap-1">
+                        <span class="text-white text-4xl font-bold tracking-tight">Grátis</span>
+                        <span class="text-gray-500 text-sm font-medium">/para sempre</span>
+                    </div>
+                    <p class="text-gray-400 text-sm mt-1">Para quem está começando a jornada de estudos.</p>
+                </div>
+                <div class="h-px w-full bg-white/5"></div>
+                <ul class="flex flex-col gap-3 flex-1">
+                    <li class="flex gap-3 text-sm text-gray-300">
+                        <span class="material-icons text-primary text-[20px]">check_circle</span>
+                        Simulados básicos diários
+                    </li>
+                    <li class="flex gap-3 text-sm text-gray-300">
+                        <span class="material-icons text-primary text-[20px]">check_circle</span>
+                        Histórico de 7 dias
+                    </li>
+                    <li class="flex gap-3 text-sm text-gray-300">
+                        <span class="material-icons text-primary text-[20px]">check_circle</span>
+                        Acesso à comunidade
+                    </li>
+                </ul>
+                <a href="/account/register"
+                    class="mt-auto block text-center w-full rounded-xl bg-white/5 py-3 text-white text-sm font-bold transition-colors hover:bg-white/10 border border-white/5">
+                    Criar conta grátis
+                </a>
+            </div>
+
+            <!-- Card 2: Pro (Highlighted) -->
+            <div
+                class="group relative flex flex-col gap-5 rounded-2xl bg-[#1f152b] p-6 shadow-2xl shadow-primary/10 ring-1 ring-primary overflow-hidden transform md:-translate-y-4">
+                <!-- Gradient Top Border/Glow -->
+                <div
+                    class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-[#0ea5e9] to-primary opacity-80">
+                </div>
+                <div
+                    class="absolute top-0 right-0 rounded-bl-xl bg-gradient-to-r from-primary to-[#0ea5e9] px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white shadow-lg">
+                    Mais Popular
+                </div>
+                <div class="flex flex-col gap-2 relative z-10">
+                    <h3 class="text-white text-lg font-bold flex items-center gap-2">
+                        Pro
+                        <span class="material-icons text-yellow-400 text-[18px]">star</span>
+                    </h3>
+                    <div class="flex items-baseline gap-1">
+                        <span class="text-white text-5xl font-extrabold tracking-tight">
+                            {{ billingCycle === 'monthly' ? 'R$ 29' : 'R$ 24' }}<small class="text-2xl">,90</small>
+                        </span>
+                        <span class="text-gray-400 text-sm font-medium">/mês</span>
+                    </div>
+                    <p class="text-gray-300 text-sm mt-1">Acelere sua aprovação com ferramentas de IA.</p>
+                </div>
+                <div class="h-px w-full bg-gradient-to-r from-primary/50 to-transparent"></div>
+                <ul class="flex flex-col gap-3 flex-1 relative z-10">
+                    <li class="flex gap-3 text-sm text-white font-medium">
+                        <span class="material-icons text-[#0ea5e9] text-[20px]">check_circle</span>
+                        Simulados ilimitados
+                    </li>
+                    <li class="flex gap-3 text-sm text-white font-medium">
+                        <span class="material-icons text-[#0ea5e9] text-[20px]">check_circle</span>
+                        IA Tutora Pessoal
+                    </li>
+                    <li class="flex gap-3 text-sm text-white font-medium">
+                        <span class="material-icons text-[#0ea5e9] text-[20px]">check_circle</span>
+                        Análise de desempenho avançada
+                    </li>
+                </ul>
+                <a href="/account/register"
+                    class="mt-auto w-full block text-center rounded-xl bg-gradient-to-r from-primary to-[#0ea5e9] py-3 text-white text-sm font-bold shadow-lg shadow-primary/25 transition-transform active:scale-[0.98] hover:shadow-primary/40">
+                    Assinar Pro Agora
+                </a>
+                <!-- Decorative Background Blob inside card -->
+                <div
+                    class="absolute -bottom-10 -right-10 w-32 h-32 bg-primary/20 rounded-full blur-2xl pointer-events-none">
+                </div>
+            </div>
+
+            <!-- Card 3: Prefeitura (Enterprise) -->
+            <div
+                class="group relative flex flex-col gap-5 rounded-2xl border border-white/5 bg-[#1f152b] p-6 transition-all duration-300 hover:border-[#0ea5e9]/30">
+                <div class="absolute top-4 right-4 text-[#0ea5e9]/20 group-hover:text-[#0ea5e9]/40 transition-colors">
+                    <span class="material-icons text-[48px]">account_balance</span>
+                </div>
+                <div class="flex flex-col gap-2 relative z-10">
+                    <h3 class="text-gray-300 text-lg font-semibold">Prefeitura</h3>
+                    <div class="flex items-baseline gap-1">
+                        <span class="text-white text-3xl font-bold tracking-tight">Sob Consulta</span>
+                    </div>
+                    <p class="text-gray-400 text-sm mt-1">Solução Multi-tenant para gestão educacional municipal.</p>
+                </div>
+                <div class="h-px w-full bg-white/5"></div>
+                <ul class="flex flex-col gap-3 flex-1">
+                    <li class="flex gap-3 text-sm text-gray-300">
+                        <span class="material-icons text-[#0ea5e9] text-[20px]">verified</span>
+                        Múltiplos usuários e escolas
+                    </li>
+                    <li class="flex gap-3 text-sm text-gray-300">
+                        <span class="material-icons text-[#0ea5e9] text-[20px]">verified</span>
+                        Painel administrativo completo
+                    </li>
+                    <li class="flex gap-3 text-sm text-gray-300">
+                        <span class="material-icons text-[#0ea5e9] text-[20px]">verified</span>
+                        Relatórios de gestão em tempo real
+                    </li>
+                </ul>
+                <button
+                    class="mt-auto w-full rounded-xl border border-[#0ea5e9]/50 text-[#0ea5e9] bg-[#0ea5e9]/5 py-3 text-sm font-bold transition-colors hover:bg-[#0ea5e9]/10 hover:text-white hover:border-[#0ea5e9]">
+                    Falar com Consultor
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

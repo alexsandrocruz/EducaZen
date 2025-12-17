@@ -33,33 +33,39 @@
     display: flex;
     gap: 1rem;
 
-    .search-box {
+    .zen-input-group {
         position: relative;
         flex: 1;
         max-width: 300px;
 
-        .material-icons-round {
+        .input-icon {
             position: absolute;
-            left: 12px;
+            left: $zen-space-4;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--zen-text-secondary);
-            font-size: 20px;
+            color: $zen-text-muted;
+            pointer-events: none;
         }
+    }
+}
 
-        input {
-            width: 100%;
-            padding: 10px 10px 10px 40px;
-            border-radius: 8px;
-            border: 1px solid var(--zen-border-color);
-            outline: none;
-            transition: all 0.2s;
+.zen-input {
+    width: 100%;
+    padding: $zen-space-4 $zen-space-5;
+    border-radius: $zen-radius-lg;
+    border: 2px solid transparent;
+    background: $zen-input-light;
+    font-size: $zen-text-base;
+    transition: all $zen-transition-base;
 
-            &:focus {
-                border-color: var(--zen-primary);
-                box-shadow: 0 0 0 3px rgba(var(--zen-primary-rgb), 0.1);
-            }
-        }
+    &--icon {
+        padding-left: 3rem;
+    }
+
+    &:focus {
+        outline: none;
+        border-color: $zen-primary;
+        background: white;
     }
 }
 
@@ -141,30 +147,5 @@
     &.status-default {
         background-color: rgba(0, 0, 0, 0.05);
         color: #666;
-    }
-}
-
-.actions-cell {
-    display: flex;
-    gap: 8px;
-}
-
-.icon-btn {
-    border: none;
-    background: transparent;
-    color: var(--zen-text-secondary);
-    cursor: pointer;
-    padding: 6px;
-    border-radius: 8px;
-    transition: all 0.2s;
-
-    &:hover {
-        background-color: rgba(0, 0, 0, 0.05);
-        color: var(--zen-primary);
-    }
-
-    &.delete:hover {
-        color: #ef4444;
-        background-color: rgba(239, 68, 68, 0.1);
     }
 }

@@ -462,6 +462,9 @@ namespace EstudaZen.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("LastModifierId");
 
+                    b.Property<DateTime?>("LastUsedAt")
+                        .HasColumnType("timestamp without time zone");
+
                     b.Property<string>("MediaUrl")
                         .HasMaxLength(500)
                         .HasColumnType("character varying(500)");
@@ -484,6 +487,9 @@ namespace EstudaZen.Migrations
                         .HasColumnName("TenantId");
 
                     b.Property<int>("TimeLimitSeconds")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("UsageCount")
                         .HasColumnType("integer");
 
                     b.Property<int?>("Year")

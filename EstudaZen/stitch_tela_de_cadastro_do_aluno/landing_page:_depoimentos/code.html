@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VestiQuiz - Depoimentos</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7f13ec",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#191022",
+                        "surface-dark": "#231630",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "2xl": "2rem", "full": "9999px"},
+                    backgroundImage: {
+                        'vibrant-gradient': 'linear-gradient(135deg, rgba(127, 19, 236, 0.15) 0%, rgba(56, 189, 248, 0.1) 100%)',
+                        'card-gradient': 'linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%)',
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar hiding for cleaner mobile look */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        .glass-card {
+            background: linear-gradient(180deg, rgba(35, 22, 48, 0.7) 0%, rgba(25, 16, 34, 0.9) 100%);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="antialiased text-slate-50 bg-background-light dark:bg-background-dark font-display selection:bg-primary selection:text-white">
+<!-- Background Decoration -->
+<div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+<div class="absolute -top-[20%] -right-[10%] w-[500px] h-[500px] rounded-full bg-primary/20 blur-[100px]"></div>
+<div class="absolute top-[40%] -left-[20%] w-[400px] h-[400px] rounded-full bg-blue-500/10 blur-[80px]"></div>
+<div class="absolute bottom-[10%] right-[10%] w-[300px] h-[300px] rounded-full bg-primary/15 blur-[60px]"></div>
+</div>
+<!-- Main Container -->
+<div class="relative z-10 flex flex-col min-h-screen w-full max-w-md mx-auto overflow-x-hidden border-x border-white/5 bg-background-light dark:bg-background-dark">
+<!-- Top App Bar -->
+<header class="sticky top-0 z-50 flex items-center justify-between p-4 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-white/5">
+<button class="flex items-center justify-center size-10 text-white rounded-full hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined text-[24px]">menu</span>
+</button>
+<div class="flex items-center gap-2">
+<div class="size-6 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px] text-white">school</span>
+</div>
+<h1 class="text-white text-lg font-bold tracking-tight">VestiQuiz</h1>
+</div>
+<button class="h-9 px-4 rounded-full bg-white/5 hover:bg-white/10 text-[#ad92c9] text-sm font-bold transition-colors">
+                Login
+            </button>
+</header>
+<!-- Hero Text -->
+<section class="flex flex-col items-center px-6 pt-8 pb-4 text-center">
+<div class="inline-flex items-center gap-1.5 px-3 py-1 mb-4 rounded-full bg-primary/10 border border-primary/20">
+<span class="material-symbols-outlined text-[14px] text-primary fill-1">verified</span>
+<span class="text-xs font-semibold text-primary uppercase tracking-wider">Resultados Comprovados</span>
+</div>
+<h2 class="text-white text-3xl font-bold leading-tight mb-3">
+                Quem usa, <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-400">recomenda</span>
+</h2>
+<p class="text-slate-400 text-base font-medium leading-relaxed max-w-[320px]">
+                Veja como o VestiQuiz está transformando a gestão educacional em todo o país com tecnologia de ponta.
+            </p>
+</section>
+<!-- Reviews / Testimonials -->
+<section class="flex flex-col gap-5 p-5 pb-8">
+<!-- Card 1 -->
+<article class="glass-card rounded-2xl p-5 hover:border-primary/30 transition-all duration-300 group">
+<div class="flex items-start justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="relative">
+<div class="size-12 rounded-full bg-cover bg-center border-2 border-primary/20 group-hover:border-primary/50 transition-colors" data-alt="Portrait of a female director smiling" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBC_RSAuCzVZT-LiGTEcW0QU-dxiitMXGJmOwnNgxP28O5zVegEUeWkxYxp1n4EQ_acnhAmGp6s9dpq24H2EdQ3YSB3EmdGe4d0pUnC2ycPeYBBXA22CP4jtvLBkQVp6mTfsw15QDZnfQghixKYBkx4eTNZHhqztNEPxYQOWwAAJ6SBYZo6OBmfWBpoZ3yOXhILkz9hJPG57EB1onmPXqtNCdfuWg0AipYxm3RPyA1n3kHbRD72ne3_er33y5_fj1H4WwjjtaFvKk8');"></div>
+<div class="absolute -bottom-1 -right-1 bg-primary rounded-full p-0.5 border-2 border-[#191022]">
+<span class="material-symbols-outlined text-[12px] text-white">verified_user</span>
+</div>
+</div>
+<div>
+<h3 class="text-white font-semibold text-base">Ana Silva</h3>
+<p class="text-primary text-xs font-medium uppercase tracking-wide">Diretora Municipal</p>
+</div>
+</div>
+<span class="text-slate-500 text-xs font-medium">Há 2 dias</span>
+</div>
+<div class="flex gap-1 mb-3">
+<span class="material-symbols-outlined text-[20px] text-primary fill-1">star</span>
+<span class="material-symbols-outlined text-[20px] text-primary fill-1">star</span>
+<span class="material-symbols-outlined text-[20px] text-primary fill-1">star</span>
+<span class="material-symbols-outlined text-[20px] text-primary fill-1">star</span>
+<span class="material-symbols-outlined text-[20px] text-primary fill-1">star</span>
+</div>
+<p class="text-slate-300 text-sm leading-relaxed mb-5">
+                    "O VestiQuiz revolucionou a gestão das nossas provas municipais. Economizamos tempo e recursos valiosos que agora são investidos onde realmente importa: nos alunos."
+                </p>
+<div class="flex items-center gap-4 pt-4 border-t border-white/5">
+<button class="flex items-center gap-2 text-slate-400 hover:text-white transition-colors group/btn">
+<span class="material-symbols-outlined text-[18px] group-hover/btn:scale-110 transition-transform">thumb_up</span>
+<span class="text-xs font-medium">12 Útil</span>
+</button>
+<button class="flex items-center gap-2 text-slate-400 hover:text-white transition-colors group/btn">
+<span class="material-symbols-outlined text-[18px] group-hover/btn:scale-110 transition-transform">share</span>
+<span class="text-xs font-medium">Compartilhar</span>
+</button>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="glass-card rounded-2xl p-5 hover:border-primary/30 transition-all duration-300 group">
+<div class="flex items-start justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="relative">
+<div class="size-12 rounded-full bg-cover bg-center border-2 border-primary/20 group-hover:border-primary/50 transition-colors" data-alt="Portrait of a male education secretary in a suit" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuApUFPRy9DcifkRoW2dHfVhq2tZjuGrp2birnrR3feU7SPSTQwOavPuJZBDYSbBXVuFxlXI50yzQoLfBVKME92iSGNtlATNfBovU1NfKdprIiYj7dyMfjBvVSZqj1zTsi9D4Vavt1y3nSU3holv0e6cUNmibS5GodSVTwglBmHi03Hx3DCVrEv-7I_y-sAeFQ7D3mtA4K9LmCSUJIeb8K2DaZjk63WAdHBxexvbSU5n3hqAYTBJud_IEU34HiRNi9fzQX0-OLSOtio');"></div>
+</div>
+<div>
+<h3 class="text-white font-semibold text-base">Carlos Souza</h3>
+<p class="text-primary text-xs font-medium uppercase tracking-wide">Sec. de Educação</p>
+</div>
+</div>
+<span class="text-slate-500 text-xs font-medium">Há 1 semana</span>
+</div>
+<div class="flex gap-1 mb-3">
+<span class="material-symbols-outlined text-[20px] text-primary fill-1">star</span>
+<span class="material-symbols-outlined text-[20px] text-primary fill-1">star</span>
+<span class="material-symbols-outlined text-[20px] text-primary fill-1">star</span>
+<span class="material-symbols-outlined text-[20px] text-primary fill-1">star</span>
+<span class="material-symbols-outlined text-[20px] text-primary fill-1">star_half</span>
+</div>
+<p class="text-slate-300 text-sm leading-relaxed mb-5">
+                    "Os alunos estão mais engajados e os professores ganharam tempo com a correção automática. A interface é intuitiva e o suporte é fenomenal."
+                </p>
+<div class="flex items-center gap-4 pt-4 border-t border-white/5">
+<button class="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors group/btn">
+<span class="material-symbols-outlined text-[18px] fill-1 group-hover/btn:scale-110 transition-transform">thumb_up</span>
+<span class="text-xs font-medium">45 Útil</span>
+</button>
+<button class="flex items-center gap-2 text-slate-400 hover:text-white transition-colors group/btn">
+<span class="material-symbols-outlined text-[18px] group-hover/btn:scale-110 transition-transform">share</span>
+<span class="text-xs font-medium">Compartilhar</span>
+</button>
+</div>
+</article>
+<!-- Card 3 -->
+<article class="glass-card rounded-2xl p-5 hover:border-primary/30 transition-all duration-300 group">
+<div class="flex items-start justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="relative">
+<div class="size-12 rounded-full bg-cover bg-center border-2 border-primary/20 group-hover:border-primary/50 transition-colors" data-alt="Portrait of a female school manager smiling warmly" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBAAFprK42VxzPPDgnArtRvEkM-b2539AhFPnCHRQN29gJwBlnfF6N8xW4RgVpLgWyPjry90hTpem-taopecLEHRTieXbNyFMkh879QePkByIcxQw_PvgVASS1vaQrgpWTKbGnpMRGJsyClxJizcLg6crq1jxy_Y9PnxIysWc5grk-FxzyJkS0mcKJmBxjzaaBLHr-wxW3R4kIryztwCxOlkQDTerQPL9GgKvTXGnEsNgoskNCjxJCRy8q_tzmGXLz3ic1LIVF8kAo');"></div>
+</div>
+<div>
+<h3 class="text-white font-semibold text-base">Marta Oliveira</h3>
+<p class="text-primary text-xs font-medium uppercase tracking-wide">Gestora Escolar</p>
+</div>
+</div>
+<span class="text-slate-500 text-xs font-medium">Há 2 semanas</span>
+</div>
+<div class="flex gap-1 mb-3">
+<span class="material-symbols-outlined text-[20px] text-primary fill-1">star</span>
+<span class="material-symbols-outlined text-[20px] text-primary fill-1">star</span>
+<span class="material-symbols-outlined text-[20px] text-primary fill-1">star</span>
+<span class="material-symbols-outlined text-[20px] text-primary fill-1">star</span>
+<span class="material-symbols-outlined text-[20px] text-primary fill-1">star</span>
+</div>
+<p class="text-slate-300 text-sm leading-relaxed mb-5">
+                    "Relatórios precisos em tempo real. Uma ferramenta indispensável para nossa tomada de decisão pedagógica. Recomendo fortemente!"
+                </p>
+<div class="flex items-center gap-4 pt-4 border-t border-white/5">
+<button class="flex items-center gap-2 text-slate-400 hover:text-white transition-colors group/btn">
+<span class="material-symbols-outlined text-[18px] group-hover/btn:scale-110 transition-transform">thumb_up</span>
+<span class="text-xs font-medium">30 Útil</span>
+</button>
+<button class="flex items-center gap-2 text-slate-400 hover:text-white transition-colors group/btn">
+<span class="material-symbols-outlined text-[18px] group-hover/btn:scale-110 transition-transform">share</span>
+<span class="text-xs font-medium">Compartilhar</span>
+</button>
+</div>
+</article>
+</section>
+<!-- Partners Section -->
+<section class="py-6 border-t border-white/5">
+<h3 class="text-white tracking-tight text-lg font-bold px-6 text-center mb-6">Parceiros que confiam</h3>
+<div class="grid grid-cols-4 gap-4 px-6 items-center opacity-60">
+<!-- Partner 1 -->
+<div class="aspect-square flex items-center justify-center bg-white/5 rounded-lg p-2">
+<img class="w-full h-auto opacity-70" data-alt="Abstract minimal logo of a partner institution" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbs7R3IIZp4GaSoJnPNhcJeIA9QJESIDme7YmJ96DFexY1oKR9SQ3VVxjI2MGV89YgCZpBkuD5HHvj_B2k1TeCyxldpLY8DtvLwOQlsEw3ppkb0IR--vCEsHNPJoeJArckn1DrQ9KFoSG3f6tP6hIU5twmQCPgR1GiFWtqkOEzIKoL45p6oIv6gbb-_ba6Is8Gri70peWvuo6yGc0hn4IbaY_TvWKCvMnoDrgFlIf1to5VpPR82wUINYuKrqNcBm0NSbcGnx_iIxw"/>
+</div>
+<!-- Partner 2 -->
+<div class="aspect-square flex items-center justify-center bg-white/5 rounded-lg p-2">
+<img class="w-full h-auto opacity-70" data-alt="Abstract geometric logo of a school" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaiK4BzDMk1dNcw3fuGk74kzmv0GEshWCLFxhKkYeimIPEJKz5Imf1JVnzgM1wrw_VggttmdaNLh5kS2x5V87wBmGhMP6hn5Nq-hSBQJXxboosLanYXTw8OWyi9s1cmuu5ltpksixhywqcM_WIpdpVcrwyXN0BvETODBvrFyPkWBa2JD9bOTBr5BB84tqs33OaiphqRlMCBQN3F1jyQr9YVD513R65DTVOm4KQkDRX8wtyxJFmCO6S2AAJc3krjDNfaoT4KbDELMA"/>
+</div>
+<!-- Partner 3 -->
+<div class="aspect-square flex items-center justify-center bg-white/5 rounded-lg p-2">
+<img class="w-full h-auto opacity-70" data-alt="Abstract shield logo of a municipality" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtSYOPoL6CfLrTucoxeP1uJrpFTyaa7-N_kaDWW0tsk0falaTu0mnRoZNRtPQVm_I19UbliFUZxYo2ADd6_wOIBiPVuoPphyerCKI3xGGoEw6wRLQoaYdGzTRCGiIs7FYIUwvzwIhQ87ShRjk6DY0xZ4D6pfK_qi6wTLtrT4RfC12LoeOgyJVWyHiCgjnuHtOEEVwWCPa3t_c8-VfGfQj5hxQ3JCRK-DgBkQ4tz2uxqJ5ubRpJ6WoXjkSPtxb-JlvShDQ6EjDFdyc"/>
+</div>
+<!-- Partner 4 -->
+<div class="aspect-square flex items-center justify-center bg-white/5 rounded-lg p-2">
+<img class="w-full h-auto opacity-70" data-alt="Abstract book logo of an education group" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlqTIpVHKVUSp7VcPW_w_bhiLsCkf9R9nvUEytt-_XDrA5P-M8R8xVmzUy7ex4b2zjk5-9O9TnX7AjcjzPB0eRUU7VkPZjBRrdStt70B3778NacyqP2Mu1F6kbz7UfymQEjWL-r1MNHyfnK2ocWzNHCO_3S17eLfDkN_TepmRL4RDFN1sxCV1GNARJpJ4efrkdkIzrKCW5VhMNLR-IplO0IrRPuudHNH0KZDTswB68ddcjDcnYsFiYyl3ksCsZA5cQbJzo5eOVoFs"/>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="px-6 py-8">
+<div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary to-purple-800 p-6 text-center">
+<!-- Decorative Circle -->
+<div class="absolute -top-10 -left-10 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+<div class="absolute -bottom-10 -right-10 w-32 h-32 bg-blue-500/20 rounded-full blur-2xl"></div>
+<div class="relative z-10 flex flex-col gap-4 items-center">
+<div class="bg-white/20 p-3 rounded-full backdrop-blur-sm">
+<span class="material-symbols-outlined text-white text-[28px]">rocket_launch</span>
+</div>
+<div>
+<h3 class="text-white font-bold text-xl mb-1">Pronto para inovar?</h3>
+<p class="text-white/80 text-sm">Junte-se a mais de 500 instituições.</p>
+</div>
+<button class="w-full bg-white text-primary font-bold py-3.5 px-6 rounded-xl hover:bg-slate-100 transition-colors shadow-lg active:scale-95 transform duration-100">
+                        Começar Agora
+                    </button>
+<p class="text-xs text-white/60">Teste grátis de 14 dias. Sem cartão.</p>
+</div>
+</div>
+</section>
+<!-- Spacer for safe area -->
+<div class="h-8"></div>
+</div>
+</body></html>

@@ -43,6 +43,26 @@
     }
 }
 
+.zen-input {
+    width: 100%;
+    padding: $zen-space-4 $zen-space-5;
+    border-radius: $zen-radius-lg;
+    border: 2px solid transparent;
+    background: $zen-input-light;
+    font-size: $zen-text-base;
+    transition: all $zen-transition-base;
+
+    &--icon {
+        padding-left: 3rem;
+    }
+
+    &:focus {
+        outline: none;
+        border-color: $zen-primary;
+        background: white;
+    }
+}
+
 .loading-state {
     display: flex;
     flex-direction: column;
@@ -181,6 +201,16 @@
 
         &:hover {
             background: $zen-error;
+            color: white;
+        }
+    }
+
+    &--secondary {
+        background: rgba($zen-text-secondary, 0.1);
+        color: $zen-text-secondary;
+
+        &:hover {
+            background: $zen-primary;
             color: white;
         }
     }

@@ -10,10 +10,10 @@
     <div class="zen-card">
         <!-- Filters -->
         <div class="table-filters">
-            <div class="search-box">
-                <span class="material-icons-round">search</span>
-                <input type="text" placeholder="Buscar alunos..." [(ngModel)]="searchTerm"
-                    (keyup.enter)="loadStudents()">
+            <div class="zen-input-group">
+                <span class="material-icons-round input-icon">search</span>
+                <input class="zen-input zen-input--icon" type="text" placeholder="Buscar alunos..."
+                    [(ngModel)]="searchTerm" (keyup.enter)="loadStudents()">
             </div>
         </div>
 
@@ -54,15 +54,19 @@
                             <span class="status-badge" [ngClass]="getStatusClass(student.status!)">{{
                                 getStatusLabel(student.status!) }}</span>
                         </td>
-                        <td class="actions-cell">
-                            <button *abpPermission="'EstudaZen.Students.Edit'" class="icon-btn"
-                                (click)="editStudent(student.id)">
-                                <span class="material-icons-round">edit</span>
-                            </button>
-                            <button *abpPermission="'EstudaZen.Students.Delete'" class="icon-btn delete"
-                                (click)="deleteStudent(student)">
-                                <span class="material-icons-round">delete</span>
-                            </button>
+                        <td class="text-right">
+                            <div class="action-buttons">
+                                <button *abpPermission="'EstudaZen.Students.Edit'"
+                                    class="zen-btn-icon zen-btn-icon--primary" (click)="editStudent(student.id)"
+                                    title="Editar">
+                                    <span class="material-icons-round">edit</span>
+                                </button>
+                                <button *abpPermission="'EstudaZen.Students.Delete'"
+                                    class="zen-btn-icon zen-btn-icon--danger" (click)="deleteStudent(student)"
+                                    title="Excluir">
+                                    <span class="material-icons-round">delete</span>
+                                </button>
+                            </div>
                         </td>
                     </tr>
                 </tbody>

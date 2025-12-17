@@ -61,4 +61,8 @@ export class SchoolListComponent implements OnInit {
             }
         });
     }
+
+    viewClasses(schoolId: string) {
+        this.router.navigate(['/admin/schools', schoolId, 'classes']);
+    }
 }

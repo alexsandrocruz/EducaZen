@@ -27,6 +27,9 @@ public class QuestionDto : FullAuditedEntityDto<Guid>
     [StringLength(200)]
     public string? Source { get; set; }
 
+    public DateTime? LastUsedAt { get; set; }
+    public int UsageCount { get; set; }
+
     public bool IsPublished { get; set; }
     public List<QuestionAnswerDto> Answers { get; set; } = new();
 }

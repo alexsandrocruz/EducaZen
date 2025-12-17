@@ -2,9 +2,12 @@
     <div class="form-header">
         <button class="back-link" (click)="goBack()">
             <span class="material-icons-round">arrow_back</span>
-            Voltar
+            {{ isSchoolContext ? 'Voltar para Turmas' : 'Voltar' }}
         </button>
-        <h1>{{ isEditMode ? 'Editar Turma' : 'Nova Turma' }}</h1>
+        <div class="header-info">
+            <h1>{{ isEditMode ? 'Editar Turma' : 'Nova Turma' }}</h1>
+            <p class="school-name" *ngIf="school">{{ school.name }}</p>
+        </div>
     </div>
 
     <div class="zen-card">

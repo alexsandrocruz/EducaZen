@@ -1,0 +1,199 @@
+<div class="admin-container">
+    <div class="form-header">
+        <button class="back-link" (click)="goBack()">
+            <span class="material-icons-round">arrow_back</span>
+            Voltar
+        </button>
+        <div class="header-content">
+            <h1>Questões do Simulado</h1>
+            <p *ngIf="exam" class="exam-title">{{exam.title}}</p>
+        </div>
+    </div>
+
+    <div class="stats-bar" *ngIf="exam">
+        <div class="stat">
+            <span class="stat-value">{{exam.totalQuestions}}</span>
+            <span class="stat-label">Questões</span>
+        </div>
+        <div class="stat">
+            <span class="stat-value">{{exam.totalPoints}}</span>
+            <span class="stat-label">Pontos</span>
+        </div>
+        <div class="stat">
+            <span class="stat-value">{{exam.durationMinutes}} min</span>
+            <span class="stat-label">Duração</span>
+        </div>
+
+        <div class="actions">
+            <button class="zen-btn zen-btn--secondary" (click)="showAddModal = true">
+                <span class="material-icons-round">add</span>
+                Adicionar Questão
+            </button>
+            <button class="zen-btn zen-btn--primary" (click)="showGenerateModal = true">
+                <span class="material-icons-round">auto_awesome</span>
+                Gerar Automaticamente
+            </button>
+        </div>
+    </div>
+
+    <div *ngIf="loading" class="loading-state">
+        <div class="spinner"></div>
+        <p>Carregando...</p>
+    </div>
+
+    <!-- Questions List -->
+    <div *ngIf="!loading && examQuestions.length === 0" class="empty-state">
+        <span class="material-icons-round empty-icon">quiz</span>
+        <h3>Nenhuma questão adicionada</h3>
+        <p>Use os botões acima para adicionar questões ao simulado</p>
+    </div>
+
+    <div *ngIf="!loading && examQuestions.length > 0" class="questions-list">
+        <div *ngFor="let q of examQuestions; let i = index" class="question-card">
+            <div class="question-order">{{i + 1}}</div>
+            <div class="question-content">
+                <p class="question-text">{{stripHtml(q.content) | slice:0:200}}...</p>
+                <div class="question-meta">
+                    <span class="difficulty-badge" [class]="getDifficultyClass(q.difficulty)">
+                        {{getDifficultyLabel(q.difficulty)}}
+                    </span>
+                    <span class="subject-tag">{{q.subjectName}}</span>
+                    <span class="points-tag">{{q.points}} pts</span>
+                </div>
+            </div>
+            <div class="question-actions">
+                <button class="zen-btn-icon zen-btn-icon--danger" (click)="removeQuestion(q)" title="Remover">
+                    <span class="material-icons-round">delete</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Generate Modal -->
+    <div class="modal-overlay" *ngIf="showGenerateModal" (click)="showGenerateModal = false">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+            <div class="modal-header">
+                <h2>Gerar Questões Automaticamente</h2>
+                <button class="close-btn" (click)="showGenerateModal = false">
+                    <span class="material-icons-round">close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="zen-label">Total de Questões</label>
+                    <input type="number" [(ngModel)]="generateTotal" class="zen-input" min="1" max="100">
+                </div>
+
+                <div class="form-group">
+                    <label class="zen-label">Matéria (opcional)</label>
+                    <select [(ngModel)]="generateSubjectId" class="zen-select">
+                        <option value="">Todas as matérias</option>
+                        <option *ngFor="let s of subjects" [value]="s.id">{{s.name}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="zen-label">Modo de Seleção</label>
+                    <div class="mode-toggle">
+                        <button [class.active]="generateMode === 'distribution'"
+                            (click)="generateMode = 'distribution'">Distribuição</button>
+                        <button [class.active]="generateMode === 'single'" (click)="generateMode = 'single'">Dificuldade
+                            Única</button>
+                    </div>
+                </div>
+
+                <div *ngIf="generateMode === 'distribution'" class="distribution-inputs">
+                    <div class="form-group">
+                        <label class="zen-label">Fácil (%)</label>
+                        <input type="number" [(ngModel)]="generateEasyPercent" class="zen-input" min="0" max="100">
+                    </div>
+                    <div class="form-group">
+                        <label class="zen-label">Médio (%)</label>
+                        <input type="number" [(ngModel)]="generateMediumPercent" class="zen-input" min="0" max="100">
+                    </div>
+                    <div class="form-group">
+                        <label class="zen-label">Difícil (%)</label>
+                        <input type="number" [(ngModel)]="generateHardPercent" class="zen-input" min="0" max="100">
+                    </div>
+                    <p class="hint"
+                        [class.error]="generateEasyPercent + generateMediumPercent + generateHardPercent !== 100">
+                        Total: {{generateEasyPercent + generateMediumPercent + generateHardPercent}}% (deve ser 100%)
+                    </p>
+                </div>
+
+                <div *ngIf="generateMode === 'single'" class="form-group">
+                    <label class="zen-label">Dificuldade</label>
+                    <select [(ngModel)]="generateSingleDifficulty" class="zen-select">
+                        <option [ngValue]="0">Fácil</option>
+                        <option [ngValue]="1">Médio</option>
+                        <option [ngValue]="2">Difícil</option>
+                        <option [ngValue]="3">Desafio</option>
+                    </select>
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <label class="checkbox-container">
+                        <input type="checkbox" [(ngModel)]="generateAvoidRecent">
+                        <span class="label-text">Evitar questões usadas nos últimos</span>
+                    </label>
+                    <input type="number" [(ngModel)]="generateAvoidDays" class="zen-input small"
+                        [disabled]="!generateAvoidRecent"> dias
+                </div>
+
+                <div class="form-group">
+                    <label class="zen-label">Pontos por questão</label>
+                    <input type="number" [(ngModel)]="generatePointsPerQuestion" class="zen-input" min="1">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="zen-btn zen-btn--secondary" (click)="showGenerateModal = false">Cancelar</button>
+                <button class="zen-btn zen-btn--primary" (click)="generateQuestions()">
+                    <span class="material-icons-round">auto_awesome</span>
+                    Gerar {{generateTotal}} Questões
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Question Modal -->
+    <div class="modal-overlay" *ngIf="showAddModal" (click)="showAddModal = false">
+        <div class="modal-content modal-lg" (click)="$event.stopPropagation()">
+            <div class="modal-header">
+                <h2>Adicionar Questão do Banco</h2>
+                <button class="close-btn" (click)="showAddModal = false">
+                    <span class="material-icons-round">close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="filters-row">
+                    <select [(ngModel)]="filterSubjectId" (change)="loadAvailableQuestions()" class="zen-select">
+                        <option value="">Todas as matérias</option>
+                        <option *ngFor="let s of subjects" [value]="s.id">{{s.name}}</option>
+                    </select>
+                    <select [(ngModel)]="filterDifficulty" (change)="loadAvailableQuestions()" class="zen-select">
+                        <option value="">Qualquer dificuldade</option>
+                        <option value="0">Fácil</option>
+                        <option value="1">Médio</option>
+                        <option value="2">Difícil</option>
+                    </select>
+                    <input type="text" [(ngModel)]="filterSearchTerm" (keyup.enter)="loadAvailableQuestions()"
+                        class="zen-input" placeholder="Buscar...">
+                </div>
+
+                <div class="available-questions">
+                    <div *ngFor="let q of availableQuestions" class="question-row" (click)="addQuestion(q)">
+                        <div class="question-preview">
+                            <span class="difficulty-badge" [class]="getDifficultyClass(q.difficulty!)">
+                                {{getDifficultyLabel(q.difficulty!)}}
+                            </span>
+                            <span class="question-text">{{stripHtml(q.content!) | slice:0:100}}...</span>
+                        </div>
+                        <button class="zen-btn-icon zen-btn-icon--primary">
+                            <span class="material-icons-round">add</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

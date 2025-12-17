@@ -6,6 +6,7 @@ export const colors = {
     background: {
         light: '#f7f6f8',
         dark: '#130b1b',
+        card: '#1f162b',
     },
 
     surface: {

@@ -1,9 +1,9 @@
 import { Stack } from 'expo-router';
-import { View } from 'react-native';
+import { AuthProvider } from '../src/components/AuthProvider';
 
 export default function RootLayout() {
     return (
-        <View style={{ flex: 1 }}>
+        <AuthProvider>
             <Stack
                 screenOptions={{
                     headerShown: false,
@@ -13,7 +13,8 @@ export default function RootLayout() {
             >
                 <Stack.Screen name="index" />
                 <Stack.Screen name="(auth)" />
+                <Stack.Screen name="(tabs)" />
             </Stack>
-        </View>
+        </AuthProvider>
     );
 }

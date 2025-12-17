@@ -8,10 +8,12 @@ import {
     Platform,
     StatusBar,
     TouchableOpacity,
+    Alert,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Button, Input } from '../../src/components/ui';
 import { theme } from '../../src/theme';
+import { useAuthStore } from '../../src/stores/authStore';
 
 export default function RegisterScreen() {
     const router = useRouter();
@@ -73,16 +75,33 @@ export default function RegisterScreen() {
         setLoading(true);
 
         try {
-            // TODO: API call to register
-            console.log('Registering:', formData);
+            // Usar auth store para registrar
+            const { register } = useAuthStore.getState();
 
-            // Simulate API call
-            await new Promise(resolve => setTimeout(resolve, 2000));
+            await register({
+                name: formData.fullName,
+                email: formData.email,
+                cpf: formData.cpf,
+                password: formData.password,
+                schoolCode: formData.schoolCode || undefined,
+            });
 
-            // Navigate to login or home
-            router.replace('/(auth)/login');
-        } catch (error) {
-            console.error('Registration error:', error);
+            // Mostrar mensagem de sucesso
+            if (formData.schoolCode) {
+                Alert.alert(
+                    'Registro Criado!',
+                    'Sua conta foi criada e está aguardando aprovação da escola. Você receberá uma notificação quando for aprovado.',
+                    [{ text: 'OK', onPress: () => router.replace('/(auth)/login') }]
+                );
+            } else {
+                Alert.alert(
+                    'Registro Criado!',
+                    'Sua conta foi criada com sucesso. Faça login para continuar.',
+                    [{ text: 'OK', onPress: () => router.replace('/(auth)/login') }]
+                );
+            }
+        } catch (error: any) {
+            Alert.alert('Erro', error.message || 'Erro ao registrar');
         } finally {
             setLoading(false);
         }

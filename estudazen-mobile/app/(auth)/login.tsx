@@ -8,10 +8,12 @@ import {
     Platform,
     StatusBar,
     TouchableOpacity,
+    Alert,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Button, Input, Card } from '../../src/components/ui';
 import { theme } from '../../src/theme';
+import { useAuthStore } from '../../src/stores/authStore';
 
 export default function LoginScreen() {
     const router = useRouter();
@@ -54,17 +56,15 @@ export default function LoginScreen() {
         setLoading(true);
 
         try {
-            // TODO: API call to login
-            console.log('Logging in:', formData);
+            const { login } = useAuthStore.getState();
 
-            // Simulate API call
-            await new Promise(resolve => setTimeout(resolve, 2000));
+            await login(formData.email, formData.password);
 
-            // Navigate to home (will be implemented later)
-            // router.replace('/(tabs)');
-        } catch (error) {
-            console.error('Login error:', error);
-            setErrors({ general: 'Email ou senha incorretos' });
+            // Sucesso - authStore vai atualizar isAuthenticated
+            Alert.alert('Sucesso!', 'Login realizado com sucesso!');
+            // TODO: Navegar para home screen quando estiver pronta
+        } catch (error: any) {
+            Alert.alert('Erro', error.message || 'Email ou senha incorretos');
         } finally {
             setLoading(false);
         }

@@ -52,7 +52,7 @@ export default function QuizResultsScreen() {
     const loadResults = async () => {
         try {
             setLoading(true);
-            const token = await AsyncStorage.getItem('accessToken');
+            const token = await AsyncStorage.getItem('access_token');
 
             const response = await fetch(
                 `http://localhost:5000/api/app/student-quiz/quiz-result/${quizId}`,

@@ -73,32 +73,47 @@ export default function QuizTakingScreen() {
     const loadCurrentQuestion = async () => {
         try {
             setLoading(true);
-            const token = await AsyncStorage.getItem('accessToken');
+            const token = await AsyncStorage.getItem('access_token');
 
-            const response = await fetch(
-                `http://localhost:5000/api/app/student-quiz/current-question/${quizId}`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            );
+            console.log('=== Loading Quiz Question ===');
+            console.log('Quiz ID:', quizId);
+            console.log('Token:', token ? 'Present' : 'Missing');
+
+            const url = `http://localhost:5000/api/app/student-quiz/current-question/${quizId}`;
+            console.log('Fetching URL:', url);
+
+            const response = await fetch(url, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            console.log('Response status:', response.status);
+            console.log('Response ok:', response.ok);
 
             if (!response.ok) {
-                if (response.status === 404) {
+                const errorText = await response.text();
+                console.log('Error response:', errorText);
+
+                // Quiz completed or no more questions - redirect to results
+                if (response.status === 404 || errorText.includes('Não há mais questões')) {
+                    console.log('Quiz completed - Navigating to results');
                     router.replace(`/quiz/${quizId}/results`);
                     return;
                 }
-                throw new Error('Erro ao carregar questão');
+                throw new Error(`Erro ao carregar questão (${response.status})`);
             }
 
             const data: QuizQuestion = await response.json();
+            console.log('Question loaded:', JSON.stringify(data, null, 2));
+
             setCurrentQuestion(data);
             setSelectedAnswer(null);
             setSubmittedAnswer(null);
             setFeedback(null);
             setTimeRemaining(data.timeLimitSeconds || null);
         } catch (error: any) {
+            console.error('Error loading question:', error);
             Alert.alert('Erro', error.message || 'Não foi possível carregar a questão');
             router.back();
         } finally {
@@ -112,7 +127,7 @@ export default function QuizTakingScreen() {
         try {
             setSubmitting(true);
             setSubmittedAnswer(selectedAnswer);
-            const token = await AsyncStorage.getItem('accessToken');
+            const token = await AsyncStorage.getItem('access_token');
 
             const response = await fetch(
                 'http://localhost:5000/api/app/student-quiz/submit-answer',
@@ -161,7 +176,7 @@ export default function QuizTakingScreen() {
                     style: 'destructive',
                     onPress: async () => {
                         try {
-                            const token = await AsyncStorage.getItem('accessToken');
+                            const token = await AsyncStorage.getItem('access_token');
                             await fetch(
                                 `http://localhost:5000/api/app/student-quiz/abandon-quiz/${quizId}`,
                                 {

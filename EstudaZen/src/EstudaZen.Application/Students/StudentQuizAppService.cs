@@ -23,14 +23,14 @@ namespace EstudaZen.Students;
 
 public class StudentQuizAppService : ApplicationService, Quizzes.IStudentQuizAppService
 {
-    private readonly IRepository<Quiz, Guid> _quizRepository;
+    private readonly IQuizRepository _quizRepository;
     private readonly IRepository<Question, Guid> _questionRepository;
     private readonly IRepository<Student, Guid> _studentRepository;
     private readonly IRepository<Subject, Guid> _subjectRepository;
     private readonly ICurrentUser _currentUser;
 
     public StudentQuizAppService(
-        IRepository<Quiz, Guid> quizRepository,
+        IQuizRepository quizRepository,
         IRepository<Question, Guid> questionRepository,
         IRepository<Student, Guid> studentRepository,
         IRepository<Subject, Guid> subjectRepository,
@@ -323,10 +323,12 @@ public class StudentQuizAppService : ApplicationService, Quizzes.IStudentQuizApp
 
     private async Task<Quiz> GetQuizWithQuestionsAsync(Guid quizId)
     {
-        return await _quizRepository.GetAsync(
-            quizId,
-            includeDetails: true
-        );
+        var quiz = await _quizRepository.GetWithQuestionsAsync(quizId);
+        if (quiz == null)
+        {
+            throw new UserFriendlyException("Quiz não encontrado.");
+        }
+        return quiz;
     }
 
     private async Task<List<Question>> GetRandomQuestionsAsync(

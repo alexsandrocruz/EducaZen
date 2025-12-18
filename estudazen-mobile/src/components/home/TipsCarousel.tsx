@@ -34,7 +34,7 @@ const defaultTips: TipItem[] = [
         category: 'Dica do Dia',
         title: 'Fórmula de Bhaskara',
         description: 'Revise equações de 2º grau para garantir pontos em Matemática básica.',
-        icon: 'lightbulb-on',
+        icon: 'lightbulb',
         iconColor: '#ffffff',
     },
     {
@@ -43,7 +43,7 @@ const defaultTips: TipItem[] = [
         category: 'Novidade',
         title: 'Edital FUVEST 2024',
         description: 'Confira as principais mudanças no formato da prova e datas de inscrição.',
-        icon: 'newspaper-variant-outline',
+        icon: 'newspaper',
         iconColor: '#3b82f6',
         iconBgColor: 'rgba(59, 130, 246, 0.1)',
     },
@@ -207,8 +207,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(255, 255, 255, 0.2)',
     },
     cardContent: {
-        padding: theme.spacing.lg,
-        minHeight: 160,
+        padding: 20,
+        minHeight: 140,
         justifyContent: 'space-between',
     },
     cardHeader: {

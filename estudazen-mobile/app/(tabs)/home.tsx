@@ -214,7 +214,7 @@ export default function HomeScreen() {
                             variant="secondary"
                             title="Praticar por matéria"
                             subtitle="Treino focado"
-                            icon="shape"
+                            icon="shape-outline"
                             iconColor="#ec4899"
                             iconBgColor="rgba(236, 72, 153, 0.1)"
                             onPress={handlePracticeBySubject}

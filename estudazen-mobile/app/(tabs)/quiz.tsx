@@ -50,8 +50,7 @@ export default function QuizScreen() {
 
     const handleContinueQuiz = async (quizId: string) => {
         try {
-            // TODO: Implementar tela de quiz taking
-            Alert.alert('Em Desenvolvimento', 'A tela de fazer quiz será implementada em breve.');
+            router.push(`/quiz/${quizId}`);
         } catch (error: any) {
             Alert.alert('Erro', error.message || 'Não foi possível continuar o quiz');
         }

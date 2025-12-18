@@ -58,7 +58,7 @@ export const authService = {
     async login(data: LoginData): Promise<AuthResponse> {
         try {
             // OAuth endpoint está na raiz, não em /api
-            const tokenUrl = 'http://localhost:5000/connect/token';
+            const tokenUrl = 'http://localhost:44335/connect/token';
 
             const formData = new URLSearchParams();
             formData.append('grant_type', 'password');

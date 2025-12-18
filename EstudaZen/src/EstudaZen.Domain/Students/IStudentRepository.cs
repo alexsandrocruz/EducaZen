@@ -21,4 +21,9 @@ public interface IStudentRepository : IRepository<Student, Guid>
     Task<int> GetRankByXpAsync(Guid studentId, Guid? schoolId = null, CancellationToken cancellationToken = default);
 
     Task<List<Student>> GetBySchoolAsync(Guid schoolId, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Get total count of students (for ranking percentile calculation)
+    /// </summary>
+    Task<int> GetTotalCountAsync(Guid? tenantId = null, CancellationToken cancellationToken = default);
 }

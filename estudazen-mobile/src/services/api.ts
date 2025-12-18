@@ -1,12 +1,12 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-// TODO: Alterar para o IP correto do seu backend
-// Para iOS Simulator: use localhost:5000 (HTTP)
-// Para Android Emulator: use 10.0.2.2:5000
-// Para dispositivo físico: use o IP da sua máquina (ex: 192.168.1.100:5000)
+// Backend URL - porta 44335 (HTTP) para desenvolvimento
+// Para iOS Simulator: use localhost
+// Para Android Emulator: use 10.0.2.2
+// Para dispositivo físico: use o IP da sua máquina
 const API_BASE_URL = __DEV__
-    ? 'http://localhost:5000/api'  // HTTP na porta 5000
+    ? 'http://localhost:44335/api'
     : 'https://api.estudazen.com/api';
 
 export const api = axios.create({

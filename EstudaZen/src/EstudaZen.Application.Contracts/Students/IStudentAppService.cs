@@ -26,6 +26,11 @@ public interface IStudentAppService : IApplicationService
     /// </summary>
     Task<RankingEntryDto> GetMyRankingAsync(RankingScope scope);
 
+    /// <summary>
+    /// Get unified dashboard data for student home screen
+    /// </summary>
+    Task<StudentHomeDashboardDto> GetHomeDashboardAsync();
+
     Task<PagedResultDto<StudentDto>> GetListAsync(GetStudentListDto input);
     Task<StudentDto> GetAsync(Guid id);
     Task<StudentDto> CreateAsync(CreateUpdateStudentDto input);

@@ -24,14 +24,14 @@ namespace EstudaZen.Students;
 public class StudentQuizAppService : ApplicationService, Quizzes.IStudentQuizAppService
 {
     private readonly IQuizRepository _quizRepository;
-    private readonly IRepository<Question, Guid> _questionRepository;
+    private readonly IQuestionRepository _questionRepository;
     private readonly IRepository<Student, Guid> _studentRepository;
     private readonly IRepository<Subject, Guid> _subjectRepository;
     private readonly ICurrentUser _currentUser;
 
     public StudentQuizAppService(
         IQuizRepository quizRepository,
-        IRepository<Question, Guid> questionRepository,
+        IQuestionRepository questionRepository,
         IRepository<Student, Guid> studentRepository,
         IRepository<Subject, Guid> subjectRepository,
         ICurrentUser currentUser)
@@ -146,10 +146,11 @@ public class StudentQuizAppService : ApplicationService, Quizzes.IStudentQuizApp
             throw new UserFriendlyException("Não há mais questões disponíveis.");
         }
 
-        var question = await _questionRepository.GetAsync(
-            currentQuizQuestion.QuestionId,
-            includeDetails: true
-        );
+        var question = await _questionRepository.GetWithAnswersAsync(currentQuizQuestion.QuestionId);
+        if (question == null)
+        {
+            throw new UserFriendlyException("Questão não encontrada.");
+        }
 
         return MapToQuizQuestionDto(question, currentQuizQuestion);
     }

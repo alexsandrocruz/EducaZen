@@ -10,20 +10,27 @@ import {
 } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Button, Badge, ProgressBar } from '../../src/components/ui';
+import { Button, Badge, Progress } from '../../src/components/ui';
 import { theme } from '../../src/theme';
 
 interface QuizQuestion {
     questionId: string;
-    questionText: string;
+    content: string;  // Backend returns 'content' not 'questionText'
+    mediaUrl?: string;
+    explanation?: string;
+    difficulty: number;
     points: number;
+    order: number;
     timeLimitSeconds?: number;
-    currentQuestionNumber: number;
-    totalQuestions: number;
+    currentQuestionNumber?: number;
+    totalQuestions?: number;
     answers: {
         id: string;
         content: string;
     }[];
+    selectedAnswerId?: string;
+    isCorrect?: boolean;
+    xpEarned?: number;
 }
 
 interface SubmitAnswerResult {
@@ -227,20 +234,20 @@ export default function QuizTakingScreen() {
         );
     }
 
-    const progress = (currentQuestion.currentQuestionNumber / currentQuestion.totalQuestions) * 100;
+    const progress = ((currentQuestion.currentQuestionNumber ?? currentQuestion.order + 1) / (currentQuestion.totalQuestions ?? 10)) * 100;
 
     return (
         <View style={styles.container}>
             <View style={styles.header}>
                 <Text style={styles.headerTitle}>
-                    Questão {currentQuestion.currentQuestionNumber} de {currentQuestion.totalQuestions}
+                    Questão {currentQuestion.currentQuestionNumber ?? currentQuestion.order + 1} de {currentQuestion.totalQuestions ?? 10}
                 </Text>
                 <TouchableOpacity onPress={handleAbandonQuiz}>
                     <Text style={styles.abandonButton}>Sair</Text>
                 </TouchableOpacity>
             </View>
 
-            <ProgressBar progress={progress} />
+            <Progress value={progress} />
 
             <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
                 <View style={styles.questionInfo}>
@@ -254,7 +261,7 @@ export default function QuizTakingScreen() {
                 </View>
 
                 <View style={styles.questionCard}>
-                    <Text style={styles.questionText}>{currentQuestion.questionText}</Text>
+                    <Text style={styles.questionText}>{currentQuestion.content}</Text>
                 </View>
 
                 <View style={styles.answersContainer}>

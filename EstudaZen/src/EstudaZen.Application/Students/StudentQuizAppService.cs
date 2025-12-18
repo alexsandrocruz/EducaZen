@@ -170,10 +170,11 @@ public class StudentQuizAppService : ApplicationService, Quizzes.IStudentQuizApp
             throw new UserFriendlyException("Este quiz não está mais ativo.");
         }
 
-        var question = await _questionRepository.GetAsync(
-            input.QuestionId,
-            includeDetails: true
-        );
+        var question = await _questionRepository.GetWithAnswersAsync(input.QuestionId);
+        if (question == null)
+        {
+            throw new UserFriendlyException("Questão não encontrada.");
+        }
 
         var correctAnswer = question.Answers.FirstOrDefault(a => a.IsCorrect);
         if (correctAnswer == null)
@@ -214,11 +215,11 @@ public class StudentQuizAppService : ApplicationService, Quizzes.IStudentQuizApp
 
             if (nextQuizQuestion != null)
             {
-                var nextQuestion = await _questionRepository.GetAsync(
-                    nextQuizQuestion.QuestionId,
-                    includeDetails: true
-                );
-                result.NextQuestion = MapToQuizQuestionDto(nextQuestion, nextQuizQuestion);
+                var nextQuestion = await _questionRepository.GetWithAnswersAsync(nextQuizQuestion.QuestionId);
+                if (nextQuestion != null)
+                {
+                    result.NextQuestion = MapToQuizQuestionDto(nextQuestion, nextQuizQuestion);
+                }
             }
         }
 

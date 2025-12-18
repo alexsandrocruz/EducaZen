@@ -20,16 +20,23 @@ interface QuizResult {
     totalXpEarned: number;
     highestStreak: number;
     accuracyPercentage: number;
+    elapsedTime?: string;
+    startedAt?: string;
     completedAt: string;
     questions: {
-        id: string;
-        questionText: string;
+        questionId: string;
+        content: string;  // Backend returns 'content' not 'questionText'
         points: number;
+        difficulty: number;
+        order: number;
         answers: {
             id: string;
             content: string;
-            isCorrect: boolean;
+            isCorrect?: boolean;
         }[];
+        selectedAnswerId?: string;
+        isCorrect?: boolean;  // isCorrect is on the question object, not computed from answers
+        xpEarned?: number;
     }[];
 }
 
@@ -54,20 +61,31 @@ export default function QuizResultsScreen() {
             setLoading(true);
             const token = await AsyncStorage.getItem('access_token');
 
-            const response = await fetch(
-                `http://localhost:5000/api/app/student-quiz/quiz-result/${quizId}`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            );
+            console.log('=== Loading Quiz Results ===');
+            console.log('Quiz ID:', quizId);
 
-            if (!response.ok) throw new Error('Erro ao carregar resultados');
+            const url = `http://localhost:5000/api/app/student-quiz/quiz-result/${quizId}`;
+            console.log('Fetching URL:', url);
+
+            const response = await fetch(url, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            console.log('Response status:', response.status);
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.log('Error response:', errorText);
+                throw new Error('Erro ao carregar resultados');
+            }
 
             const data: QuizResult = await response.json();
+            console.log('Results loaded:', JSON.stringify(data, null, 2));
             setResult(data);
         } catch (error: any) {
+            console.error('Results error:', error);
             Alert.alert('Erro', error.message || 'Não foi possível carregar os resultados');
             router.back();
         } finally {
@@ -162,30 +180,30 @@ export default function QuizResultsScreen() {
                     <Text style={styles.sectionTitle}>Revisão das Questões</Text>
 
                     {result.questions.map((q, index) => {
-                        const hasCorrectAnswer = q.answers.some((a) => a.isCorrect);
+                        const isCorrect = q.isCorrect === true;
                         return (
                             <TouchableOpacity
-                                key={q.id}
+                                key={q.questionId}
                                 style={[
                                     styles.questionItem,
-                                    hasCorrectAnswer ? styles.questionCorrect : styles.questionIncorrect,
+                                    isCorrect ? styles.questionCorrect : styles.questionIncorrect,
                                 ]}
                             >
                                 <View style={styles.questionHeader}>
                                     <Text style={styles.questionNumber}>Questão {index + 1}</Text>
                                     <Badge
-                                        label={hasCorrectAnswer ? 'Correta' : 'Incorreta'}
-                                        variant={hasCorrectAnswer ? 'success' : 'danger'}
+                                        label={isCorrect ? 'Correta' : 'Incorreta'}
+                                        variant={isCorrect ? 'success' : 'danger'}
                                     />
                                 </View>
                                 <Text style={styles.questionTextSmall} numberOfLines={2}>
-                                    {q.questionText}
+                                    {q.content}
                                 </Text>
                                 <View style={styles.questionFooter}>
                                     <Text style={styles.questionPoints}>
-                                        {hasCorrectAnswer ? q.points : 0}/{q.points} pontos
+                                        {q.xpEarned ?? 0}/{q.points} XP
                                     </Text>
-                                    {hasCorrectAnswer ? (
+                                    {isCorrect ? (
                                         <Text style={styles.checkmark}>✓</Text>
                                     ) : (
                                         <Text style={styles.crossmark}>✗</Text>

@@ -35,10 +35,12 @@ interface QuizQuestion {
 
 interface SubmitAnswerResult {
     isCorrect: boolean;
-    correctAnswerId: string;
     xpEarned: number;
-    hasNextQuestion: boolean;
-    feedback?: string;
+    currentStreak: number;
+    correctAnswerId?: string;
+    explanation?: string;
+    nextQuestion?: any;
+    isQuizComplete: boolean;
 }
 
 export default function QuizTakingScreen() {
@@ -136,6 +138,11 @@ export default function QuizTakingScreen() {
             setSubmittedAnswer(selectedAnswer);
             const token = await AsyncStorage.getItem('access_token');
 
+            console.log('=== Submitting Answer ===');
+            console.log('Quiz ID:', quizId);
+            console.log('Question ID:', currentQuestion.questionId);
+            console.log('Selected Answer ID:', selectedAnswer);
+
             const response = await fetch(
                 'http://localhost:5000/api/app/student-quiz/submit-answer',
                 {
@@ -152,19 +159,27 @@ export default function QuizTakingScreen() {
                 }
             );
 
-            if (!response.ok) throw new Error('Erro ao enviar resposta');
+            console.log('Submit Response status:', response.status);
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.log('Submit Error response:', errorText);
+                throw new Error('Erro ao enviar resposta');
+            }
 
             const result: SubmitAnswerResult = await response.json();
+            console.log('Submit Result:', JSON.stringify(result, null, 2));
             setFeedback(result);
 
             setTimeout(() => {
-                if (result.hasNextQuestion) {
-                    loadCurrentQuestion();
-                } else {
+                if (result.isQuizComplete) {
                     router.replace(`/quiz/${quizId}/results`);
+                } else {
+                    loadCurrentQuestion();
                 }
             }, 2000);
         } catch (error: any) {
+            console.error('Submit error:', error);
             Alert.alert('Erro', error.message || 'Não foi possível enviar resposta');
             setSubmittedAnswer(null);
         } finally {

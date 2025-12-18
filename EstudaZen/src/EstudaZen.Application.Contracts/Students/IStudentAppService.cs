@@ -46,4 +46,10 @@ public interface IStudentAppService : IApplicationService
     /// Aprovar ou rejeitar aluno
     /// </summary>
     Task ApproveStudentAsync(ApproveStudentDto input);
+
+    /// <summary>
+    /// Get complete student profile with stats and achievements
+    /// </summary>
+    Task<StudentProfileDto> GetProfileAsync();
 }
+

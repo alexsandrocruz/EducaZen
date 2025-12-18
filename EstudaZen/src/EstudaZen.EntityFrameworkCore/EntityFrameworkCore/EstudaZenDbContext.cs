@@ -11,6 +11,7 @@ using EstudaZen.Students;
 using EstudaZen.Subjects;
 using EstudaZen.Subscriptions;
 using EstudaZen.Tips;
+using EstudaZen.Achievements;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.BlobStoring.Database.EntityFrameworkCore;
 using Volo.Abp.Data;
@@ -63,6 +64,10 @@ public class EstudaZenDbContext :
     
     // Tips/Blog
     public DbSet<Tip> Tips { get; set; }
+    
+    // Achievements
+    public DbSet<Achievement> Achievements { get; set; }
+    public DbSet<StudentAchievement> StudentAchievements { get; set; }
 
     #endregion
 
@@ -298,6 +303,31 @@ public class EstudaZenDbContext :
             b.Property(x => x.LinkUrl).HasMaxLength(500);
             b.HasIndex(x => new { x.TenantId, x.IsActive, x.Order });
             b.HasIndex(x => new { x.StartDate, x.EndDate });
+        });
+
+        // Achievement
+        builder.Entity<Achievement>(b =>
+        {
+            b.ToTable(EstudaZenConsts.DbTablePrefix + "Achievements", EstudaZenConsts.DbSchema);
+            b.ConfigureByConvention();
+            b.Property(x => x.Code).IsRequired().HasMaxLength(50);
+            b.Property(x => x.Title).IsRequired().HasMaxLength(100);
+            b.Property(x => x.Description).HasMaxLength(500);
+            b.Property(x => x.Icon).HasMaxLength(50);
+            b.Property(x => x.GradientColors).HasMaxLength(100);
+            b.Property(x => x.RequiredField).HasMaxLength(100);
+            b.HasIndex(x => x.Code).IsUnique();
+            b.HasIndex(x => new { x.TenantId, x.Trigger, x.IsActive });
+        });
+
+        // StudentAchievement
+        builder.Entity<StudentAchievement>(b =>
+        {
+            b.ToTable(EstudaZenConsts.DbTablePrefix + "StudentAchievements", EstudaZenConsts.DbSchema);
+            b.ConfigureByConvention();
+            b.HasOne(x => x.Student).WithMany().HasForeignKey(x => x.StudentId).OnDelete(DeleteBehavior.Cascade);
+            b.HasOne(x => x.Achievement).WithMany().HasForeignKey(x => x.AchievementId).OnDelete(DeleteBehavior.Cascade);
+            b.HasIndex(x => new { x.StudentId, x.AchievementId }).IsUnique();
         });
     }
 }

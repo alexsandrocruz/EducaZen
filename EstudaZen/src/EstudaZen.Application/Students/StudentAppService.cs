@@ -7,6 +7,8 @@ using Volo.Abp.Application.Services;
 using Volo.Abp.Users;
 using Volo.Abp.Identity;
 using EstudaZen.Permissions;
+using EstudaZen.Exams;
+using EstudaZen.Tips;
 using Microsoft.AspNetCore.Authorization;
 
 namespace EstudaZen.Students;
@@ -17,17 +19,23 @@ public class StudentAppService : ApplicationService, IStudentAppService
     private readonly StudentMapper _studentMapper;
     private readonly ICurrentUser _currentUser;
     private readonly IdentityUserManager _userManager;
+    private readonly IExamSessionRepository _examSessionRepository;
+    private readonly ITipRepository _tipRepository;
 
     public StudentAppService(
         IStudentRepository studentRepository,
         StudentMapper studentMapper,
         ICurrentUser currentUser,
-        IdentityUserManager userManager)
+        IdentityUserManager userManager,
+        IExamSessionRepository examSessionRepository,
+        ITipRepository tipRepository)
     {
         _studentRepository = studentRepository;
         _studentMapper = studentMapper;
         _currentUser = currentUser;
         _userManager = userManager;
+        _examSessionRepository = examSessionRepository;
+        _tipRepository = tipRepository;
     }
 
     public async Task<StudentDto> GetMyProfileAsync()
@@ -123,7 +131,7 @@ public class StudentAppService : ApplicationService, IStudentAppService
             AccuracyRate = Math.Round(accuracyRate, 0),
             TotalQuestionsAnswered = totalAnswered,
             TotalCorrectAnswers = profile.TotalCorrectAnswers,
-            Tips = GetDefaultTips()
+            Tips = await GetTipsAsync()
         };
     }
 
@@ -183,14 +191,48 @@ public class StudentAppService : ApplicationService, IStudentAppService
 
     private async Task<TodayStatsDto> GetTodayStatsAsync(Guid studentId)
     {
-        // For MVP: return mock data
-        // In production: query ExamSession/ExamAnswer for today's activity
-        // TODO: Implement real query when ExamSession repository is ready
-        return await Task.FromResult(new TodayStatsDto
+        var (totalQuestions, correctAnswers) = await _examSessionRepository.GetTodayStatsAsync(studentId);
+        
+        return new TodayStatsDto
         {
-            QuestionsAnswered = 24,
-            CorrectAnswers = 18
-        });
+            QuestionsAnswered = totalQuestions,
+            CorrectAnswers = correctAnswers
+        };
+    }
+
+    private async Task<List<TipDto>> GetTipsAsync()
+    {
+        var tips = await _tipRepository.GetActiveTipsAsync(10);
+        
+        if (tips.Count == 0)
+        {
+            // Return default tips if none in database
+            return GetDefaultTips();
+        }
+        
+        return tips.Select(t => new TipDto
+        {
+            Id = t.Id.ToString(),
+            Type = t.Type == TipType.Highlight ? "highlight" : "normal",
+            Category = GetCategoryName(t.Category),
+            Title = t.Title,
+            Description = t.Description,
+            Icon = t.Icon,
+            IconColor = t.IconColor,
+            IconBgColor = t.IconBgColor
+        }).ToList();
+    }
+
+    private static string GetCategoryName(TipCategory category)
+    {
+        return category switch
+        {
+            TipCategory.DicaDoDia => "Dica do Dia",
+            TipCategory.Novidade => "Novidade",
+            TipCategory.Estudos => "Estudos",
+            TipCategory.Evento => "Evento",
+            _ => "Dica"
+        };
     }
 
     private static List<TipDto> GetDefaultTips()

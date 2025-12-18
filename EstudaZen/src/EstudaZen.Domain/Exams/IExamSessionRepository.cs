@@ -36,4 +36,11 @@ public interface IExamSessionRepository : IRepository<ExamSession, Guid>
     Task<List<ExamSession>> GetExamSessionsAsync(
         Guid examId,
         CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Get today's statistics for a student (questions answered and correct)
+    /// </summary>
+    Task<(int TotalQuestions, int CorrectAnswers)> GetTodayStatsAsync(
+        Guid studentId,
+        CancellationToken cancellationToken = default);
 }

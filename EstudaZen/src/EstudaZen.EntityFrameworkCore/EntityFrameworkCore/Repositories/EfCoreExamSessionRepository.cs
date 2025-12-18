@@ -64,4 +64,23 @@ public class EfCoreExamSessionRepository : EfCoreRepository<EstudaZenDbContext, 
             .OrderByDescending(x => x.StartedAt)
             .ToListAsync(cancellationToken);
     }
+
+    public async Task<(int TotalQuestions, int CorrectAnswers)> GetTodayStatsAsync(
+        Guid studentId,
+        CancellationToken cancellationToken = default)
+    {
+        var dbSet = await GetDbSetAsync();
+        var today = DateTime.UtcNow.Date;
+        
+        // Get all sessions from today for this student
+        var todaySessions = await dbSet
+            .Where(x => x.StudentId == studentId && x.StartedAt >= today)
+            .ToListAsync(cancellationToken);
+        
+        // Sum up the stats
+        var totalQuestions = todaySessions.Sum(s => s.CorrectAnswers + s.WrongAnswers + s.SkippedAnswers);
+        var correctAnswers = todaySessions.Sum(s => s.CorrectAnswers);
+        
+        return (totalQuestions, correctAnswers);
+    }
 }

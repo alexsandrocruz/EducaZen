@@ -1,0 +1,116 @@
+<div class="admin-container">
+    <!-- Header -->
+    <div class="admin-header">
+        <div>
+            <h1 class="admin-title">Dicas e Conteúdos</h1>
+            <p class="admin-subtitle">Gerencie as dicas do bloco "Para Você" na Home do aluno</p>
+        </div>
+        <button class="zen-btn zen-btn--primary" (click)="createTip()">
+            <span class="material-icons-round">add</span>
+            Nova Dica
+        </button>
+    </div>
+
+    <!-- Search & Filters -->
+    <div class="admin-search">
+        <div class="filters-row">
+            <div class="zen-input-group">
+                <span class="material-icons-round input-icon">search</span>
+                <input class="zen-input zen-input--icon" type="text" placeholder="Buscar por título..."
+                    [(ngModel)]="searchTerm" (keyup.enter)="loadTips()" />
+            </div>
+
+            <select [(ngModel)]="filterCategory" (change)="loadTips()" class="zen-select">
+                <option value="">Todas as Categorias</option>
+                <option value="0">Dica do Dia</option>
+                <option value="1">Novidade</option>
+                <option value="2">Estudos</option>
+                <option value="3">Evento</option>
+            </select>
+
+            <select [(ngModel)]="filterActive" (change)="loadTips()" class="zen-select">
+                <option value="">Todos os Status</option>
+                <option value="true">Ativos</option>
+                <option value="false">Inativos</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Loading State -->
+    <div *ngIf="loading" class="loading-state">
+        <div class="spinner"></div>
+        <p>Carregando dicas...</p>
+    </div>
+
+    <!-- Data Table -->
+    <div *ngIf="!loading" class="data-table-container">
+        <table class="zen-table">
+            <thead>
+                <tr>
+                    <th>Ordem</th>
+                    <th>Título</th>
+                    <th>Categoria</th>
+                    <th>Tipo</th>
+                    <th>Ícone</th>
+                    <th>Status</th>
+                    <th class="text-right">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let tip of tips.items" class="table-row">
+                    <td>
+                        <span class="order-badge">{{ tip.order }}</span>
+                    </td>
+                    <td class="content-cell">
+                        <div class="tip-preview">
+                            <strong>{{ tip.title }}</strong>
+                            <span class="text-muted">{{ tip.description }}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="zen-badge" [ngClass]="'zen-badge--' + getCategoryColor(tip.category)">
+                            {{ getCategoryLabel(tip.category) }}
+                        </span>
+                    </td>
+                    <td>
+                        <span class="type-badge" [class.highlight]="tip.type === 1">
+                            {{ getTypeLabel(tip.type) }}
+                        </span>
+                    </td>
+                    <td>
+                        <span class="icon-preview" [style.color]="tip.iconColor">
+                            <span class="material-icons-round">{{ tip.icon || 'lightbulb' }}</span>
+                        </span>
+                    </td>
+                    <td>
+                        <button class="status-toggle" [class.active]="tip.isActive" (click)="toggleActive(tip)">
+                            {{ tip.isActive ? 'Ativo' : 'Inativo' }}
+                        </button>
+                    </td>
+                    <td class="text-right">
+                        <div class="action-buttons">
+                            <button class="zen-btn-icon zen-btn-icon--primary" (click)="editTip(tip.id!)"
+                                title="Editar">
+                                <span class="material-icons-round">edit</span>
+                            </button>
+                            <button class="zen-btn-icon zen-btn-icon--danger" (click)="deleteTip(tip)" title="Excluir">
+                                <span class="material-icons-round">delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <tr *ngIf="tips.items.length === 0">
+                    <td colspan="7" class="empty-state">
+                        <div class="empty-state-content">
+                            <span class="material-icons-round empty-icon">lightbulb</span>
+                            <p>Nenhuma dica encontrada</p>
+                            <button class="zen-btn zen-btn--primary" (click)="createTip()">
+                                Criar primeira dica
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

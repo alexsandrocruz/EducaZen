@@ -15,6 +15,8 @@ import { StudentFormComponent } from './students/student-form/student-form.compo
 import { ExamListComponent } from './exams/exam-list/exam-list.component';
 import { ExamFormComponent } from './exams/exam-form/exam-form.component';
 import { ExamQuestionsComponent } from './exams/exam-questions/exam-questions.component';
+import { TipListComponent } from './tips/tip-list/tip-list.component';
+import { TipFormComponent } from './tips/tip-form/tip-form.component';
 
 const routes: Routes = [
   {
@@ -65,6 +67,18 @@ const routes: Routes = [
       { path: ':examId/questions', component: ExamQuestionsComponent }
     ]
   },
+  {
+    path: 'tips',
+    children: [
+      { path: '', component: TipListComponent },
+      { path: 'new', component: TipFormComponent },
+      { path: 'edit/:id', component: TipFormComponent }
+    ],
+    canActivate: [permissionGuard],
+    data: {
+      requiredPolicy: 'EstudaZen.Tips',
+    },
+  },
   { path: '', redirectTo: 'subjects', pathMatch: 'full' }
 ];
 
@@ -73,3 +87,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AdminRoutingModule { }
+

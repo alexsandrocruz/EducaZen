@@ -73,5 +73,14 @@ function configureRoutes() {
       order: 5,
       layout: eLayoutType.application,
     },
+    {
+      path: '/admin/tips',
+      name: 'Dicas e Conteúdos',
+      parentName: 'Administração',
+      iconClass: 'fas fa-lightbulb',
+      order: 6,
+      layout: eLayoutType.application,
+      requiredPolicy: 'EstudaZen.Tips',
+    },
   ]);
 }

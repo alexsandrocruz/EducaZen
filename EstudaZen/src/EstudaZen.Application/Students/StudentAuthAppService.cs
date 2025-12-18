@@ -32,46 +32,71 @@ public class StudentAuthAppService : ApplicationService, IStudentAuthAppService
 
     public async Task RegisterAsync(RegisterStudentDto input)
     {
-        // 1. Validate School
-        var school = await _schoolRepository.GetAsync(input.SchoolId);
-        if (school == null)
+        // 1. Validar se email já existe
+        var existingUser = await _userManager.FindByEmailAsync(input.Email);
+        if (existingUser != null)
         {
-            throw new UserFriendlyException("Escola invelida ou nao encontrada.");
+            throw new UserFriendlyException("Email já cadastrado!");
         }
 
-        // 2. Create Identity User
-        // We use the tenant of the school for the user
-        using (CurrentTenant.Change(school.TenantId))
+        Guid? schoolId = null;
+        Guid? tenantId = null;
+        StudentStatus status = StudentStatus.APPROVED; // Default: aprovado (Host)
+
+        // 2. Se informou código de escola, valida e busca escola
+        if (!string.IsNullOrWhiteSpace(input.SchoolCode))
         {
-            var user = new IdentityUser(
+            var school = await _schoolRepository.FirstOrDefaultAsync(s => s.Code == input.SchoolCode.Trim());
+            
+            if (school == null)
+            {
+                throw new UserFriendlyException($"Código de escola '{input.SchoolCode}' inválido!");
+            }
+
+            schoolId = school.Id;
+            tenantId = school.TenantId;
+            status = StudentStatus.PENDING; // Requer aprovação do gestor
+        }
+
+        // 3. Criar IdentityUser no tenant correto
+        IdentityUser user;
+        using (CurrentTenant.Change(tenantId))
+        {
+            user = new IdentityUser(
                 GuidGenerator.Create(),
-                input.Name.Replace(" ", ""), // Minimal username, usually not used for login if email is unique
+                input.Email.Replace("@", "").Replace(".", ""), // Username simplificado
                 input.Email,
-                school.TenantId
+                tenantId
             );
             user.Name = input.Name;
-            user.SetEmailConfirmed(true); // Auto confirm for now for MVP
+            user.SetEmailConfirmed(true); // Auto-confirmar por enquanto (MVP)
 
             var result = await _userManager.CreateAsync(user, input.Password);
             if (!result.Succeeded)
             {
-                throw new UserFriendlyException(string.Join(", ", result.Errors.Select(e => e.Description)));
+                throw new UserFriendlyException(
+                    string.Join(", ", result.Errors.Select(e => e.Description))
+                );
             }
-            
-            // Assign Role "student" (Optional: check if role exists first)
-            // await _userManager.AddToRoleAsync(user, "student"); 
 
-            // 3. Create Student Entity
+            // Atribuir role "Student" (se existir)
+            // await _userManager.AddToRoleAsync(user, "Student");
+        }
+
+        // 4. Criar Student entity no tenant correto
+        using (CurrentTenant.Change(tenantId))
+        {
             var student = new Student(
                 GuidGenerator.Create(),
                 user.Id,
-                school.TenantId
+                tenantId
             )
             {
-                SchoolId = school.Id,
                 FullName = input.Name,
                 Email = input.Email,
-                Status = StudentStatus.Active
+                CPF = input.Cpf,
+                SchoolId = schoolId,
+                Status = status
             };
 
             await _studentRepository.InsertAsync(student);

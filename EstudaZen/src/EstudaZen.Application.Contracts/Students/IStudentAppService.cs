@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
@@ -25,9 +26,24 @@ public interface IStudentAppService : IApplicationService
     /// </summary>
     Task<RankingEntryDto> GetMyRankingAsync(RankingScope scope);
 
+    /// <summary>
+    /// Get unified dashboard data for student home screen
+    /// </summary>
+    Task<StudentHomeDashboardDto> GetHomeDashboardAsync();
+
     Task<PagedResultDto<StudentDto>> GetListAsync(GetStudentListDto input);
     Task<StudentDto> GetAsync(Guid id);
     Task<StudentDto> CreateAsync(CreateUpdateStudentDto input);
     Task<StudentDto> UpdateAsync(Guid id, CreateUpdateStudentDto input);
     Task DeleteAsync(Guid id);
+
+    /// <summary>
+    /// Listar alunos pendentes de aprovação (para gestor da escola)
+    /// </summary>
+    Task<List<PendingStudentDto>> GetPendingStudentsAsync();
+    
+    /// <summary>
+    /// Aprovar ou rejeitar aluno
+    /// </summary>
+    Task ApproveStudentAsync(ApproveStudentDto input);
 }

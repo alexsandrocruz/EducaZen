@@ -30,6 +30,11 @@ public class EstudaZenPermissionDefinitionProvider : PermissionDefinitionProvide
         schools.AddChild(EstudaZenPermissions.Schools.Create, L("Permission:Create"));
         schools.AddChild(EstudaZenPermissions.Schools.Edit, L("Permission:Edit"));
         schools.AddChild(EstudaZenPermissions.Schools.Delete, L("Permission:Delete"));
+
+        var tips = myGroup.AddPermission(EstudaZenPermissions.Tips.Default, L("Permission:Tips"));
+        tips.AddChild(EstudaZenPermissions.Tips.Create, L("Permission:Create"));
+        tips.AddChild(EstudaZenPermissions.Tips.Edit, L("Permission:Edit"));
+        tips.AddChild(EstudaZenPermissions.Tips.Delete, L("Permission:Delete"));
         //Define your own permissions here. Example:
         //myGroup.AddPermission(EstudaZenPermissions.MyPermission1, L("Permission:MyPermission1"));
     }

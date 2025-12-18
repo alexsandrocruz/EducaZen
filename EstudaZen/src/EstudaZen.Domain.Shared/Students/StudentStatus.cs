@@ -6,27 +6,42 @@ namespace EstudaZen.Students;
 public enum StudentStatus
 {
     /// <summary>
-    /// Active student
+    /// Aguardando aprovação da escola
     /// </summary>
-    Active = 0,
+    PENDING = 0,
+
+    /// <summary>
+    /// Aprovado - pode usar o app
+    /// </summary>
+    APPROVED = 1,
+
+    /// <summary>
+    /// Rejeitado pela escola
+    /// </summary>
+    REJECTED = 2,
+
+    /// <summary>
+    /// Active student (legado - equivalente a APPROVED)
+    /// </summary>
+    Active = 10,
 
     /// <summary>
     /// Inactive student
     /// </summary>
-    Inactive = 1,
+    Inactive = 11,
 
     /// <summary>
     /// Transferred to another school
     /// </summary>
-    Transferred = 2,
+    Transferred = 12,
 
     /// <summary>
     /// Graduated/completed
     /// </summary>
-    Graduated = 3,
+    Graduated = 13,
 
     /// <summary>
     /// Suspended
     /// </summary>
-    Suspended = 4
+    Suspended = 14
 }

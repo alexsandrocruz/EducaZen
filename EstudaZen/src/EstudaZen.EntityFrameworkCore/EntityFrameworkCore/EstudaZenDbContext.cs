@@ -10,6 +10,7 @@ using EstudaZen.Simulados;
 using EstudaZen.Students;
 using EstudaZen.Subjects;
 using EstudaZen.Subscriptions;
+using EstudaZen.Tips;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.BlobStoring.Database.EntityFrameworkCore;
 using Volo.Abp.Data;
@@ -59,6 +60,9 @@ public class EstudaZenDbContext :
     public DbSet<ExamQuestion> ExamQuestions { get; set; }
     public DbSet<ExamSession> ExamSessions { get; set; }
     public DbSet<ExamAnswer> ExamAnswers { get; set; }
+    
+    // Tips/Blog
+    public DbSet<Tip> Tips { get; set; }
 
     #endregion
 
@@ -278,6 +282,22 @@ public class EstudaZenDbContext :
             b.ToTable(EstudaZenConsts.DbTablePrefix + "ExamAnswers", EstudaZenConsts.DbSchema);
             b.ConfigureByConvention();
             b.HasIndex(x => new { x.ExamSessionId, x.QuestionId }).IsUnique();
+        });
+
+        // Tip
+        builder.Entity<Tip>(b =>
+        {
+            b.ToTable(EstudaZenConsts.DbTablePrefix + "Tips", EstudaZenConsts.DbSchema);
+            b.ConfigureByConvention();
+            b.Property(x => x.Title).IsRequired().HasMaxLength(200);
+            b.Property(x => x.Description).IsRequired().HasMaxLength(500);
+            b.Property(x => x.Icon).HasMaxLength(50);
+            b.Property(x => x.IconColor).HasMaxLength(20);
+            b.Property(x => x.IconBgColor).HasMaxLength(50);
+            b.Property(x => x.ImageUrl).HasMaxLength(500);
+            b.Property(x => x.LinkUrl).HasMaxLength(500);
+            b.HasIndex(x => new { x.TenantId, x.IsActive, x.Order });
+            b.HasIndex(x => new { x.StartDate, x.EndDate });
         });
     }
 }

@@ -61,4 +61,10 @@ public class EfCoreStudentRepository : EfCoreRepository<EstudaZenDbContext, Stud
             .OrderByDescending(x => x.TotalXp)
             .ToListAsync(cancellationToken);
     }
+
+    public async Task<int> GetTotalCountAsync(Guid? tenantId = null, CancellationToken cancellationToken = default)
+    {
+        var dbSet = await GetDbSetAsync();
+        return await dbSet.CountAsync(cancellationToken);
+    }
 }

@@ -4,11 +4,12 @@ export interface RankingEntry {
     id: string;
     studentId: string;
     studentName: string;
+    schoolName?: string;
+    avatarUrl?: string;
     totalXp: number;
     currentLevel: number;
     currentStreak: number;
     position: number;
-    photoUrl?: string;
 }
 
 export interface RankingFilter {

@@ -1,0 +1,311 @@
+@import '../../../../styles/zen-design-tokens';
+
+.admin-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: $zen-space-8 $zen-space-6;
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: $zen-space-8;
+
+    @media (max-width: $zen-screen-md) {
+        flex-direction: column;
+        gap: $zen-space-4;
+    }
+}
+
+.admin-title {
+    font-size: $zen-text-3xl;
+    font-weight: $zen-font-extrabold;
+    color: $zen-text-primary;
+    margin-bottom: $zen-space-2;
+}
+
+.admin-subtitle {
+    color: $zen-text-secondary;
+    font-size: $zen-text-base;
+}
+
+.admin-search {
+    margin-bottom: 2rem;
+
+    .filters-row {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 1rem;
+
+        @media (max-width: 768px) {
+            grid-template-columns: 1fr;
+        }
+    }
+}
+
+.zen-input-group {
+    position: relative;
+
+    .input-icon {
+        position: absolute;
+        left: $zen-space-4;
+        top: 50%;
+        transform: translateY(-50%);
+        color: $zen-text-muted;
+        pointer-events: none;
+    }
+}
+
+.zen-input {
+    width: 100%;
+    padding: $zen-space-4 $zen-space-5;
+    border-radius: $zen-radius-lg;
+    border: 2px solid transparent;
+    background: $zen-input-light;
+    font-size: $zen-text-base;
+    transition: all $zen-transition-base;
+
+    &--icon {
+        padding-left: 3rem;
+    }
+
+    &:focus {
+        outline: none;
+        border-color: $zen-primary;
+        background: white;
+    }
+}
+
+.zen-select {
+    width: 100%;
+    padding: $zen-space-4 $zen-space-5;
+    border-radius: $zen-radius-lg;
+    border: 2px solid transparent;
+    background: $zen-input-light;
+    font-size: $zen-text-base;
+    transition: all $zen-transition-base;
+    cursor: pointer;
+
+    &:focus {
+        outline: none;
+        border-color: $zen-primary;
+        background: white;
+    }
+}
+
+.loading-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: $zen-space-12;
+    color: $zen-text-secondary;
+
+    .spinner {
+        width: 48px;
+        height: 48px;
+        border: 4px solid $zen-input-light;
+        border-top-color: $zen-primary;
+        border-radius: $zen-radius-full;
+        animation: spin 1s linear infinite;
+        margin-bottom: $zen-space-4;
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.data-table-container {
+    background: white;
+    border-radius: $zen-radius-xl;
+    box-shadow: $zen-shadow-soft;
+    overflow: hidden;
+}
+
+.zen-table {
+    width: 100%;
+    border-collapse: collapse;
+
+    thead {
+        background: $zen-bg-light;
+
+        th {
+            padding: $zen-space-4 $zen-space-6;
+            text-align: left;
+            font-size: $zen-text-sm;
+            font-weight: $zen-font-bold;
+            color: $zen-text-secondary;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+
+            &.text-right {
+                text-align: right;
+            }
+        }
+    }
+
+    tbody {
+        tr {
+            border-bottom: 1px solid $zen-input-light;
+            transition: background-color $zen-transition-base;
+
+            &:hover {
+                background: rgba($zen-primary, 0.02);
+            }
+
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+
+        td {
+            padding: $zen-space-5 $zen-space-6;
+            color: $zen-text-primary;
+
+            &.text-right {
+                text-align: right;
+            }
+        }
+    }
+}
+
+.action-buttons {
+    display: flex;
+    gap: $zen-space-2;
+    justify-content: flex-end;
+}
+
+.zen-btn-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: $zen-radius-md;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all $zen-transition-base;
+
+    .material-icons-round {
+        font-size: 18px;
+    }
+
+    &--primary {
+        background: $zen-primary-light;
+        color: $zen-primary;
+
+        &:hover {
+            background: $zen-primary;
+            color: white;
+        }
+    }
+
+    &--danger {
+        background: rgba($zen-error, 0.1);
+        color: $zen-error;
+
+        &:hover {
+            background: $zen-error;
+            color: white;
+        }
+    }
+}
+
+.empty-state {
+    text-align: center;
+    padding: $zen-space-12 !important;
+}
+
+.empty-state-content {
+    .empty-icon {
+        font-size: 64px;
+        color: $zen-text-muted;
+        margin-bottom: $zen-space-4;
+    }
+
+    p {
+        color: $zen-text-secondary;
+        margin-bottom: $zen-space-6;
+    }
+}
+
+// Tip specific styles
+.tip-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-width: 350px;
+
+    strong {
+        color: $zen-text-primary;
+    }
+
+    .text-muted {
+        font-size: $zen-text-sm;
+        color: $zen-text-secondary;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+.order-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: $zen-input-light;
+    border-radius: $zen-radius-full;
+    font-size: $zen-text-sm;
+    font-weight: $zen-font-bold;
+    color: $zen-text-secondary;
+}
+
+.type-badge {
+    font-size: $zen-text-sm;
+    color: $zen-text-secondary;
+
+    &.highlight {
+        color: $zen-primary;
+        font-weight: $zen-font-bold;
+    }
+}
+
+.icon-preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: $zen-input-light;
+    border-radius: $zen-radius-md;
+
+    .material-icons-round {
+        font-size: 18px;
+    }
+}
+
+.status-toggle {
+    padding: 6px 12px;
+    border: none;
+    border-radius: $zen-radius-md;
+    font-size: $zen-text-sm;
+    cursor: pointer;
+    transition: all $zen-transition-base;
+    background: rgba($zen-error, 0.1);
+    color: $zen-error;
+
+    &.active {
+        background: rgba($zen-success, 0.1);
+        color: $zen-success;
+    }
+
+    &:hover {
+        opacity: 0.8;
+    }
+}

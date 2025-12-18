@@ -95,15 +95,15 @@ public class StudentHomeDashboardDto
     /// <summary>
     /// Lista de dicas/conteúdos para o aluno
     /// </summary>
-    public List<TipDto> Tips { get; set; } = new();
+    public List<HomeTipDto> Tips { get; set; } = new();
     
     #endregion
 }
 
 /// <summary>
-/// DTO para dicas/conteúdos na Home
+/// DTO para dicas/conteúdos na Home (diferente do Tips.TipDto usado no CRUD)
 /// </summary>
-public class TipDto
+public class HomeTipDto
 {
     /// <summary>
     /// ID único da dica

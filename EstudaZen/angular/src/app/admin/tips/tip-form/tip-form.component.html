@@ -1,0 +1,142 @@
+<div class="admin-container">
+    <!-- Header -->
+    <div class="form-header">
+        <button class="zen-btn zen-btn--ghost" (click)="cancel()">
+            <span class="material-icons-round">arrow_back</span>
+            Voltar
+        </button>
+        <h1 class="admin-title">{{ isEditMode ? 'Editar Dica' : 'Nova Dica' }}</h1>
+    </div>
+
+    <!-- Loading -->
+    <div *ngIf="loading" class="loading-state">
+        <div class="spinner"></div>
+        <p>Carregando...</p>
+    </div>
+
+    <!-- Form -->
+    <form *ngIf="!loading" [formGroup]="form" (ngSubmit)="save()" class="tip-form">
+        <div class="form-card">
+            <h2 class="section-title">Informações Básicas</h2>
+
+            <!-- Title -->
+            <div class="form-group">
+                <label class="form-label">Título *</label>
+                <input type="text" class="zen-input" formControlName="title" placeholder="Ex: Fórmula de Bhaskara" />
+                <span class="char-count">{{ form.value.title?.length || 0 }}/200</span>
+            </div>
+
+            <!-- Description -->
+            <div class="form-group">
+                <label class="form-label">Descrição *</label>
+                <textarea class="zen-textarea" formControlName="description" rows="3"
+                    placeholder="Ex: Revise equações de 2º grau para garantir pontos em Matemática básica."></textarea>
+                <span class="char-count">{{ form.value.description?.length || 0 }}/500</span>
+            </div>
+
+            <!-- Category & Type -->
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="form-label">Categoria *</label>
+                    <select class="zen-select" formControlName="category">
+                        <option *ngFor="let cat of categories" [value]="cat.value">{{ cat.label }}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Tipo de Exibição *</label>
+                    <select class="zen-select" formControlName="type">
+                        <option *ngFor="let t of types" [value]="t.value">{{ t.label }}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-card">
+            <h2 class="section-title">Aparência</h2>
+
+            <!-- Icon Selection -->
+            <div class="form-group">
+                <label class="form-label">Ícone *</label>
+                <div class="icon-grid">
+                    <button type="button" *ngFor="let icon of suggestedIcons" class="icon-option"
+                        [class.selected]="form.value.icon === icon" (click)="selectIcon(icon)">
+                        <span class="material-icons-round">{{ icon }}</span>
+                    </button>
+                </div>
+                <input type="text" class="zen-input" formControlName="icon" placeholder="Ou digite o nome do ícone" />
+            </div>
+
+            <!-- Colors -->
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="form-label">Cor do Ícone</label>
+                    <div class="color-input-group">
+                        <input type="color" formControlName="iconColor" class="color-picker" />
+                        <input type="text" class="zen-input" formControlName="iconColor" placeholder="#ffffff" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Cor de Fundo do Ícone</label>
+                    <input type="text" class="zen-input" formControlName="iconBgColor"
+                        placeholder="rgba(0, 0, 0, 0.1)" />
+                </div>
+            </div>
+
+            <!-- URLs -->
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="form-label">URL da Imagem</label>
+                    <input type="url" class="zen-input" formControlName="imageUrl"
+                        placeholder="https://example.com/image.jpg" />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Link Externo</label>
+                    <input type="url" class="zen-input" formControlName="linkUrl" placeholder="https://example.com/" />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-card">
+            <h2 class="section-title">Configurações</h2>
+
+            <!-- Order & Status -->
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="form-label">Ordem de Exibição *</label>
+                    <input type="number" class="zen-input" formControlName="order" min="0" />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Status</label>
+                    <label class="toggle-switch">
+                        <input type="checkbox" formControlName="isActive" />
+                        <span class="slider"></span>
+                        <span class="toggle-label">{{ form.value.isActive ? 'Ativo' : 'Inativo' }}</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Date Range -->
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="form-label">Data Início (opcional)</label>
+                    <input type="date" class="zen-input" formControlName="startDate" />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Data Fim (opcional)</label>
+                    <input type="date" class="zen-input" formControlName="endDate" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="form-actions">
+            <button type="button" class="zen-btn zen-btn--ghost" (click)="cancel()">
+                Cancelar
+            </button>
+            <button type="submit" class="zen-btn zen-btn--primary" [disabled]="saving">
+                <span *ngIf="saving" class="spinner-small"></span>
+                {{ saving ? 'Salvando...' : 'Salvar Dica' }}
+            </button>
+        </div>
+    </form>
+</div>

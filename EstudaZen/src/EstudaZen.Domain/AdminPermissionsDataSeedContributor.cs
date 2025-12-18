@@ -43,6 +43,12 @@ public class AdminPermissionsDataSeedContributor : IDataSeedContributor, ITransi
         await GrantPermissionToAdminRoleAsync("EstudaZen.Questions.Create");
         await GrantPermissionToAdminRoleAsync("EstudaZen.Questions.Edit");
         await GrantPermissionToAdminRoleAsync("EstudaZen.Questions.Delete");
+        
+        // Tips Permissions
+        await GrantPermissionToAdminRoleAsync("EstudaZen.Tips");
+        await GrantPermissionToAdminRoleAsync("EstudaZen.Tips.Create");
+        await GrantPermissionToAdminRoleAsync("EstudaZen.Tips.Edit");
+        await GrantPermissionToAdminRoleAsync("EstudaZen.Tips.Delete");
     }
 
     private async Task GrantPermissionToAdminRoleAsync(string permissionName)

@@ -200,7 +200,7 @@ public class StudentAppService : ApplicationService, IStudentAppService
         };
     }
 
-    private async Task<List<TipDto>> GetTipsAsync()
+    private async Task<List<HomeTipDto>> GetTipsAsync()
     {
         var tips = await _tipRepository.GetActiveTipsAsync(10);
         
@@ -210,7 +210,7 @@ public class StudentAppService : ApplicationService, IStudentAppService
             return GetDefaultTips();
         }
         
-        return tips.Select(t => new TipDto
+        return tips.Select(t => new HomeTipDto
         {
             Id = t.Id.ToString(),
             Type = t.Type == TipType.Highlight ? "highlight" : "normal",
@@ -235,9 +235,9 @@ public class StudentAppService : ApplicationService, IStudentAppService
         };
     }
 
-    private static List<TipDto> GetDefaultTips()
+    private static List<HomeTipDto> GetDefaultTips()
     {
-        return new List<TipDto>
+        return new List<HomeTipDto>
         {
             new()
             {

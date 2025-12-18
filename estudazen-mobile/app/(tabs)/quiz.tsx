@@ -121,55 +121,113 @@ export default function QuizScreen() {
                     </Card>
                 )}
 
-                {/* Quiz List */}
-                {availableQuizzes.map((quiz) => (
-                    <Card key={quiz.id} style={styles.quizCard}>
-                        <View style={styles.quizHeader}>
-                            <View style={styles.quizTitleContainer}>
-                                <Text style={styles.quizTitle}>{quiz.title}</Text>
-                                {quiz.subjectName && (
-                                    <Text style={styles.quizSubject}>{quiz.subjectName}</Text>
-                                )}
-                            </View>
-                            {getDifficultyBadge(quiz.difficulty)}
-                        </View>
+                {/* Quiz List - Sorted by status (active first) */}
+                {[...availableQuizzes]
+                    .sort((a, b) => {
+                        // InProgress first, then Completed, then Abandoned
+                        const statusOrder = { InProgress: 0, Completed: 1, Abandoned: 2 };
+                        return (statusOrder[a.status] || 3) - (statusOrder[b.status] || 3);
+                    })
+                    .map((quiz) => {
+                        const isCompleted = quiz.status === 'Completed';
+                        const isAbandoned = quiz.status === 'Abandoned';
+                        const isActive = quiz.status === 'InProgress';
 
-                        {quiz.description && (
-                            <Text style={styles.quizDescription}>{quiz.description}</Text>
-                        )}
-
-                        <View style={styles.quizStats}>
-                            <View style={styles.stat}>
-                                <Text style={styles.statIcon}>📋</Text>
-                                <Text style={styles.statText}>
-                                    {quiz.totalQuestions} questões
-                                </Text>
-                            </View>
-                            <View style={styles.stat}>
-                                <Text style={styles.statIcon}>⭐</Text>
-                                <Text style={styles.statText}>
-                                    {quiz.totalPoints} pontos
-                                </Text>
-                            </View>
-                            {quiz.timeLimit && (
-                                <View style={styles.stat}>
-                                    <Text style={styles.statIcon}>⏱️</Text>
-                                    <Text style={styles.statText}>
-                                        {quiz.timeLimit} min
-                                    </Text>
+                        return (
+                            <Card
+                                key={quiz.id}
+                                style={{
+                                    ...styles.quizCard,
+                                    ...(isCompleted ? styles.completedQuizCard : {}),
+                                    ...(isAbandoned ? styles.abandonedQuizCard : {}),
+                                }}
+                            >
+                                <View style={styles.quizHeader}>
+                                    <View style={styles.quizTitleContainer}>
+                                        <View style={styles.quizTitleRow}>
+                                            {isActive && <Text style={styles.activeIndicator}>🔥</Text>}
+                                            <Text style={[
+                                                styles.quizTitle,
+                                                isCompleted && styles.completedText,
+                                                isAbandoned && styles.abandonedText,
+                                            ]}>
+                                                Quiz #{quiz.id.slice(-4).toUpperCase()}
+                                            </Text>
+                                        </View>
+                                        {quiz.subjectName && (
+                                            <Text style={styles.quizSubject}>{quiz.subjectName}</Text>
+                                        )}
+                                    </View>
+                                    <Badge
+                                        label={
+                                            isCompleted ? '✓ Concluído' :
+                                                isAbandoned ? 'Abandonado' :
+                                                    'Em Progresso'
+                                        }
+                                        variant="status"
+                                        color={
+                                            isCompleted ? theme.colors.status.success :
+                                                isAbandoned ? theme.colors.status.error :
+                                                    theme.colors.primary
+                                        }
+                                    />
                                 </View>
-                            )}
-                        </View>
 
-                        <TouchableOpacity
-                            style={styles.startButton}
-                            onPress={() => handleContinueQuiz(quiz.id)}
-                        >
-                            <Text style={styles.startButtonText}>Continuar Quiz</Text>
-                            <Text style={styles.startButtonIcon}>→</Text>
-                        </TouchableOpacity>
-                    </Card>
-                ))}
+                                <View style={styles.quizStats}>
+                                    <View style={styles.stat}>
+                                        <Text style={styles.statIcon}>📋</Text>
+                                        <Text style={styles.statText}>
+                                            {quiz.totalQuestions} questões
+                                        </Text>
+                                    </View>
+                                    {isCompleted && (
+                                        <>
+                                            <View style={styles.stat}>
+                                                <Text style={styles.statIcon}>✅</Text>
+                                                <Text style={styles.statText}>
+                                                    {quiz.correctAnswers}/{quiz.totalQuestions} corretas
+                                                </Text>
+                                            </View>
+                                            <View style={styles.stat}>
+                                                <Text style={styles.statIcon}>⭐</Text>
+                                                <Text style={styles.statText}>
+                                                    {quiz.totalXpEarned} XP
+                                                </Text>
+                                            </View>
+                                        </>
+                                    )}
+                                    {isActive && (
+                                        <View style={styles.stat}>
+                                            <Text style={styles.statIcon}>⏱️</Text>
+                                            <Text style={styles.statText}>Em andamento</Text>
+                                        </View>
+                                    )}
+                                </View>
+
+                                {isCompleted ? (
+                                    <TouchableOpacity
+                                        style={styles.viewResultsButton}
+                                        onPress={() => router.push(`/quiz/${quiz.id}/results`)}
+                                    >
+                                        <Text style={styles.viewResultsButtonText}>Ver Resultados</Text>
+                                        <Text style={styles.startButtonIcon}>📊</Text>
+                                    </TouchableOpacity>
+                                ) : isAbandoned ? (
+                                    <View style={styles.abandonedMessage}>
+                                        <Text style={styles.abandonedMessageText}>Quiz abandonado</Text>
+                                    </View>
+                                ) : (
+                                    <TouchableOpacity
+                                        style={styles.startButton}
+                                        onPress={() => handleContinueQuiz(quiz.id)}
+                                    >
+                                        <Text style={styles.startButtonText}>Continuar Quiz</Text>
+                                        <Text style={styles.startButtonIcon}>→</Text>
+                                    </TouchableOpacity>
+                                )}
+                            </Card>
+                        );
+                    })}
             </ScrollView>
         </View>
     );
@@ -326,5 +384,54 @@ const styles = StyleSheet.create({
     startButtonIcon: {
         fontSize: 20,
         color: '#ffffff',
+    },
+    // New styles for status-aware quiz cards
+    completedQuizCard: {
+        opacity: 0.85,
+        borderColor: theme.colors.status.success,
+        borderWidth: 1,
+    },
+    abandonedQuizCard: {
+        opacity: 0.6,
+        borderColor: theme.colors.status.error,
+        borderWidth: 1,
+    },
+    quizTitleRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: theme.spacing.sm,
+    },
+    activeIndicator: {
+        fontSize: 18,
+    },
+    completedText: {
+        color: theme.colors.status.success,
+    },
+    abandonedText: {
+        color: theme.colors.text.secondary,
+    },
+    viewResultsButton: {
+        backgroundColor: theme.colors.status.success,
+        borderRadius: theme.borderRadius.lg,
+        padding: theme.spacing.md,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: theme.spacing.sm,
+    },
+    viewResultsButtonText: {
+        fontSize: theme.typography.sizes.base,
+        fontWeight: '600',
+        color: '#ffffff',
+    },
+    abandonedMessage: {
+        backgroundColor: 'rgba(255, 255, 255, 0.05)',
+        borderRadius: theme.borderRadius.lg,
+        padding: theme.spacing.md,
+        alignItems: 'center',
+    },
+    abandonedMessageText: {
+        fontSize: theme.typography.sizes.sm,
+        color: theme.colors.text.secondary,
     },
 });

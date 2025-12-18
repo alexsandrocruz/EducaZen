@@ -4,13 +4,18 @@ export interface Quiz {
     id: string;
     title: string;
     description?: string;
-    subjectId: string;
+    subjectId?: string;
     subjectName?: string;
-    difficulty: 'EASY' | 'MEDIUM' | 'HARD';
+    difficulty?: 'EASY' | 'MEDIUM' | 'HARD' | null;
     totalQuestions: number;
-    totalPoints: number;
+    totalPoints?: number;
+    correctAnswers?: number;
+    totalXpEarned?: number;
     timeLimit?: number; // em minutos
-    isActive: boolean;
+    status: 'InProgress' | 'Completed' | 'Abandoned';
+    startedAt?: string;
+    completedAt?: string;
+    accuracyPercentage?: number;
 }
 
 export interface Question {

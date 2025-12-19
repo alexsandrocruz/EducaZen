@@ -1,0 +1,110 @@
+name: Deploy API
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'EstudaZen/src/**'
+      - 'EstudaZen/common.props'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore EstudaZen/src/EstudaZen.HttpApi.Host/EstudaZen.HttpApi.Host.csproj
+
+      - name: Install ABP CLI
+        run: dotnet tool install -g Volo.Abp.Cli
+
+      - name: Install ABP Libs
+        run: abp install-libs
+        working-directory: EstudaZen/src/EstudaZen.HttpApi.Host
+
+      - name: Build
+        run: dotnet build EstudaZen/src/EstudaZen.HttpApi.Host/EstudaZen.HttpApi.Host.csproj -c Release --no-restore
+
+      - name: Restore OpenIddict Certificate
+        run: |
+          echo "${{ secrets.OPENIDDICT_CERTIFICATE }}" | base64 --decode > EstudaZen/src/EstudaZen.HttpApi.Host/openiddict.pfx
+
+      - name: Publish
+        run: dotnet publish EstudaZen/src/EstudaZen.HttpApi.Host/EstudaZen.HttpApi.Host.csproj -c Release --no-build -o ./publish
+
+      - name: Copy appsettings.Production.json
+        run: |
+          cat > ./publish/appsettings.Production.json << 'EOF'
+          {
+            "App": {
+              "SelfUrl": "https://educa.zensuite.com.br",
+              "AngularUrl": "https://educa.zensuite.com.br",
+              "CorsOrigins": "https://educa.zensuite.com.br",
+              "RedirectAllowedUrls": "https://educa.zensuite.com.br",
+              "DisablePII": true,
+              "HealthCheckUrl": "/health-status"
+            },
+            "ConnectionStrings": {
+              "Default": "Host=localhost;Port=5432;Database=EstudaZen;User ID=educazen;Password=EducaZen@2024!Prod;"
+            },
+            "AuthServer": {
+              "Authority": "https://educa.zensuite.com.br",
+              "RequireHttpsMetadata": true,
+              "SwaggerClientId": "EstudaZen_Swagger",
+              "CertificatePassPhrase": "7a4979bb-93a4-4558-a79c-37a770212923"
+            },
+            "Redis": {
+              "Configuration": "localhost:6379"
+            },
+            "StringEncryption": {
+              "DefaultPassPhrase": "EducaZenProd2024Key"
+            }
+          }
+          EOF
+
+      - name: Copy wwwroot libs to publish
+        run: |
+          if [ -d "EstudaZen/src/EstudaZen.HttpApi.Host/wwwroot/libs" ]; then
+            cp -r EstudaZen/src/EstudaZen.HttpApi.Host/wwwroot/libs ./publish/wwwroot/libs
+          fi
+
+      - name: Copy files to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "publish/*"
+          target: "/opt/educazen/deploy-temp"
+          strip_components: 1
+
+      - name: Deploy on server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            # Parar API
+            systemctl stop educazen-api || true
+            
+            # Limpar e mover arquivos
+            rm -rf /opt/educazen/api/*
+            mv /opt/educazen/deploy-temp/* /opt/educazen/api/
+            rm -rf /opt/educazen/deploy-temp
+            
+            # Iniciar API
+            systemctl start educazen-api
+            
+            # Aguardar e verificar
+            sleep 5
+            systemctl status educazen-api --no-pager

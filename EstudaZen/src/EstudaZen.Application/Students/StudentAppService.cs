@@ -70,7 +70,8 @@ public class StudentAppService : ApplicationService, IStudentAppService
         {
             Rank = index + 1,
             StudentId = s.Id,
-            StudentName = "Student " + s.Id.ToString().Substring(0, 4), // Placeholder for real name
+            StudentName = s.FullName ?? $"Estudante {index + 1}",
+            AvatarUrl = s.PhotoUrl,
             TotalXp = s.TotalXp,
             Level = s.CurrentLevel,
             CurrentStreak = s.CurrentStreak,

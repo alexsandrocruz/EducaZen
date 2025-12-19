@@ -66,7 +66,7 @@ export default function HomeScreen() {
     };
 
     const handleNotifications = () => {
-        // TODO: Navigate to notifications
+        router.push('/notifications');
     };
 
     // Loading state

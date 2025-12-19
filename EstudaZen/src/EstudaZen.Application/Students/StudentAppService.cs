@@ -9,6 +9,7 @@ using Volo.Abp.Identity;
 using EstudaZen.Permissions;
 using EstudaZen.Exams;
 using EstudaZen.Tips;
+using EstudaZen.Achievements;
 using Microsoft.AspNetCore.Authorization;
 
 namespace EstudaZen.Students;
@@ -21,6 +22,7 @@ public class StudentAppService : ApplicationService, IStudentAppService
     private readonly IdentityUserManager _userManager;
     private readonly IExamSessionRepository _examSessionRepository;
     private readonly ITipRepository _tipRepository;
+    private readonly IAchievementRepository _achievementRepository;
 
     public StudentAppService(
         IStudentRepository studentRepository,
@@ -28,7 +30,8 @@ public class StudentAppService : ApplicationService, IStudentAppService
         ICurrentUser currentUser,
         IdentityUserManager userManager,
         IExamSessionRepository examSessionRepository,
-        ITipRepository tipRepository)
+        ITipRepository tipRepository,
+        IAchievementRepository achievementRepository)
     {
         _studentRepository = studentRepository;
         _studentMapper = studentMapper;
@@ -36,6 +39,7 @@ public class StudentAppService : ApplicationService, IStudentAppService
         _userManager = userManager;
         _examSessionRepository = examSessionRepository;
         _tipRepository = tipRepository;
+        _achievementRepository = achievementRepository;
     }
 
     public async Task<StudentDto> GetMyProfileAsync()
@@ -66,7 +70,8 @@ public class StudentAppService : ApplicationService, IStudentAppService
         {
             Rank = index + 1,
             StudentId = s.Id,
-            StudentName = "Student " + s.Id.ToString().Substring(0, 4), // Placeholder for real name
+            StudentName = s.FullName ?? $"Estudante {index + 1}",
+            AvatarUrl = s.PhotoUrl,
             TotalXp = s.TotalXp,
             Level = s.CurrentLevel,
             CurrentStreak = s.CurrentStreak,
@@ -415,5 +420,104 @@ public class StudentAppService : ApplicationService, IStudentAppService
         student.Status = input.Approved ? StudentStatus.APPROVED : StudentStatus.REJECTED;
 
         await _studentRepository.UpdateAsync(student);
+    }
+
+    /// <summary>
+    /// Get complete student profile with stats and achievements
+    /// </summary>
+    public async Task<StudentProfileDto> GetProfileAsync()
+    {
+        if (!_currentUser.Id.HasValue)
+            throw new Volo.Abp.Authorization.AbpAuthorizationException("User not authenticated");
+
+        var student = await _studentRepository.FindByUserIdAsync(_currentUser.Id.Value);
+        if (student == null)
+        {
+            student = new Student(GuidGenerator.Create(), _currentUser.Id.Value, CurrentTenant.Id);
+            await _studentRepository.InsertAsync(student);
+        }
+
+        // Get ranking
+        var rank = await _studentRepository.GetRankByXpAsync(student.Id, student.SchoolId);
+
+        // Get achievements
+        var allAchievements = await _achievementRepository.GetActiveAsync();
+        var studentAchievements = await _achievementRepository.GetStudentAchievementsAsync(student.Id);
+        var unlockedIds = studentAchievements.Select(sa => sa.AchievementId).ToHashSet();
+
+        var achievementDtos = allAchievements.Select(a => new AchievementDto
+        {
+            Id = a.Id,
+            Code = a.Code,
+            Title = a.Title,
+            Description = a.Description,
+            Icon = a.Icon,
+            GradientColors = ParseGradientColors(a.GradientColors),
+            Type = a.Type,
+            IsUnlocked = unlockedIds.Contains(a.Id),
+            UnlockedAt = studentAchievements.FirstOrDefault(sa => sa.AchievementId == a.Id)?.CreationTime,
+            Order = a.Order
+        }).OrderBy(a => a.Order).ToList();
+
+        // Calculate XP for next level
+        var currentLevel = student.CurrentLevel;
+        var xpForCurrentLevel = (currentLevel - 1) * (currentLevel - 1) * 100;
+        var xpForNextLevel = currentLevel * currentLevel * 100;
+        var xpInCurrentLevel = student.TotalXp - xpForCurrentLevel;
+        var xpNeeded = xpForNextLevel - xpForCurrentLevel;
+
+        // Calculate accuracy
+        var totalQuestions = student.TotalQuizzes * 10; // Approximate
+        var accuracy = totalQuestions > 0 
+            ? (int)Math.Round((double)student.TotalCorrectAnswers / totalQuestions * 100) 
+            : 0;
+
+        return new StudentProfileDto
+        {
+            Id = student.Id,
+            FullName = student.FullName ?? "Estudante",
+            Email = student.Email,
+            PhotoUrl = student.PhotoUrl,
+            Status = student.Status,
+            CurrentLevel = currentLevel,
+            LevelTitle = GetLevelTitle(currentLevel),
+            CurrentXp = student.TotalXp,
+            RequiredXpForNextLevel = xpForNextLevel,
+            XpToNextLevel = xpForNextLevel - student.TotalXp,
+            StreakDays = student.CurrentStreak,
+            Ranking = rank,
+            AccuracyPercent = accuracy,
+            TotalQuestions = totalQuestions,
+            TotalCorrectAnswers = student.TotalCorrectAnswers,
+            TotalQuizzes = student.TotalQuizzes,
+            Achievements = achievementDtos,
+            TotalAchievements = allAchievements.Count,
+            UnlockedAchievements = unlockedIds.Count
+        };
+    }
+
+    private static string[] ParseGradientColors(string json)
+    {
+        try
+        {
+            return System.Text.Json.JsonSerializer.Deserialize<string[]>(json) ?? ["#7f13ec", "#9d4dff"];
+        }
+        catch
+        {
+            return ["#7f13ec", "#9d4dff"];
+        }
+    }
+
+    private static string GetLevelTitle(int level)
+    {
+        return level switch
+        {
+            <= 2 => "Iniciante",
+            <= 5 => "Explorador",
+            <= 10 => "Estudioso",
+            <= 20 => "Veterano",
+            <= 50 => "Mestre",
+            _ => "Lenda"
+        };
     }
 }

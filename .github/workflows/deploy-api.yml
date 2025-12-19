@@ -61,7 +61,7 @@ jobs:
               "Authority": "https://educa.zensuite.com.br",
               "RequireHttpsMetadata": true,
               "SwaggerClientId": "EstudaZen_Swagger",
-              "CertificatePassPhrase": "7a4979bb-93a4-4558-a79c-37a770212923"
+              "CertificatePassPhrase": "Avacanoeiros33"
             },
             "Redis": {
               "Configuration": "localhost:6379"

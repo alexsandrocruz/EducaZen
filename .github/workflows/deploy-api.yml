@@ -35,12 +35,12 @@ jobs:
       - name: Build
         run: dotnet build EstudaZen/src/EstudaZen.HttpApi.Host/EstudaZen.HttpApi.Host.csproj -c Release --no-restore
 
-      - name: Restore OpenIddict Certificate
-        run: |
-          echo "${{ secrets.OPENIDDICT_CERTIFICATE }}" | base64 --decode > EstudaZen/src/EstudaZen.HttpApi.Host/openiddict.pfx
-
       - name: Publish
         run: dotnet publish EstudaZen/src/EstudaZen.HttpApi.Host/EstudaZen.HttpApi.Host.csproj -c Release --no-build -o ./publish
+
+      - name: Restore OpenIddict Certificate
+        run: |
+          echo "${{ secrets.OPENIDDICT_CERTIFICATE }}" | base64 --decode > ./publish/openiddict.pfx
 
       - name: Copy appsettings.Production.json
         run: |

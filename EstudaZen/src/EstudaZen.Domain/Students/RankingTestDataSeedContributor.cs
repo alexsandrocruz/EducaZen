@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using EstudaZen.Schools;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Guids;
@@ -18,6 +19,7 @@ public class RankingTestDataSeedContributor : IDataSeedContributor, ITransientDe
     private readonly IdentityUserManager _userManager;
     private readonly IGuidGenerator _guidGenerator;
     private readonly ICurrentTenant _currentTenant;
+    private readonly SchoolDataSeedContributor _schoolDataSeedContributor;
 
     // Test student data: Name, XP, Streak, Quizzes, CorrectAnswers
     private readonly (string Name, int Xp, int Streak, int Quizzes, int Correct)[] _testStudents =
@@ -43,16 +45,21 @@ public class RankingTestDataSeedContributor : IDataSeedContributor, ITransientDe
         IStudentRepository studentRepository,
         IdentityUserManager userManager,
         IGuidGenerator guidGenerator,
-        ICurrentTenant currentTenant)
+        ICurrentTenant currentTenant,
+        SchoolDataSeedContributor schoolDataSeedContributor)
     {
         _studentRepository = studentRepository;
         _userManager = userManager;
         _guidGenerator = guidGenerator;
         _currentTenant = currentTenant;
+        _schoolDataSeedContributor = schoolDataSeedContributor;
     }
 
     public async Task SeedAsync(DataSeedContext context)
     {
+        // Ensure school exists first
+        await _schoolDataSeedContributor.SeedAsync(context);
+
         // Only seed if we have fewer than 10 students
         if (await _studentRepository.GetCountAsync() >= 10)
         {
@@ -94,8 +101,8 @@ public class RankingTestDataSeedContributor : IDataSeedContributor, ITransientDe
                 Status = StudentStatus.APPROVED,
                 BirthDate = DateTime.Now.AddYears(-17),
                 Gender = GetRandomGender(testStudent.Name),
-                // Escola principal para ranking por escola
-                SchoolId = Guid.Parse("3a1e3992-fce2-7c2d-9f74-8b97e14c84af")
+                // Escola principal para ranking por escola (usa a escola criada pelo SchoolDataSeedContributor)
+                SchoolId = SchoolDataSeedContributor.DefaultSchoolId
             };
 
             // Add XP (this will calculate level automatically)

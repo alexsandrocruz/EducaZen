@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using EstudaZen.Schools;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Guids;
@@ -14,21 +15,27 @@ public class StudentDataSeedContributor : IDataSeedContributor, ITransientDepend
     private readonly IdentityUserManager _userManager;
     private readonly IGuidGenerator _guidGenerator;
     private readonly ICurrentTenant _currentTenant;
+    private readonly SchoolDataSeedContributor _schoolDataSeedContributor;
 
     public StudentDataSeedContributor(
         IStudentRepository studentRepository,
         IdentityUserManager userManager,
         IGuidGenerator guidGenerator,
-        ICurrentTenant currentTenant)
+        ICurrentTenant currentTenant,
+        SchoolDataSeedContributor schoolDataSeedContributor)
     {
         _studentRepository = studentRepository;
         _userManager = userManager;
         _guidGenerator = guidGenerator;
         _currentTenant = currentTenant;
+        _schoolDataSeedContributor = schoolDataSeedContributor;
     }
 
     public async Task SeedAsync(DataSeedContext context)
     {
+        // Ensure school exists first
+        await _schoolDataSeedContributor.SeedAsync(context);
+
         if (await _studentRepository.GetCountAsync() > 0)
         {
             return;
@@ -65,6 +72,7 @@ public class StudentDataSeedContributor : IDataSeedContributor, ITransientDepend
             }
 
             var student = new Student(_guidGenerator.Create(), userId, context.TenantId);
+            student.SchoolId = SchoolDataSeedContributor.DefaultSchoolId;
             student.FullName = $"Student {i} Seed";
             student.Email = email;
             student.Status = StudentStatus.Active;

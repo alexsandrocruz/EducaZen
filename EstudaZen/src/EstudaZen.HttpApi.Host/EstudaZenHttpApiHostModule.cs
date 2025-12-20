@@ -106,7 +106,12 @@ public class EstudaZenHttpApiHostModule : AbpModule
             
             Configure<ForwardedHeadersOptions>(options =>
             {
-                options.ForwardedHeaders = ForwardedHeaders.XForwardedProto;
+                options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | 
+                                           ForwardedHeaders.XForwardedProto | 
+                                           ForwardedHeaders.XForwardedHost;
+                // Trust all proxies - required for Linux behind nginx/docker
+                options.KnownNetworks.Clear();
+                options.KnownProxies.Clear();
             });
         }
 

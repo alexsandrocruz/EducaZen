@@ -1,0 +1,62 @@
+;;
+;; Domain:     zensuite.com.br.
+;; Exported:   2025-12-20 12:52:27
+;;
+;; This file is intended for use for informational and archival
+;; purposes ONLY and MUST be edited before use on a production
+;; DNS server.  In particular, you must:
+;;   -- update the SOA record with the correct authoritative name server
+;;   -- update the SOA record with the contact e-mail address information
+;;   -- update the NS record(s) with the authoritative name servers for this domain.
+;;
+;; For further information, please consult the BIND documentation
+;; located on the following website:
+;;
+;; http://www.isc.org/
+;;
+;; And RFC 1035:
+;;
+;; http://www.ietf.org/rfc/rfc1035.txt
+;;
+;; Please note that we do NOT offer technical support for any use
+;; of this zone data, the BIND name server, or any other third-party
+;; DNS software.
+;;
+;; Use at your own risk.
+;; SOA Record
+zensuite.com.br	3600	IN	SOA	jay.ns.cloudflare.com. dns.cloudflare.com. 2051790174 10000 2400 604800 3600
+
+;; NS Records
+zensuite.com.br.	86400	IN	NS	jay.ns.cloudflare.com.
+zensuite.com.br.	86400	IN	NS	zara.ns.cloudflare.com.
+
+;; A Records
+educa.zensuite.com.br.	1	IN	A	37.27.221.76 ; cf_tags=cf-proxied:false
+eventos.zensuite.com.br.	1	IN	A	65.109.172.148 ; cf_tags=cf-proxied:false
+serverchatbot.zensuite.com.br.	1	IN	A	72.60.156.128 ; cf_tags=cf-proxied:false
+www.zensuite.com.br.	1	IN	A	72.60.156.128 ; cf_tags=cf-proxied:false
+zensuite.com.br.	1	IN	A	72.60.156.128 ; cf_tags=cf-proxied:false
+
+;; CNAME Records
+api.zensuite.com.br.	1	IN	CNAME	serverchatbot.zensuite.com.br. ; cf_tags=cf-proxied:false
+app.zensuite.com.br.	1	IN	CNAME	serverchatbot.zensuite.com.br. ; cf_tags=cf-proxied:false
+auth.zensuite.com.br.	1	IN	CNAME	serverchatbot.zensuite.com.br. ; cf_tags=cf-proxied:false
+bot.zensuite.com.br.	1	IN	CNAME	serverchatbot.zensuite.com.br. ; cf_tags=cf-proxied:false
+chat.zensuite.com.br.	1	IN	CNAME	serverchatbot.zensuite.com.br. ; cf_tags=cf-proxied:false
+douglas.zensuite.com.br.	1	IN	CNAME	music-event-crm-app.rork.app. ; cf_tags=cf-proxied:false
+erp.zensuite.com.br.	1	IN	CNAME	serverchatbot.zensuite.com.br. ; cf_tags=cf-proxied:false
+flowise.zensuite.com.br.	1	IN	CNAME	serverchatbot.zensuite.com.br. ; cf_tags=cf-proxied:false
+mautic.zensuite.com.br.	1	IN	CNAME	serverchatbot.zensuite.com.br. ; cf_tags=cf-proxied:false
+minioapi.zensuite.com.br.	1	IN	CNAME	serverchatbot.zensuite.com.br. ; cf_tags=cf-proxied:false
+minio.zensuite.com.br.	1	IN	CNAME	serverchatbot.zensuite.com.br. ; cf_tags=cf-proxied:false
+odoo.zensuite.com.br.	1	IN	CNAME	serverchatbot.zensuite.com.br. ; cf_tags=cf-proxied:false
+painel.zensuite.com.br.	1	IN	CNAME	serverchatbot.zensuite.com.br. ; cf_tags=cf-proxied:false
+postgres.zensuite.com.br.	1	IN	CNAME	serverchatbot.zensuite.com.br. ; cf_tags=cf-proxied:false
+redis.zensuite.com.br.	1	IN	CNAME	serverchatbot.zensuite.com.br. ; cf_tags=cf-proxied:false
+typebot.zensuite.com.br.	1	IN	CNAME	serverchatbot.zensuite.com.br. ; cf_tags=cf-proxied:false
+workflowwebhook.zensuite.com.br.	1	IN	CNAME	serverchatbot.zensuite.com.br. ; cf_tags=cf-proxied:false
+workflow.zensuite.com.br.	1	IN	CNAME	serverchatbot.zensuite.com.br. ; cf_tags=cf-proxied:false
+
+;; TXT Records
+_acme-challenge.www.zensuite.com.br.	120	IN	TXT	"hH0WiqnHtZigI4nGdtowLDvb9vbx84GXkcXmmZxYCkE"
+_acme-challenge.zensuite.com.br.	120	IN	TXT	"eGB2-u8gHZnWITMUtI_QEdsjRLANko3Olj2B1EPCeXY"

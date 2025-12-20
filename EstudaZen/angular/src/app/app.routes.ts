@@ -52,4 +52,10 @@ export const APP_ROUTES: Routes = [
     loadChildren: () => import('./admin/admin-module').then(m => m.AdminModule),
     canActivate: [authGuard],
   },
+  // Wildcard route - must be last to catch all unmatched routes
+  {
+    path: '**',
+    redirectTo: '',
+    pathMatch: 'full',
+  },
 ];

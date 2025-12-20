@@ -1,13 +1,13 @@
 import { Environment } from '@abp/ng.core';
 
-const baseUrl = 'http://localhost:4200';
+const baseUrl = 'https://educa.zensuite.com.br';
 
 const oAuthConfig = {
-  issuer: 'https://localhost:44334/',
+  issuer: 'https://educa.zensuite.com.br/',
   redirectUri: baseUrl,
   clientId: 'EstudaZen_App',
   responseType: 'code',
-  scope: 'offline_access EstudaZen',
+  scope: 'offline_access openid profile email phone EstudaZen',
   requireHttps: true,
 };
 
@@ -20,7 +20,7 @@ export const environment = {
   oAuthConfig,
   apis: {
     default: {
-      url: 'https://localhost:44334',
+      url: 'https://educa.zensuite.com.br',
       rootNamespace: 'EstudaZen',
     },
     AbpAccountPublic: {

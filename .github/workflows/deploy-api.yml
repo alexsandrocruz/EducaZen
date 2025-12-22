@@ -138,6 +138,10 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
+            # Configurar PATH para dotnet
+            export PATH="$HOME/.dotnet:$PATH"
+            export DOTNET_ROOT="$HOME/.dotnet"
+            
             # Parar API
             systemctl stop educazen-api || true
             
@@ -145,11 +149,14 @@ jobs:
             echo "Running DbMigrator..."
             cd /opt/educazen/migrator
             chmod +x EstudaZen.DbMigrator || true
-            dotnet EstudaZen.DbMigrator.dll 2>&1 | tee /opt/educazen/migrator-output.log
+            
+            # Usar caminho completo ou PATH configurado
+            $HOME/.dotnet/dotnet EstudaZen.DbMigrator.dll 2>&1 | tee /opt/educazen/migrator-output.log
+            MIGRATOR_RESULT=${PIPESTATUS[0]}
             
             # Verificar se o migrator rodou com sucesso
-            if [ $? -ne 0 ]; then
-              echo "DbMigrator failed!"
+            if [ $MIGRATOR_RESULT -ne 0 ]; then
+              echo "DbMigrator failed with exit code: $MIGRATOR_RESULT"
               cat /opt/educazen/migrator-output.log
               exit 1
             fi

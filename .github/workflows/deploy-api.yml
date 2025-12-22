@@ -22,8 +22,11 @@ jobs:
           dotnet-version: '10.0.x'
           include-prerelease: true
 
-      - name: Restore dependencies
+      - name: Restore dependencies (API)
         run: dotnet restore EstudaZen/src/EstudaZen.HttpApi.Host/EstudaZen.HttpApi.Host.csproj
+
+      - name: Restore dependencies (DbMigrator)
+        run: dotnet restore EstudaZen/src/EstudaZen.DbMigrator/EstudaZen.DbMigrator.csproj
 
       - name: Install ABP CLI
         run: dotnet tool install -g Volo.Abp.Cli
@@ -32,19 +35,26 @@ jobs:
         run: abp install-libs
         working-directory: EstudaZen/src/EstudaZen.HttpApi.Host
 
-      - name: Build
+      - name: Build API
         run: dotnet build EstudaZen/src/EstudaZen.HttpApi.Host/EstudaZen.HttpApi.Host.csproj -c Release --no-restore
 
-      - name: Publish
-        run: dotnet publish EstudaZen/src/EstudaZen.HttpApi.Host/EstudaZen.HttpApi.Host.csproj -c Release --no-build -o ./publish
+      - name: Build DbMigrator
+        run: dotnet build EstudaZen/src/EstudaZen.DbMigrator/EstudaZen.DbMigrator.csproj -c Release --no-restore
+
+      - name: Publish API
+        run: dotnet publish EstudaZen/src/EstudaZen.HttpApi.Host/EstudaZen.HttpApi.Host.csproj -c Release --no-build -o ./publish-api
+
+      - name: Publish DbMigrator
+        run: dotnet publish EstudaZen/src/EstudaZen.DbMigrator/EstudaZen.DbMigrator.csproj -c Release --no-build -o ./publish-migrator
 
       - name: Restore OpenIddict Certificate
         run: |
-          echo "${{ secrets.OPENIDDICT_CERTIFICATE }}" | base64 --decode > ./publish/openiddict.pfx
+          echo "${{ secrets.OPENIDDICT_CERTIFICATE }}" | base64 --decode > ./publish-api/openiddict.pfx
+          echo "${{ secrets.OPENIDDICT_CERTIFICATE }}" | base64 --decode > ./publish-migrator/openiddict.pfx
 
-      - name: Copy appsettings.Production.json
+      - name: Create appsettings.Production.json for API
         run: |
-          cat > ./publish/appsettings.Production.json << 'EOF'
+          cat > ./publish-api/appsettings.Production.json << 'EOF'
           {
             "App": {
               "SelfUrl": "https://educa.zensuite.com.br",
@@ -73,23 +83,55 @@ jobs:
           }
           EOF
 
+      - name: Create appsettings.json for DbMigrator
+        run: |
+          cat > ./publish-migrator/appsettings.json << 'EOF'
+          {
+            "ConnectionStrings": {
+              "Default": "Host=localhost;Port=5432;Database=EstudaZen;User ID=educazen;Password=EducaZen@2024!Prod;"
+            },
+            "OpenIddict": {
+              "Applications": {
+                "EstudaZen_App": {
+                  "ClientId": "EstudaZen_App",
+                  "RootUrl": "https://educa.zensuite.com.br"
+                },
+                "EstudaZen_Swagger": {
+                  "ClientId": "EstudaZen_Swagger",
+                  "RootUrl": "https://educa.zensuite.com.br/"
+                }
+              }
+            }
+          }
+          EOF
+
       - name: Copy wwwroot libs to publish
         run: |
           if [ -d "EstudaZen/src/EstudaZen.HttpApi.Host/wwwroot/libs" ]; then
-            cp -r EstudaZen/src/EstudaZen.HttpApi.Host/wwwroot/libs ./publish/wwwroot/libs
+            cp -r EstudaZen/src/EstudaZen.HttpApi.Host/wwwroot/libs ./publish-api/wwwroot/libs
           fi
 
-      - name: Copy files to server
+      - name: Copy API files to server
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "publish/*"
+          source: "publish-api/*"
           target: "/opt/educazen/deploy-temp"
           strip_components: 1
 
-      - name: Deploy on server
+      - name: Copy DbMigrator to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "publish-migrator/*"
+          target: "/opt/educazen/migrator"
+          strip_components: 1
+
+      - name: Run DbMigrator and Deploy API
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -99,7 +141,22 @@ jobs:
             # Parar API
             systemctl stop educazen-api || true
             
-            # Limpar e mover arquivos
+            # Executar DbMigrator (migrations + seeds)
+            echo "Running DbMigrator..."
+            cd /opt/educazen/migrator
+            chmod +x EstudaZen.DbMigrator || true
+            dotnet EstudaZen.DbMigrator.dll 2>&1 | tee /opt/educazen/migrator-output.log
+            
+            # Verificar se o migrator rodou com sucesso
+            if [ $? -ne 0 ]; then
+              echo "DbMigrator failed!"
+              cat /opt/educazen/migrator-output.log
+              exit 1
+            fi
+            
+            echo "DbMigrator completed successfully."
+            
+            # Limpar e mover arquivos da API
             rm -rf /opt/educazen/api/*
             mv /opt/educazen/deploy-temp/* /opt/educazen/api/
             rm -rf /opt/educazen/deploy-temp

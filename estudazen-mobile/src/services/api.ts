@@ -7,7 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 // Para dispositivo físico: use o IP da sua máquina
 const API_BASE_URL = __DEV__
     ? 'http://localhost:44335/api'
-    : 'https://api.estudazen.com/api';
+    : 'https://educa.zensuite.com.br/api';
 
 export const api = axios.create({
     baseURL: API_BASE_URL,

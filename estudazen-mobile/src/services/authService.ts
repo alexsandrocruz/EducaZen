@@ -1,6 +1,11 @@
 import api from './api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+// Base URL para OAuth (sem /api)
+const BASE_URL = __DEV__
+    ? 'http://localhost:44335'
+    : 'https://educa.zensuite.com.br';
+
 export interface RegisterData {
     name: string;          // FullName
     email: string;
@@ -58,7 +63,7 @@ export const authService = {
     async login(data: LoginData): Promise<AuthResponse> {
         try {
             // OAuth endpoint está na raiz, não em /api
-            const tokenUrl = 'http://localhost:44335/connect/token';
+            const tokenUrl = `${BASE_URL}/connect/token`;
 
             const formData = new URLSearchParams();
             formData.append('grant_type', 'password');

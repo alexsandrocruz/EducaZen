@@ -128,6 +128,18 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
+            },
+            "debug-remote": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.debug-remote.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -140,6 +152,9 @@
             },
             "development": {
               "buildTarget": "EstudaZen:build:development"
+            },
+            "debug-remote": {
+              "buildTarget": "EstudaZen:build:debug-remote"
             }
           },
           "defaultConfiguration": "development"

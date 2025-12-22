@@ -49,11 +49,11 @@ jobs:
             "App": {
               "SelfUrl": "https://educa.zensuite.com.br",
               "AngularUrl": "https://educa.zensuite.com.br",
-              "CorsOrigins": "https://educa.zensuite.com.br",
-              "RedirectAllowedUrls": "https://educa.zensuite.com.br",
+              "CorsOrigins": "https://educa.zensuite.com.br,http://localhost:4200",
+              "RedirectAllowedUrls": "https://educa.zensuite.com.br,http://localhost:4200",
               "DisablePII": true,
               "HealthCheckUrl": "/health-status",
-              "HealthUiCheckUrl": "http://localhost:5000/health-status"
+              "HealthUiCheckUrl": "https://educa.zensuite.com.br/health-status"
             },
             "ConnectionStrings": {
               "Default": "Host=localhost;Port=5432;Database=EstudaZen;User ID=educazen;Password=EducaZen@2024!Prod;"

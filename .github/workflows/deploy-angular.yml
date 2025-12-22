@@ -70,7 +70,17 @@ jobs:
           target: "/opt/educazen/angular"
           strip_components: 5
 
-      - name: Set permissions
+      - name: Copy nginx.conf to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "EstudaZen/nginx.conf"
+          target: "/opt/educazen"
+          strip_components: 1
+
+      - name: Set permissions and reload nginx
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -78,4 +88,4 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             chmod -R 755 /opt/educazen/angular
-            docker restart educazen-nginx || true
+            docker exec educazen-nginx nginx -t && docker exec educazen-nginx nginx -s reload || docker restart educazen-nginx
